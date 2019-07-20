@@ -18,11 +18,31 @@ class ConvertorRule extends \Ease\Sand
      *
      * @var array 
      */
-    public $rules      = [];
-    private $convertor = null;
-    private $keepId    = null;
-    private $addExtId  = null;
-    private $keepCode  = null;
+    public $rules     = [];
+
+    /**
+     *
+     * @var Convertor 
+     */
+    public $convertor = null;
+
+    /**
+     *
+     * @var boolean 
+     */
+    private $keepId   = null;
+
+    /**
+     *
+     * @var boolean 
+     */
+    private $addExtId = null;
+
+    /**
+     *
+     * @var boolean 
+     */
+    private $keepCode = null;
 
     /**
      * Conversion Rule
@@ -170,5 +190,15 @@ class '.$className.' extends \FlexiPeeHP\Bricks\ConvertorRule
         }
 
         return $outProps;
+    }
+
+    /**
+     * Actions performed after converting process
+     * 
+     * @return boolean
+     */
+    public function finalizeConversion()
+    {
+        return true;
     }
 }
