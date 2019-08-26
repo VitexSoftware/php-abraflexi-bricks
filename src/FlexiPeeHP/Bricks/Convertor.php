@@ -44,7 +44,6 @@ class Convertor extends \Ease\Sand
                                 \FlexiPeeHP\FlexiBeeRW $output = null,
                                 $ruler = null)
     {
-        parent::__construct();
         if (!empty($input)) {
             $this->setSource($input);
         }

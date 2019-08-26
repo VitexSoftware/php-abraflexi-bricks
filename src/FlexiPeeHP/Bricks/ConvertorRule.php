@@ -57,8 +57,6 @@ class ConvertorRule extends \Ease\Sand
                                 $addExtId = false, $keepCode = false,
                                 $handleAccounting = true)
     {
-        parent::__construct();
-
         $this->keepId   = $keepId;
         $this->addExtId = $addExtId;
         $this->keepCode = $keepCode;
@@ -142,7 +140,7 @@ class ConvertorRule extends \Ease\Sand
         $inputRelations = $convertor->getInput()->getRelationsInfo();
         if (!empty($inputRelations)) {
             if (array_key_exists('polozkyDokladu',
-                    self::reindexArrayBy($inputRelations, 'url'))) {
+                    \Ease\Functions::reindexArrayBy($inputRelations, 'url'))) {
                 $outSubitemsInfo            = $convertor->getOutput()->getColumnsInfo($convertor->getOutput()->getEvidence().'-polozka');
                 $inSubitemsInfo             = $convertor->getInput()->getColumnsInfo($convertor->getInput()->getEvidence().'-polozka');
                 $oposites['polozkyDokladu'] = self::getOposites($inSubitemsInfo,
