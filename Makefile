@@ -12,7 +12,7 @@ doc:
 
 phpunit:
 	composer update
-	phpunit --bootstrap tests/bootstrap.php
+	./vendor/bin/phpunit --bootstrap tests/bootstrap.php
 
 changelog:
 	VERSION=`cat debian/composer.json | grep version | awk -F'"' '{print $$4}'`; \

@@ -54,7 +54,6 @@ class ParovacFaktur extends \Ease\Sand
                         $key));
             }
         }
-        parent::__construct();
         $this->banker = new \FlexiPeeHP\Banka(null, $this->config);
     }
 
