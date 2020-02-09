@@ -359,7 +359,7 @@ class Customer extends \Ease\User
             $userID = $this->getUserID();
         }
         if (!empty($userID)) {
-            $hash = $this->encryptPassword($newPassword);
+            $hash = self::encryptPassword($newPassword);
 
             $this->kontakt->insertToFlexiBee([
                 'id' => $userID,
@@ -384,18 +384,6 @@ class Customer extends \Ease\User
         }
 
         return $hash;
-    }
-
-    /**
-     * Zašifruje heslo.
-     *
-     * @param string $plainTextPassword nešifrované heslo (plaintext)
-     *
-     * @return string Encrypted password
-     */
-    public function encryptPassword($plainTextPassword)
-    {
-        return $plainTextPassword;
     }
 
     /**
