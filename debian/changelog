@@ -1,8 +1,9 @@
 php-flexibee-bricks (0.26) UNRELEASED; urgency=medium
 
+  [ Vítězslav Dvořák ]
   * New Cloner and its rules
 
- -- Vítězslav Dvořák <info@vitexsoftware.cz>  Wed, 02 Oct 2019 00:56:05 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Fri, 21 Feb 2020 01:36:12 +0100
 
 php-flexibee-bricks (0.24) UNRELEASED; urgency=medium
 
