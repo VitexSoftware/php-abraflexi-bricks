@@ -21,7 +21,7 @@ set -e
 case "$1" in
     configure)
 
-        composer-global-update deb/flexipeehp-bricks
+        composer-global-update deb/flexibee-bricks
 
     ;;
 
