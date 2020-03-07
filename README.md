@@ -1,15 +1,15 @@
 # php-FlexiBee-Bricks
 ![Project Logo](https://raw.githubusercontent.com/VitexSoftware/php-flexibee-bricks/master/project-logo.png "Project Logo")
 
-[![Build Status](https://travis-ci.org/VitexSoftware/Ease-PHP-Bricks.svg?branch=master)](https://travis-ci.org/VitexSoftware/Ease-PHP-Bricks)
+[![Build Status](https://travis-ci.org/VitexSoftware/php-flexibee-bricks.svg?branch=master)](https://travis-ci.org/VitexSoftware/php-flexibee-bricks)
 [![GitHub stars](https://img.shields.io/github/stars/VitexSoftware/php-flexibee-bricks.svg)](https://github.com/VitexSoftware/php-flexibee-bricks/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/VitexSoftware/php-flexibee-bricks.svg)](https://github.com/VitexSoftware/php-flexibee-bricks/issues)
 [![GitHub license](https://img.shields.io/github/license/VitexSoftware/php-flexibee-bricks.svg)](https://github.com/VitexSoftware/php-flexibee-bricks/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/VitexSoftware/php-flexibee-bricks.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FVitexSoftware%2Fphp-flexibee-bricks)
 
-Examples how to use [FlexiPeeHP](https://github.com/Spoje-NET/FlexiPeeHP) Library for FlexiBee with EasePHP Framework widgets
+Examples how to use [php-flexibee](https://github.com/Spoje-NET/php-flexibee) Library for FlexiBee with EasePHP Framework widgets
 
-Příklady použití knihovny [FlexiPeeHP](https://github.com/Spoje-NET/FlexiPeeHP) pro [FlexiBee](https://flexibee.eu/)
+Příklady použití knihovny [php-flexibee](https://github.com/Spoje-NET/php-flexibee) pro [FlexiBee](https://flexibee.eu/)
 
 
 Instalace
@@ -48,30 +48,29 @@ Zatím několik málo praktických ukázek určený k použití ve vašich aplik
 | [parse-cmdline.php](src/parse-cmdline.php)                    | Parser parametrů příkazové řádky
 | [RegisterAddress.php](src/RegisterAddress.php)                | Ukázka použití registračního formuláře
 | [UpomenNeplatice.php](src/UpomenNeplatice.php)                | Rozešle neplatičům upomínky
-| [webhook.php](src/RegisterAddress.php)                        | Endpoint pro příjem WebHooků
+| [webhook.php](src/webhook.php)                                | Endpoint pro příjem WebHooků
 
-# Třídy v FlexiPeeHP/Bricks/:
+# Třídy v php-flexibee/Bricks/:
+
+| Soubor                                                          | Popis                                 |
+| --------------------------------------------------------------- | --------------------------------------|
+| [Convertor.php](src/php-flexibee/Bricks/Convertor.php)          | Konvertor dokladů
+| [Customer.php](src/php-flexibee/Bricks/Customer.php)            | Zákazník
+| [GdprLog.php](src/php-flexibee/Bricks/GdprLog.php)              | GDPR Logger s podporou pro FlexiBee
+| [GateKeeper.php](src/php-flexibee/Bricks/GateKeeper.php)        | Kontroluje zdali je shodná firma uživatele a dokladu
+| [PotvrzeniUhrady.php](src/php-flexibee/Bricks/HookReciever.php) | Třída potvrzující došlou úhradu
+| [ParovacFaktur.php](src/php-flexibee/Bricks/ParovacFaktur.php)  | Párovač faktur
+
+# Třídy v php-flexibee/Bricks/ui:
 
 | Soubor                                                        | Popis                                 |
 | ------------------------------------------------------------- | --------------------------------------|
-| [Convertor.php](src/FlexiPeeHP/Bricks/Convertor.php)          | Konvertor dokladů
-| [Customer.php](src/FlexiPeeHP/Bricks/Customer.php)            | Zákazník
-| [GdprLog.php](src/FlexiPeeHP/Bricks/GdprLog.php)              | GDPR Logger s podporou pro FlexiBee
-| [GateKeeper.php](src/FlexiPeeHP/Bricks/GateKeeper.php)        | Kontroluje zdali je shodná firma uživatele a dokladu
-| [HookReciever.php](src/FlexiPeeHP/Bricks/HookReciever.php)    | Příjmač WebHooků
-| [PotvrzeniUhrady.php](src/FlexiPeeHP/Bricks/HookReciever.php) | Třída potvrzující došlou úhradu
-| [ParovacFaktur.php](src/FlexiPeeHP/Bricks/ParovacFaktur.php)  | Párovač faktur
-
-# Třídy v FlexiPeeHP/Bricks/ui:
-
-| Soubor                                                        | Popis                                 |
-| ------------------------------------------------------------- | --------------------------------------|
-| [CompanyLogo.php](src/FlexiPeeHP/Bricks/ui/CompanyLogo.php)   | Logo Firmy
-| [FlexiBeeLogo.php](src/FlexiPeeHP/Bricks/ui/FlexiBeeLogo.php) | Logo FlexiBee
-| [EmbedResponsiveHTML.php](src/FlexiPeeHP/Bricks/ui/EmbedResponsiveHTML.php)| Třída pro zobrazení HTML dokumentu na stránce 
-| [EmbedResponsivePDF.php](src/FlexiPeeHP/Bricks/ui/EmbedResponsivePDF.php)  | Třída pro zobrazení PDF dokumentu na stránce 
-| [RecordTypeSelect.php](src/FlexiPeeHP/Bricks/ui/RecordTypeSelect.php)      | Nabídka pro výběr typu dokumnetu 
-| [RecordChooser.php](src/FlexiPeeHP/Bricks/ui/RecordChooser.php)            | Nabídka pro výběr záznamu zaleožený na [Selectize.js](https://selectize.github.io/selectize.js/)
+| [CompanyLogo.php](src/php-flexibee/Bricks/ui/CompanyLogo.php)   | Logo Firmy
+| [FlexiBeeLogo.php](src/php-flexibee/Bricks/ui/FlexiBeeLogo.php) | Logo FlexiBee
+| [EmbedResponsiveHTML.php](src/php-flexibee/Bricks/ui/EmbedResponsiveHTML.php)| Třída pro zobrazení HTML dokumentu na stránce 
+| [EmbedResponsivePDF.php](src/php-flexibee/Bricks/ui/EmbedResponsivePDF.php)  | Třída pro zobrazení PDF dokumentu na stránce 
+| [RecordTypeSelect.php](src/php-flexibee/Bricks/ui/RecordTypeSelect.php)      | Nabídka pro výběr typu dokumnetu 
+| [RecordChooser.php](src/php-flexibee/Bricks/ui/RecordChooser.php)            | Nabídka pro výběr záznamu zaleožený na [Selectize.js](https://selectize.github.io/selectize.js/)
 
 
 Ukázky ve složce [Examples](Examples)
@@ -109,7 +108,8 @@ Debian/Ubuntu
 
 Pro Linux jsou k dispozici .deb balíčky. Prosím použijte repo:
 
-    wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
-    echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/ease.list
-    apt update
-    apt install php-flexibee-bricks
+
+    echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+    sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
+    sudo apt update
+    sudo apt install php-flexibee-bricks

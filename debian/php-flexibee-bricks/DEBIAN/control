@@ -1,0 +1,12 @@
+Package: php-flexibee-bricks
+Version: 0.26
+Architecture: all
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Installed-Size: 154
+Depends: php-flexibee, php-ease-bricks
+Suggests: composer, flexipeehp-doc, php-flexibee-bricks-doc
+Section: web
+Priority: optional
+Homepage: https://github.com/VitexSoftware/php-flexibee-bricks
+Description: PHP Based FlexiBee RestAPI/Json library AddOns
+ Additional classess and code snipplets for FlexiPeeHP library
