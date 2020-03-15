@@ -1,7 +1,7 @@
-php-flexibee-bricks (0.26) UNRELEASED; urgency=medium
+php-flexibee-bricks (0.30) UNRELEASED; urgency=medium
 
-  [ Vítězslav Dvořák ]
   * New Cloner and its rules
+  * Composer Json Fix
 
   [ CyberVitexus ]
   * Repack for Buster

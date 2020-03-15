@@ -3,7 +3,7 @@
     "description": "php-flexibee extending classes and widgets (debianized)",
     "homepage": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks",
     "license": "GPL-2.0+",
-    "version": "0.26",
+    "version": "0.30",
     "type": "library",
     "authors": [
         {
@@ -26,45 +26,23 @@
     "repositories": [
         {
             "type": "path",
-            "url": "/usr/share/php/Ease",
-            "options": {
-                "symlink": true
-            }
+            "url": "/usr/share/php/Ease"
         },
         {
             "type": "path",
-            "url": "/usr/share/php/EaseHtml",
-            "options": {
-                "symlink": true
-            }
+            "url": "/usr/share/php/EaseHtml"
         },
         {
             "type": "path",
-            "url": "/usr/share/php/EaseTWB",
-            "options": {
-                "symlink": true
-            }
+            "url": "/usr/share/php/EaseTWB"
         },
         {
             "type": "path",
-            "url": "/usr/share/php/EaseBricks",
-            "options": {
-                "symlink": true
-            }
+            "url": "/usr/share/php/EaseBricks"
         },
         {
             "type": "path",
-            "url": "/usr/share/php/flexibee",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/FlexiBee",
-            "options": {
-                "symlink": true
-            }
+            "url": "/usr/share/php/FlexiPeeHP"
         }
     ]
 }
