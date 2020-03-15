@@ -3,7 +3,10 @@ php-flexibee-bricks (0.26) UNRELEASED; urgency=medium
   [ Vítězslav Dvořák ]
   * New Cloner and its rules
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Fri, 21 Feb 2020 01:36:12 +0100
+  [ CyberVitexus ]
+  * Repack for Buster
+
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Thu, 05 Mar 2020 01:29:24 +0100
 
 php-flexibee-bricks (0.24) UNRELEASED; urgency=medium
 
