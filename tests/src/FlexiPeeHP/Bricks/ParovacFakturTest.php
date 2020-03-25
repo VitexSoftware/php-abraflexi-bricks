@@ -36,7 +36,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function makePayment($initialData = [])
     {
-        return \Test\FlexiPeeHP\BankaTest::makeTestPayment($initialData,1);
+        return \Test\FlexiPeeHP\BankaTest::makeTestPayment($initialData, 1);
     }
 
     /**
@@ -96,9 +96,9 @@ class ParovacFakturTest extends \Test\Ease\SandTest
     }
 
     /**
-     * @covers FlexiPeeHP\Bricks\ParovacFaktur::invoicesMatchingByBank
+     * @covers FlexiPeeHP\Bricks\ParovacFaktur::inInvoicesMatchingByBank
      */
-    public function testInvoicesMatchingByBank()
+    public function testInInvoicesMatchingByBank()
     {
         $faktura         = $this->makeInvoice(['typDokl' => \FlexiPeeHP\FlexiBeeRO::code('FAKTURA'),
             'popis' => 'InvoicesMatchingByBank FlexiPeeHP-Bricks Test']);
@@ -196,8 +196,8 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testHotfixDeductionOfAdvances()
     {
-        $varSym = \Ease\Sand::randomNumber(1111, 9999);
-        $price  = \Ease\Sand::randomNumber(11, 99);
+        $varSym = \Ease\Functions::randomNumber(1111, 9999);
+        $price  = \Ease\Functions::randomNumber(11, 99);
 
 
         $invoice = $this->makeInvoice(['typDokl' => 'code:ZDD', 'varSym' => $varSym,
@@ -251,9 +251,9 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testFindBestPayment()
     {
-        $varSym  = \Ease\Sand::randomNumber(111111, 999999);
-        $specSym = \Ease\Sand::randomNumber(1111, 9999);
-        $price   = \Ease\Sand::randomNumber(111, 999);
+        $varSym  = \Ease\Functions::randomNumber(111111, 999999);
+        $specSym = \Ease\Functions::randomNumber(1111, 9999);
+        $price   = \Ease\Functions::randomNumber(111, 999);
 
         $invoiceSs     = $this->makeInvoice(['varSym' => $varSym, 'specSym' => $specSym,
             'sumCelkem' => $price]);

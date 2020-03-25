@@ -1,10 +1,10 @@
 <?php
 /**
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright (c) 2018, Vítězslav Dvořák
+ * @copyright (c) 2018-2020, Vítězslav Dvořák
  */
 
-namespace FlexiPeeHP\Bricks;
+namespace Test\FlexiPeeHP\Bricks;
 
 use \FlexiPeeHP\Bricks\HookReciever;
 
@@ -47,7 +47,7 @@ class HookRecieverTest extends \Test\FlexiPeeHP\ChangesTest
     }
 
     /**
-     * @covers SpojeNet\System\HookReciever::listen
+     * @covers \FlexiPeeHP\Bricks\HookReciever::listen
      */
     public function testListen()
     {
@@ -57,7 +57,7 @@ class HookRecieverTest extends \Test\FlexiPeeHP\ChangesTest
     }
 
     /**
-     * @covers SpojeNet\System\HookReciever::takeChanges
+     * @covers \FlexiPeeHP\Bricks\HookReciever::takeChanges
      */
     public function testTakeChanges()
     {
@@ -67,7 +67,7 @@ class HookRecieverTest extends \Test\FlexiPeeHP\ChangesTest
     }
 
     /**
-     * @covers SpojeNet\System\HookReciever::processChanges
+     * @covers \FlexiPeeHP\Bricks\HookReciever::processChanges
      * @depends testTakeChanges
      */
     public function testProcessChanges()
@@ -84,8 +84,8 @@ class HookRecieverTest extends \Test\FlexiPeeHP\ChangesTest
     }
 
     /**
-     * @covers SpojeNet\System\HookReciever::saveLastProcessedVersion
-     * @covers SpojeNet\System\HookReciever::getLastProcessedVersion
+     * @covers \FlexiPeeHP\Bricks\HookReciever::saveLastProcessedVersion
+     * @covers \FlexiPeeHP\Bricks\HookReciever::getLastProcessedVersion
      */
     public function testSaveLastProcessedVersion()
     {

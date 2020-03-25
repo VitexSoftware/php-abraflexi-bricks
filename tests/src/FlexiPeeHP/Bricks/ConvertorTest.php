@@ -18,16 +18,17 @@ class ConvertorTest extends \Test\Ease\SandTest
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->object = new Convertor();
+        $this->object = new Convertor(new \FlexiPeeHP\FakturaPrijata(),
+            new \FlexiPeeHP\FakturaVydana());
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         
     }
@@ -58,79 +59,214 @@ class ConvertorTest extends \Test\Ease\SandTest
      */
     public function testConversion()
     {
-        $this->object->conversion();
+        $varSym  = \Ease\Functions::randomNumber(1111, 9999);
+        $price   = \Ease\Functions::randomNumber(11, 99);
+        $payment = \Test\FlexiPeeHP\BankaTest::makeTestPayment(['varSym' => $varSym,
+                'sumZklZakl' => $price]);
+        $this->object->setSource($payment);
+
+        $converted = $this->object->conversion();
+        $this->assertEquals($payment->getDataValue('varSym'),
+            $converted->getDataValue('varSym'));
     }
 
     /**
      * @covers FlexiPeeHP\Bricks\Convertor::prepareRules
-     * @todo   Implement testPrepareRules().
      */
     public function testPrepareRules()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->debug = true;
+        $this->object->prepareRules(true /* $keepId */, true /* $addExtId */,
+            true /* $keepCode */, true /* $handleAccounting */);
+
+        $this->object->debug = false;
+        $this->object->prepareRules(true /* $keepId */, true /* $addExtId */,
+            true /* $keepCode */, true /* $handleAccounting */);
+        $this->expectException('\Ease\Exception'); // Cannot Load Class: \FlexiPeeHP\Bricks\ConvertRules\FakturaPrijata_to_FakturaVydana
     }
 
     /**
      * @covers FlexiPeeHP\Bricks\Convertor::convertDocument
-     * @todo   Implement testConvertDocument().
      */
     public function testConvertDocument()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->convertDocument();
     }
 
     /**
      * @covers FlexiPeeHP\Bricks\Convertor::convertSubitems
-     * @todo   Implement testConvertSubitems().
      */
     public function testConvertSubitems()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->convertSubitems('polozkyDokladu');
     }
 
     /**
      * @covers FlexiPeeHP\Bricks\Convertor::convertItems
-     * @todo   Implement testConvertItems().
      */
     public function testConvertItems()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->object->convertItems();
     }
 
     /**
      * @covers FlexiPeeHP\Bricks\Convertor::removeRoColumns
-     * @todo   Implement testRemoveRoColumns().
      */
     public function testRemoveRoColumns()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->removeRoColumns();
     }
 
     /**
      * @covers FlexiPeeHP\Bricks\Convertor::commonItems
-     * @todo   Implement testCommonItems().
      */
     public function testCommonItems()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $ci = $this->object->commonItems();
+
+        $this->assertEquals(array(
+            0 => 'id',
+            1 => 'lastUpdate',
+            2 => 'kod',
+            3 => 'zamekK',
+            4 => 'cisDosle',
+            5 => 'varSym',
+            6 => 'cisSml',
+            7 => 'cisObj',
+            8 => 'datObj',
+            9 => 'cisDodak',
+            10 => 'doprava',
+            11 => 'datVyst',
+            12 => 'duzpPuv',
+            13 => 'duzpUcto',
+            14 => 'datSplat',
+            15 => 'datUhr',
+            16 => 'datTermin',
+            17 => 'datReal',
+            18 => 'popis',
+            19 => 'poznam',
+            20 => 'sumOsv',
+            21 => 'sumZklSniz',
+            22 => 'sumZklSniz2',
+            23 => 'sumZklZakl',
+            24 => 'sumZklCelkem',
+            25 => 'sumDphSniz',
+            26 => 'sumDphSniz2',
+            27 => 'sumDphZakl',
+            28 => 'sumDphCelkem',
+            29 => 'sumCelkSniz',
+            30 => 'sumCelkSniz2',
+            31 => 'sumCelkZakl',
+            32 => 'sumCelkem',
+            33 => 'sumOsvMen',
+            34 => 'sumZklSnizMen',
+            35 => 'sumZklSniz2Men',
+            36 => 'sumZklZaklMen',
+            37 => 'sumZklCelkemMen',
+            38 => 'sumDphZaklMen',
+            39 => 'sumDphSnizMen',
+            40 => 'sumDphSniz2Men',
+            41 => 'sumDphCelkemMen',
+            42 => 'sumCelkSnizMen',
+            43 => 'sumCelkSniz2Men',
+            44 => 'sumCelkZaklMen',
+            45 => 'sumCelkemMen',
+            46 => 'slevaDokl',
+            47 => 'kurz',
+            48 => 'kurzMnozstvi',
+            49 => 'stavUzivK',
+            50 => 'nazFirmy',
+            51 => 'ulice',
+            52 => 'mesto',
+            53 => 'psc',
+            54 => 'eanKod',
+            55 => 'ic',
+            56 => 'dic',
+            57 => 'pocetPriloh',
+            58 => 'buc',
+            59 => 'iban',
+            60 => 'bic',
+            61 => 'specSym',
+            62 => 'bezPolozek',
+            63 => 'ucetni',
+            64 => 'szbDphSniz',
+            65 => 'szbDphSniz2',
+            66 => 'szbDphZakl',
+            67 => 'uzpTuzemsko',
+            68 => 'zuctovano',
+            69 => 'datUcto',
+            70 => 'vyloucitSaldo',
+            71 => 'storno',
+            72 => 'stitky',
+            73 => 'typDokl',
+            74 => 'mena',
+            75 => 'konSym',
+            76 => 'firma',
+            77 => 'stat',
+            78 => 'banSpojDod',
+            79 => 'bankovniUcet',
+            80 => 'typUcOp',
+            81 => 'primUcet',
+            82 => 'protiUcet',
+            83 => 'dphZaklUcet',
+            84 => 'dphSnizUcet',
+            85 => 'dphSniz2Ucet',
+            86 => 'smerKod',
+            87 => 'statDph',
+            88 => 'clenDph',
+            89 => 'stredisko',
+            90 => 'cinnost',
+            91 => 'zakazka',
+            92 => 'statOdesl',
+            93 => 'statUrc',
+            94 => 'statPuvod',
+            95 => 'dodPodm',
+            96 => 'obchTrans',
+            97 => 'druhDopr',
+            98 => 'zvlPoh',
+            99 => 'krajUrc',
+            100 => 'uzivatel',
+            101 => 'zodpOsoba',
+            102 => 'kontaktOsoba',
+            103 => 'kontaktJmeno',
+            104 => 'kontaktEmail',
+            105 => 'kontaktTel',
+            106 => 'rada',
+            107 => 'smlouva',
+            108 => 'formaDopravy',
+            109 => 'uuid',
+            110 => 'source',
+            112 => 'clenKonVykDph',
+            113 => 'datUp1',
+            114 => 'datUp2',
+            115 => 'datSmir',
+            116 => 'datPenale',
+            117 => 'podpisPrik',
+            118 => 'prikazSum',
+            119 => 'prikazSumMen',
+            120 => 'juhSum',
+            121 => 'juhSumMen',
+            122 => 'juhDat',
+            123 => 'juhDatMen',
+            124 => 'zbyvaUhradit',
+            125 => 'zbyvaUhraditMen',
+            126 => 'formaUhradyCis',
+            127 => 'stavUhrK',
+            128 => 'juhSumPp',
+            129 => 'juhSumPpMen',
+            130 => 'sumPrepl',
+            131 => 'sumPreplMen',
+            132 => 'sumZalohy',
+            133 => 'sumZalohyMen',
+            134 => 'stavOdpocetK',
+            135 => 'generovatSkl',
+            136 => 'hromFakt',
+            137 => 'zdrojProSkl',
+            139 => 'dobropisovano',
+            140 => 'sumCelkemBezZaloh',
+            141 => 'sumCelkemBezZalohMen',
+            142 => 'typDoklSkl',
+            ), $ci);
     }
 
     /**

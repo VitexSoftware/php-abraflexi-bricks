@@ -33,23 +33,6 @@ How to run ?
 
 Zatím několik málo praktických ukázek určený k použití ve vašich aplikacích - odtud název bricks/cihličky
 
-# Skripty v src/:
-
-| Soubor                                                        | Popis                                 |
-| ------------------------------------------------------------- | --------------------------------------|
-| [common.php](src/common.php)                                  | sdílené obecné funkce
-| [ConnectionInfo.php](src/ConnectionInfo.php)                  | Kontrola připojení k FlexiBee serveru   
-| [gethtml.php](src/gethtml.php)                                | Vrací HTML verzi dokumentu 
-| [LogResults.php](src/LogResults.php)                          | Loguje výsledky requestu      
-| [XSLTimporter.php](src/XSLTimporter.php)                      | Importuje XML přez XSLT transformaci
-| [config.php](src/config.php)                                  | Ukázka konfiguračního souboru 
-| [CurrencyExchange.php](src/CurrencyExchange.php)              | Funkce pro směnu měny v záznamu 
-| [getpdf.php](src/getpdf.php)                                  | Vrací PDF verzi dokumentu  
-| [parse-cmdline.php](src/parse-cmdline.php)                    | Parser parametrů příkazové řádky
-| [RegisterAddress.php](src/RegisterAddress.php)                | Ukázka použití registračního formuláře
-| [UpomenNeplatice.php](src/UpomenNeplatice.php)                | Rozešle neplatičům upomínky
-| [webhook.php](src/webhook.php)                                | Endpoint pro příjem WebHooků
-
 # Třídy v php-flexibee/Bricks/:
 
 | Soubor                                                          | Popis                                 |
@@ -102,6 +85,26 @@ Formulář pro zadání přihlašovacích údajů FlexiBee a zobrazení zdali by
 Instalátor uživatelských tlačítek [buttonInstaller](src/buttonInstaller.php)
 
 ![Custom Button Installer](https://raw.githubusercontent.com/VitexSoftware/php-flexibee-bricks/master/Examples/buttoninstaller.png)
+
++ tyto přesunuté původně z src
+
+| Soubor                                                        | Popis                                 |
+| ------------------------------------------------------------- | --------------------------------------|
+| [common.php](Examples/common.php)                             | sdílené obecné funkce
+| [ConnectionInfo.php](Examples/ConnectionInfo.php)             | Kontrola připojení k FlexiBee serveru   
+| [ConvertIncomeToZdd.php](Examples/ConvertIncomeToZdd.php)     | Zkonvertuje příjem v bance na ZDD a vytvoří vazbu
+| [gethtml.php](Examples/gethtml.php)                           | Vrací HTML verzi dokumentu 
+| [LogResults.php](Examples/LogResults.php)                     | Loguje výsledky requestu      
+| [XSLTimporter.php](Examples/XSLTimporter.php)                 | Importuje XML přez XSLT transformaci
+| [config.php](Examples/config.php)                             | Ukázka konfiguračního souboru 
+| [CurrencyExchange.php](Examples/CurrencyExchange.php)         | Funkce pro směnu měny v záznamu 
+| [getpdf.php](Examples/getpdf.php)                             | Vrací PDF verzi dokumentu  
+| [parse-cmdline.php](Examples/parse-cmdline.php)               | Parser parametrů příkazové řádky
+| [RegisterAddress.php](Examples/RegisterAddress.php)           | Ukázka použití registračního formuláře
+| [UpomenNeplatice.php](Examples/UpomenNeplatice.php)           | Rozešle neplatičům upomínky
+| [webhook.php](Examples/webhook.php)                           | Endpoint pro příjem WebHooků
+
+
 
 Debian/Ubuntu
 -------------

@@ -1,8 +1,9 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FlexiPeeHP Bricks - Convertor Class Rule
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2017-2020 Vitex Software
  */
 
 namespace FlexiPeeHP\Bricks;
@@ -48,9 +49,9 @@ class ConvertorRule extends \Ease\Sand
      * Conversion Rule
      * 
      * @param Convertor $convertor Convertor Engine
-     * @param boolean $keepId
-     * @param boolean $addExtId
-     * @param boolean $keepCode
+     * @param boolean $keepId           Keep original ID in cloned document
+     * @param boolean $addExtId         Add automatically generated ext:id based on source
+     * @param boolean $keepCode         Keep original code: in cloned document
      * @param boolean $handleAccounting set columns "ucetni" like target or ignore it
      */
     public function __construct(Convertor &$convertor = null, $keepId = false,
@@ -127,6 +128,8 @@ class ConvertorRule extends \Ease\Sand
      * @param Convertor $convertor
      * @param string    $className
      * 
+     * @return string   Generated class filename
+     * 
      * @throws \Ease\Exception
      */
     public static function convertorClassTemplateGenerator($convertor,
@@ -153,7 +156,7 @@ namespace FlexiPeehp\Bricks\ConvertRules;
 /**
  * Description of '.$className.'
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @author EaseFlexiBeeConvertorRule <info@vitexsoftware.cz>
  */
 class '.$className.' extends \FlexiPeeHP\Bricks\ConvertorRule
 {
@@ -171,6 +174,7 @@ class '.$className.' extends \FlexiPeeHP\Bricks\ConvertorRule
             throw new \Ease\Exception(sprintf(_('Cannot save ClassFile: %s'),
                     $className.'.php'));
         }
+        return $className.'.php';
     }
 
     public static function getOposites($inProps, $outProps)

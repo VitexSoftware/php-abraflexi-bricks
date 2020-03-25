@@ -3,7 +3,7 @@ php-flexibee-bricks (0.30) UNRELEASED; urgency=medium
   * New Cloner and its rules
   * Composer Json Fix
 
- -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Sat, 07 Mar 2020 22:07:02 +0100
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Sat, 07 Mar 2020 22:13:28 +0100
 
 php-flexibee-bricks (0.24) UNRELEASED; urgency=medium
 

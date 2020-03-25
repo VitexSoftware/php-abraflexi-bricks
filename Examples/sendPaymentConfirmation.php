@@ -15,7 +15,7 @@ include_once '../vendor/autoload.php';
 include_once './common.php';
 
 $faktura = new \FlexiPeeHP\FakturaVydana(['typDokl' => 'code:FAKTURA', 'firma' => 'code:VITEX',
-    'sumZklZakl' => \Ease\Sand::randomNumber(1000, 9999), 'bezPolozek' => true]);
+    'sumZklZakl' => \Ease\Functions::randomNumber(1000, 9999), 'bezPolozek' => true]);
 $faktura->refresh();
 
 $potvrzovac = new PotvrzeniUhrady($faktura);

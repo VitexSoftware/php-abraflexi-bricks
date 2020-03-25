@@ -24,7 +24,7 @@ function makePayment($initialData = [], $dayBack = 1)
     $yesterday = new \DateTime();
     $yesterday->modify('-'.$dayBack.' day');
 
-    $testCode = 'PAY_'.\Ease\Sand::randomString();
+    $testCode = 'PAY_'.\Ease\Functions::randomString();
 
     $payment = new \FlexiPeeHP\Banka($initialData);
 
@@ -33,8 +33,8 @@ function makePayment($initialData = [], $dayBack = 1)
         'banka' => 'code:HLAVNI',
         'typPohybuK' => 'typPohybu.prijem',
         'popis' => 'FlexiPeeHP bricks Test bank record',
-        'varSym' => \Ease\Sand::randomNumber(1111, 9999),
-        'specSym' => \Ease\Sand::randomNumber(111, 999),
+        'varSym' => \Ease\Functions::randomNumber(1111, 9999),
+        'specSym' => \Ease\Functions::randomNumber(111, 999),
         'bezPolozek' => true,
         'datVyst' => \FlexiPeeHP\FlexiBeeRO::dateToFlexiDate($yesterday),
         'typDokl' => \FlexiPeeHP\FlexiBeeRO::code('STANDARD')

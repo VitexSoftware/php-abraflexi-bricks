@@ -3,7 +3,7 @@
  * FlexiPeeHP Bricks - Convertor Class
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2018 Vitex Software
+ * @copyright  (G) 2017-2020 Vitex Software
  */
 
 namespace FlexiPeeHP\Bricks;
@@ -107,7 +107,12 @@ class Convertor extends \Ease\Sand
     }
 
     /**
-     * Prepare conversion rules
+     * Prepare conversion rules; in debug mode generate new empty new convertRule file
+     * 
+     * @param boolean $keepId           Keep original ID in cloned document
+     * @param boolean $addExtId         Add automatically generated ext:id based on source
+     * @param boolean $keepCode         Keep original code: in cloned document
+     * @param boolean $handleAccounting set columns "ucetni" like source or ignore it
      * 
      * @throws \Ease\Exception
      */
@@ -121,7 +126,7 @@ class Convertor extends \Ease\Sand
                 $handleAccounting);
             $this->rules->assignConvertor($this);
         } else {
-            if ($this->debug) {
+            if ($this->debug === true) {
                 ConvertorRule::convertorClassTemplateGenerator($this,
                     $convertorClassname);
             }
@@ -130,6 +135,11 @@ class Convertor extends \Ease\Sand
         }
     }
 
+    /**
+     * Name for class with rules for converting $this->input to $this->output
+     * 
+     * @return string
+     */
     public function getConvertorClassName()
     {
         return self::baseClassName($this->input).'_to_'.self::baseClassName($this->output);
