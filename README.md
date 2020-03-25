@@ -49,6 +49,7 @@ Zatím několik málo praktických ukázek určený k použití ve vašich aplik
 | Soubor                                                        | Popis                                 |
 | ------------------------------------------------------------- | --------------------------------------|
 | [CompanyLogo.php](src/php-flexibee/Bricks/ui/CompanyLogo.php)   | Logo Firmy
+| [DocumentLink.php](src/php-flexibee/Bricks/ui/DocumentLink.php) | Odkaz na dokument ve webovém rozhraní FlexiBee
 | [FlexiBeeLogo.php](src/php-flexibee/Bricks/ui/FlexiBeeLogo.php) | Logo FlexiBee
 | [EmbedResponsiveHTML.php](src/php-flexibee/Bricks/ui/EmbedResponsiveHTML.php)| Třída pro zobrazení HTML dokumentu na stránce 
 | [EmbedResponsivePDF.php](src/php-flexibee/Bricks/ui/EmbedResponsivePDF.php)  | Třída pro zobrazení PDF dokumentu na stránce 
