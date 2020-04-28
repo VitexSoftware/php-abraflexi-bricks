@@ -12,6 +12,7 @@
 ./src/FlexiPeeHP/Bricks/ParovacFaktur.php
 ./src/FlexiPeeHP/Bricks/PotvrzeniUhrady.php
 ./src/FlexiPeeHP/ui/CompanyLogo.php
+./src/FlexiPeeHP/ui/DocumentLink.php
 ./src/FlexiPeeHP/ui/EmbedResponsive.php
 ./src/FlexiPeeHP/ui/EmbedResponsiveHTML.php
 ./src/FlexiPeeHP/ui/EmbedResponsivePDF.php

@@ -13,7 +13,7 @@ namespace FlexiPeeHP\Bricks;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class PotvrzeniUhrady extends \Ease\Mailer
+class PotvrzeniUhrady extends \Ease\HtmlMailer
 {
 
     /**

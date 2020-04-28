@@ -3,7 +3,7 @@
     "description": "php-flexibee extending classes and widgets (debianized)",
     "homepage": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks",
     "license": "GPL-2.0+",
-    "version": "0.30",
+    "version": "0.32",
     "type": "library",
     "authors": [
         {
