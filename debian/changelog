@@ -7,8 +7,9 @@ php-flexibee-bricks (0.33) UNRELEASED; urgency=medium
   * Repack for Buster
   * Debian package fixed
   * twbootstrap renamed to bootstrap
+  * Release v0.33
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 20 Jun 2020 13:17:50 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 20 Jun 2020 13:21:59 +0200
 
 php-flexibee-bricks (0.24) UNRELEASED; urgency=medium
 
