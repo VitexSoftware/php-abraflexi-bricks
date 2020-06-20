@@ -1,4 +1,4 @@
-php-flexibee-bricks (0.32) UNRELEASED; urgency=medium
+php-flexibee-bricks (0.33) UNRELEASED; urgency=medium
 
   * New Cloner and its rules
   * Composer Json Fix
@@ -6,8 +6,9 @@ php-flexibee-bricks (0.32) UNRELEASED; urgency=medium
   [ CyberVitexus ]
   * Repack for Buster
   * Debian package fixed
+  * twbootstrap renamed to bootstrap
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Wed, 29 Apr 2020 00:40:47 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 20 Jun 2020 13:17:50 +0200
 
 php-flexibee-bricks (0.24) UNRELEASED; urgency=medium
 
