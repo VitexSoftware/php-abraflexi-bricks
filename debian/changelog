@@ -9,8 +9,9 @@ php-flexibee-bricks (0.34) UNRELEASED; urgency=medium
   * twbootstrap renamed to bootstrap
   * Release v0.33
   * Release v0.33
+  * Release v0.34
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 20 Jun 2020 14:20:28 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 20 Jun 2020 14:39:50 +0200
 
 php-flexibee-bricks (0.24) UNRELEASED; urgency=medium
 
