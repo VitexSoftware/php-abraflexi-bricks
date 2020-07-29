@@ -8,10 +8,10 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "spoje.net/flexibee": "dev-master",
-        "vitexsoftware/ease-html": "dev-master"
+        "vitexsoftware/ease-html": "^1.23",
+        "spojenet/flexibee": "^1.37"
     },
     "autoload": {
         "psr-4": {
