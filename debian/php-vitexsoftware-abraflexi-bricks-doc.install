@@ -1,0 +1,13 @@
+docs/classes/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/classes
+docs/css/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/css
+docs/files/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/files
+docs/graphs/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/graphs
+docs/index.html		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/
+docs/indices/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/indices
+docs/js/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/js
+docs/namespaces/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/namespaces
+docs/packages/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/packages
+docs/reports/*		usr/share/doc/php-vitexsoftware-abraflexi-bricks/html/reports
+debian/php-vitexsoftware-abraflexi-bricks-doc.conf	usr/share/doc/php-vitexsoftware-abraflexi-bricks-doc/apache
+README.md			usr/share/doc/php-vitexsoftware-abraflexi-bricks
+

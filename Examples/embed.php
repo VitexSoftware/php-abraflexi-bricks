@@ -12,7 +12,7 @@ $id       = $oPage->getRequestValue('id');
 $evidence = $oPage->getRequestValue('evidence');
 
 
-$document = new \FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
+$document = new \AbraFlexi\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
     ['evidence' => $evidence, 'detail' => 'summary']);
 
 $oPage->setPageTitle($document->getEvidence().' '.$document);
@@ -20,7 +20,7 @@ $oPage->setPageTitle($document->getEvidence().' '.$document);
 
 $feeder = 'getpdf.php?lang=en'; //Override choosen language here
 
-$embed = new \FlexiPeeHP\ui\EmbedResponsivePDF($document, $feeder, 'default');
+$embed = new \AbraFlexi\ui\EmbedResponsivePDF($document, $feeder, 'default');
 
 $oPage->addItem(new \Ease\TWB\Container($embed));
 $oPage->draw();

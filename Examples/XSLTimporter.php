@@ -1,6 +1,6 @@
 <?php
 
-namespace FlexiPeeHP\Bricks;
+namespace AbraFlexi\Bricks;
 
 use PrettyXml\Formatter;
 
@@ -9,7 +9,7 @@ use PrettyXml\Formatter;
  *
  * @author vitex
  */
-class XSLT extends \FlexiPeeHP\FlexiBeeRW
+class XSLT extends \AbraFlexi\FlexiBeeRW
 {
 
     public $evidence = 'xslt';

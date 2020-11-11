@@ -1,6 +1,6 @@
 <?php
 
-namespace FlexiPeeHP;
+namespace AbraFlexi;
 
 /**
  * Address Book Record Editor form usage example

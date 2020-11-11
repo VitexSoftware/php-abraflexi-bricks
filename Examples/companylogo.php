@@ -11,6 +11,6 @@ $oPage = new \Ease\WebPage();
     true);
 
 
-$oPage->addItem(new \FlexiPeeHP\ui\CompanyLogo(['width'=>'100']));
+$oPage->addItem(new \AbraFlexi\ui\CompanyLogo(['width'=>'100']));
 
 $oPage->draw();

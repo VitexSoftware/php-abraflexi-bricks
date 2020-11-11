@@ -1,16 +1,16 @@
 <?php
 /**
- * FlexiPeeHP Bricks - Example how to show connection check InfoBox
+ * AbraFlexi Bricks - Example how to show connection check InfoBox
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2017 Vitex Software
  */
 
-namespace FlexiPeeHP\Bricks;
+namespace AbraFlexi\Bricks;
 
 include_once './config.php';
 include_once '../vendor/autoload.php';
 include_once './common.php';
 
-$oPage->addItem(new \FlexiPeeHP\ui\StatusInfoBox());
+$oPage->addItem(new \AbraFlexi\ui\StatusInfoBox());
 $oPage->draw();

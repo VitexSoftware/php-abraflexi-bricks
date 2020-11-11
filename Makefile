@@ -1,10 +1,10 @@
-repoversion=$(shell LANG=C aptitude show php-flexibee-bricks | grep Version: | awk '{print $$2}')
+repoversion=$(shell LANG=C aptitude show php-vitexsoftware-abraflexi-bricks | grep Version: | awk '{print $$2}')
 nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$$_]}, 0, -1), map {++$$_} pop @{[split/\./,$$_]}), "\n";')
 
 
 clean:
-	rm -rf debian/php-flexibee-bricks
-	rm -rf debian/php-flexibee-bricks-doc
+	rm -rf debian/php-vitexsoftware-abraflexi-bricks
+	rm -rf debian/php-vitexsoftware-abraflexi-bricks-doc
 	rm -rf debian/*.log
 	rm -rf debian/*.substvars
 	rm -rf docs/*
@@ -12,7 +12,7 @@ clean:
 
 doc:
 	VERSION=`cat debian/composer.json | grep version | awk -F'"' '{print $$4}'`; \
-	php -f /usr/bin/apigen generate --source src --destination docs --title "php-flexibee-bricks ${VERSION}" --charset UTF-8 --access-levels public --access-levels protected --php --tree
+	php -f /usr/bin/apigen generate --source src --destination docs --title "php-vitexsoftware-abraflexi-bricks ${VERSION}" --charset UTF-8 --access-levels public --access-levels protected --php --tree
 
 phpunit:
 	composer update
@@ -20,14 +20,14 @@ phpunit:
 
 changelog:
 	VERSION=`cat debian/composer.json | grep version | awk -F'"' '{print $$4}'`; \
-	CHANGES=`git log -n 1 | tail -n+5` ; dch -b -v $${VERSION} --package php-flexibee-bricks "$(CHANGES)"
+	CHANGES=`git log -n 1 | tail -n+5` ; dch -b -v $${VERSION} --package php-vitexsoftware-abraflexi-bricks "$(CHANGES)"
 
 deb: changelog
 	dpkg-buildpackage -A -us -uc
 
 rpm:
-	rpmdev-bumpspec --comment="Build" --userstring="Vítězslav Dvořák <info@vitexsoftware.cz>" php-flexibee-bricks.spec
-	rpmbuild -ba flexipeehp.spec 
+	rpmdev-bumpspec --comment="Build" --userstring="Vítězslav Dvořák <info@vitexsoftware.cz>" php-vitexsoftware-abraflexi-bricks.spec
+	rpmbuild -ba abraflexi.spec 
 
 verup:
 	git commit debian/composer.json debian/version debian/revision  -m "`cat debian/version`-`cat debian/revision`"

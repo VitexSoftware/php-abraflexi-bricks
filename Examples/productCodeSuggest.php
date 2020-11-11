@@ -1,6 +1,6 @@
 <?php
 
-namespace FlexiPeeHP;
+namespace AbraFlexi;
 
 include_once './config.php';
 include_once '../vendor/autoload.php';

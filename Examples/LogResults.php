@@ -3,7 +3,7 @@
 /**
  * Loguje info o výsledku operace importu.
  *
- * @param \FlexiPeeHP\FlexiBeeRW $engine
+ * @param \AbraFlexi\FlexiBeeRW $engine
  * @param string $id ID záznamu
  * @param string $caption
  */

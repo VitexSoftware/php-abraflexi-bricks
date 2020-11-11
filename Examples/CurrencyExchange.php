@@ -3,7 +3,7 @@
 /**
  * Convert item to another currency
  *
- * @param \FlexiPeeHP\Banka|\FlexiPeeHP\Pokladna $subject    item to change
+ * @param \AbraFlexi\Banka|\AbraFlexi\Pokladna $subject    item to change
  * @param string                                 $toCurrency code:CZK
  * @param float                                  $rate       rate 26.30
  *

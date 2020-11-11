@@ -1,5 +1,5 @@
 {
-    "name": "vitexsoftware/flexipeehp-bricks-example",
+    "name": "vitexsoftware/abraflexi-bricks-example",
     "description": "List Invoices and embed choosen invoice PDF in english to webpage",
     "authors": [
         {
@@ -8,6 +8,6 @@
         }
     ],
     "require": {
-        "vitexsoftware/flexipeehp-bricks": ">=0.3"
+        "vitexsoftware/abraflexi-bricks": ">=0.3"
     }
 }

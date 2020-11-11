@@ -9,7 +9,7 @@ require_once '../vendor/autoload.php';
 
 function unc($code)
 {
-    return \FlexiPeeHP\FlexiBeeRO::uncode($code);
+    return \AbraFlexi\FlexiBeeRO::uncode($code);
 }
 
 /**
@@ -17,7 +17,7 @@ function unc($code)
  * 
  * @param array $initialData
  * 
- * @return \FlexiPeeHP\Banka
+ * @return \AbraFlexi\Banka
  */
 function makePayment($initialData = [], $dayBack = 1)
 {
@@ -26,18 +26,18 @@ function makePayment($initialData = [], $dayBack = 1)
 
     $testCode = 'PAY_'.\Ease\Functions::randomString();
 
-    $payment = new \FlexiPeeHP\Banka($initialData);
+    $payment = new \AbraFlexi\Banka($initialData);
 
     $payment->takeData(array_merge([
         'kod' => $testCode,
         'banka' => 'code:HLAVNI',
         'typPohybuK' => 'typPohybu.prijem',
-        'popis' => 'FlexiPeeHP bricks Test bank record',
+        'popis' => 'AbraFlexi bricks Test bank record',
         'varSym' => \Ease\Functions::randomNumber(1111, 9999),
         'specSym' => \Ease\Functions::randomNumber(111, 999),
         'bezPolozek' => true,
-        'datVyst' => \FlexiPeeHP\FlexiBeeRO::dateToFlexiDate($yesterday),
-        'typDokl' => \FlexiPeeHP\FlexiBeeRO::code('STANDARD')
+        'datVyst' => \AbraFlexi\FlexiBeeRO::dateToFlexiDate($yesterday),
+        'typDokl' => \AbraFlexi\FlexiBeeRO::code('STANDARD')
             ], $initialData));
     if ($payment->sync()) {
         $payment->addStatusMessage($payment->getApiURL().' '.unc($payment->getDataValue('typPohybuK')).' '.unc($payment->getRecordIdent()).' '.unc($payment->getDataValue('sumCelkem')).' '.unc($payment->getDataValue('mena')),
@@ -52,9 +52,9 @@ function makePayment($initialData = [], $dayBack = 1)
 \Ease\Shared::instanced()->loadConfig(dirname(__DIR__).'/tests/client.json');
 
 $prijem = makePayment();
-$zdd = new FlexiPeeHP\FakturaVydana(['typDokl' => \FlexiPeeHP\FlexiBeeRO::code('ZDD')]);
+$zdd = new AbraFlexi\FakturaVydana(['typDokl' => \AbraFlexi\FlexiBeeRO::code('ZDD')]);
 
-$engine = new FlexiPeeHP\Bricks\Convertor($prijem,$zdd);
+$engine = new AbraFlexi\Bricks\Convertor($prijem,$zdd);
 $zdd = $engine->conversion();
 
 print_r($zdd->getData());

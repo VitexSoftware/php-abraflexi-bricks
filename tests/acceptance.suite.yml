@@ -8,7 +8,7 @@ actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost/VitexSoftware/FlexiPeeHP-Bricks/src/
+            url: http://localhost/VitexSoftware/AbraFlexi-Bricks/src/
             browser: chrome
         - \Helper\Acceptance
         

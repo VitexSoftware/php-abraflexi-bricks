@@ -23,7 +23,7 @@ $invoiceRow->addColumn(2, 'Company');
 $container->addItem($invoiceRow);
 
 
-$invoice = new \FlexiPeeHP\FakturaVydana();
+$invoice = new \AbraFlexi\FakturaVydana();
 
 $invoices = $invoice->getColumnsFromFlexibee(['id', 'kod', 'cisDosle', 'sumCelkem',
     'nazFirmy'], ['storno' => false,'limit'=>20]);

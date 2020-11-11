@@ -1,12 +1,12 @@
 <?php
 /**
- * FlexiPeeHP - Example how to show connection check InfoBox
+ * AbraFlexi - Example how to show connection check InfoBox
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2017 Vitex Software
  */
 
-namespace FlexiPeeHP\Bricks;
+namespace AbraFlexi\Bricks;
 
 include_once './config.php';
 include_once '../vendor/autoload.php';

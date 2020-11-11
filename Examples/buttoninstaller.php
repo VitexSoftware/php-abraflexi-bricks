@@ -5,13 +5,13 @@
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 
-namespace FlexiPeeHP\Bricks;
+namespace AbraFlexi\Bricks;
 
 require_once dirname(__DIR__).'/vendor/autoload.php';
 
 $oPage = new \Ease\TWB\WebPage(_('FlexiBee Custom Button Installer'));
 
-$loginForm = new \FlexiPeeHP\ui\ConnectionForm('install.php');
+$loginForm = new \AbraFlexi\ui\ConnectionForm('install.php');
 $loginForm->addInput(new \Ease\ui\TWBSwitch('browser',
         isset($_REQUEST) && array_key_exists('browser', $_REQUEST), 'automatic',
         ['onText' => _('FlexiBee WebView'), 'offText' => _('System Browser')]),
@@ -25,7 +25,7 @@ if ($oPage->isPosted()) {
     $browser = isset($_REQUEST) && array_key_exists('browser', $_REQUEST) ? 'automatic'
             : 'desktop';
 
-    $buttoner = new \FlexiPeeHP\FlexiBeeRW(null,
+    $buttoner = new \AbraFlexi\FlexiBeeRW(null,
         array_merge($_REQUEST, ['evidence' => 'custom-button']));
 
 

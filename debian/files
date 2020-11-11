@@ -1,2 +1,3 @@
-php-flexibee-bricks_0.34_all.deb web optional
-php-flexibee-bricks_0.34_amd64.buildinfo - optional
+php-abraflexi-bricks-doc_0.32_all.deb doc optional
+php-vitexsoftware-abraflexi-bricks_0.32_all.buildinfo - optional
+php-vitexsoftware-abraflexi-bricks_0.32_all.deb web optional

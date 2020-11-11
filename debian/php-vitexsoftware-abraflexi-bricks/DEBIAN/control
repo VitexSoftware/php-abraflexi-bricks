@@ -1,0 +1,13 @@
+Package: php-vitexsoftware-abraflexi-bricks
+Version: 0.32
+Architecture: all
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Installed-Size: 163
+Depends: php-spojenet-abraflexi, php-vitexsoftware-ease-bricks
+Suggests: php-spojenet-abraflexi-doc, php-abraflexi-bricks-doc
+Replaces: php-abraflexi-bricks
+Section: web
+Priority: optional
+Homepage: https://github.com/VitexSoftware/php-abraflexi-bricks
+Description: PHP Based AbraFlexi RestAPI/Json library AddOns
+ Additional classes and code snipplets for spojenet/abraflexi library

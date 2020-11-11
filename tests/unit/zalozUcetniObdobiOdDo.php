@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @covers FlexiPeeHP\UcetniObdobi::createYearsFrom
+ * @covers AbraFlexi\UcetniObdobi::createYearsFrom
  */
 public function testCreateYearsFrom()
 {

@@ -9,13 +9,13 @@ require_once '../vendor/autoload.php';
 
 $oPage = new \Ease\TWB\WebPage(_('FlexiBee connection probe'));
 
-$connForm = new FlexiPeeHP\ui\ConnectionForm();
+$connForm = new AbraFlexi\ui\ConnectionForm();
 $connForm->fillUp($_REQUEST);
 
 
 $container = $oPage->addItem(new \Ease\TWB\Container($connForm));
 
-$container->addItem( new \Ease\TWB\Well( new \FlexiPeeHP\ui\StatusInfoBox(null, $_REQUEST)));
+$container->addItem( new \Ease\TWB\Well( new \AbraFlexi\ui\StatusInfoBox(null, $_REQUEST)));
 
 $container->addItem( $oPage->getStatusMessagesAsHtml() );
 

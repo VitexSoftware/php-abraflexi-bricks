@@ -1,48 +1,49 @@
 {
-    "name": "deb/flexibee-bricks",
-    "description": "php-flexibee extending classes and widgets (debianized)",
-    "homepage": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks",
-    "license": "GPL-2.0+",
-    "version": "0.32",
-    "type": "library",
-    "authors": [
-        {
-            "name": "Vítězslav Dvořák",
-            "email": "vitex@arachne.cz"
-        }
-    ],
-    "require": {
-        "deb/flexibee": "*",
-        "deb/ease-bricks": "*"
+  "name": "deb/flexibee-bricks",
+  "description": "php-flexibee extending classes and widgets (debianized)",
+  "homepage": "https://github.com/VitexSoftware/AbraFlexi-Bricks",
+  "license": "GPL-2.0+",
+  "version": "0.32",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Vítězslav Dvořák",
+      "email": "vitex@arachne.cz"
+    }
+  ],
+  "require": {
+    "deb/flexibee": "*",
+    "deb/ease-bricks": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AbraFlexi\\Bricks\\": "./Bricks",
+      "AbraFlexi\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules",
+      "AbraFlexi\\ui\\": "./ui"
+    }
+  },
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseCore"
     },
-    "autoload": {
-        "psr-4": {
-            "FlexiPeeHP\\Bricks\\": "./Bricks",
-            "FlexiPeeHP\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules",
-            "FlexiPeeHP\\ui\\": "./ui"
-        }
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseHtml"
     },
-    "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/usr/share/php/EaseCore"
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/EaseHtml"
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/EaseTWB"
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/EaseBricks"
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHP"
-        }
-    ]
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseTWB"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseBricks"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/AbraFlexi"
+    }
+  ],
+  "address": "0.32"
 }

@@ -1,26 +1,26 @@
-Source: php-flexibee-bricks
-Build-Depends: debhelper (>= 7.0.50~) 
-#,php-apigen
-Standards-Version: 3.8.4
+Source: php-vitexsoftware-abraflexi-bricks
+Build-Depends: debhelper (>= 7.0.50~), composer, phpdocumentor 
+Standards-Version: 4.3.0
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
-Homepage: https://github.com/VitexSoftware/php-flexibee-bricks
+Homepage: https://github.com/VitexSoftware/php-abraflexi-bricks
 
-Package: php-flexibee-bricks
-Depends: ${misc:Depends}, php-flexibee, php-ease-bricks
-Suggests: flexipeehp-doc,php-flexibee-bricks-doc
+Package: php-vitexsoftware-abraflexi-bricks
+Depends: ${misc:Depends}, php-spojenet-abraflexi, php-vitexsoftware-ease-bricks
+Replaces: php-abraflexi-bricks
+Suggests: php-spojenet-abraflexi-doc,php-abraflexi-bricks-doc
 Architecture: all
 Section: web
 Priority: optional
-Description: PHP Based FlexiBee RestAPI/Json library AddOns
- Additional classess and code snipplets for FlexiPeeHP library
+Description: PHP Based AbraFlexi RestAPI/Json library AddOns
+ Additional classes and code snipplets for spojenet/abraflexi library
 
-#Package: php-flexibee-bricks-doc
-#Depends: ${misc:Depends}
-#Suggests: www-browser
-#Architecture: all
-#Section: doc
-#Priority: optional
-#Description: PHP Based FlexiBee RestAPI/Json library Addons documentation
-# ApiGen html documentation for FlexiPeeHP Bricks php library
+Package: php-abraflexi-bricks-doc
+Depends: ${misc:Depends}
+Suggests: www-browser
+Architecture: all
+Section: doc
+Priority: optional
+Description: PHP Based AbraFlexi RestAPI/Json library Addons documentation
+ PHPDocumentor html documentation for AbraFlexi Bricks php library

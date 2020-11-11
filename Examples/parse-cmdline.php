@@ -1,6 +1,6 @@
 <?php
 /**
- * FlexiPeeHP Bricks - Commandline parameters parser
+ * AbraFlexi Bricks - Commandline parameters parser
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2018 Vitex Software

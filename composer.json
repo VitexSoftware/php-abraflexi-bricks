@@ -1,7 +1,8 @@
 {
-    "name": "vitexsoftware/flexibee-bricks",
-    "description": "php-flexibee extending classes and widgets",
+    "name": "vitexsoftware/abraflexi-bricks",
+    "description": "php-abraflexi extending classes and widgets",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Vitex",
@@ -10,22 +11,22 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "vitexsoftware/ease-html": "^1.23",
-        "spojenet/flexibee": "^1.37"
+        "vitexsoftware/ease-html": ">=1.25",
+        "spojenet/flexibee": "2.0.x-dev"
     },
     "autoload": {
         "psr-4": {
-            "FlexiPeeHP\\Bricks\\": "src/FlexiPeeHP/Bricks",
-            "FlexiPeeHP\\Bricks\\ConvertRules\\": "src/FlexiPeeHP/Bricks/ConvertRules",
-            "FlexiPeeHP\\ui\\": "src/FlexiPeeHP/ui"
+            "AbraFlexi\\Bricks\\": "src/AbraFlexi/Bricks",
+            "AbraFlexi\\Bricks\\ConvertRules\\": "src/AbraFlexi/Bricks/ConvertRules",
+            "AbraFlexi\\ui\\": "src/AbraFlexi/ui"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
-            "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/testing/src/FlexiPeeHP/",
-            "Test\\FlexiPeeHP\\ui\\": "testing/FlexiPeeHP/ui",
-            "Test\\FlexiPeeHP\\Bricks\\": "testing/FlexiPeeHP/Bricks",
+            "Test\\AbraFlexi\\": "vendor/spoje.net/abraflexi/testing/src/AbraFlexi/",
+            "Test\\AbraFlexi\\ui\\": "testing/AbraFlexi/ui",
+            "Test\\AbraFlexi\\Bricks\\": "testing/AbraFlexi/Bricks",
             "Test\\": "testing/"
         }
     },

@@ -10,7 +10,7 @@
  */
 function createYearsFrom($startYear, $endYear = null)
 {
-    $this   = new \FlexiPeeHP\UcetniObdobi();
+    $this   = new \AbraFlexi\UcetniObdobi();
     $result = [];
     if (is_null($endYear)) {
         $endYear = date('Y');

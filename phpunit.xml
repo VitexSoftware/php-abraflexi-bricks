@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="./tests/bootstrap.php">
-    <testsuites>
-        <testsuite name="all">
-            <directory>./tests/src/FlexiPeeHP</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">src/FlexiPeeHP</directory>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <!-- log type="tap" target="build/report.tap"/>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" bootstrap="./tests/bootstrap.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory suffix=".php">src/AbraFlexi</directory>
+    </include>
+    <report>
+      <clover outputFile="clover.log"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="all">
+      <directory>./tests/src/AbraFlexi</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <!-- log type="tap" target="build/report.tap"/>
         <log type="junit" target="build/report.junit.xml"/>
         <log type="coverage-text" target="php://stdout"/>
         <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/ -->
-        <log type="coverage-clover" target="clover.log"/>
-    </logging>
+  </logging>
 </phpunit>

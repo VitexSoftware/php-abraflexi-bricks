@@ -17,7 +17,7 @@ $evidence = $oPage->getRequestValue('evidence');
 $lang     = $oPage->getRequestValue('lang');
 
 
-$document = new \FlexiPeeHP\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
+$document = new \AbraFlexi\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
     ['evidence' => $evidence]);
 
 if (!is_null($document->getMyKey())) {
