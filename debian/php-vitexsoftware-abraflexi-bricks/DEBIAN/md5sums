@@ -1,5 +1,5 @@
 6bd09856434771323ca9b054aee78ad3  usr/share/doc/php-vitexsoftware-abraflexi-bricks/README.Debian
-10243e556d5f57ec1c7bd30814b4420c  usr/share/doc/php-vitexsoftware-abraflexi-bricks/changelog.gz
+e55d1f2a3dcb721a69271792bc579645  usr/share/doc/php-vitexsoftware-abraflexi-bricks/changelog.gz
 8ba8d36ef815f6b999de3c79c8b88d1d  usr/share/doc/php-vitexsoftware-abraflexi-bricks/copyright
 e1a1cbec5045d031b14d1754fad91092  usr/share/php/AbraFlexiBricks/Bricks/ConvertRules/Banka_to_FakturaVydana.php
 181d00df2c07fadf3a0fa34f994ab138  usr/share/php/AbraFlexiBricks/Bricks/ConvertRules/FakturaPrijata_to_FakturaVydana.php
@@ -15,7 +15,7 @@ de58b8d47c97ee3d6a7ad04cb0b38e14  usr/share/php/AbraFlexiBricks/Bricks/GdprLog.p
 7a174e285f16bcf3301003d61170c592  usr/share/php/AbraFlexiBricks/Bricks/HookReciever.php
 ba98114b506ec357cfe6d6facf43f576  usr/share/php/AbraFlexiBricks/Bricks/ParovacFaktur.php
 dfb5336570eddf936272893f636c42bb  usr/share/php/AbraFlexiBricks/Bricks/PotvrzeniUhrady.php
-5873daa75a9bdfa9c45278bba5104ceb  usr/share/php/AbraFlexiBricks/composer.json
+3b5bea64220208257e093ea98dc19ba0  usr/share/php/AbraFlexiBricks/composer.json
 d8947d2e03e72804105fac3062f4770b  usr/share/php/AbraFlexiBricks/ui/CompanyLogo.php
 64c4520c72f5c9a98adc87d73a17ac72  usr/share/php/AbraFlexiBricks/ui/DocumentLink.php
 05e00df6da24f01ced50eb49e8010599  usr/share/php/AbraFlexiBricks/ui/EmbedResponsive.php

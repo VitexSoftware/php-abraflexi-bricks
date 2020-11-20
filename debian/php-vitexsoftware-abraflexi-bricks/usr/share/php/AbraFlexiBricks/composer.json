@@ -1,9 +1,9 @@
 {
-  "name": "deb/flexibee-bricks",
+  "name": "deb/abraflexi-bricks",
   "description": "php-flexibee extending classes and widgets (debianized)",
-  "homepage": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks",
+  "homepage": "https://github.com/VitexSoftware/AbraFlexi-Bricks",
   "license": "GPL-2.0+",
-  "version": "0.32",
+  "version": "0.33",
   "type": "library",
   "authors": [
     {
@@ -12,14 +12,14 @@
     }
   ],
   "require": {
-    "deb/flexibee": "*",
+    "deb/abraflexi": "*",
     "deb/ease-bricks": "*"
   },
   "autoload": {
     "psr-4": {
-      "FlexiPeeHP\\Bricks\\": "./Bricks",
-      "FlexiPeeHP\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules",
-      "FlexiPeeHP\\ui\\": "./ui"
+      "AbraFlexi\\Bricks\\": "./Bricks",
+      "AbraFlexi\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules",
+      "AbraFlexi\\ui\\": "./ui"
     }
   },
   "minimum-stability": "dev",
@@ -42,7 +42,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/FlexiPeeHP"
+      "url": "/usr/share/php/AbraFlexi"
     }
   ],
   "address": "0.32"

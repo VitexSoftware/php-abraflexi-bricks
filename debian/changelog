@@ -1,4 +1,4 @@
-php-vitexsoftware-abraflexi-bricks (0.32) UNRELEASED; urgency=medium
+php-vitexsoftware-abraflexi-bricks (0.33) UNRELEASED; urgency=medium
 
   * New Cloner and its rules
   * Composer Json Fix
@@ -7,8 +7,9 @@ php-vitexsoftware-abraflexi-bricks (0.32) UNRELEASED; urgency=medium
   * Repack for Buster
   * Debian package fixed
   * twbootstrap renamed to bootstrap
+  * Logo file renamed according AbraFlexi current name
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Wed, 11 Nov 2020 01:28:56 +0100
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Fri, 20 Nov 2020 07:23:11 +0100
 
 php-vitexsoftware-abraflexi-bricks (0.24) UNRELEASED; urgency=medium
 

@@ -1,9 +1,9 @@
 {
-  "name": "deb/flexibee-bricks",
+  "name": "deb/abraflexi-bricks",
   "description": "php-flexibee extending classes and widgets (debianized)",
   "homepage": "https://github.com/VitexSoftware/AbraFlexi-Bricks",
   "license": "GPL-2.0+",
-  "version": "0.32",
+  "version": "0.33",
   "type": "library",
   "authors": [
     {
@@ -12,7 +12,7 @@
     }
   ],
   "require": {
-    "deb/flexibee": "*",
+    "deb/abraflexi": "*",
     "deb/ease-bricks": "*"
   },
   "autoload": {
