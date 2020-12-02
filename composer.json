@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "vitexsoftware/ease-html": ">=1.25",
-        "spojenet/abraflexi": "2.0.x-dev"
+        "spojenet/flexibee": "2.0.x-dev"
     },
     "autoload": {
         "psr-4": {
