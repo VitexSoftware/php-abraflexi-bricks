@@ -16,7 +16,7 @@ $searcher = new \AbraFlexi\Cenik();
 $searchColumn = $oPage->getRequestValue('column');
 $searchTerm = $oPage->getRequestValue('q');
 
-$found = $searcher->getColumnsFromFlexibee(['id','kod','nazev'], ["$searchColumn like similar '$searchTerm'"]);
+$found = $searcher->getColumnsFromAbraFlexi(['id','kod','nazev'], ["$searchColumn like similar '$searchTerm'"]);
 
 header('Content-Type: application/json');
 echo json_encode($found);

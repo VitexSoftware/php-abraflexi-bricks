@@ -18,7 +18,7 @@ $addressId = $oPage->getRequestValue('id');
 if (empty($addressId)) {
     $form = new \Ease\TWB\Form('idform');
     $form->addInput(new \Ease\Html\InputTextTag('id'),
-        _('FlexiBee address identifier'));
+        _('AbraFlexi address identifier'));
 } else {
     $adresser = new Adresar(is_numeric($addressId) ? (int) $addressId : $addressId);
     if ($oPage->isPosted()) {

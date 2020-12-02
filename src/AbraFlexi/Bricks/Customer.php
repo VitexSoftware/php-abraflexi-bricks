@@ -9,7 +9,7 @@
 namespace AbraFlexi\Bricks;
 
 /**
- * Description of FlexiBeeUser
+ * Description of AbraFlexiUser
  *
  * @author vitex
  */
@@ -65,7 +65,7 @@ class Customer extends \Ease\User
 
         if (is_array($userID)) {
             if (isset($userID['username'])) {
-                $contactInfo = $this->kontakt->getColumnsFromFlexiBee('*',
+                $contactInfo = $this->kontakt->getColumnsFromAbraFlexi('*',
                     ['username' => $userID['username']]);
                 if (!is_null($contactInfo)) {
                     $this->kontakt->takeData($contactInfo);
@@ -74,14 +74,14 @@ class Customer extends \Ease\User
                 }
             }
             if (isset($userID['email'])) {
-                $contactInfo = $this->kontakt->getColumnsFromFlexiBee('*',
+                $contactInfo = $this->kontakt->getColumnsFromAbraFlexi('*',
                     ['email' => $userID['email']]);
                 if (!empty($contactInfo)) {
                     $this->kontakt->takeData($contactInfo[0]);
                     $this->takeData($contactInfo[0]);
                     $this->origin = 'kontakt';
                 } else {
-                    $contactInfo = $this->adresar->getColumnsFromFlexiBee('*',
+                    $contactInfo = $this->adresar->getColumnsFromAbraFlexi('*',
                         ['email' => $userID['email']]);
                     if (!empty($contactInfo)) {
                         $this->adresar->takeData($contactInfo);
@@ -99,24 +99,24 @@ class Customer extends \Ease\User
      */
     public function getCustomerList()
     {
-        return $this->adresar->getColumnsFromFlexiBee(['id', 'stitky'], null,
+        return $this->adresar->getColumnsFromAbraFlexi(['id', 'stitky'], null,
                 'id');
     }
 
     /**
-     * Load Customer from FlexiBee
+     * Load Customer from AbraFlexi
      *
-     * @param id $id FlexiBee address record ID
+     * @param id $id AbraFlexi address record ID
      * @return int
      */
-    public function loadFromFlexiBee($id = null)
+    public function loadFromAbraFlexi($id = null)
     {
-        $result = $this->adresar->loadFromFlexiBee($id);
+        $result = $this->adresar->loadFromAbraFlexi($id);
         $this->takeData($this->adresar->getData());
         return $result;
     }
 
-    public function insertToFlexiBee($data = null)
+    public function insertToAbraFlexi($data = null)
     {
         if (is_null($data)) {
             $data = $this->getData();
@@ -124,14 +124,14 @@ class Customer extends \Ease\User
 
         switch ($this->origin) {
             case 'adresar':
-                $result = $this->adresar->insertToFlexiBee($data);
+                $result = $this->adresar->insertToAbraFlexi($data);
                 break;
             case 'kontakt':
-                $result = $this->kontakt->insertToFlexiBee($data);
+                $result = $this->kontakt->insertToAbraFlexi($data);
                 break;
             default:
-                $result = $this->kontakt->insertToFlexiBee($data);
-                $result = $this->adresar->insertToFlexiBee($data);
+                $result = $this->kontakt->insertToAbraFlexi($data);
+                $result = $this->adresar->insertToAbraFlexi($data);
                 break;
         }
         return $result;
@@ -168,7 +168,7 @@ class Customer extends \Ease\User
         }
         $result                                    = [];
         $this->invoicer->defaultUrlParams['order'] = 'datVyst@A';
-        $invoices                                  = $this->invoicer->getColumnsFromFlexibee([
+        $invoices                                  = $this->invoicer->getColumnsFromAbraFlexi([
             'id',
             'kod',
             'stavUhrK',
@@ -184,7 +184,7 @@ class Customer extends \Ease\User
             'mena',
             'zamekK',
             'datVyst'],
-            ["datSplat lte '".\AbraFlexi\FlexiBeeRW::dateToFlexiDate(new \DateTime())."' AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false AND firma=".(is_numeric($firma)
+            ["datSplat lte '".\AbraFlexi\RW::dateToFlexiDate(new \DateTime())."' AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false AND firma=".(is_numeric($firma)
                     ? $firma : "'".$firma."'" )], 'kod');
 
         if ($this->invoicer->lastResponseCode == 200) {
@@ -196,7 +196,7 @@ class Customer extends \Ease\User
     /**
      * Obtain Customer "Score"
      *
-     * @param int $addressID FlexiBee user ID
+     * @param int $addressID AbraFlexi user ID
      * 
      * @return int ZewlScore
      */
@@ -204,7 +204,7 @@ class Customer extends \Ease\User
     {
         $score     = 0;
         $debts     = $this->getCustomerDebts($addressID);
-        $stitkyRaw = $this->adresar->getColumnsFromFlexiBee(['stitky'],
+        $stitkyRaw = $this->adresar->getColumnsFromAbraFlexi(['stitky'],
             ['id' => $addressID]);
         $stitky    = $stitkyRaw[0]['stitky'];
         if (!empty($debts)) {
@@ -279,7 +279,7 @@ class Customer extends \Ease\User
         $result = $this->kontakt->authenticate($login, $password);
         if ($result === true) {
             $this->kontakt->defaultUrlParams['detail'] = 'full';
-            $contactId                                 = $this->kontakt->loadFromFlexiBee([
+            $contactId                                 = $this->kontakt->loadFromAbraFlexi([
                 $this->loginColumn => $login]);
             if (is_array($contactId)) {
                 $this->addStatusMessage(sprintf(_('Multiplete ContactID'),
@@ -289,7 +289,7 @@ class Customer extends \Ease\User
             }
 
             $firma = $this->kontakt->getDataValue('firma');
-            $this->adresar->loadFromFlexiBee(['id' => $firma]);
+            $this->adresar->loadFromAbraFlexi(['id' => $firma]);
 
             $this->addStatusMessage($firma.' '.$this->adresar->getDataValue('nazev'));
 
@@ -361,7 +361,7 @@ class Customer extends \Ease\User
         if (!empty($userID)) {
             $hash = self::encryptPassword($newPassword);
 
-            $this->kontakt->insertToFlexiBee([
+            $this->kontakt->insertToAbraFlexi([
                 'id' => $userID,
                 'username' => $this->getUserLogin(),
                 'password' => $hash,
@@ -370,7 +370,7 @@ class Customer extends \Ease\User
             ]);
             if ($this->kontakt->lastResponseCode == 201) {
                 $this->kontakt->addStatusMessage('Password set', 'success');
-                $this->kontakt->loadFromFlexiBee();
+                $this->kontakt->loadFromAbraFlexi();
             } else {
                 $hash = null;
                 $this->kontakt->addStatusMessage('Password set failed',

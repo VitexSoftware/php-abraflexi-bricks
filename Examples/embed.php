@@ -12,7 +12,7 @@ $id       = $oPage->getRequestValue('id');
 $evidence = $oPage->getRequestValue('evidence');
 
 
-$document = new \AbraFlexi\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
+$document = new \AbraFlexi\RO(is_numeric($id) ? intval($id) : $id,
     ['evidence' => $evidence, 'detail' => 'summary']);
 
 $oPage->setPageTitle($document->getEvidence().' '.$document);

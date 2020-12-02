@@ -17,23 +17,23 @@ define('EASE_APPNAME', 'AbraFlexi-Example');
 define('EASE_LOGGER', 'console');
 
 /*
- * URL Flexibee API
+ * URL AbraFlexi API
  */
-define('FLEXIBEE_URL', 'https://demo.flexibee.eu');
-//define('FLEXIBEE_URL', 'https://localhost:5434/');
+define('ABRAFLEXI_URL', 'https://demo.abraflexi.eu');
+//define('ABRAFLEXI_URL', 'https://localhost:5434/');
 
 /*
- * FlexiBee API User Login
+ * AbraFlexi API User Login
  */
-define('FLEXIBEE_LOGIN', 'winstrom');
-//define('FLEXIBEE_LOGIN', 'admin');
+define('ABRAFLEXI_LOGIN', 'winstrom');
+//define('ABRAFLEXI_LOGIN', 'admin');
 /*
- * FlexiBee API User Password
+ * AbraFlexi API User Password
  */
-define('FLEXIBEE_PASSWORD', 'winstrom');
-//define('FLEXIBEE_PASSWORD', 'admin123');
+define('ABRAFLEXI_PASSWORD', 'winstrom');
+//define('ABRAFLEXI_PASSWORD', 'admin123');
 /*
- * FlexiBee API Company
+ * AbraFlexi API Company
  */
-define('FLEXIBEE_COMPANY', 'demo');
-//define('FLEXIBEE_COMPANY', 'spoje_net_s_r_o_');
+define('ABRAFLEXI_COMPANY', 'demo');
+//define('ABRAFLEXI_COMPANY', 'spoje_net_s_r_o_');

@@ -95,7 +95,7 @@ class ParovacFaktur extends \Ease\Sand
     {
         $result                                  = [];
         $this->banker->defaultUrlParams['order'] = 'datVyst@A';
-        $payments                                = $this->banker->getColumnsFromFlexibee([
+        $payments                                = $this->banker->getColumnsFromAbraFlexi([
             'id',
             'kod',
             'varSym',
@@ -108,7 +108,7 @@ class ParovacFaktur extends \Ease\Sand
             ["sparovano eq false AND typPohybuK eq '".(($direction == 'out') ? 'typPohybu.vydej'
                     : 'typPohybu.prijem' )."' AND storno eq false ".
                 (is_null($daysBack) ? '' :
-                "AND datVyst eq '".\AbraFlexi\FlexiBeeRW::timestampToFlexiDate(mktime(0,
+                "AND datVyst eq '".\AbraFlexi\RW::timestampToFlexiDate(mktime(0,
                         0, 0, date("m"), date("d") - $daysBack, date("Y")))."' ")
             ], 'id');
 
@@ -141,7 +141,7 @@ class ParovacFaktur extends \Ease\Sand
 
         $conds['datVyst'] = $period;
 
-        $payments = $this->banker->getColumnsFromFlexibee([
+        $payments = $this->banker->getColumnsFromAbraFlexi([
             'id',
             'kod',
             'buc',
@@ -184,7 +184,7 @@ class ParovacFaktur extends \Ease\Sand
 
             $this->addStatusMessage(sprintf('Processing Payment %s %s %s vs: %s ss: %s %s',
                     $paymentData['kod'], $paymentData['sumCelkem'],
-                    \AbraFlexi\FlexiBeeRO::uncode($paymentData['mena']),
+                    \AbraFlexi\RO::uncode($paymentData['mena']),
                     $paymentData['varSym'], $paymentData['specSym'],
                     $this->banker->url.'/c/'.$this->banker->company.'/'.$this->banker->getEvidence().'/'.$paymentData['id']),
                 'info');
@@ -206,7 +206,7 @@ class ParovacFaktur extends \Ease\Sand
 
                     $typDokl                = $invoiceData['typDokl'][0];
                     $docType                = $typDokl['typDoklK'];
-                    $invoiceData['typDokl'] = \AbraFlexi\FlexiBeeRO::code($typDokl['kod']);
+                    $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl['kod']);
 
                     $invoice = new FakturaVydana($invoiceData, $this->config);
 
@@ -246,11 +246,11 @@ class ParovacFaktur extends \Ease\Sand
                     if ($matched && $this->savePayerAccount($invoice->getDataValue('firma'),
                             $payment)) {
                         $this->addStatusMessage(sprintf(_('new Bank account %s assigned to Address %s'),
-                                $payment->getDataValue('buc').'/'.\AbraFlexi\FlexiBeeRO::uncode($payment->getDataValue('smerKod')),
+                                $payment->getDataValue('buc').'/'.\AbraFlexi\RO::uncode($payment->getDataValue('smerKod')),
                                 $invoice->getDataValue('firma@showAs')));
                     }
 
-                    $this->banker->loadFromFlexiBee(\AbraFlexi\FlexiBeeRO::code($paymentData['kod']));
+                    $this->banker->loadFromAbraFlexi(\AbraFlexi\RO::code($paymentData['kod']));
                     if ($this->banker->getDataValue('sparovano') == true) {
                         break;
                     }
@@ -272,7 +272,7 @@ class ParovacFaktur extends \Ease\Sand
 ////                    $zdd = $this->paymentToZDD($payment);
 ////                    if ($zdd) {
 ////                        $this->addStatusMessage(sprinf(_('advance tax document created'),
-////                                \AbraFlexi\FlexiBeeRO::uncode($zdd)));
+////                                \AbraFlexi\RO::uncode($zdd)));
 ////                    }
 //
 //                    $this->addStatusMessage(_('Invoice found: - overdue?'),
@@ -301,7 +301,7 @@ class ParovacFaktur extends \Ease\Sand
             $this->banker->setMyKey($outPaymentId);
             $this->addStatusMessage(sprintf('Processing Outcoming Payment %s %s %s vs: %s ss: %s %s',
                     $outPaymentData['kod'], $outPaymentData['sumCelkem'],
-                    \AbraFlexi\FlexiBeeRO::uncode($outPaymentData['mena']),
+                    \AbraFlexi\RO::uncode($outPaymentData['mena']),
                     $outPaymentData['varSym'], $outPaymentData['specSym'],
                     $this->banker->getApiURL()), 'info');
 
@@ -360,7 +360,7 @@ class ParovacFaktur extends \Ease\Sand
     }
 
     /**
-     * Obtain FlexiBee company code for given bank account number
+     * Obtain AbraFlexi company code for given bank account number
      * 
      * @param string $account
      * @param string $bankCode
@@ -369,9 +369,9 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function getCompanyForBUC($account, $bankCode = null)
     {
-        $bucer      = new \AbraFlexi\FlexiBeeRW(null,
+        $bucer      = new \AbraFlexi\RW(null,
             ['evidence' => 'adresar-bankovni-ucet']);
-        $companyRaw = $bucer->getColumnsFromFlexibee(['firma'],
+        $companyRaw = $bucer->getColumnsFromAbraFlexi(['firma'],
             empty($bankCode) ? ['buc' => $account] : ['buc' => $account, 'smerKod' => $bankCode]);
         return array_key_exists(0, $companyRaw) ? $companyRaw[0]['firma'] : null;
     }
@@ -410,7 +410,7 @@ class ParovacFaktur extends \Ease\Sand
             if (!empty($payments) && count(current($payments))) {
                 $typDokl                = $invoiceData['typDokl'][0];
                 $docType                = $typDokl['typDoklK'];
-                $invoiceData['typDokl'] = \AbraFlexi\FlexiBeeRO::code($typDokl['kod']);
+                $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl['kod']);
                 $invoice                = new FakturaVydana($invoiceData,
                     $this->config);
                 $this->invoicer->setMyKey($invoiceData['id']);
@@ -480,16 +480,16 @@ class ParovacFaktur extends \Ease\Sand
             $this->banker->setDataValue('id', $payment['id']);
             $this->banker->setDataValue('stitky',
                 $this->config['LABEL_PREPLATEK']);
-            $this->banker->insertToFlexiBee();
+            $this->banker->insertToAbraFlexi();
         }
 
-        if ($invoice->sparujPlatbu($payment, 'castecnaUhrada')) { //Jak se ma FlexiBee zachovat pri preplatku/nedoplatku
+        if ($invoice->sparujPlatbu($payment, 'castecnaUhrada')) { //Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
             $success = 1;
             $invoice->addStatusMessage(sprintf(_('Platba %s  %s byla sparovana s dobropisem %s'),
                     (string) $payment, $prijataCastka, (string) $invoice),
                 'success');
             //PDF Danoveho dokladu priloz k nemu samemu
-            //PDF Danoveho dokladu odesli mailem zakaznikovi y FLEXIBEE( nasledne pouzit tabulku Mail/Gandalf)
+            //PDF Danoveho dokladu odesli mailem zakaznikovi y ABRAFLEXI( nasledne pouzit tabulku Mail/Gandalf)
         }
 
         return $success;
@@ -508,14 +508,14 @@ class ParovacFaktur extends \Ease\Sand
         $success       = 0;
         $prijataCastka = (float) $payment['sumCelkem'];
 
-        $platba = new \AbraFlexi\Banka(\AbraFlexi\FlexiBeeRO::code($payment['kod']),
+        $platba = new \AbraFlexi\Banka(\AbraFlexi\RO::code($payment['kod']),
             $this->config);
 
         if ($zaloha->sparujPlatbu($platba, 'castecnaUhrada')) {
             $success = 1;
             $zaloha->addStatusMessage(sprintf(_('Platba %s  %s %s byla sparovana s zalohou %s'),
-                    \AbraFlexi\FlexiBeeRO::uncode($platba), $prijataCastka,
-                    \AbraFlexi\FlexiBeeRO::uncode($payment['mena']),
+                    \AbraFlexi\RO::uncode($platba), $prijataCastka,
+                    \AbraFlexi\RO::uncode($payment['mena']),
                     (string) $zaloha), 'success');
 
             if ($zaloha->getDataValue('zbyvaUhradit') > $prijataCastka) { // Castecna Uhrada
@@ -553,9 +553,9 @@ class ParovacFaktur extends \Ease\Sand
 ////                            2);
 //                    }
 //                }
-//                $result = $zdd->insertToFlexiBee();
+//                $result = $zdd->insertToAbraFlexi();
 //
-//                $zdd->loadFromFlexiBee();
+//                $zdd->loadFromAbraFlexi();
 //                $zaloha->debug = true;
 //                $zdd->debug    = true;
 //
@@ -563,7 +563,7 @@ class ParovacFaktur extends \Ease\Sand
 //                $targt      = $platba->apiURL.'/vytvor-zdd.json';
 //                $zauctovani = '01-02';
 //                $value      = $zaloha->getDataValue('kod').'^^^'.$zauctovani;
-//                $sender     = new \AbraFlexi\FlexiBeeRW();
+//                $sender     = new \AbraFlexi\RW();
 //                $sender->setPostFields(['zalohaACleneni' => $value]);
 //                $result     = $sender->performRequest($targt, 'POST', 'json');
 //
@@ -598,7 +598,7 @@ class ParovacFaktur extends \Ease\Sand
                 $faktura2 = $this->invoiceCopy($zaloha,
                     ['duzpUcto' => $platba->getDataValue('datVyst'), 'datVyst' => $platba->getDataValue('datVyst')]);
                 $id       = (int) $faktura2->getLastInsertedId();
-                $faktura2->loadFromFlexiBee($id);
+                $faktura2->loadFromAbraFlexi($id);
                 $kod      = $faktura2->getDataValue('kod');
                 $faktura2->dataReset();
                 $faktura2->setDataValue('id', 'code:'.$kod);
@@ -617,7 +617,7 @@ class ParovacFaktur extends \Ease\Sand
             }
 
             //PDF Danoveho dokladu priloz k nemu samemu
-            //PDF Danoveho dokladu odesli mailem zakaznikovi y FLEXIBEE( nasledne pouzit tabulku Mail/Gandalf)
+            //PDF Danoveho dokladu odesli mailem zakaznikovi y ABRAFLEXI( nasledne pouzit tabulku Mail/Gandalf)
         }
         return $success;
     }
@@ -640,32 +640,32 @@ class ParovacFaktur extends \Ease\Sand
         if ($prijataCastka < $zbyvaUhradit) { //Castecna uhrada
             $this->addStatusMessage(sprintf(_('Castecna uhrada - FAKTURA: prijato: %s %s ma byt zaplaceno %s %s'),
                     $prijataCastka,
-                    \AbraFlexi\FlexiBeeRO::uncode($payment->getDataValue('mena')),
+                    \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
                     $zbyvaUhradit,
-                    \AbraFlexi\FlexiBeeRO::uncode($invoice->getDataValue('mena'))),
+                    \AbraFlexi\RO::uncode($invoice->getDataValue('mena'))),
                 'warning');
             $zbytek = 'castecnaUhrada';
         }
         if ($prijataCastka > $zbyvaUhradit) { //Castecna uhrada
             $this->addStatusMessage(sprintf(_('Přeplatek - FAKTURA: prijato: %s %s ma byt zaplaceno %s %s'),
                     $prijataCastka,
-                    \AbraFlexi\FlexiBeeRO::uncode($payment->getDataValue('mena')),
+                    \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
                     $zbyvaUhradit,
-                    \AbraFlexi\FlexiBeeRO::uncode($invoice->getDataValue('mena'))),
+                    \AbraFlexi\RO::uncode($invoice->getDataValue('mena'))),
                 'warning');
 
-            //$this->banker->insertToFlexiBee(['id'=>$payment->getDataValue('id'), 'stitky'=>$this->config['LABEL_CASTECNAUHRADA']]);
+            //$this->banker->insertToAbraFlexi(['id'=>$payment->getDataValue('id'), 'stitky'=>$this->config['LABEL_CASTECNAUHRADA']]);
             $zbytek = 'ignorovat';
         }
 
-        if ($invoice->sparujPlatbu($payment, $zbytek)) { //Jak se ma FlexiBee zachovat pri preplatku/nedoplatku
+        if ($invoice->sparujPlatbu($payment, $zbytek)) { //Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
             $success = 1;
-            $invoice->insertToFlexiBee(['id' => $invoice->getRecordIdent(), 'stavMailK' => 'stavMail.odeslat']);
+            $invoice->insertToAbraFlexi(['id' => $invoice->getRecordIdent(), 'stavMailK' => 'stavMail.odeslat']);
             $invoice->addStatusMessage(sprintf(_('Platba %s  %s %s byla sparovana s fakturou %s'),
-                    \AbraFlexi\FlexiBeeRO::uncode($payment->getRecordIdent()),
+                    \AbraFlexi\RO::uncode($payment->getRecordIdent()),
                     $prijataCastka,
-                    \AbraFlexi\FlexiBeeRO::uncode($payment->getDataValue('mena')),
-                    \AbraFlexi\FlexiBeeRO::uncode($invoice->getRecordIdent())),
+                    \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
+                    \AbraFlexi\RO::uncode($invoice->getRecordIdent())),
                 'success');
         }
 
@@ -675,7 +675,7 @@ class ParovacFaktur extends \Ease\Sand
     /**
      * Provizorní zkopírování faktury
      *
-     * @link https://www.flexibee.eu/podpora/Tickets/Ticket/View/28848 Chyba při Provádění akcí přes REST API JSON
+     * @link https://www.abraflexi.eu/podpora/Tickets/Ticket/View/28848 Chyba při Provádění akcí přes REST API JSON
      * @param  FakturaVydana $invoice
      * @param array                     $extraValues Extra hodnoty pro kopii faktury
      *
@@ -741,9 +741,9 @@ class ParovacFaktur extends \Ease\Sand
 
         if ($invoice2->sync()) {
             $invoice->addStatusMessage(sprintf(_('Faktura %s %s byla vytvořena z dokladu %s %s'),
-                    \AbraFlexi\FlexiBeeRO::uncode($invoice2->getRecordCode()),
+                    \AbraFlexi\RO::uncode($invoice2->getRecordCode()),
                     $invoice2->getApiURL(),
-                    \AbraFlexi\FlexiBeeRO::uncode($invoice->getRecordCode()),
+                    \AbraFlexi\RO::uncode($invoice->getRecordCode()),
                     $invoice->getApiURL()), 'success');
         }
         return $invoice2;
@@ -829,14 +829,14 @@ class ParovacFaktur extends \Ease\Sand
             $this->banker->setDataValue('stitky', 'NEIDENTIFIKOVANO');
             $this->addStatusMessage(_('Neidentifikovaná platba').': '.$this->banker->getApiURL(),
                 'warning');
-            $this->banker->insertToFlexiBee();
+            $this->banker->insertToAbraFlexi();
         } elseif (count($invoices) == 0) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
             $this->banker->setDataValue('stitky', 'CHYBIFAKTURA');
             $this->addStatusMessage(_('Platba bez faktury').': '.$this->banker->getApiURL(),
                 'warning');
-            $this->banker->insertToFlexiBee();
+            $this->banker->insertToAbraFlexi();
         }
 
         return $invoices;
@@ -854,7 +854,7 @@ class ParovacFaktur extends \Ease\Sand
         $invoicesByAge    = [];
         $invoicesByAgeRaw = [];
         foreach ($invoices as $invoiceData) {
-            $invoicesByAgeRaw[\AbraFlexi\FlexiBeeRW::flexiDateToDateTime($invoiceData['datVyst'])->getTimestamp()]
+            $invoicesByAgeRaw[\AbraFlexi\RW::flexiDateToDateTime($invoiceData['datVyst'])->getTimestamp()]
                 = $invoiceData;
         }
         ksort($invoicesByAgeRaw);
@@ -912,7 +912,7 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function findInvoice($what)
     {
-        return $this->searchInvoices(["(".\AbraFlexi\FlexiBeeRO::flexiUrl($what,
+        return $this->searchInvoices(["(".\AbraFlexi\RO::flexiUrl($what,
                     'or').") AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false"]);
     }
 
@@ -928,7 +928,7 @@ class ParovacFaktur extends \Ease\Sand
         $result                                       = null;
         $this->invoicer->defaultUrlParams['order']    = 'datVyst@A';
         $this->invoicer->defaultUrlParams['includes'] = '/faktura-vydana/typDokl';
-        $invoices                                     = $this->invoicer->getColumnsFromFlexibee([
+        $invoices                                     = $this->invoicer->getColumnsFromAbraFlexi([
             'id',
             'kod',
             'stavUhrK',
@@ -963,7 +963,7 @@ class ParovacFaktur extends \Ease\Sand
     {
         $result                                  = null;
         $this->banker->defaultUrlParams['order'] = 'datVyst@A';
-        $payments                                = $this->banker->getColumnsFromFlexibee([
+        $payments                                = $this->banker->getColumnsFromAbraFlexi([
             'id',
             'varSym',
             'specSym',
@@ -972,7 +972,7 @@ class ParovacFaktur extends \Ease\Sand
             'mena',
             'stitky',
             'datVyst'],
-            ["(".\AbraFlexi\FlexiBeeRO::flexiUrl($what, 'or').") AND sparovano eq 'false'"],
+            ["(".\AbraFlexi\RO::flexiUrl($what, 'or').") AND sparovano eq 'false'"],
             'id');
         if ($this->banker->lastResponseCode == 200) {
             $result = $payments;
@@ -994,7 +994,7 @@ class ParovacFaktur extends \Ease\Sand
         $value = $invoice->getDataValue('sumCelkem');
         foreach ($payments as $paymentID => $payment) {
             if ($payment['sumCelkem'] == $value) {
-                return new \AbraFlexi\Banka(\AbraFlexi\FlexiBeeRO::code($payments[$paymentID]['kod']),
+                return new \AbraFlexi\Banka(\AbraFlexi\RO::code($payments[$paymentID]['kod']),
                     $this->config);
             }
         }
@@ -1037,7 +1037,7 @@ class ParovacFaktur extends \Ease\Sand
         if (empty($this->docTypes)) {
             $this->docTypes = $this->getDocumentTypes();
         }
-        $documentType = \AbraFlexi\FlexiBeeRO::uncode($typDokl);
+        $documentType = \AbraFlexi\RO::uncode($typDokl);
         return array_key_exists($documentType, $this->docTypes) ? $this->docTypes[$documentType]
                 : 'typDokladu.neznamy';
     }
@@ -1065,9 +1065,9 @@ class ParovacFaktur extends \Ease\Sand
     {
         $result      = null;
         $accounts    = [];
-        $bucer       = new \AbraFlexi\FlexiBeeRW(null,
+        $bucer       = new \AbraFlexi\RW(null,
             ['evidence' => 'adresar-bankovni-ucet']);
-        $accountsRaw = $bucer->getColumnsFromFlexibee(['buc', 'smerKod'],
+        $accountsRaw = $bucer->getColumnsFromAbraFlexi(['buc', 'smerKod'],
             ['firma' => $address]);
         if (!empty($accountsRaw)) {
             $accounts = \Ease\Functions::reindexArrayBy($accountsRaw, 'buc');
@@ -1085,9 +1085,9 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function assignBankAccountToAddress($address, $payment)
     {
-        $bucer = new \AbraFlexi\FlexiBeeRW(null,
+        $bucer = new \AbraFlexi\RW(null,
             ['evidence' => 'adresar-bankovni-ucet']);
-        $bucer->insertToFlexiBee(['firma' => $address, 'buc' => $payment->getDataValue('buc'),
+        $bucer->insertToAbraFlexi(['firma' => $address, 'buc' => $payment->getDataValue('buc'),
             'smerKod' => $payment->getDataValue('smerKod'), 'poznam' => _('Added by script')]);
         return $bucer->lastResponseCode == 201;
     }
@@ -1118,7 +1118,7 @@ class ParovacFaktur extends \Ease\Sand
             $result      = true;
             $message     = '';
             foreach ($responseArr as $lineNo => $responseLine) {
-                if (strstr($responseLine, '<ul class = "flexibee-errors">')) {
+                if (strstr($responseLine, '<ul class = "abraflexi-errors">')) {
                     $message = trim($responseArr[$lineNo + 1]);
                     $result  = false;
                 }

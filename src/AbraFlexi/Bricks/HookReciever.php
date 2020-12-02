@@ -8,7 +8,7 @@
 namespace AbraFlexi\Bricks;
 
 /**
- * Obtain & process FlexiBee webhook call
+ * Obtain & process AbraFlexi webhook call
  *
  * @author vitex
  */
@@ -73,7 +73,7 @@ class HookReciever extends \AbraFlexi\Changes
                             $inVersion), 'warning');
                     continue;
                 }
-                $handlerClassName = \AbraFlexi\FlexiBeeRO::evidenceToClassName($evidence);
+                $handlerClassName = \AbraFlexi\RO::evidenceToClassName($evidence);
                 $handlerClassFile = 'System/whplugins/'.$handlerClassName.'.php';
                 if (file_exists($handlerClassFile)) {
                     include_once $handlerClassFile;
@@ -114,7 +114,7 @@ class HookReciever extends \AbraFlexi\Changes
     /**
      * Převezme změny
      * 
-     * @link https://www.flexibee.eu/api/dokumentace/ref/changes-api/ Changes API
+     * @link https://www.abraflexi.eu/api/dokumentace/ref/changes-api/ Changes API
      * @param array $changes pole změn
      * @return int Globální verze poslední změny
      */
@@ -143,8 +143,8 @@ class HookReciever extends \AbraFlexi\Changes
     {
         $this->lastProcessedVersion = $version;
         $this->myCreateColumn       = null;
-        $this->deleteFromSQL(['serverurl' => constant('FLEXIBEE_URL')]);
-        if (is_null($this->insertToSQL(['serverurl' => constant('FLEXIBEE_URL'),
+        $this->deleteFromSQL(['serverurl' => constant('ABRAFLEXI_URL')]);
+        if (is_null($this->insertToSQL(['serverurl' => constant('ABRAFLEXI_URL'),
                     'changeid' => $version]))) {
             $this->addStatusMessage(_("Last Processed Change ID Saving Failed"),
                 'error');

@@ -100,11 +100,11 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testInInvoicesMatchingByBank()
     {
-        $faktura         = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('FAKTURA'),
+        $faktura         = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('FAKTURA'),
             'popis' => 'InvoicesMatchingByBank AbraFlexi-Bricks Test']);
-        $zaloha          = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('ZÁLOHA'),
+        $zaloha          = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('ZÁLOHA'),
             'popis' => 'InvoicesMatchingByBank AbraFlexi-Bricks Test']);
-        $dobropis        = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('DOBROPIS'),
+        $dobropis        = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('DOBROPIS'),
             'popis' => 'InvoicesMatchingByBank AbraFlexi-Bricks Test']);
         $this->object->setStartDay(-1);
         $this->object->outInvoicesMatchingByBank();
@@ -114,7 +114,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
         $paymentsToCheck = $this->object->getPaymentsToProcess(1);
         $this->object->outInvoicesMatchingByBank();
         foreach ($paymentsToCheck as $paymentID => $paymentData) {
-            $paymentChecker->loadFromFlexiBee(\AbraFlexi\FlexiBeeRO::code($paymentData['kod']));
+            $paymentChecker->loadFromAbraFlexi(\AbraFlexi\RO::code($paymentData['kod']));
             $this->assertEquals('true',
                 $paymentChecker->getDataValue('sparovano'), 'Matching error');
         }
@@ -126,11 +126,11 @@ class ParovacFakturTest extends \Test\Ease\SandTest
     public function testInvoicesMatchingByInvoices()
     {
 
-        $faktura  = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('FAKTURA'),
+        $faktura  = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('FAKTURA'),
             'popis' => 'InvoicesMatchingByInvoices AbraFlexi-Bricks Test']);
-        $zaloha   = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('ZÁLOHA'),
+        $zaloha   = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('ZÁLOHA'),
             'popis' => 'InvoicesMatchingByInvoices AbraFlexi-Bricks Test']);
-        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('DOBROPIS'),
+        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('DOBROPIS'),
             'popis' => 'InvoicesMatchingByInvoices AbraFlexi-Bricks Test']);
 
         $invoiceChecker  = new \AbraFlexi\FakturaVydana(null,
@@ -141,7 +141,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
         } else {
             $this->object->invoicesMatchingByInvoices();
             foreach ($invoicesToCheck as $paymentID => $paymentData) {
-                $invoiceChecker->loadFromFlexiBee($paymentID);
+                $invoiceChecker->loadFromAbraFlexi($paymentID);
                 $this->assertEquals('true',
                     $invoiceChecker->getDataValue('sparovano'), 'Matching error');
             }
@@ -153,7 +153,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testSettleCreditNote()
     {
-        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('ODD'),
+        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('ODD'),
             'popis' => 'Test SettleCreditNote AbraFlexi-Bricks']);
         $payment  = $this->makePayment();
         $this->assertEquals(1,
@@ -165,7 +165,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testSettleProforma()
     {
-        $zaloha  = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('ZÁLOHA'),
+        $zaloha  = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('ZÁLOHA'),
             'popis' => 'Test SettleProforma AbraFlexi-Bricks']);
         $payment = $this->makePayment();
         $this->object->settleProforma($zaloha, $payment->getData());
@@ -176,7 +176,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testSettleInvoice()
     {
-        $invoice = $this->makeInvoice(['typDokl' => \AbraFlexi\FlexiBeeRO::code('FAKTURA'),
+        $invoice = $this->makeInvoice(['typDokl' => \AbraFlexi\RO::code('FAKTURA'),
             'popis' => 'Test SettleInvoice AbraFlexi-Bricks PHPUnit']);
         $payment = $this->makePayment();
         $this->assertEquals(1, $this->object->settleInvoice($invoice, $payment));
@@ -274,7 +274,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testApiUrlToLink()
     {
-        $this->assertEquals('<a href="'.constant('FLEXIBEE_URL').'/c/'.constant('FLEXIBEE_COMPANY').'/banka.json" target="_blank" rel="nofollow">https://demo.flexibee.eu:5434/c/demo/banka.json</a>',
+        $this->assertEquals('<a href="'.constant('ABRAFLEXI_URL').'/c/'.constant('ABRAFLEXI_COMPANY').'/banka.json" target="_blank" rel="nofollow">https://demo.abraflexi.eu:5434/c/demo/banka.json</a>',
             $this->object->apiUrlToLink($this->object->banker->apiURL));
     }
 }

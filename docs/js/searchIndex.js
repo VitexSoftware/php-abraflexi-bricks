@@ -43,12 +43,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AconvertDocument\u0028\u0029",
             "name": "convertDocument",
-            "summary": "Convert\u0020FlexiBee\u0020document",
+            "summary": "Convert\u0020AbraFlexi\u0020document",
             "url": "../classes/AbraFlexi-Bricks-Convertor.html#method_convertDocument"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AconvertSubitems\u0028\u0029",
             "name": "convertSubitems",
-            "summary": "Convert\u0020FlexiBee\u0020documnet\u0027s\u0020subitems",
+            "summary": "Convert\u0020AbraFlexi\u0020documnet\u0027s\u0020subitems",
             "url": "../classes/AbraFlexi-Bricks-Convertor.html#method_convertSubitems"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AconvertItems\u0028\u0029",
@@ -223,7 +223,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Customer",
             "name": "Customer",
-            "summary": "Description\u0020of\u0020FlexiBeeUser",
+            "summary": "Description\u0020of\u0020AbraFlexiUser",
             "url": "../classes/AbraFlexi-Bricks-Customer.html"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Customer\u003A\u003A__construct\u0028\u0029",
@@ -236,15 +236,15 @@ Search.appendIndex(
             "summary": "Return\u0020Cutomers",
             "url": "../classes/AbraFlexi-Bricks-Customer.html#method_getCustomerList"
         },                {
-            "fqsen": "\\AbraFlexi\\Bricks\\Customer\u003A\u003AloadFromFlexiBee\u0028\u0029",
-            "name": "loadFromFlexiBee",
-            "summary": "Load\u0020Customer\u0020from\u0020FlexiBee",
-            "url": "../classes/AbraFlexi-Bricks-Customer.html#method_loadFromFlexiBee"
+            "fqsen": "\\AbraFlexi\\Bricks\\Customer\u003A\u003AloadFromAbraFlexi\u0028\u0029",
+            "name": "loadFromAbraFlexi",
+            "summary": "Load\u0020Customer\u0020from\u0020AbraFlexi",
+            "url": "../classes/AbraFlexi-Bricks-Customer.html#method_loadFromAbraFlexi"
         },                {
-            "fqsen": "\\AbraFlexi\\Bricks\\Customer\u003A\u003AinsertToFlexiBee\u0028\u0029",
-            "name": "insertToFlexiBee",
+            "fqsen": "\\AbraFlexi\\Bricks\\Customer\u003A\u003AinsertToAbraFlexi\u0028\u0029",
+            "name": "insertToAbraFlexi",
             "summary": "",
-            "url": "../classes/AbraFlexi-Bricks-Customer.html#method_insertToFlexiBee"
+            "url": "../classes/AbraFlexi-Bricks-Customer.html#method_insertToAbraFlexi"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Customer\u003A\u003AgetCustomerDebts\u0028\u0029",
             "name": "getCustomerDebts",
@@ -351,19 +351,19 @@ Search.appendIndex(
             "summary": "Description\u0020of\u0020CustomerLog",
             "url": "../classes/AbraFlexi-Bricks-GdprLog.html"
         },                {
-            "fqsen": "\\AbraFlexi\\Bricks\\GdprLog\u003A\u003AlogFlexiBeeEvent\u0028\u0029",
-            "name": "logFlexiBeeEvent",
-            "summary": "Log\u0020FlexiBee\u0020event",
-            "url": "../classes/AbraFlexi-Bricks-GdprLog.html#method_logFlexiBeeEvent"
+            "fqsen": "\\AbraFlexi\\Bricks\\GdprLog\u003A\u003AlogAbraFlexiEvent\u0028\u0029",
+            "name": "logAbraFlexiEvent",
+            "summary": "Log\u0020AbraFlexi\u0020event",
+            "url": "../classes/AbraFlexi-Bricks-GdprLog.html#method_logAbraFlexiEvent"
         },                {
-            "fqsen": "\\AbraFlexi\\Bricks\\GdprLog\u003A\u003AlogFlexiBeeChange\u0028\u0029",
-            "name": "logFlexiBeeChange",
-            "summary": "Log\u0020Change\u0020in\u0020FlexiBee",
-            "url": "../classes/AbraFlexi-Bricks-GdprLog.html#method_logFlexiBeeChange"
+            "fqsen": "\\AbraFlexi\\Bricks\\GdprLog\u003A\u003AlogAbraFlexiChange\u0028\u0029",
+            "name": "logAbraFlexiChange",
+            "summary": "Log\u0020Change\u0020in\u0020AbraFlexi",
+            "url": "../classes/AbraFlexi-Bricks-GdprLog.html#method_logAbraFlexiChange"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\HookReciever",
             "name": "HookReciever",
-            "summary": "Obtain\u0020\u0026\u0020process\u0020FlexiBee\u0020webhook\u0020call",
+            "summary": "Obtain\u0020\u0026\u0020process\u0020AbraFlexi\u0020webhook\u0020call",
             "url": "../classes/AbraFlexi-Bricks-HookReciever.html"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\HookReciever\u003A\u003A__construct\u0028\u0029",
@@ -468,7 +468,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003AgetCompanyForBUC\u0028\u0029",
             "name": "getCompanyForBUC",
-            "summary": "Obtain\u0020FlexiBee\u0020company\u0020code\u0020for\u0020given\u0020bank\u0020account\u0020number",
+            "summary": "Obtain\u0020AbraFlexi\u0020company\u0020code\u0020for\u0020given\u0020bank\u0020account\u0020number",
             "url": "../classes/AbraFlexi-Bricks-ParovacFaktur.html#method_getCompanyForBUC"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003AisSameCompany\u0028\u0029",
@@ -643,7 +643,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\ui\\DocumentLink\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "A\u0020Href\u0020to\u0020document\u0020in\u0020FlexiBee\u0020web\u0020interface",
+            "summary": "A\u0020Href\u0020to\u0020document\u0020in\u0020AbraFlexi\u0020web\u0020interface",
             "url": "../classes/AbraFlexi-ui-DocumentLink.html#method___construct"
         },                {
             "fqsen": "\\AbraFlexi\\ui\\EmbedResponsive",
@@ -676,20 +676,20 @@ Search.appendIndex(
             "summary": "Ebed\u0020Document\u0027s\u0020PDF\u0020to\u0020Page",
             "url": "../classes/AbraFlexi-ui-EmbedResponsivePDF.html#method___construct"
         },                {
-            "fqsen": "\\AbraFlexi\\ui\\FlexiBeeLogo",
-            "name": "FlexiBeeLogo",
-            "summary": "AbraFlexi\u0020Bricks\u0020\u002D\u0020FlexiBee\u0020svg\u0020logo",
-            "url": "../classes/AbraFlexi-ui-FlexiBeeLogo.html"
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo",
+            "name": "AbraFlexiLogo",
+            "summary": "AbraFlexi\u0020Bricks\u0020\u002D\u0020AbraFlexi\u0020svg\u0020logo",
+            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html"
         },                {
-            "fqsen": "\\AbraFlexi\\ui\\FlexiBeeLogo\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Inline\u0020vector\u0020FlexiBee\u0020logo",
-            "url": "../classes/AbraFlexi-ui-FlexiBeeLogo.html#method___construct"
+            "summary": "Inline\u0020vector\u0020AbraFlexi\u0020logo",
+            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html#method___construct"
         },                {
-            "fqsen": "\\AbraFlexi\\ui\\FlexiBeeLogo\u003A\u003A\u0024svg",
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A\u0024svg",
             "name": "svg",
             "summary": "",
-            "url": "../classes/AbraFlexi-ui-FlexiBeeLogo.html#property_svg"
+            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html#property_svg"
         },                {
             "fqsen": "\\AbraFlexi\\ui\\RecordChooser",
             "name": "RecordChooser",
@@ -718,7 +718,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\ui\\RecordTypeSelect\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Common\u0020FlexiBee\u0020evidence\u0020record\u0020Type\u0020Select",
+            "summary": "Common\u0020AbraFlexi\u0020evidence\u0020record\u0020Type\u0020Select",
             "url": "../classes/AbraFlexi-ui-RecordTypeSelect.html#method___construct"
         },                {
             "fqsen": "\\AbraFlexi\\ui\\SearchBox",

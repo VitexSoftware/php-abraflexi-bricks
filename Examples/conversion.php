@@ -9,7 +9,7 @@ require_once '../vendor/autoload.php';
 
 function unc($code)
 {
-    return \AbraFlexi\FlexiBeeRO::uncode($code);
+    return \AbraFlexi\RO::uncode($code);
 }
 
 /**
@@ -36,8 +36,8 @@ function makePayment($initialData = [], $dayBack = 1)
         'varSym' => \Ease\Functions::randomNumber(1111, 9999),
         'specSym' => \Ease\Functions::randomNumber(111, 999),
         'bezPolozek' => true,
-        'datVyst' => \AbraFlexi\FlexiBeeRO::dateToFlexiDate($yesterday),
-        'typDokl' => \AbraFlexi\FlexiBeeRO::code('STANDARD')
+        'datVyst' => \AbraFlexi\RO::dateToFlexiDate($yesterday),
+        'typDokl' => \AbraFlexi\RO::code('STANDARD')
             ], $initialData));
     if ($payment->sync()) {
         $payment->addStatusMessage($payment->getApiURL().' '.unc($payment->getDataValue('typPohybuK')).' '.unc($payment->getRecordIdent()).' '.unc($payment->getDataValue('sumCelkem')).' '.unc($payment->getDataValue('mena')),
@@ -52,7 +52,7 @@ function makePayment($initialData = [], $dayBack = 1)
 \Ease\Shared::instanced()->loadConfig(dirname(__DIR__).'/tests/client.json');
 
 $prijem = makePayment();
-$zdd = new AbraFlexi\FakturaVydana(['typDokl' => \AbraFlexi\FlexiBeeRO::code('ZDD')]);
+$zdd = new AbraFlexi\FakturaVydana(['typDokl' => \AbraFlexi\RO::code('ZDD')]);
 
 $engine = new AbraFlexi\Bricks\Convertor($prijem,$zdd);
 $zdd = $engine->conversion();

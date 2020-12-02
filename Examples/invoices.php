@@ -15,7 +15,7 @@ $container  = $oPage->addItem(new \Ease\TWB\Container());
 $container->addItem(new \Ease\Html\H1Tag('20 invoices'));
 
 $invoiceRow = new \Ease\TWB\Row();
-$invoiceRow->addColumn(2, 'FlexiBee Code');
+$invoiceRow->addColumn(2, 'AbraFlexi Code');
 $invoiceRow->addColumn(2, 'Remote Number');
 $invoiceRow->addColumn(2, 'Amount');
 $invoiceRow->addColumn(2, 'Company');
@@ -25,7 +25,7 @@ $container->addItem($invoiceRow);
 
 $invoice = new \AbraFlexi\FakturaVydana();
 
-$invoices = $invoice->getColumnsFromFlexibee(['id', 'kod', 'cisDosle', 'sumCelkem',
+$invoices = $invoice->getColumnsFromAbraFlexi(['id', 'kod', 'cisDosle', 'sumCelkem',
     'nazFirmy'], ['storno' => false,'limit'=>20]);
 
 if (!empty($invoices)) {

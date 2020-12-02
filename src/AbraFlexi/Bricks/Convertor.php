@@ -17,13 +17,13 @@ class Convertor extends \Ease\Sand
 {
     /**
      * Source Object
-     * @var \AbraFlexi\FlexiBeeRO 
+     * @var \AbraFlexi\RO 
      */
     private $input;
 
     /**
      * Destination Object
-     * @var \AbraFlexi\FlexiBeeRO 
+     * @var \AbraFlexi\RO 
      */
     private $output;
 
@@ -36,12 +36,12 @@ class Convertor extends \Ease\Sand
     /**
      * Convertor 
      * 
-     * @param \AbraFlexi\FlexiBeeRO $input   Source 
-     * @param \AbraFlexi\FlexiBeeRW $output  Destination
+     * @param \AbraFlexi\RO $input   Source 
+     * @param \AbraFlexi\RW $output  Destination
      * @param ConvertorRule          $ruler   force convertor rule class
      */
-    public function __construct(\AbraFlexi\FlexiBeeRO $input = null,
-                                \AbraFlexi\FlexiBeeRW $output = null,
+    public function __construct(\AbraFlexi\RO $input = null,
+                                \AbraFlexi\RW $output = null,
                                 $ruler = null)
     {
         if (!empty($input)) {
@@ -59,9 +59,9 @@ class Convertor extends \Ease\Sand
     /**
      * Set Source Documnet
      * 
-     * @param \AbraFlexi\FlexiBeeRO $source
+     * @param \AbraFlexi\RO $source
      */
-    public function setSource(\AbraFlexi\FlexiBeeRO $source)
+    public function setSource(\AbraFlexi\RO $source)
     {
         $this->input = $source;
     }
@@ -69,9 +69,9 @@ class Convertor extends \Ease\Sand
     /**
      * Set Destination document
      * 
-     * @param \AbraFlexi\FlexiBeeRO $destinantion
+     * @param \AbraFlexi\RO $destinantion
      */
-    public function setDestination(\AbraFlexi\FlexiBeeRO $destination)
+    public function setDestination(\AbraFlexi\RO $destination)
     {
         $this->output = $destination;
     }
@@ -84,7 +84,7 @@ class Convertor extends \Ease\Sand
      * @param boolean $keepCode
      * @param boolean $handleAccounting set columns "ucetni" like target or ignore it
      * 
-     * @return \AbraFlexi\FlexiBeeRW converted object ( unsaved )
+     * @return \AbraFlexi\RW converted object ( unsaved )
      */
     public function conversion($keepId = false, $addExtId = false,
                                $keepCode = false, $handleAccounting = false)
@@ -146,7 +146,7 @@ class Convertor extends \Ease\Sand
     }
 
     /**
-     * Convert FlexiBee document
+     * Convert AbraFlexi document
      * 
      * @param boolean $keepId           keep item IDs
      * @param boolean $addExtId         add ext:originalEvidence:originalId 
@@ -160,7 +160,7 @@ class Convertor extends \Ease\Sand
     }
 
     /**
-     * Convert FlexiBee documnet's subitems
+     * Convert AbraFlexi documnet's subitems
      * 
      * @param string  $columnToTake   usually "polozkyDokladu"
      */
@@ -234,7 +234,7 @@ class Convertor extends \Ease\Sand
     /**
      * Get input object here
      * 
-     * @return \AbraFlexi\FlexiBeeRO
+     * @return \AbraFlexi\RO
      */
     public function getInput()
     {
@@ -244,7 +244,7 @@ class Convertor extends \Ease\Sand
     /**
      * Get output object here
      * 
-     * @return \AbraFlexi\FlexiBeeRO
+     * @return \AbraFlexi\RO
      */
     public function getOutput()
     {

@@ -18,7 +18,7 @@ class EmbedResponsiveHTML extends EmbedResponsive
     /**
      * Ebed Document's HTML to Page
      *
-     * @param \AbraFlexi\FlexiBeeRO $source object with document
+     * @param \AbraFlexi\RO $source object with document
      * @param string                 $feeder script can send us the pdf
      */
     public function __construct($source, $feeder = 'gethtml.php')

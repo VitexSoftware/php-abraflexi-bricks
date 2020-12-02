@@ -59,11 +59,11 @@
         }
 
         if (array_key_exists('f', $options)) {
-            $optionsParsed['config'] = $options['f'] ? $options['f'] : '/etc/flexibee/client.json';
+            $optionsParsed['config'] = $options['f'] ? $options['f'] : '/etc/abraflexi/client.json';
         }
 
         if (array_key_exists('file', $options)) {
-            $optionsParsed['config'] = $options['file'] ? $options['file'] : '/etc/flexibee/client.json';
+            $optionsParsed['config'] = $options['file'] ? $options['file'] : '/etc/abraflexi/client.json';
         }
 
         if (array_key_exists('config', $optionsParsed)) {

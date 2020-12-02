@@ -3,7 +3,7 @@ namespace AbraFlexi\Bricks\ConvertRules;
 /**
  * Description of FakturaPrijata_to_FakturaVydana
  *
- * @author EaseFlexiBeeConvertorRule <info@vitexsoftware.cz>
+ * @author EaseAbraFlexiConvertorRule <info@vitexsoftware.cz>
  */
 class FakturaPrijata_to_FakturaVydana extends \AbraFlexi\Bricks\ConvertorRule
 {

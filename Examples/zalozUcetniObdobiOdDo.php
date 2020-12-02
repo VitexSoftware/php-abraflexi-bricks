@@ -25,7 +25,7 @@ function createYearsFrom($startYear, $endYear = null)
             $this->addStatusMessage(sprintf(_('%s already exists.'), $year));
         } else {
             $this->setData($obdobi);
-            $result[] = $this->insertToFlexibee();
+            $result[] = $this->insertToAbraFlexi();
             $this->dataReset();
         }
     }

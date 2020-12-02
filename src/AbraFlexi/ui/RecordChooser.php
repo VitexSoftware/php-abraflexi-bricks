@@ -1,6 +1,6 @@
 <?php
 /**
- * Common selectize.js based FlexiBee records chooser
+ * Common selectize.js based AbraFlexi records chooser
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright (c) 2019, Vitex Software
@@ -23,7 +23,7 @@ class RecordChooser extends \Ease\Html\InputTextTag
      * 
      * @param string                 $name
      * @param array                  $values
-     * @param \AbraFlexi\FlexiBeeRO $optionsEngine
+     * @param \AbraFlexi\RO $optionsEngine
      * @param array                  $properties
      */
     public function __construct($name, $values, $optionsEngine,
@@ -42,7 +42,7 @@ class RecordChooser extends \Ease\Html\InputTextTag
         }
 
         parent::__construct($name, $values, $properties);
-        $values = $optionsEngine->getColumnsFromFlexibee([$keyColumn, $nameColumn]);
+        $values = $optionsEngine->getColumnsFromAbraFlexi([$keyColumn, $nameColumn]);
         if ($keyColumn == 'kod') {
             foreach ($values as $id => $valueRow) {
                 $values[$id][$nameColumn] = $values[$id][$keyColumn].': '.$values[$id][$nameColumn];

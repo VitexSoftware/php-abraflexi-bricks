@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "vitexsoftware/ease-html": ">=1.25",
-        "spojenet/flexibee": "2.0.x-dev"
+        "spojenet/abraflexi": "2.0.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -24,7 +24,7 @@
     "autoload-dev": {
         "psr-4": {
             "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
-            "Test\\AbraFlexi\\": "vendor/spoje.net/abraflexi/testing/src/AbraFlexi/",
+            "Test\\AbraFlexi\\": "vendor/spoje.net/flexibee/testing/src/AbraFlexi/",
             "Test\\AbraFlexi\\ui\\": "testing/AbraFlexi/ui",
             "Test\\AbraFlexi\\Bricks\\": "testing/AbraFlexi/Bricks",
             "Test\\": "testing/"

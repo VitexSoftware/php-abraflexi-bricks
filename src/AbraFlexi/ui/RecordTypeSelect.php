@@ -16,9 +16,9 @@ class RecordTypeSelect extends \Ease\Html\SelectTag
 {
 
     /**
-     * Common FlexiBee evidence record Type Select
+     * Common AbraFlexi evidence record Type Select
      *
-     * @param \AbraFlexi\FlexiBeeRO $engine
+     * @param \AbraFlexi\RO $engine
      * @param string $valueType Column with return value eg. kod
      * @param array $conditons Additonal conditions
      */
@@ -27,7 +27,7 @@ class RecordTypeSelect extends \Ease\Html\SelectTag
         if (!isset($conditions['order'])) {
             $conditions['order'] = 'nazev';
         }
-        $typesRaw = $engine->getColumnsFromFlexibee(['nazev', $valueType],
+        $typesRaw = $engine->getColumnsFromAbraFlexi(['nazev', $valueType],
             $conditions);
 
         $types = ['' => _('Undefined')];
@@ -37,7 +37,7 @@ class RecordTypeSelect extends \Ease\Html\SelectTag
             }
         }
         parent::__construct($engine->getEvidence(), $types,
-            ($valueType == 'kod' ? \AbraFlexi\FlexiBeeRO::code($engine->getDataValue($valueType))
+            ($valueType == 'kod' ? \AbraFlexi\RO::code($engine->getDataValue($valueType))
                     : $engine->getDataValue($valueType))
         );
     }

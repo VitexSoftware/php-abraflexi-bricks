@@ -15,33 +15,33 @@ namespace AbraFlexi\Bricks;
 class GdprLog extends \Ease\GdprLog
 {
     /**
-     * Log FlexiBee event
+     * Log AbraFlexi event
      * 
-     * @param \AbraFlexi\FlexiBeeRW $flexibee
+     * @param \AbraFlexi\RW $abraflexi
      * @param array $columns
      */
-    public function logFlexiBeeEvent($flexibee, $columns)
+    public function logAbraFlexiEvent($abraflexi, $columns)
     {
         foreach ($columns as $columnName) {
             $this->logEvent($columnName,
-                empty($flexibee->lastInsertedID) ? 'update' : 'create', null,
-                $flexibee->getApiURL().'#'.$columnName);
+                empty($abraflexi->lastInsertedID) ? 'update' : 'create', null,
+                $abraflexi->getApiURL().'#'.$columnName);
         }
     }
 
     /**
-     * Log Change in FlexiBee
+     * Log Change in AbraFlexi
      * 
-     * @param \AbraFlexi\FlexiBeeRW $flexibee
+     * @param \AbraFlexi\RW $abraflexi
      * @param array $originalData
      * @param array $columns
      */
-    public function logFlexiBeeChange($flexibee, $originalData, $columns)
+    public function logAbraFlexiChange($abraflexi, $originalData, $columns)
     {
         foreach ($columns as $columnName) {
-            if ($originalData[$columnName] != $flexibee->getDataValue($columnName)) {
-                $this->logEvent($columnName, $flexibee->getLastOperationType(), null,
-                    $flexibee->getApiURL().'#'.$columnName);
+            if ($originalData[$columnName] != $abraflexi->getDataValue($columnName)) {
+                $this->logEvent($columnName, $abraflexi->getLastOperationType(), null,
+                    $abraflexi->getApiURL().'#'.$columnName);
             }
         }
     }

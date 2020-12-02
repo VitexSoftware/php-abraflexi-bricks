@@ -169,7 +169,7 @@ class FakturaVydana_to_FakturaVydana extends \AbraFlexi\Bricks\ConvertorRule
             'mnozMj' => 'mnozMj',
             'typCenyDphK' => 'typCenyDphK',
             'typSzbDphK' => 'typSzbDphK',
-//            'szbDph' => 'szbDph', https://podpora.flexibee.eu/knowledge-bases/2/articles/13617-jaky-je-rozdil-mezi-atributy-szbdph-a-typszbdphk-u-polozek-faktur
+//            'szbDph' => 'szbDph', https://podpora.abraflexi.eu/knowledge-bases/2/articles/13617-jaky-je-rozdil-mezi-atributy-szbdph-a-typszbdphk-u-polozek-faktur
             'cenaMj' => 'cenaMj',
             'slevaPol' => 'slevaPol',
 //            'uplSlevaDokl' => 'uplSlevaDokl',

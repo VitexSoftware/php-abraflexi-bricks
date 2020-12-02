@@ -18,9 +18,9 @@ class EmbedResponsivePDF extends EmbedResponsive
     /**
      * Ebed Document's PDF to Page
      * 
-     * @link https://www.flexibee.eu/api/dokumentace/ref/pdf/ PDF Export
+     * @link https://www.abraflexi.eu/api/dokumentace/ref/pdf/ PDF Export
      *
-     * @param \AbraFlexi\FlexiBeeRO $source object with document
+     * @param \AbraFlexi\RO $source object with document
      * @param string                 $feeder script can send us the pdf
      * @param string                 $report printSet name
      */

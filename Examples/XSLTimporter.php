@@ -9,7 +9,7 @@ use PrettyXml\Formatter;
  *
  * @author vitex
  */
-class XSLT extends \AbraFlexi\FlexiBeeRW
+class XSLT extends \AbraFlexi\RW
 {
 
     public $evidence = 'xslt';
@@ -26,7 +26,7 @@ class XSLT extends \AbraFlexi\FlexiBeeRW
                 $importdata['nazev']        = str_replace('.xslt', '', $entry);
                 $importdata['id']           = self::code(strtoupper($importdata['nazev']));
                 $importdata['transformace'] = file_get_contents('xslt/'.$entry);
-                $this->insertToFlexiBee($importdata);
+                $this->insertToAbraFlexi($importdata);
                 $this->addStatusMessage('XSLT: '.$importdata['nazev'],
                     $this->lastResponseCode == 201 ? 'success' : 'error' );
             }
@@ -75,7 +75,7 @@ class XSLT extends \AbraFlexi\FlexiBeeRW
         $outputFile    = '../log/'.$prefix.'_'.$xslt.'-inport.xml';
         $transformFile = 'xslt/'.strtolower($xslt).'.xslt';
         file_put_contents($inputFile, $formatter->format($xml));
-        $cmd           = "/usr/share/flexibee/bin/flexibee2xml --from-xml $inputFile --run-xslt $transformFile --to-xml $outputFile";
+        $cmd           = "/usr/share/abraflexi/bin/abraflexi2xml --from-xml $inputFile --run-xslt $transformFile --to-xml $outputFile";
         system("$cmd 2>&1 /dev/null");
         $errors        = "\n";
         if (isset($this->errors)) {

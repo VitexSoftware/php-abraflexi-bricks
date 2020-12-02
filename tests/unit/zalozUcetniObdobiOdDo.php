@@ -6,7 +6,7 @@
 public function testCreateYearsFrom()
 {
     //Načíst stávající roky
-    $fbyears = $this->object->getColumnsFromFlexibee(['kod'], null, 'kod');
+    $fbyears = $this->object->getColumnsFromAbraFlexi(['kod'], null, 'kod');
     $years   = [];
     foreach ($fbyears as $fbyear) {
         if (is_numeric($fbyear['kod'])) {
@@ -21,8 +21,8 @@ public function testCreateYearsFrom()
     //Založit další dva předcházející roky
     $this->object->createYearsFrom($testyear, $testyear + 1);
 
-    //Znovu přečíst roky z FlexiBee
-    $newfbyears = $this->object->getColumnsFromFlexibee(['kod'], null, 'kod');
+    //Znovu přečíst roky z AbraFlexi
+    $newfbyears = $this->object->getColumnsFromAbraFlexi(['kod'], null, 'kod');
     $newyears   = [];
     foreach ($newfbyears as $newfbyear) {
         if (is_numeric($newfbyear['kod'])) {
@@ -42,6 +42,6 @@ public function testCreateYearsFrom()
         'current year does not exist ?');
 
     //Uklid
-    $this->object->deleteFromFlexiBee('code:'.$testyear);
-    $this->object->deleteFromFlexiBee('code:'.$testyear + 1);
+    $this->object->deleteFromAbraFlexi('code:'.$testyear);
+    $this->object->deleteFromAbraFlexi('code:'.$testyear + 1);
 }

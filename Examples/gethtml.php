@@ -4,7 +4,7 @@ namespace Orderer;
 
 include_once '../vendor/autoload.php';
 
-$engine = new FlexiBeeEngine(['config' => '../config.json']);
+$engine = new AbraFlexiEngine(['config' => '../config.json']);
 
 $oPage = new \Ease\TWB\WebPage('HTML');
 
@@ -25,7 +25,7 @@ function deleteAllBetween($beginning, $end, $string)
 
     return str_replace($textToDelete, '', $string);
 }
-$document = new \AbraFlexi\FlexiBeeRO(is_numeric($id) ? intval($id) : $id,
+$document = new \AbraFlexi\RO(is_numeric($id) ? intval($id) : $id,
     ['evidence' => $evidence]);
 
 if (!is_null($document->getMyKey())) {
@@ -33,8 +33,8 @@ if (!is_null($document->getMyKey())) {
 
     $documentBody = str_replace(['src="/', 'href="/'],
         ['src="'.$document->url.'/', 'href="'.$document->url.'/'], $documentBody);
-    $documentBody = deleteAllBetween('FLEXIBEE:TOOLBAR:START',
-        'FLEXIBEE:TOOLBAR:END', $documentBody);
+    $documentBody = deleteAllBetween('ABRAFLEXI:TOOLBAR:START',
+        'ABRAFLEXI:TOOLBAR:END', $documentBody);
 
     if ($embed != 'true') {
         header('Content-Description: File Transfer');

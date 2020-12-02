@@ -156,7 +156,7 @@ namespace AbraFlexi\Bricks\ConvertRules;
 /**
  * Description of '.$className.'
  *
- * @author EaseFlexiBeeConvertorRule <info@vitexsoftware.cz>
+ * @author EaseAbraFlexiConvertorRule <info@vitexsoftware.cz>
  */
 class '.$className.' extends \AbraFlexi\Bricks\ConvertorRule
 {

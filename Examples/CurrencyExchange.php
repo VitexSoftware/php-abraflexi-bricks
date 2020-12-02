@@ -20,7 +20,7 @@ function exchange($subject, $toCurrency, $rate)
         'sumOsvMen' => round($convertedPrice, 2)
     ];
 
-    $subject->insertToFlexiBee($converse);
+    $subject->insertToAbraFlexi($converse);
     if ($subject->lastResponseCode == 201) {
         $subject->setDataValue('mena', self::code($toCurrency));
         $subject->setDataValue('sumOsvMen', round($convertedPrice, 2));

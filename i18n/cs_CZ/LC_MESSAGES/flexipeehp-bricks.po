@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: FlexiBee invoice matcher\n"
+"Project-Id-Version: AbraFlexi invoice matcher\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-12 18:59+0200\n"
 "PO-Revision-Date: 2018-07-12 19:02+0200\n"

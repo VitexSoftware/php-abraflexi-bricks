@@ -3,11 +3,11 @@
 namespace AbraFlexi\ui;
 
 /**
- * AbraFlexi Bricks - FlexiBee svg logo
+ * AbraFlexi Bricks - AbraFlexi svg logo
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class FlexiBeeLogo extends \Ease\Html\ImgTag
+class AbraFlexiLogo extends \Ease\Html\ImgTag
 {
     static $svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
@@ -33,7 +33,7 @@ class FlexiBeeLogo extends \Ease\Html\ImgTag
 ';
 
     /**
-     * Inline vector FlexiBee logo
+     * Inline vector AbraFlexi logo
      * 
      * @param string $style         ignored now
      * @param array  $tagProperties img tag properties
@@ -41,6 +41,6 @@ class FlexiBeeLogo extends \Ease\Html\ImgTag
     public function __construct($style = 'default', $tagProperties = array())
     {
         parent::__construct('data:image/svg+xml;base64,'.base64_encode(self::$svg),
-            'FlexiBee', $tagProperties);
+            'AbraFlexi', $tagProperties);
     }
 }

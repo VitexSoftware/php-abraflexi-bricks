@@ -1,13 +1,13 @@
 <?php
 /**
- * Try to connecte to FlexiBee by form 
+ * Try to connecte to AbraFlexi by form 
  * Show Connection Status
  * 
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 require_once '../vendor/autoload.php';
 
-$oPage = new \Ease\TWB\WebPage(_('FlexiBee connection probe'));
+$oPage = new \Ease\TWB\WebPage(_('AbraFlexi connection probe'));
 
 $connForm = new AbraFlexi\ui\ConnectionForm();
 $connForm->fillUp($_REQUEST);

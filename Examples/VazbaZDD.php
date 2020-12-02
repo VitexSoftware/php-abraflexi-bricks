@@ -28,7 +28,7 @@ include_once './common.php';
                                 'ExtCode' => $document], 'ext');
                             $this->casher->ignore404(true);
                             $this->casher->defaultUrlParams['detail'] = 'id';
-                            $this->casher->loadFromFlexiBee(rawurlencode($documentID));
+                            $this->casher->loadFromAbraFlexi(rawurlencode($documentID));
                             if ($this->casher->lastResponseCode == 200) {
 
                                 $cashID = $this->casher->getDataValue('id');
@@ -44,7 +44,7 @@ include_once './common.php';
                                 $message                            = '';
                                 foreach ($responseArr as $lineNo => $responseLine) {
                                     if (strstr($responseLine,
-                                            '<ul class = "flexibee-errors">')) {
+                                            '<ul class = "abraflexi-errors">')) {
                                         $message = trim($responseArr[$lineNo + 1]);
                                         $result  = false;
                                     }
@@ -79,7 +79,7 @@ include_once './common.php';
 
                             $this->banker->ignore404(true);
 
-                            $this->banker->loadFromFlexiBee(rawurlencode($documentID));
+                            $this->banker->loadFromAbraFlexi(rawurlencode($documentID));
                             if ($this->banker->lastResponseCode == 200) {
 
                                 $bankID = $this->banker->getDataValue('id');
@@ -96,7 +96,7 @@ include_once './common.php';
                                 $message     = '';
                                 foreach ($responseArr as $lineNo => $responseLine) {
                                     if (strstr($responseLine,
-                                            '<ul class = "flexibee-errors">')) {
+                                            '<ul class = "abraflexi-errors">')) {
                                         $message = trim($responseArr[$lineNo + 1]);
                                         $result  = false;
                                     }
