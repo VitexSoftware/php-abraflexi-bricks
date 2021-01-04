@@ -676,21 +676,6 @@ Search.appendIndex(
             "summary": "Ebed\u0020Document\u0027s\u0020PDF\u0020to\u0020Page",
             "url": "../classes/AbraFlexi-ui-EmbedResponsivePDF.html#method___construct"
         },                {
-            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo",
-            "name": "AbraFlexiLogo",
-            "summary": "AbraFlexi\u0020Bricks\u0020\u002D\u0020AbraFlexi\u0020svg\u0020logo",
-            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html"
-        },                {
-            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Inline\u0020vector\u0020AbraFlexi\u0020logo",
-            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html#method___construct"
-        },                {
-            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A\u0024svg",
-            "name": "svg",
-            "summary": "",
-            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html#property_svg"
-        },                {
             "fqsen": "\\AbraFlexi\\ui\\RecordChooser",
             "name": "RecordChooser",
             "summary": "Description\u0020of\u0020GroupChooser",
@@ -735,6 +720,21 @@ Search.appendIndex(
             "name": "finalize",
             "summary": "",
             "url": "../classes/AbraFlexi-ui-SearchBox.html#method_finalize"
+        },                {
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo",
+            "name": "AbraFlexiLogo",
+            "summary": "AbraFlexi\u0020Bricks\u0020\u002D\u0020AbraFlexi\u0020svg\u0020logo",
+            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html"
+        },                {
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Inline\u0020vector\u0020AbraFlexi\u0020logo",
+            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html#method___construct"
+        },                {
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A\u0024svg",
+            "name": "svg",
+            "summary": "",
+            "url": "../classes/AbraFlexi-ui-AbraFlexiLogo.html#property_svg"
         },                {
             "fqsen": "\\",
             "name": "\\",
