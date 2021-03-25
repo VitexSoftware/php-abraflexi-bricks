@@ -36,9 +36,8 @@ class RecordTypeSelect extends \Ease\Html\SelectTag
                 $types[($valueType == 'kod' ? 'code:' : '').$type[$valueType]] = $type['nazev'];
             }
         }
-        parent::__construct($engine->getEvidence(), $types,
-            ($valueType == 'kod' ? \AbraFlexi\RO::code($engine->getDataValue($valueType))
-                    : $engine->getDataValue($valueType))
-        );
+        $default = $engine->getDataValue($valueType);
+
+        parent::__construct($engine->getEvidence(), $types, ( $valueType == 'kod' && !empty($default) ? \AbraFlexi\RO::code($default) : $default));
     }
 }
