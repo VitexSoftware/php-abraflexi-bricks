@@ -57,7 +57,7 @@ class HookReciever extends \AbraFlexi\Changes
      */
     function processChanges()
     {
-        if (count($this->changes)) {
+        if (!empty($this->changes)) {
             $changepos = 0;
             foreach ($this->changes as $change) {
                 $changepos++;

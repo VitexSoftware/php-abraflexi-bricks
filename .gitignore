@@ -12,3 +12,7 @@ debian/php-abraflexi-bricks-doc/
 debian/php-abraflexi-bricks.debhelper.log
 /debian/.debhelper/
 /.phpdoc/
+/debian/php-vitexsoftware-abraflexi-bricks-doc.debhelper.log
+/debian/php-vitexsoftware-abraflexi-bricks-doc.substvars
+/debian/php-vitexsoftware-abraflexi-bricks/
+/debian/php-vitexsoftware-abraflexi-bricks-doc/
