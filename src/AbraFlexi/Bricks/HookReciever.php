@@ -27,9 +27,9 @@ class HookReciever extends \AbraFlexi\Changes
     /**
      * Prijmac WebHooku
      */
-    public function __construct()
+    public function __construct($id = null,$options = [])
     {
-        parent::__construct();
+        parent::__construct($id,$options);
         $this->lastProcessedVersion = $this->getLastProcessedVersion();
     }
 
@@ -143,17 +143,17 @@ class HookReciever extends \AbraFlexi\Changes
     {
         $this->lastProcessedVersion = $version;
         $this->myCreateColumn       = null;
-        $this->deleteFromSQL(['serverurl' => constant('ABRAFLEXI_URL')]);
-        if (is_null($this->insertToSQL(['serverurl' => constant('ABRAFLEXI_URL'),
-                    'changeid' => $version]))) {
-            $this->addStatusMessage(_("Last Processed Change ID Saving Failed"),
-                'error');
-        } else {
-            if ($this->debug === true) {
-                $this->addStatusMessage(sprintf(_('Last Processed Change ID #%s Saved'),
-                        $version));
-            }
-        }
+//        $this->deleteFromSQL(['serverurl' => constant('ABRAFLEXI_URL')]);
+//        if (is_null($this->insertToSQL(['serverurl' => constant('ABRAFLEXI_URL'),
+//                    'changeid' => $version]))) {
+//            $this->addStatusMessage(_("Last Processed Change ID Saving Failed"),
+//                'error');
+//        } else {
+//            if ($this->debug === true) {
+//                $this->addStatusMessage(sprintf(_('Last Processed Change ID #%s Saved'),
+//                        $version));
+//            }
+//        }
     }
 
     /**
