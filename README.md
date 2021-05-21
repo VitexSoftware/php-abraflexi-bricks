@@ -1,23 +1,21 @@
 # php-vitexsoftware-abraflexi-bricks
-![Project Logo](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/master/project-logo.png "Project Logo")
+![Project Logo](project-logo.png?raw=true "Project Logo")
 
-[![Build Status](https://travis-ci.org/VitexSoftware/php-vitexsoftware-abraflexi-bricks.svg?branch=master)](https://travis-ci.org/VitexSoftware/php-vitexsoftware-abraflexi-bricks)
-[![GitHub stars](https://img.shields.io/github/stars/VitexSoftware/php-vitexsoftware-abraflexi-bricks.svg)](https://github.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/VitexSoftware/php-vitexsoftware-abraflexi-bricks.svg)](https://github.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/issues)
-[![GitHub license](https://img.shields.io/github/license/VitexSoftware/php-vitexsoftware-abraflexi-bricks.svg)](https://github.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/blob/master/LICENSE)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FVitexSoftware%2Fphp-vitexsoftware-abraflexi-bricks)
+[![Build Status](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks.svg?branch=master)](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks)
+[![GitHub stars](https://img.shields.io/github/stars/VitexSoftware/php-abraflexi-bricks.svg)](stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/VitexSoftware/php-abraflexi-bricks.svg)](issues)
+[![GitHub license](https://img.shields.io/github/license/VitexSoftware/php-abraflexi-bricks.svg)](LICENSE?raw=true)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/VitexSoftware/php-abraflexi-bricks.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FVitexSoftware%2Fphp-abraflexi-bricks)
 
 Examples how to use [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) Library for AbraFlexi with EasePHP Framework widgets
 
-Příklady použití knihovny [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) pro [AbraFlexi](https://abraflexi.eu/)
+Příklady použití knihovny [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) pro [AbraFlexi](https://flexibee.eu/)
 
 
 Instalace
 ----------
 
     composer require vitexsoftware/abraflexi-bricks
-
-
 
 
 How to run ?
