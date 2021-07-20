@@ -826,14 +826,14 @@ class ParovacFaktur extends \Ease\Sand
         if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', 'NEIDENTIFIKOVANO');
+            $this->banker->setDataValue('stitky', \Ease\Functions::cfg('MATCHER_LABEL_NEIDENTIFIKOVANO'));
             $this->addStatusMessage(_('Neidentifikovaná platba').': '.$this->banker->getApiURL(),
                 'warning');
             $this->banker->insertToAbraFlexi();
         } elseif (count($invoices) == 0) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', 'CHYBIFAKTURA');
+            $this->banker->setDataValue('stitky', \Ease\Functions::cfg('MATCHER_LABEL_NEIDENTIFIKOVANO'));
             $this->addStatusMessage(_('Platba bez faktury').': '.$this->banker->getApiURL(),
                 'warning');
             $this->banker->insertToAbraFlexi();
