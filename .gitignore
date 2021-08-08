@@ -18,3 +18,5 @@ debian/php-abraflexi-bricks.debhelper.log
 /debian/php-vitexsoftware-abraflexi-bricks-doc/
 /nbproject/
 /.phpunit.result.cache
+/debian/php-vitexsoftware-abraflexi-bricks.debhelper.log
+/debian/php-vitexsoftware-abraflexi-bricks.substvars

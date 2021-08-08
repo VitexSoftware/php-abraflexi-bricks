@@ -40,7 +40,7 @@ class ParovacFaktur extends \Ease\Sand
      * Requied Config Keys
      * @var array 
      */
-    public $cfgRequed = ["LABEL_PREPLATEK", "LABEL_CHYBIFAKTURA", "LABEL_NEIDENTIFIKOVANO"];
+    public $cfgRequed = ["LABEL_OVERPAY", "LABEL_INVOICE_MISSING", "LABEL_UNIDENTIFIED"];
 
     /**
      * Invoice matcher
@@ -478,8 +478,7 @@ class ParovacFaktur extends \Ease\Sand
 
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $payment['id']);
-            $this->banker->setDataValue('stitky',
-                $this->config['LABEL_PREPLATEK']);
+            $this->banker->setDataValue('stitky', $this->config['LABEL_OVERPAY']);
             $this->banker->insertToAbraFlexi();
         }
 
@@ -826,16 +825,14 @@ class ParovacFaktur extends \Ease\Sand
         if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', \Ease\Functions::cfg('MATCHER_LABEL_NEIDENTIFIKOVANO'));
-            $this->addStatusMessage(_('Neidentifikovaná platba').': '.$this->banker->getApiURL(),
-                'warning');
+            $this->banker->setDataValue('stitky', $this->config['LABEL_NEIDENTIFIKOVANO']);
+            $this->addStatusMessage(_('Unidentified payment').': '.$this->banker->getApiURL(), 'warning');
             $this->banker->insertToAbraFlexi();
         } elseif (count($invoices) == 0) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', \Ease\Functions::cfg('MATCHER_LABEL_NEIDENTIFIKOVANO'));
-            $this->addStatusMessage(_('Platba bez faktury').': '.$this->banker->getApiURL(),
-                'warning');
+            $this->banker->setDataValue('stitky', $this->config['LABEL_INVOICE_MISSING']);
+            $this->addStatusMessage(_('Payment without invoice').': '.$this->banker->getApiURL(), 'warning');
             $this->banker->insertToAbraFlexi();
         }
 

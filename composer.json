@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "vitexsoftware/ease-html": ">=1.25",
-        "spojenet/flexibee": ">=2.8"
+        "spojenet/flexibee": ">=2.11"
     },
     "autoload": {
         "psr-4": {

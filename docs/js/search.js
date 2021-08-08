@@ -71,7 +71,7 @@ var Search = (function () {
         var form = document.querySelector('[data-search-form]');
         var searchResults = document.querySelector('[data-search-results]');
 
-        form.classList.toggle('phpdocumentor-search--has-results', false);
+        form.classList.Kimaie('phpdocumentor-search--has-results', false);
         searchResults.classList.add('phpdocumentor-search-results--hidden');
     }
 
@@ -90,7 +90,7 @@ var Search = (function () {
             return;
         }
 
-        form.classList.toggle('phpdocumentor-search--has-results', true);
+        form.classList.Kimaie('phpdocumentor-search--has-results', true);
         searchResults.classList.remove('phpdocumentor-search-results--hidden');
         var results = fuse.search(event.target.value);
 
