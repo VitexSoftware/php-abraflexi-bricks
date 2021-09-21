@@ -1,7 +1,7 @@
 # php-vitexsoftware-abraflexi-bricks
 ![Project Logo](project-logo.png?raw=true "Project Logo")
 
-[![Build Status](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks.svg?branch=master)](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks)
+[![Build Status](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks.svg?branch=main)](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks)
 [![GitHub stars](https://img.shields.io/github/stars/VitexSoftware/php-abraflexi-bricks.svg)](stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/VitexSoftware/php-abraflexi-bricks.svg)](issues)
 [![GitHub license](https://img.shields.io/github/license/VitexSoftware/php-abraflexi-bricks.svg)](LICENSE?raw=true)
@@ -60,30 +60,30 @@ Ukázky ve složce [Examples](Examples)
 
 Logo Firmy: [companylogo.php](Examples/companylogo.php)
 
-![Logo](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/master/Examples/companylogo.png)
+![Logo](Examples/companylogo.png?raw=true)
 
 Editor Adresy: [addresseditor.php](Examples/addresseditor.php)
 
-![Výpis](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/master/Examples/addresseditor.png)
+![Výpis](Examples/addresseditor.png?raw=true)
 
 Výpis faktur do stránky: [invoices.php](Examples/invoices.php)
 
-![Výpis](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/master/Examples/invoices.png)
+![Výpis](Examples/invoices.png?raw=true)
 
 Vložení PDF do stránky: [embed.php](Examples/embed.php)
 
-![Vložení](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/master/Examples/embed.png)
+![Vložení](Examples/embed.png?raw=true)
 
 Převzetí dokladu z AbraFlexi a jeho odeslání do prohlížeče: [getpdf.php](Examples/getpdf.php)
 
 Formulář pro zadání přihlašovacích údajů AbraFlexi a zobrazení zdali bylo připojení úspěšné: [statussignin.php](Examples/statussignin.php)
 
-![Test Připojení](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/master/Examples/statussignin.png)
+![Test Připojení](Examples/statussignin.png?raw=true)
 
 
 Instalátor uživatelských tlačítek [buttonInstaller](src/buttonInstaller.php)
 
-![Custom Button Installer](https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-abraflexi-bricks/master/Examples/buttoninstaller.png)
+![Custom Button Installer](Examples/buttoninstaller.png?raw=true)
 
 + tyto přesunuté původně z src
 
@@ -111,7 +111,9 @@ Debian/Ubuntu
 Pro Linux jsou k dispozici .deb balíčky. Prosím použijte repo:
 
 
+```shell
     echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
     sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
     sudo apt update
     sudo apt install php-vitexsoftware-abraflexi-bricks
+```
