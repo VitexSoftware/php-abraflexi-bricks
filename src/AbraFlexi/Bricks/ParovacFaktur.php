@@ -822,11 +822,11 @@ class ParovacFaktur extends \Ease\Sand {
      * 
      * @return array Older First sorted invoices
      */
-    public static function reorderInvoicesByAge($invoices) {
+    public static function reorderInvoicesByAge(array $invoices) {
         $invoicesByAge = [];
         $invoicesByAgeRaw = [];
         foreach ($invoices as $invoiceData) {
-            $invoicesByAgeRaw[\AbraFlexi\RW::flexiDateToDateTime($invoiceData['datVyst'])->getTimestamp()] = $invoiceData;
+            $invoicesByAgeRaw[$invoiceData['datVyst']->getTimestamp()] = $invoiceData;
         }
         ksort($invoicesByAgeRaw);
         foreach ($invoicesByAgeRaw as $invoiceData) {
