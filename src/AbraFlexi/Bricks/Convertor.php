@@ -167,7 +167,7 @@ class Convertor extends \Ease\Sand
     public function convertSubitems($columnToTake)
     {
         $subitemRules = $this->rules->getRuleForColumn($columnToTake);
-        if (self::isAssoc($this->input->data[$columnToTake])) {
+        if (\Ease\Functions::isAssoc($this->input->data[$columnToTake])) {
             $sourceData = [$this->input->data[$columnToTake]];
         } else {
             $sourceData = $this->input->getDataValue($columnToTake);
