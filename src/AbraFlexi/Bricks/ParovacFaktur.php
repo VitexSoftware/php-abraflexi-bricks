@@ -195,9 +195,9 @@ class ParovacFaktur extends \Ease\Sand {
 
                 foreach ($invoices as $invoiceID => $invoiceData) {
 
-                    $typDokl = $invoiceData['typDokl'][0];
-                    $docType = $typDokl['typDoklK'];
-                    $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl['kod']);
+                    $typDokl = $invoiceData['typDokl'];
+                    $docType = $typDokl->value[0]['typDoklK'];
+                    $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl->value[0]['kod']);
 
                     $invoice = new FakturaVydana($invoiceData, $this->config);
 
@@ -801,7 +801,7 @@ class ParovacFaktur extends \Ease\Sand {
         if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', $this->config['LABEL_NEIDENTIFIKOVANO']);
+            $this->banker->setDataValue('stitky', $this->config['LABEL_UNIDENTIFIED']);
             $this->addStatusMessage(_('Unidentified payment') . ': ' . $this->banker->getApiURL(), 'warning');
             $this->banker->insertToAbraFlexi();
         } elseif (count($invoices) == 0) {
