@@ -1,9 +1,10 @@
 <?php
+
 /**
  * AbraFlexi Bricks - Customer Class
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2018 Vitex Software
+ * @copyright  (G) 2017-2021 Vitex Software
  */
 
 namespace AbraFlexi\Bricks;
@@ -13,8 +14,8 @@ namespace AbraFlexi\Bricks;
  *
  * @author vitex
  */
-class Customer extends \Ease\User
-{
+class Customer extends \Ease\User {
+
     /**
      *
      * @var \AbraFlexi\Adresar
@@ -57,8 +58,7 @@ class Customer extends \Ease\User
      * Customer
      * @param mixed $userID
      */
-    public function __construct($userID = null)
-    {
+    public function __construct($userID = null) {
         $this->adresar = new \AbraFlexi\Adresar();
         $this->kontakt = new \AbraFlexi\Kontakt();
         parent::__construct();
@@ -66,7 +66,7 @@ class Customer extends \Ease\User
         if (is_array($userID)) {
             if (isset($userID['username'])) {
                 $contactInfo = $this->kontakt->getColumnsFromAbraFlexi('*',
-                    ['username' => $userID['username']]);
+                        ['username' => $userID['username']]);
                 if (!is_null($contactInfo)) {
                     $this->kontakt->takeData($contactInfo);
                     $this->takeData($contactInfo);
@@ -75,14 +75,14 @@ class Customer extends \Ease\User
             }
             if (isset($userID['email'])) {
                 $contactInfo = $this->kontakt->getColumnsFromAbraFlexi('*',
-                    ['email' => $userID['email']]);
+                        ['email' => $userID['email']]);
                 if (!empty($contactInfo)) {
                     $this->kontakt->takeData($contactInfo[0]);
                     $this->takeData($contactInfo[0]);
                     $this->origin = 'kontakt';
                 } else {
                     $contactInfo = $this->adresar->getColumnsFromAbraFlexi('*',
-                        ['email' => $userID['email']]);
+                            ['email' => $userID['email']]);
                     if (!empty($contactInfo)) {
                         $this->adresar->takeData($contactInfo);
                         $this->takeData($contactInfo);
@@ -97,10 +97,9 @@ class Customer extends \Ease\User
      * Return Cutomers
      * @return array
      */
-    public function getCustomerList()
-    {
+    public function getCustomerList() {
         return $this->adresar->getColumnsFromAbraFlexi(['id', 'stitky'], null,
-                'id');
+                        'id');
     }
 
     /**
@@ -109,15 +108,13 @@ class Customer extends \Ease\User
      * @param id $id AbraFlexi address record ID
      * @return int
      */
-    public function loadFromAbraFlexi($id = null)
-    {
+    public function loadFromAbraFlexi($id = null) {
         $result = $this->adresar->loadFromAbraFlexi($id);
         $this->takeData($this->adresar->getData());
         return $result;
     }
 
-    public function insertToAbraFlexi($data = null)
-    {
+    public function insertToAbraFlexi($data = null) {
         if (is_null($data)) {
             $data = $this->getData();
         }
@@ -143,8 +140,7 @@ class Customer extends \Ease\User
      * @param mixed $customer Customer Identifier or Object
      * @return array
      */
-    public function getCustomerDebts($customer = null)
-    {
+    public function getCustomerDebts($customer = null) {
         switch (gettype($customer)) {
             case 'object':
                 if (get_class($customer) == 'Customer') {
@@ -166,9 +162,9 @@ class Customer extends \Ease\User
         if (!is_object($this->invoicer)) {
             $this->invoicer = new \AbraFlexi\FakturaVydana();
         }
-        $result                                    = [];
+        $result = [];
         $this->invoicer->defaultUrlParams['order'] = 'datVyst@A';
-        $invoices                                  = $this->invoicer->getColumnsFromAbraFlexi([
+        $invoices = $this->invoicer->getColumnsFromAbraFlexi([
             'id',
             'kod',
             'stavUhrK',
@@ -184,8 +180,7 @@ class Customer extends \Ease\User
             'mena',
             'zamekK',
             'datVyst'],
-            ["datSplat lte '".\AbraFlexi\RW::dateToFlexiDate(new \DateTime())."' AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false AND firma=".(is_numeric($firma)
-                    ? $firma : "'".$firma."'" )], 'kod');
+                ["datSplat lte '" . \AbraFlexi\RW::dateToFlexiDate(new \DateTime()) . "' AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false AND firma=" . (is_numeric($firma) ? $firma : "'" . $firma . "'" )], 'kod');
 
         if ($this->invoicer->lastResponseCode == 200) {
             $result = $invoices;
@@ -200,13 +195,12 @@ class Customer extends \Ease\User
      * 
      * @return int ZewlScore
      */
-    public function getCustomerScore($addressID)
-    {
-        $score     = 0;
-        $debts     = $this->getCustomerDebts($addressID);
+    public function getCustomerScore($addressID) {
+        $score = 0;
+        $debts = $this->getCustomerDebts($addressID);
         $stitkyRaw = $this->adresar->getColumnsFromAbraFlexi(['stitky'],
-            ['id' => $addressID]);
-        $stitky    = $stitkyRaw[0]['stitky'];
+                ['id' => $addressID]);
+        $stitky = $stitkyRaw[0]['stitky'];
         if (!empty($debts)) {
             foreach ($debts as $did => $debt) {
                 $ddiff = \AbraFlexi\FakturaVydana::overdueDays($debt['datSplat']);
@@ -243,8 +237,7 @@ class Customer extends \Ease\User
      *
      * @return int max of all levels processed
      */
-    static private function maxScore($score, $level)
-    {
+    static private function maxScore($score, $level) {
         if ($level > $score) {
             $score = $level;
         }
@@ -259,12 +252,9 @@ class Customer extends \Ease\User
      *
      * @return null|boolean
      */
-    public function tryToLogin($formData)
-    {
-        $login    = array_key_exists($this->loginColumn, $formData) ? trim($formData[$this->loginColumn])
-                : '';
-        $password = array_key_exists($this->passwordColumn, $formData) ? trim($formData[$this->passwordColumn])
-                : '';
+    public function tryToLogin($formData) {
+        $login = array_key_exists($this->loginColumn, $formData) ? trim($formData[$this->loginColumn]) : '';
+        $password = array_key_exists($this->passwordColumn, $formData) ? trim($formData[$this->passwordColumn]) : '';
         if (!$login) {
             $this->addStatusMessage(_('missing login'), 'error');
 
@@ -279,11 +269,11 @@ class Customer extends \Ease\User
         $result = $this->kontakt->authenticate($login, $password);
         if ($result === true) {
             $this->kontakt->defaultUrlParams['detail'] = 'full';
-            $contactId                                 = $this->kontakt->loadFromAbraFlexi([
+            $contactId = $this->kontakt->loadFromAbraFlexi([
                 $this->loginColumn => $login]);
             if (is_array($contactId)) {
                 $this->addStatusMessage(sprintf(_('Multiplete ContactID'),
-                        serialize($contactId)), 'warning');
+                                serialize($contactId)), 'warning');
                 $contactId = current($contactId);
                 $this->addStatusMessage(_('Using the first one'));
             }
@@ -291,7 +281,7 @@ class Customer extends \Ease\User
             $firma = $this->kontakt->getDataValue('firma');
             $this->adresar->loadFromAbraFlexi(['id' => $firma]);
 
-            $this->addStatusMessage($firma.' '.$this->adresar->getDataValue('nazev'));
+            $this->addStatusMessage($firma . ' ' . $this->adresar->getDataValue('nazev'));
 
             $result = $this->loginSuccess();
         }
@@ -302,13 +292,12 @@ class Customer extends \Ease\User
      * Akce provedené po úspěšném přihlášení
      * pokud tam jeste neexistuje zaznam, vytvori se novy.
      */
-    public function loginSuccess()
-    {
+    public function loginSuccess() {
         $this->userID = (int) $this->kontakt->getMyKey();
         $this->setUserLogin($this->kontakt->getDataValue($this->loginColumn));
         $this->logged = true;
         $this->addStatusMessage(sprintf(_('Sign in %s all ok'), $this->userLogin),
-            'success');
+                'success');
 
         return true;
     }
@@ -318,8 +307,7 @@ class Customer extends \Ease\User
      *
      * @return string
      */
-    public function getUserName()
-    {
+    public function getUserName() {
         return $this->kontakt->getDataValue($this->loginColumn);
     }
 
@@ -328,8 +316,7 @@ class Customer extends \Ease\User
      *
      * @return string
      */
-    public function getUserLogin()
-    {
+    public function getUserLogin() {
         return $this->getUserName();
     }
 
@@ -338,10 +325,8 @@ class Customer extends \Ease\User
      *
      * @return string
      */
-    public function getUserEmail()
-    {
-        return strlen($this->kontakt->getDataValue($this->mailColumn)) ? $this->kontakt->getDataValue($this->mailColumn)
-                : $this->adresar->getDataValue($this->mailColumn);
+    public function getUserEmail() {
+        return strlen($this->kontakt->getDataValue($this->mailColumn)) ? $this->kontakt->getDataValue($this->mailColumn) : $this->adresar->getDataValue($this->mailColumn);
     }
 
     /**
@@ -352,8 +337,7 @@ class Customer extends \Ease\User
      *
      * @return string password hash
      */
-    public function passwordChange($newPassword, $userID = null)
-    {
+    public function passwordChange($newPassword, $userID = null) {
         $hash = null;
         if (empty($userID)) {
             $userID = $this->getUserID();
@@ -374,10 +358,10 @@ class Customer extends \Ease\User
             } else {
                 $hash = null;
                 $this->kontakt->addStatusMessage('Password set failed',
-                    'warning');
+                        'warning');
             }
 
-            $this->addToLog('PasswordChange: '.$this->getDataValue($this->loginColumn).'@'.$userID.'#'.$this->getDataValue($this->myIDSColumn).' '.$hash);
+            $this->addToLog('PasswordChange: ' . $this->getDataValue($this->loginColumn) . '@' . $userID . '#' . $this->getDataValue($this->myIDSColumn) . ' ' . $hash);
             if ($userID == $this->getUserID()) {
                 $this->setDataValue($this->passwordColumn, $hash);
             }
@@ -387,16 +371,27 @@ class Customer extends \Ease\User
     }
 
     /**
+     * Zašifruje heslo.
+     *
+     * @param string $plainTextPassword nešifrované heslo (plaintext)
+     *
+     * @return string Encrypted password
+     */
+    public static function encryptPassword($plainTextPassword) {
+        return $plainTextPassword;
+    }
+    
+    /**
      * Vraci ID přihlášeného uživatele.
      *
      * @return int ID uživatele
      */
-    public function getUserID()
-    {
+    public function getUserID() {
         if (isset($this->userID)) {
             return (int) $this->userID;
         }
 
         return (int) $this->kontakt->getMyKey();
     }
+
 }
