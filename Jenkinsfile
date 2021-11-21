@@ -68,7 +68,7 @@ pipeline {
                 dir('build/debian/package') {
                     checkout scm
                     sh 'sudo apt-get update'
-                    sh 'sudo apt-get install php-xml'
+                    sh 'sudo apt-get install -y php-xml'
                     buildPackage()
                     installPackages()
                 }
