@@ -9,14 +9,14 @@ pipeline {
     options {
         ansiColor('xterm')
         copyArtifactPermission('*');
-	//disableConcurrentBuilds()
+    //disableConcurrentBuilds()
     }
 
     environment {
         RED      = '\\e[31m'
         GREEN    = '\\e[32m'
         ENDCOLOR = '\\e[0m'
-    }    
+    }
     
     stages {
 
@@ -27,8 +27,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-buster'
             }
@@ -47,8 +47,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-bullseye'
             }
@@ -67,8 +67,10 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    sh 'sudo apt-get update'
+                    sh 'sudo apt-get install php-xml'
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-bookworm'
             }
@@ -87,8 +89,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-focal'
             }
@@ -107,8 +109,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-hirsute'
             }
@@ -136,23 +138,23 @@ def copyArtifact(){
 def buildPackage() {
 
     def DIST = sh (
-	script: 'lsb_release -sc',
+    script: 'lsb_release -sc',
         returnStdout: true
     ).trim()
 
     def DISTRO = sh (
-	script: 'lsb_release -sd',
+    script: 'lsb_release -sd',
         returnStdout: true
     ).trim()
 
 
     def SOURCE = sh (
-	script: 'dpkg-parsechangelog --show-field Source',
+    script: 'dpkg-parsechangelog --show-field Source',
         returnStdout: true
     ).trim()
 
     def VERSION = sh (
-	script: 'dpkg-parsechangelog --show-field Version',
+    script: 'dpkg-parsechangelog --show-field Version',
         returnStdout: true
     ).trim()
 
@@ -165,11 +167,11 @@ def buildPackage() {
 //Buster problem: Can't continue: dpkg-parsechangelog is not new enough(needs to be at least 1.17.0)
 //
 //    debianPbuilder additionalBuildResults: '', 
-//	    components: '', 
-//	    distribution: DIST, 
-//	    keyring: '', 
-//	    mirrorSite: 'http://deb.debian.org/debian/', 
-//	    pristineTarName: ''
+//        components: '', 
+//        distribution: DIST, 
+//        keyring: '', 
+//        mirrorSite: 'http://deb.debian.org/debian/', 
+//        pristineTarName: ''
     sh 'dch -b -v ' + VER  + ' "' + env.BUILD_TAG  + '"'
     sh 'sudo apt-get update'
     sh 'debuild-pbuilder  -i -us -uc -b'
