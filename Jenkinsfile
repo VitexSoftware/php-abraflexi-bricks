@@ -19,7 +19,7 @@ pipeline {
 
     stages {
 
-        final string artifactDir = 'dist/debian'
+        final String artifactDir = 'dist/debian'
 
         stage('debian-buster') {
             agent {
