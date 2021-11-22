@@ -5,7 +5,7 @@
 /* groovylint-disable-next-line CompileStatic */
 pipeline {
     agent none
-    final artifactDir = 'dist/debian'
+    final string artifactDir = 'dist/debian'
 
     options {
         ansiColor('xterm')
