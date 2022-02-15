@@ -7,8 +7,8 @@ namespace AbraFlexi\Bricks\ConvertRules;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule
-{
+class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule {
+
     public $rules = array(
 //        'kod' => 'kod',
 //        'cisDosle' => 'cisDosle',
@@ -98,7 +98,7 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule
 //        'zakazPlatba' => 'zakazPlatba',
 //        'sumCelkemBezZaloh' => 'sumCelkemBezZaloh',
 //        'sumCelkemBezZalohMen' => 'sumCelkemBezZalohMen',
-        'polozkyFaktury' => array(
+        'polozkyDokladu' => array(
 //            'ucetni' => 'ucetni',
 //            'eanKod' => 'eanKod',
             'nazev' => 'nazev',
@@ -179,8 +179,8 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule
      * 
      * @return string typPolozky.obecny|typPolozky.ucetni|typPolozky.text
      */
-    public function polozkyFakturyTypPolozkyK($inputValue)
-    {
+    public function polozkyFakturyTypPolozkyK($inputValue) {
         return ($inputValue == 'typPolozky.katalog') ? 'typPolozky.obecny' : $inputValue;
     }
+
 }
