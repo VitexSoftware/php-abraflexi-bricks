@@ -66,7 +66,7 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule {
 //        'clenDph' => 'clenDph',
         'stredisko' => 'stredisko',
         'cinnost' => 'cinnost',
-//        'zakazka' => 'zakazka',
+        'zakazka' => 'zakazka',
 //        'statOdesl' => 'statOdesl',
 //        'statUrc' => 'statUrc',
 //        'statPuvod' => 'statPuvod',
