@@ -11,10 +11,10 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule {
 
     public $rules = array(
 //        'kod' => 'kod',
-//        'cisDosle' => 'cisDosle',
+        'cisDosle' => 'cisDosle',
         'varSym' => 'varSym',
         'cisSml' => 'cisSml',
-//        'cisObj' => 'cisObj',
+        'cisObj' => 'cisObj',
 //        'datObj' => 'datObj',
 //        'cisDodak' => 'cisDodak',
 //        'doprava' => 'doprava',
@@ -33,7 +33,7 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule {
 //        'ulice' => 'ulice',
 //        'mesto' => 'mesto',
 //        'psc' => 'psc',
-//        'eanKod' => 'eanKod',
+        'eanKod' => 'eanKod',
 //        'ic' => 'ic',
 //        'dic' => 'dic',
 //        'buc' => 'buc',
@@ -98,7 +98,7 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule {
 //        'zakazPlatba' => 'zakazPlatba',
 //        'sumCelkemBezZaloh' => 'sumCelkemBezZaloh',
 //        'sumCelkemBezZalohMen' => 'sumCelkemBezZalohMen',
-        'polozkyDokladu' => array(
+        'polozkyFaktury' => array(
 //            'ucetni' => 'ucetni',
 //            'eanKod' => 'eanKod',
             'nazev' => 'nazev',
