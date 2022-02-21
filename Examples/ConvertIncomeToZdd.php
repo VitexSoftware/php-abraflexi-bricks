@@ -3,7 +3,7 @@
  * AbraFlexi - Example how to convert Bank Income into ZDD
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2020 Vitex Software
+ * @copyright  (G) 2020-2022 Vitex Software
  */
 
 namespace AbraFlexi\Bricks;

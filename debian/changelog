@@ -1,4 +1,4 @@
-php-vitexsoftware-abraflexi-bricks (1.0) UNRELEASED; urgency=medium
+php-vitexsoftware-abraflexi-bricks (1.2) UNRELEASED; urgency=medium
 
   * New Cloner and its rules
   * Composer Json Fix
@@ -12,8 +12,10 @@ php-vitexsoftware-abraflexi-bricks (1.0) UNRELEASED; urgency=medium
 
   [ vitex ]
   * v1.0 release
+  * FakturaPrijata_to_Zavazek update
+  * Convert rule fix
 
- -- vitex <info@vitexsoftware.cz>  Thu, 25 Nov 2021 09:20:54 +0100
+ -- vitex <info@vitexsoftware.cz>  Mon, 21 Feb 2022 22:56:03 +0100
 
 php-vitexsoftware-abraflexi-bricks (0.24) UNRELEASED; urgency=medium
 
