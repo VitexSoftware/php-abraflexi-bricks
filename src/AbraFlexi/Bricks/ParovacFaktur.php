@@ -195,9 +195,9 @@ class ParovacFaktur extends \Ease\Sand {
 
                 foreach ($invoices as $invoiceID => $invoiceData) {
 
-                    $typDokl = $invoiceData['typDokl'][0];
-                    $docType = $typDokl['typDoklK'];
-                    $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl['kod']);
+                    $typDokl = $invoiceData['typDokl'];
+                    $docType = $typDokl->value[0]['typDoklK'];
+                    $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl->value[0]['kod']);
 
                     $invoice = new FakturaVydana($invoiceData, $this->config);
 
