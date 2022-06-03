@@ -801,7 +801,7 @@ class ParovacFaktur extends \Ease\Sand {
         if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', $this->config['LABEL_NEIDENTIFIKOVANO']);
+            $this->banker->setDataValue('stitky', $this->config['LABEL_UNIDENTIFIED']);
             $this->addStatusMessage(_('Unidentified payment') . ': ' . $this->banker->getApiURL(), 'warning');
             $this->banker->insertToAbraFlexi();
         } elseif (count($invoices) == 0) {
