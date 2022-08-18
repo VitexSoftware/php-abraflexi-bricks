@@ -1,6 +1,86 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change",
+            "name": "Change",
+            "summary": "Handle\u0020one\u0020AbraFlexi\u0020change\u0020record",
+            "url": "classes/AbraFlexi-Bricks-Change.html"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "One\u0020AbraFlexi\u0020change",
+            "url": "classes/AbraFlexi-Bricks-Change.html#method___construct"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "Give\u0020your\u0020data\u0020back",
+            "url": "classes/AbraFlexi-Bricks-Change.html#method_getData"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003AsetData\u0028\u0029",
+            "name": "setData",
+            "summary": "Store\u0020data",
+            "url": "classes/AbraFlexi-Bricks-Change.html#method_setData"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003A\u0024evidence",
+            "name": "evidence",
+            "summary": "Evidence\u0020of\u0020record",
+            "url": "classes/AbraFlexi-Bricks-Change.html#property_evidence"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003A\u0024inVersion",
+            "name": "inVersion",
+            "summary": "Change\u0020IN\u0020Version",
+            "url": "classes/AbraFlexi-Bricks-Change.html#property_inVersion"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003A\u0024operation",
+            "name": "operation",
+            "summary": "create,\u0020update,\u0020delete",
+            "url": "classes/AbraFlexi-Bricks-Change.html#property_operation"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003A\u0024timestamp",
+            "name": "timestamp",
+            "summary": "",
+            "url": "classes/AbraFlexi-Bricks-Change.html#property_timestamp"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/AbraFlexi-Bricks-Change.html#property_id"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Change\u003A\u003A\u0024extIds",
+            "name": "extIds",
+            "summary": "Ext\u002DIDs\u0020for\u0020record",
+            "url": "classes/AbraFlexi-Bricks-Change.html#property_extIds"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Changes",
+            "name": "Changes",
+            "summary": "WebHook\u0020data\u0020Handler\u0020class",
+            "url": "classes/AbraFlexi-Bricks-Changes.html"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Changes\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/AbraFlexi-Bricks-Changes.html#method___construct"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Changes\u003A\u003AdataDiff\u0028\u0029",
+            "name": "dataDiff",
+            "summary": "Show\u0020recursive\u0020difference\u0020between\u0020two\u0020multidimensional\u0020arrays",
+            "url": "classes/AbraFlexi-Bricks-Changes.html#method_dataDiff"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Changes\u003A\u003A\u0024globalVersion",
+            "name": "globalVersion",
+            "summary": "Reported\u0020number\u0020of\u0020last\u0020change",
+            "url": "classes/AbraFlexi-Bricks-Changes.html#property_globalVersion"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Changes\u003A\u003A\u0024changes",
+            "name": "changes",
+            "summary": "Stored\u0020Changes",
+            "url": "classes/AbraFlexi-Bricks-Changes.html#property_changes"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Changes\u003A\u003A\u0024next",
+            "name": "next",
+            "summary": "Next\u0020chunk\u0020ID",
+            "url": "classes/AbraFlexi-Bricks-Changes.html#property_next"
+        },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor",
             "name": "Convertor",
             "summary": "Description\u0020of\u0020Convertor",
@@ -626,6 +706,21 @@ Search.appendIndex(
             "summary": "Ode\u0161le\u0020potvrzen\u00ED\u0020\u00FAhrady",
             "url": "classes/AbraFlexi-Bricks-PotvrzeniUhrady.html#method___construct"
         },                {
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo",
+            "name": "AbraFlexiLogo",
+            "summary": "AbraFlexi\u0020Bricks\u0020\u002D\u0020AbraFlexi\u0020svg\u0020logo",
+            "url": "classes/AbraFlexi-ui-AbraFlexiLogo.html"
+        },                {
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Inline\u0020vector\u0020AbraFlexi\u0020logo",
+            "url": "classes/AbraFlexi-ui-AbraFlexiLogo.html#method___construct"
+        },                {
+            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A\u0024svg",
+            "name": "svg",
+            "summary": "",
+            "url": "classes/AbraFlexi-ui-AbraFlexiLogo.html#property_svg"
+        },                {
             "fqsen": "\\AbraFlexi\\ui\\CompanyLogo",
             "name": "CompanyLogo",
             "summary": "Description\u0020of\u0020CompanyLogo",
@@ -725,21 +820,6 @@ Search.appendIndex(
             "name": "finalize",
             "summary": "",
             "url": "classes/AbraFlexi-ui-SearchBox.html#method_finalize"
-        },                {
-            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo",
-            "name": "AbraFlexiLogo",
-            "summary": "AbraFlexi\u0020Bricks\u0020\u002D\u0020AbraFlexi\u0020svg\u0020logo",
-            "url": "classes/AbraFlexi-ui-AbraFlexiLogo.html"
-        },                {
-            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Inline\u0020vector\u0020AbraFlexi\u0020logo",
-            "url": "classes/AbraFlexi-ui-AbraFlexiLogo.html#method___construct"
-        },                {
-            "fqsen": "\\AbraFlexi\\ui\\AbraFlexiLogo\u003A\u003A\u0024svg",
-            "name": "svg",
-            "summary": "",
-            "url": "classes/AbraFlexi-ui-AbraFlexiLogo.html#property_svg"
         },                {
             "fqsen": "\\",
             "name": "\\",

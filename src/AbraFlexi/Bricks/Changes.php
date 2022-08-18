@@ -55,7 +55,7 @@ class Changes {
     }
 
     /**
-     * Show recursive difference between two multidimensional arrays
+     * Result array contains different key with new|old values
      * 
      * @param array $data
      * @param array $datb
@@ -67,8 +67,8 @@ class Changes {
             if ((array_key_exists($column, $data) && is_array($data[$column])) || (array_key_exists($column, $datb) && is_array($datb[$column]))) {
                 $diff[$column] = self::dataDiff(array_key_exists($column, $data) ? $data[$column] : [], array_key_exists($column, $datb) ? $datb[$column] : []);
             } else {
-                if (array_key_exists($column, $data) && array_key_exists($column, $datb) && $data[$column] == $datb[$column]) {
-                    unset($diff[$column]);
+                if ( (array_key_exists($column, $data) && array_key_exists($column, $datb) && (strval($data[$column]) == strval($datb[$column]))) === false) {
+                    $diff[$column] = strval($data[$column]).'|'.strval($datb[$column]);
                 }
             }
         }
