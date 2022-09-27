@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AbraFlexi invoice matcher\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-12 18:59+0200\n"
-"PO-Revision-Date: 2018-07-12 19:02+0200\n"
+"POT-Creation-Date: 2022-09-27 20:45+0200\n"
+"PO-Revision-Date: 2022-09-27 20:50+0200\n"
 "Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
 "Language-Team: Vitex Software <info@vitexsoftware.cz>\n"
 "Language: cs_CZ\n"
@@ -13,36 +13,211 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: ../../../src\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Init.php:14
-msgid "Adding labels"
-msgstr "Přidávám štítky"
+#: AbraFlexi/Bricks/Convertor.php:133
+#, php-format
+msgid "Cannot Load Class: %s"
+msgstr ""
 
-#: Init.php:18
-msgid "Adding labels done"
-msgstr "Přidávání štítků hotovo"
+#: AbraFlexi/Bricks/ConvertorRule.php:174
+#, php-format
+msgid "Cannot save ClassFile: %s"
+msgstr ""
 
-#: ParujFaktury.php:16 ParujFakturyNew2Old.php:26
-msgid "pull account statements"
-msgstr "Stahuji bankovní výpisy"
+#: AbraFlexi/Bricks/Customer.php:259
+#, fuzzy
+msgid "missing login"
+msgstr "Přihlašovací Jméno"
 
-#: ParujFaktury.php:22
-msgid "Invoice matching begin"
-msgstr "Počátek párování faktur"
+#: AbraFlexi/Bricks/Customer.php:264
+#, fuzzy
+msgid "missing password"
+msgstr "Změna hesla"
 
-#: ParujFaktury.php:25
-msgid "Invoice matching done"
-msgstr "Párování faktur ukončeno"
+#: AbraFlexi/Bricks/Customer.php:275
+#, php-format
+msgid "Multiplete ContactID"
+msgstr ""
 
-#: ParujFakturyNew2Old.php:32
-msgid "Matching program started"
-msgstr "Programové párování zahájeno"
+#: AbraFlexi/Bricks/Customer.php:278
+msgid "Using the first one"
+msgstr "Používám první"
 
-#: ParujFakturyNew2Old.php:38
-msgid "Matching finished"
-msgstr "Párování ukončeno"
+#: AbraFlexi/Bricks/Customer.php:299
+#, fuzzy, php-format
+msgid "Sign in %s all ok"
+msgstr "Přihlášen jako: "
+
+#: AbraFlexi/Bricks/HookReciever.php:72
+#, php-format
+msgid "Change version %s already processed"
+msgstr "Změna číslo %s byla již zpracována"
+
+#: AbraFlexi/Bricks/HookReciever.php:103
+#, php-format
+msgid "Handler Class %s does not exist"
+msgstr ""
+
+#: AbraFlexi/Bricks/HookReciever.php:125
+msgid "Empty WebHook request"
+msgstr ""
+
+#: AbraFlexi/Bricks/HookReciever.php:170
+msgid "Last Processed Change ID Loading Failed"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:52
+#, fuzzy, php-format
+msgid "Configuration key %s is not set"
+msgstr "konfigurační soubor %s nebyl vytvořen"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:230
+#: AbraFlexi/Bricks/ParovacFaktur.php:429
+#, php-format
+msgid "Unsupported document type: %s %s"
+msgstr "Nepodporovaný typ dokladu: %s %s"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:239
+#, php-format
+msgid "new Bank account %s assigned to Address %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:308
+msgid "No incoming invoice found for outcoming payment"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:331
+msgid "Match by bank here"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:453
+#, php-format
+msgid "Castecna uhrada - DOBROPIS: prijato: %s ma byt zaplaceno %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:458
+#, php-format
+msgid "Přeplatek - DOBROPIS: prijato: %s ma byt zaplaceno %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:470
+#, php-format
+msgid "Platba %s  %s byla sparovana s dobropisem %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:497
+#, php-format
+msgid "Platba %s  %s %s byla sparovana s zalohou %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:562
+#, php-format
+msgid "Částečná úhrada %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:565
+#, php-format
+msgid "Vytvoř ZDD: %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:571
+#, php-format
+msgid "Přeplatek %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:591
+#, fuzzy, php-format
+#| msgid "Tabulka %s byla smazána"
+msgid "Faktura #%s byla sparovana"
+msgstr "Tabulka %s byla smazána"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:595
+#, fuzzy, php-format
+#| msgid "Tabulka %s byla smazána"
+msgid "Faktura #%s nebyla sparovana"
+msgstr "Tabulka %s byla smazána"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:621
+#, php-format
+msgid "Castecna uhrada - FAKTURA: prijato: %s %s ma byt zaplaceno %s %s"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:630
+#, php-format
+msgid "Overpay - INVOICE: recieved: %s %s excepted %s %s"
+msgstr "Přeplatek - FAKTURA: přijato: %s %s očekáváno %s %s"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:645
+#, php-format
+msgid "Payment %s  %s %s was matched with invoice %s"
+msgstr "Platba %s  %s %s byla spárována s fakturou %s"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:724
+#, fuzzy, php-format
+#| msgid "Tabulka %s byla vytvořena"
+msgid "Faktura %s %s byla vytvořena z dokladu %s %s"
+msgstr "Tabulka %s byla vytvořena"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:808
+msgid "Unidentified payment"
+msgstr "Neidentifikovaná platba"
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:814
+msgid "Payment without invoice"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:973
+#, php-format
+msgid "Platba pro fakturu %s nebyla dohledána"
+msgstr ""
+
+#: AbraFlexi/Bricks/ParovacFaktur.php:1061
+msgid "Added by script"
+msgstr "Přidáno skriptem"
+
+#: AbraFlexi/Bricks/PotvrzeniUhrady.php:27
+msgid "Dear customer,"
+msgstr ""
+
+#: AbraFlexi/Bricks/PotvrzeniUhrady.php:28
+#, php-format
+msgid "we confirm receipt of payment %s %s on %s "
+msgstr ""
+
+#: AbraFlexi/Bricks/PotvrzeniUhrady.php:35
+msgid "Confirmation of receipt of invoice payment"
+msgstr ""
+
+#: AbraFlexi/ui/CompanyLogo.php:58
+msgid "none"
+msgstr ""
+
+#: AbraFlexi/ui/RecordTypeSelect.php:33
+msgid "Undefined"
+msgstr ""
+
+#~ msgid "Adding labels"
+#~ msgstr "Přidávám štítky"
+
+#~ msgid "Adding labels done"
+#~ msgstr "Přidávání štítků hotovo"
+
+#~ msgid "pull account statements"
+#~ msgstr "Stahuji bankovní výpisy"
+
+#~ msgid "Invoice matching begin"
+#~ msgstr "Počátek párování faktur"
+
+#~ msgid "Invoice matching done"
+#~ msgstr "Párování faktur ukončeno"
+
+#~ msgid "Matching program started"
+#~ msgstr "Programové párování zahájeno"
+
+#~ msgid "Matching finished"
+#~ msgstr "Párování ukončeno"
 
 #, fuzzy
 #~ msgid "About Application"
@@ -129,10 +304,6 @@ msgstr "Párování ukončeno"
 #, fuzzy
 #~ msgid "Password confirm"
 #~ msgstr "Potvrzení hesla"
-
-#, fuzzy
-#~ msgid "Change password"
-#~ msgstr "Změna hesla"
 
 #, fuzzy
 #~ msgid "Password change"
@@ -319,10 +490,6 @@ msgstr "Párování ukončeno"
 #~ msgstr "Importovat"
 
 #, fuzzy
-#~ msgid "New script"
-#~ msgstr "Nový Host"
-
-#, fuzzy
 #~ msgid "Reinicialise database"
 #~ msgstr "Reinicializovat databázi"
 
@@ -410,12 +577,6 @@ msgstr "Párování ukončeno"
 
 #~ msgid "Nejprve se prosím přihlašte jako admin"
 #~ msgstr "Nejprve se prosím přihlašte jako admin"
-
-#~ msgid "Tabulka %s byla smazána"
-#~ msgstr "Tabulka %s byla smazána"
-
-#~ msgid "Tabulka %s byla vytvořena"
-#~ msgstr "Tabulka %s byla vytvořena"
 
 #~ msgid "Tabulka %s nebyla vytvořena"
 #~ msgstr "Tabulka %s nebyla vytvořena"
@@ -556,10 +717,6 @@ msgstr "Párování ukončeno"
 #, fuzzy
 #~ msgid "Group Name"
 #~ msgstr "Uživatelké Jméno"
-
-#, fuzzy
-#~ msgid "Missing name"
-#~ msgstr "Přihlašovací Jméno"
 
 #, fuzzy
 #~ msgid "Command was not saved"
@@ -797,10 +954,6 @@ msgstr "Párování ukončeno"
 #~ msgstr "parametry inicializace"
 
 #, fuzzy
-#~ msgid "Signed in as: "
-#~ msgstr "Přihlášen jako: "
-
-#, fuzzy
 #~ msgid "Sign in"
 #~ msgstr "Přihlásit"
 
@@ -945,10 +1098,6 @@ msgstr "Párování ukončeno"
 #, fuzzy
 #~ msgid "Configuration file %s was created"
 #~ msgstr "konfigurační soubor %s byl vytvořen"
-
-#, fuzzy
-#~ msgid "Configuration file %s was not created"
-#~ msgstr "konfigurační soubor %s nebyl vytvořen"
 
 #~ msgid "Error:"
 #~ msgstr "Chyba:"

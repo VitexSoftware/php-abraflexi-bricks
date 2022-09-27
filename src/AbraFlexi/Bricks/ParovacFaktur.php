@@ -8,7 +8,7 @@ use \AbraFlexi\FakturaVydana;
 /**
  * Invoice matching class
  *
- * @copyright (c) 2018, Vítězslav Dvořák
+ * @copyright (c) 2018-2022, Vítězslav Dvořák
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class ParovacFaktur extends \Ease\Sand {
@@ -627,7 +627,7 @@ class ParovacFaktur extends \Ease\Sand {
             $zbytek = 'castecnaUhrada';
         }
         if ($prijataCastka > $zbyvaUhradit) { //Castecna uhrada
-            $this->addStatusMessage(sprintf(_('Přeplatek - FAKTURA: prijato: %s %s ma byt zaplaceno %s %s'),
+            $this->addStatusMessage(sprintf(_('Overpay - INVOICE: recieved: %s %s excepted %s %s'),
                             $prijataCastka,
                             \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
                             $zbyvaUhradit,
@@ -638,17 +638,20 @@ class ParovacFaktur extends \Ease\Sand {
             $zbytek = 'ignorovat';
         }
 
-        if ($invoice->sparujPlatbu($payment, $zbytek)) { //Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
-            $success = 1;
-            $invoice->insertToAbraFlexi(['id' => $invoice->getRecordIdent(), 'stavMailK' => 'stavMail.odeslat']);
-            $invoice->addStatusMessage(sprintf(_('Platba %s  %s %s byla sparovana s fakturou %s'),
-                            \AbraFlexi\RO::uncode($payment->getRecordIdent()),
-                            $prijataCastka,
-                            \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
-                            \AbraFlexi\RO::uncode($invoice->getRecordIdent())),
-                    'success');
+        try {
+            if ($invoice->sparujPlatbu($payment, $zbytek)) { //Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
+                $success = 1;
+                $invoice->insertToAbraFlexi(['id' => $invoice->getRecordIdent(), 'stavMailK' => 'stavMail.odeslat']);
+                $invoice->addStatusMessage(sprintf(_('Payment %s  %s %s was matched with invoice %s'),
+                                \AbraFlexi\RO::uncode($payment->getRecordIdent()),
+                                $prijataCastka,
+                                \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
+                                \AbraFlexi\RO::uncode($invoice->getRecordIdent())),
+                        'success');
+            }
+        } catch (\AbraFlexi\Exception $exc) {
+            $success = 0;
         }
-
         return $success;
     }
 
