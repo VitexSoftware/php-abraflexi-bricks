@@ -801,20 +801,23 @@ class ParovacFaktur extends \Ease\Sand {
 
         $invoices = self::reorderInvoicesByAge($invoices);
 
-        if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
-            $this->banker->dataReset();
-            $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', $this->config['LABEL_UNIDENTIFIED']);
-            $this->addStatusMessage(_('Unidentified payment') . ': ' . $this->banker->getApiURL(), 'warning');
-            $this->banker->insertToAbraFlexi();
-        } elseif (count($invoices) == 0) {
-            $this->banker->dataReset();
-            $this->banker->setDataValue('id', $paymentData['id']);
-            $this->banker->setDataValue('stitky', $this->config['LABEL_INVOICE_MISSING']);
-            $this->addStatusMessage(_('Payment without invoice') . ': ' . $this->banker->getApiURL(), 'warning');
-            $this->banker->insertToAbraFlexi();
+        try {
+            if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
+                $this->banker->dataReset();
+                $this->banker->setDataValue('id', $paymentData['id']);
+                $this->banker->setDataValue('stitky', $this->config['LABEL_UNIDENTIFIED']);
+                $this->addStatusMessage(_('Unidentified payment') . ': ' . $this->banker->getApiURL(), 'warning');
+                $this->banker->insertToAbraFlexi();
+            } elseif (count($invoices) == 0) {
+                $this->banker->dataReset();
+                $this->banker->setDataValue('id', $paymentData['id']);
+                $this->banker->setDataValue('stitky', $this->config['LABEL_INVOICE_MISSING']);
+                $this->addStatusMessage(_('Payment without invoice') . ': ' . $this->banker->getApiURL(), 'warning');
+                $this->banker->insertToAbraFlexi();
+            }
+        } catch (\AbraFlexi\Exception $exc) {
+            
         }
-
         return $invoices;
     }
 
