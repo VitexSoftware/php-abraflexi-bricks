@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks - Company Logo
  *
@@ -12,8 +13,8 @@ namespace AbraFlexi\ui;
  *
  * @author vitex
  */
-class CompanyLogo extends \Ease\Html\ImgTag
-{
+class CompanyLogo extends \Ease\Html\ImgTag {
+
     /**
      * SVG Question Mark
      * @var string 
@@ -47,15 +48,19 @@ class CompanyLogo extends \Ease\Html\ImgTag
      * @param array $options       AbraFlexi object parameters
      * @param array $tagProperties Additional tag properties
      */
-    public function __construct($tagProperties = array(),$options = [])
-    {
+    public function __construct($tagProperties = array(), $options = []) {
         $configurator = new \AbraFlexi\Nastaveni(null, $options);
-        $logoInfo     = $configurator->getFlexiData('1/logo');
+        try {
+            $logoInfo = $configurator->getFlexiData('1/logo');
+        } catch (\AbraFlexi\Exception $ex) {
+            $logoInfo = false;
+        }
         if (is_array($logoInfo) && isset($logoInfo[0])) {
-            parent::__construct('data:'.$logoInfo[0]['contentType'].';'.$logoInfo[0]['content@encoding'].','.$logoInfo[0]['content'],
-                $logoInfo[0]['nazSoub'], $tagProperties);
+            parent::__construct('data:' . $logoInfo[0]['contentType'] . ';' . $logoInfo[0]['content@encoding'] . ',' . $logoInfo[0]['content'],
+                    $logoInfo[0]['nazSoub'], $tagProperties);
         } else {
-            parent::__construct( 'data:image/svg+xml;base64,'. base64_encode(self::$none), _('none'), $tagProperties);
+            parent::__construct('data:image/svg+xml;base64,' . base64_encode(self::$none), _('none'), $tagProperties);
         }
     }
+
 }

@@ -228,7 +228,7 @@ class ParovacFaktur extends \Ease\Sand {
                         default:
                             $this->addStatusMessage(
                                     sprintf(_('Unsupported document type: %s %s'),
-                                            $typDokl['typDoklK@showAs'] . ' (' . $docType . '): ' . $invoiceData['typDokl'],
+                                            $typDokl->showAs . ' (' . $docType . '): ' . $invoiceData['typDokl'],
                                             $invoice->getApiURL()
                                     ), 'warning');
                             break;
