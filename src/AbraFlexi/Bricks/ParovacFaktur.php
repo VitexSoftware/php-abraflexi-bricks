@@ -168,6 +168,65 @@ class ParovacFaktur extends \Ease\Sand {
     }
 
     /**
+     * Match Invoice with Payment
+     * 
+     * @param type $payment
+     * 
+     * @return type
+     */
+    public function outInvoiceMatchByBank($invoiceData, $payment) {
+        $typDokl = $invoiceData['typDokl'];
+        $docType = $typDokl->value[0]['typDoklK'];
+        $docTypeShowAs = $typDokl->value[0]['typDoklK@showAs'];
+        $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl->value[0]['kod']);
+
+        $invoice = new FakturaVydana($invoiceData, $this->config);
+
+        /*
+         *    Standardní faktura (typDokladu.faktura)
+         *    Dobropis/opravný daň. d. (typDokladu.dobropis)
+         *    Zálohová faktura (typDokladu.zalohFaktura)
+         *    Zálohový daňový doklad (typDokladu.zdd)
+         *    Dodací list (typDokladu.dodList)
+         *    Proforma (neúčetní) (typDokladu.proforma)
+         *    Pohyb Kč / Zůstatek Kč (typBanUctu.kc)
+         *    Pohyb měna / Zůstatek měna (typBanUctu.mena)
+         */
+        $matched = false;
+        switch ($docType) {
+            case 'typDokladu.zalohFaktura':
+            case 'typDokladu.faktura':
+                $matched = $this->settleInvoice($invoice, $payment);
+                break;
+            case 'typDokladu.proforma':
+                $matched = $this->settleProforma($invoice, $payment);
+                break;
+            case 'typDokladu.dobropis':
+                $matched = $this->settleCreditNote($invoice,
+                        $payment);
+                break;
+
+            default:
+                $this->addStatusMessage(
+                        sprintf(_('Unsupported document type: %s %s'),
+                                $docTypeShowAs . ' (' . $docType . '): ' . $invoiceData['typDokl'],
+                                $invoice->getApiURL()
+                        ), 'warning');
+                break;
+        }
+
+        if ($matched && $this->savePayerAccount($invoice->getDataValue('firma'),
+                        $payment)) {
+            $this->addStatusMessage(sprintf(_('new Bank account %s assigned to Address %s'),
+                            $payment->getDataValue('buc') . '/' . \AbraFlexi\RO::uncode($payment->getDataValue('smerKod')),
+                            $invoice->getDataValue('firma@showAs')));
+        }
+
+        $this->banker->loadFromAbraFlexi(\AbraFlexi\RO::code($paymentData['kod']));
+        return $this->banker->getDataValue('sparovano');
+    }
+
+    /**
      * Párování odchozích faktur podle příchozích plateb v bance
      */
     public function outInvoicesMatchingByBank() {
@@ -190,61 +249,10 @@ class ParovacFaktur extends \Ease\Sand {
 
             if (count($invoices) && count(current($invoices))) {
                 $prijatoCelkem = floatval($paymentData['sumCelkem']);
-                $payment = new \AbraFlexi\Banka($paymentData,
-                        $this->config);
+                $payment = new \AbraFlexi\Banka($paymentData, $this->config);
 
                 foreach ($invoices as $invoiceID => $invoiceData) {
-
-                    $typDokl = $invoiceData['typDokl'];
-                    $docType = $typDokl->value[0]['typDoklK'];
-                    $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl->value[0]['kod']);
-
-                    $invoice = new FakturaVydana($invoiceData, $this->config);
-
-                    /*
-                     *    Standardní faktura (typDokladu.faktura)
-                     *    Dobropis/opravný daň. d. (typDokladu.dobropis)
-                     *    Zálohová faktura (typDokladu.zalohFaktura)
-                     *    Zálohový daňový doklad (typDokladu.zdd)
-                     *    Dodací list (typDokladu.dodList)
-                     *    Proforma (neúčetní) (typDokladu.proforma)
-                     *    Pohyb Kč / Zůstatek Kč (typBanUctu.kc)
-                     *    Pohyb měna / Zůstatek měna (typBanUctu.mena)
-                     */
-                    $matched = false;
-                    switch ($docType) {
-                        case 'typDokladu.zalohFaktura':
-                        case 'typDokladu.faktura':
-                            $matched = $this->settleInvoice($invoice, $payment);
-                            break;
-                        case 'typDokladu.proforma':
-                            $matched = $this->settleProforma($invoice, $payment);
-                            break;
-                        case 'typDokladu.dobropis':
-                            $matched = $this->settleCreditNote($invoice,
-                                    $payment);
-                            break;
-
-                        default:
-                            $this->addStatusMessage(
-                                    sprintf(_('Unsupported document type: %s %s'),
-                                            $typDokl->showAs . ' (' . $docType . '): ' . $invoiceData['typDokl'],
-                                            $invoice->getApiURL()
-                                    ), 'warning');
-                            break;
-                    }
-
-                    if ($matched && $this->savePayerAccount($invoice->getDataValue('firma'),
-                                    $payment)) {
-                        $this->addStatusMessage(sprintf(_('new Bank account %s assigned to Address %s'),
-                                        $payment->getDataValue('buc') . '/' . \AbraFlexi\RO::uncode($payment->getDataValue('smerKod')),
-                                        $invoice->getDataValue('firma@showAs')));
-                    }
-
-                    $this->banker->loadFromAbraFlexi(\AbraFlexi\RO::code($paymentData['kod']));
-                    if ($this->banker->getDataValue('sparovano') == true) {
-                        break;
-                    }
+                    $this->outInvoiceMatchByBank($invoiceData, $payment);
                 }
             } else {
 
@@ -801,23 +809,20 @@ class ParovacFaktur extends \Ease\Sand {
 
         $invoices = self::reorderInvoicesByAge($invoices);
 
-        try {
-            if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
-                $this->banker->dataReset();
-                $this->banker->setDataValue('id', $paymentData['id']);
-                $this->banker->setDataValue('stitky', $this->config['LABEL_UNIDENTIFIED']);
-                $this->addStatusMessage(_('Unidentified payment') . ': ' . $this->banker->getApiURL(), 'warning');
-                $this->banker->insertToAbraFlexi();
-            } elseif (count($invoices) == 0) {
-                $this->banker->dataReset();
-                $this->banker->setDataValue('id', $paymentData['id']);
-                $this->banker->setDataValue('stitky', $this->config['LABEL_INVOICE_MISSING']);
-                $this->addStatusMessage(_('Payment without invoice') . ': ' . $this->banker->getApiURL(), 'warning');
-                $this->banker->insertToAbraFlexi();
-            }
-        } catch (\AbraFlexi\Exception $exc) {
-            
+        if (empty($paymentData['varSym']) && empty($paymentData['specSym'])) {
+            $this->banker->dataReset();
+            $this->banker->setDataValue('id', $paymentData['id']);
+            $this->banker->setDataValue('stitky', $this->config['LABEL_UNIDENTIFIED']);
+            $this->addStatusMessage(_('Unidentified payment') . ': ' . $this->banker->getApiURL(), 'warning');
+            $this->banker->insertToAbraFlexi();
+        } elseif (count($invoices) == 0) {
+            $this->banker->dataReset();
+            $this->banker->setDataValue('id', $paymentData['id']);
+            $this->banker->setDataValue('stitky', $this->config['LABEL_INVOICE_MISSING']);
+            $this->addStatusMessage(_('Payment without invoice') . ': ' . $this->banker->getApiURL(), 'warning');
+            $this->banker->insertToAbraFlexi();
         }
+
         return $invoices;
     }
 
