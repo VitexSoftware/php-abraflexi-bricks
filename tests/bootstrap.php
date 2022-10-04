@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi-Bricks - Unit Test bootstrap
  *
@@ -10,7 +11,7 @@ if (file_exists('../vendor/autoload.php')) {
 } else {
     require_once 'vendor/autoload.php'; //Create Test
 }
-\Ease\Shared::instanced()->loadConfig('tests/client.json',true);
+\Ease\Shared::instanced()->loadConfig('tests/client.json', true);
 define('EASE_LOGGER', 'syslog');
 
 /* Run me to prepare AbraFlexi database to be used for Tests

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Common selectize.js based AbraFlexi records chooser
  *
@@ -13,8 +14,7 @@ namespace AbraFlexi\ui;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class RecordSelector extends \Ease\Html\SelectTag
-{
+class RecordSelector extends \Ease\Html\SelectTag {
 
     use \Ease\ui\Selectizer;
 
@@ -27,8 +27,7 @@ class RecordSelector extends \Ease\Html\SelectTag
      * @param array                  $properties
      */
     public function __construct($name, $value, $optionsEngine,
-                                $properties = array())
-    {
+            $properties = array()) {
         if (empty($optionsEngine->getColumnInfo('nazev'))) {
             $nameColumn = 'kod';
         } else {
@@ -41,7 +40,7 @@ class RecordSelector extends \Ease\Html\SelectTag
             $keyColumn = 'kod';
         }
 
-        $values  = $optionsEngine->getColumnsFromAbraFlexi([$keyColumn, $nameColumn]);
+        $values = $optionsEngine->getColumnsFromAbraFlexi([$keyColumn, $nameColumn], ['limit' => 0]);
         $options = [];
 
         foreach ($values as $id => $valuesRow) {
@@ -53,4 +52,5 @@ class RecordSelector extends \Ease\Html\SelectTag
         $this->selectize(['valueField' => $keyColumn, 'labelField' => $nameColumn,
             'searchField' => ['kod', 'nazev'], 'create' => false]);
     }
+
 }

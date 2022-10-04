@@ -11,8 +11,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "vitexsoftware/ease-html": ">=1.25",
-        "spojenet/flexibee": "dev-main"
+        "vitexsoftware/ease-core-bricks": "*",
+        "spojenet/flexibee": "*"
     },
     "autoload": {
         "psr-4": {
