@@ -34,7 +34,7 @@ class ParovacFaktur extends \Ease\Sand {
      * Configuration options
      * @var array 
      */
-    private $config = [];
+    private $config = ['limit'=>0];
 
     /**
      * Requied Config Keys
@@ -889,6 +889,7 @@ class ParovacFaktur extends \Ease\Sand {
      * Vrací neuhrazene faktury odpovídající zadaným parametrům
      *
      * @param array $what
+     * 
      * @return array
      */
     public function findInvoice($what) {
@@ -905,7 +906,7 @@ class ParovacFaktur extends \Ease\Sand {
      */
     public function searchInvoices($what) {
         $result = null;
-        $this->invoicer->defaultUrlParams['order'] = 'datVyst@A';
+        $this->getInvoicer()->defaultUrlParams['order'] = 'datVyst@A';
         $this->invoicer->defaultUrlParams['includes'] = '/faktura-vydana/typDokl';
         $invoices = $this->invoicer->getColumnsFromAbraFlexi([
             'id',
