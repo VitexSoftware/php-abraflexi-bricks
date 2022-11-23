@@ -191,15 +191,17 @@ class Customer extends \Ease\User {
     /**
      * Obtain Customer "Score"
      *
-     * @param int $addressID AbraFlexi user ID
+     * @param int    $addressID AbraFlexi user ID
+     * @param string $label1    first remind Label
+     * @param string $label2    second remind label
      * 
      * @return int ZewlScore
      */
-    public function getCustomerScore($addressID) {
+    public function getCustomerScore($addressID = null, $label1 = 'UPOMINKA1', $label2 = 'UPOMINKA2') {
         $score = 0;
-        $debts = $this->getCustomerDebts($addressID);
+        $debts = $this->getCustomerDebts($addressID ? $addressID : $this->adresar);
         $stitkyRaw = $this->adresar->getColumnsFromAbraFlexi(['stitky'],
-                ['id' => $addressID]);
+                ['id' => $addressID ? $addressID : $this->adresar->getRecordID()]);
         $stitky = $stitkyRaw[0]['stitky'];
         if (!empty($debts)) {
             foreach ($debts as $did => $debt) {
@@ -218,11 +220,11 @@ class Customer extends \Ease\User {
                 }
             }
         }
-        if ($score == 3 && !strstr($stitky, 'UPOMINKA2')) {
+        if ($score == 3 && !strstr($stitky, $label2)) {
             $score = 2;
         }
 
-        if (!strstr($stitky, 'UPOMINKA1') && !empty($debts)) {
+        if (!strstr($stitky, $label1) && !empty($debts)) {
             $score = 1;
         }
 
@@ -361,7 +363,7 @@ class Customer extends \Ease\User {
                         'warning');
             }
 
-            $this->addStatusMessage('PasswordChange: ' . $this->getDataValue($this->loginColumn) . '@' . $userID . '#' . $this->getDataValue($this->myIDSColumn) . ' ' . $hash,'debug');
+            $this->addStatusMessage('PasswordChange: ' . $this->getDataValue($this->loginColumn) . '@' . $userID . '#' . $this->getDataValue($this->myIDSColumn) . ' ' . $hash, 'debug');
             if ($userID == $this->getUserID()) {
                 $this->setDataValue($this->passwordColumn, $hash);
             }
@@ -380,7 +382,7 @@ class Customer extends \Ease\User {
     public static function encryptPassword($plainTextPassword) {
         return $plainTextPassword;
     }
-    
+
     /**
      * Vraci ID přihlášeného uživatele.
      *
