@@ -47,10 +47,10 @@ class Changes {
             }
         }
         if (array_key_exists('@globalVersion', $changesData)) {
-            $this->globalVersion = intval($changeData['@globalVersion']);
+            $this->globalVersion = intval($changesData['@globalVersion']);
         }
         if (array_key_exists('next', $changesData)) {
-            $this->next = intval($changeData['next']);
+            $this->next = intval($changesData['next']);
         }
     }
 

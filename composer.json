@@ -14,6 +14,10 @@
         "vitexsoftware/ease-core-bricks": "*",
         "spojenet/flexibee": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "phpstan/phpstan": "*"
+    },
     "autoload": {
         "psr-4": {
             "AbraFlexi\\Bricks\\": "src/AbraFlexi/Bricks",

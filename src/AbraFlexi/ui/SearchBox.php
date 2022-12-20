@@ -21,7 +21,7 @@ class SearchBox extends \Ease\Html\InputSearchTag
      */
     public function afterAdd()
     {
-        $this->parent->addItem(new \Ease\Html\DatalistTag(new \Ease\Html\OptionTag('zatim nic')
+        $this->parent()->addItem(new \Ease\Html\DatalistTag(new \Ease\Html\OptionTag('zatim nic')
             ,
             
             ['id' => 'datalist-'.$this->getTagID()]));

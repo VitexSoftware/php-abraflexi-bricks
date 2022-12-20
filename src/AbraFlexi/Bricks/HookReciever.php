@@ -90,12 +90,12 @@ class HookReciever extends \AbraFlexi\Changes
                         case 'create':
                         case 'delete':
                             if ($saver->process($operation) && ($this->debug === true)) {
-                                $this->addToLog($changepos.'/'.count($this->changes),
+                                $this->addStatusMessage($changepos.'/'.count($this->changes),
                                     'success');
                             }
                             break;
                         default:
-                            $this->addToLog('Unknown operation', 'warning');
+                            $this->addStatusMessage('Unknown operation', 'warning');
                             break;
                     }
                 } else {

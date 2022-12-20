@@ -363,7 +363,7 @@ class Customer extends \Ease\User {
                         'warning');
             }
 
-            $this->addStatusMessage('PasswordChange: ' . $this->getDataValue($this->loginColumn) . '@' . $userID . '#' . $this->getDataValue($this->myIDSColumn) . ' ' . $hash, 'debug');
+            $this->addStatusMessage('PasswordChange: ' . $this->getDataValue($this->loginColumn) . '@' . $userID  . ' ' . $hash, 'debug');
             if ($userID == $this->getUserID()) {
                 $this->setDataValue($this->passwordColumn, $hash);
             }

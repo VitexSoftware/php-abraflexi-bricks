@@ -3,7 +3,7 @@
  * AbraFlexi Bricks - Convertor Class
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2020 Vitex Software
+ * @copyright  (G) 2017-2022 Vitex Software
  */
 
 namespace AbraFlexi\Bricks;
@@ -41,8 +41,7 @@ class Convertor extends \Ease\Sand
      * @param ConvertorRule          $ruler   force convertor rule class
      */
     public function __construct(\AbraFlexi\RO $input = null,
-                                \AbraFlexi\RW $output = null,
-                                $ruler = null)
+                                \AbraFlexi\RW $output = null, $ruler = null)
     {
         if (!empty($input)) {
             $this->setSource($input);
@@ -120,7 +119,7 @@ class Convertor extends \Ease\Sand
                                  $handleAccounting)
     {
         $convertorClassname = $this->getConvertorClassName();
-        $ruleClass          = '\\AbraFlexi\\Bricks\\ConvertRules\\'.$convertorClassname;
+        $ruleClass = '\\AbraFlexi\\Bricks\\ConvertRules\\'.$convertorClassname;
         if (class_exists($ruleClass, true)) {
             $this->rules = new $ruleClass($this, $keepId, $addExtId, $keepCode,
                 $handleAccounting);
@@ -131,7 +130,7 @@ class Convertor extends \Ease\Sand
                     $convertorClassname);
             }
             throw new \Ease\Exception(sprintf(_('Cannot Load Class: %s'),
-                    $ruleClass));
+                        $ruleClass));
         }
     }
 
@@ -154,9 +153,10 @@ class Convertor extends \Ease\Sand
      * @param boolean $handleAccounting set item's "ucetni" like target 
      */
     public function convertDocument($keepId = false, $addExtId = false,
-                                    $keepCode = false, $handleAccountig = false)
+                                    $keepCode = false, $handleAccounting = false)
     {
-        $this->convertItems($keepId, $addExtId, $keepCode, $handleAccountig);
+        return $this->conversion($keepId, $addExtId, $keepCode,
+                $handleAccounting);
     }
 
     /**
@@ -206,9 +206,12 @@ class Convertor extends \Ease\Sand
             } else {
                 if (empty($this->output->getDataValue($columnToTake))) {
                     if (strstr($subitemColumns, '()')) {
-                        $functionResult = call_user_func(array($this->rules, str_replace('()','', $subitemColumns)),  $this->input->getDataValue($columnToTake));
-                        if(!is_null($functionResult)){
-                        $this->output->setDataValue($columnToTake,  $functionResult  );
+                        $functionResult = call_user_func(array($this->rules, str_replace('()',
+                                '', $subitemColumns)),
+                            $this->input->getDataValue($columnToTake));
+                        if (!is_null($functionResult)) {
+                            $this->output->setDataValue($columnToTake,
+                                $functionResult);
                         }
                     } else {
                         $this->output->setDataValue($columnToTake,
