@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks - Convertor Class
  *
@@ -13,8 +14,8 @@ namespace AbraFlexi\Bricks;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class Convertor extends \Ease\Sand
-{
+class Convertor extends \Ease\Sand {
+
     /**
      * Source Object
      * @var \AbraFlexi\RO 
@@ -38,11 +39,10 @@ class Convertor extends \Ease\Sand
      * 
      * @param \AbraFlexi\RO $input   Source 
      * @param \AbraFlexi\RW $output  Destination
-     * @param ConvertorRule          $ruler   force convertor rule class
+     * @param ConvertorRule $ruler   force convertor rule class
      */
     public function __construct(\AbraFlexi\RO $input = null,
-                                \AbraFlexi\RW $output = null, $ruler = null)
-    {
+            \AbraFlexi\RW $output = null, $ruler = null) {
         if (!empty($input)) {
             $this->setSource($input);
         }
@@ -60,8 +60,7 @@ class Convertor extends \Ease\Sand
      * 
      * @param \AbraFlexi\RO $source
      */
-    public function setSource(\AbraFlexi\RO $source)
-    {
+    public function setSource(\AbraFlexi\RO $source) {
         $this->input = $source;
     }
 
@@ -70,8 +69,7 @@ class Convertor extends \Ease\Sand
      * 
      * @param \AbraFlexi\RO $destinantion
      */
-    public function setDestination(\AbraFlexi\RO $destination)
-    {
+    public function setDestination(\AbraFlexi\RO $destination) {
         $this->output = $destination;
     }
 
@@ -86,11 +84,10 @@ class Convertor extends \Ease\Sand
      * @return \AbraFlexi\RW converted object ( unsaved )
      */
     public function conversion($keepId = false, $addExtId = false,
-                               $keepCode = false, $handleAccounting = false)
-    {
+            $keepCode = false, $handleAccounting = false) {
         $this->prepareRules($keepId, $addExtId, $keepCode, $handleAccounting);
-        $this->convertDocument();
-        return $this->output;
+        $this->convertItems();
+        return $this->getOutput();
     }
 
     /**
@@ -100,8 +97,7 @@ class Convertor extends \Ease\Sand
      * 
      * @return string
      */
-    static public function baseClassName($object)
-    {
+    static public function baseClassName($object) {
         return basename(str_replace('\\', '/', get_class($object)));
     }
 
@@ -116,21 +112,20 @@ class Convertor extends \Ease\Sand
      * @throws \Ease\Exception
      */
     public function prepareRules($keepId, $addExtId, $keepCode,
-                                 $handleAccounting)
-    {
+            $handleAccounting) {
         $convertorClassname = $this->getConvertorClassName();
-        $ruleClass = '\\AbraFlexi\\Bricks\\ConvertRules\\'.$convertorClassname;
+        $ruleClass = '\\AbraFlexi\\Bricks\\ConvertRules\\' . $convertorClassname;
         if (class_exists($ruleClass, true)) {
             $this->rules = new $ruleClass($this, $keepId, $addExtId, $keepCode,
-                $handleAccounting);
-            $this->rules->assignConvertor($this);
+                    $handleAccounting);
+            //$this->rules->assignConvertor($this);
         } else {
             if ($this->debug === true) {
                 ConvertorRule::convertorClassTemplateGenerator($this,
-                    $convertorClassname);
+                        $convertorClassname);
             }
             throw new \Ease\Exception(sprintf(_('Cannot Load Class: %s'),
-                        $ruleClass));
+                                    $ruleClass));
         }
     }
 
@@ -139,24 +134,8 @@ class Convertor extends \Ease\Sand
      * 
      * @return string
      */
-    public function getConvertorClassName()
-    {
-        return self::baseClassName($this->input).'_to_'.self::baseClassName($this->output);
-    }
-
-    /**
-     * Convert AbraFlexi document
-     * 
-     * @param boolean $keepId           keep item IDs
-     * @param boolean $addExtId         add ext:originalEvidence:originalId 
-     * @param boolean $keepCode         keep items code
-     * @param boolean $handleAccounting set item's "ucetni" like target 
-     */
-    public function convertDocument($keepId = false, $addExtId = false,
-                                    $keepCode = false, $handleAccounting = false)
-    {
-        return $this->conversion($keepId, $addExtId, $keepCode,
-                $handleAccounting);
+    public function getConvertorClassName() {
+        return self::baseClassName($this->input) . '_to_' . self::baseClassName($this->output);
     }
 
     /**
@@ -164,8 +143,7 @@ class Convertor extends \Ease\Sand
      * 
      * @param string  $columnToTake   usually "polozkyDokladu"
      */
-    public function convertSubitems($columnToTake)
-    {
+    public function convertSubitems($columnToTake) {
         $subitemRules = $this->rules->getRuleForColumn($columnToTake);
         if (\Ease\Functions::isAssoc($this->input->data[$columnToTake])) {
             $sourceData = [$this->input->data[$columnToTake]];
@@ -179,8 +157,8 @@ class Convertor extends \Ease\Sand
                     if (strstr($subitemRules[$subitemColumn], '()')) {
                         $subItemCopyData[$subitemColumn] = call_user_func(array(
                             $this->rules, str_replace('()', '',
-                                $subitemRules[$subitemColumn])),
-                            $sourceData[$subitemPos][$subitemColumn]);
+                                    $subitemRules[$subitemColumn])),
+                                $sourceData[$subitemPos][$subitemColumn]);
                     } else {
                         $subItemCopyData[$subitemColumn] = $sourceData[$subitemPos][$subitemRules[$subitemColumn]];
                     }
@@ -195,8 +173,7 @@ class Convertor extends \Ease\Sand
      * 
      * @return boolean conversion success
      */
-    public function convertItems()
-    {
+    public function convertItems() {
         $convertRules = $this->rules->getRules();
         foreach ($convertRules as $columnToTake => $subitemColumns) {
             if (is_array($subitemColumns)) {
@@ -207,15 +184,15 @@ class Convertor extends \Ease\Sand
                 if (empty($this->output->getDataValue($columnToTake))) {
                     if (strstr($subitemColumns, '()')) {
                         $functionResult = call_user_func(array($this->rules, str_replace('()',
-                                '', $subitemColumns)),
-                            $this->input->getDataValue($columnToTake));
+                                    '', $subitemColumns)),
+                                $this->input->getDataValue($columnToTake));
                         if (!is_null($functionResult)) {
                             $this->output->setDataValue($columnToTake,
-                                $functionResult);
+                                    $functionResult);
                         }
                     } else {
                         $this->output->setDataValue($columnToTake,
-                            $this->input->getDataValue($subitemColumns));
+                                $this->input->getDataValue($subitemColumns));
                     }
                 }
             }
@@ -228,10 +205,9 @@ class Convertor extends \Ease\Sand
      * 
      * @return array
      */
-    public function commonItems()
-    {
+    public function commonItems() {
         return array_intersect(array_keys($this->input->getColumnsInfo()),
-            array_keys($this->output->getColumnsInfo()));
+                array_keys($this->output->getColumnsInfo()));
     }
 
     /**
@@ -239,8 +215,7 @@ class Convertor extends \Ease\Sand
      * 
      * @return \AbraFlexi\RO
      */
-    public function getInput()
-    {
+    public function getInput() {
         return $this->input;
     }
 
@@ -249,8 +224,8 @@ class Convertor extends \Ease\Sand
      * 
      * @return \AbraFlexi\RO
      */
-    public function getOutput()
-    {
+    public function getOutput() {
         return $this->output;
     }
+
 }

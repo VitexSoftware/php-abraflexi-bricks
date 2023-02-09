@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi - WebHook reciever
  *
@@ -15,8 +16,7 @@ namespace AbraFlexi\Bricks;
  *
  * @author vitex
  */
-class GateKeeper extends \Ease\Sand
-{
+class GateKeeper extends \Ease\Sand {
 
     /**
      * Is document accessible by user ?
@@ -26,8 +26,7 @@ class GateKeeper extends \Ease\Sand
      *
      * @return boolean
      */
-    public static function isAccessibleBy($document, $user)
-    {
+    public static function isAccessibleBy($document, $user) {
         $result = null;
         switch (Convertor::baseClassName($user)) {
             case 'User': //Admin
@@ -50,10 +49,9 @@ class GateKeeper extends \Ease\Sand
      *
      * @return string documnent code
      */
-    public static function getDocumentCompany($document)
-    {
+    public static function getDocumentCompany($document) {
         return $document->getDataValue('firma') ? \AbraFlexi\RO::uncode(
-                $document->getDataValue('firma')) : null;
+                        $document->getDataValue('firma')) : null;
     }
 
     /**
@@ -63,9 +61,8 @@ class GateKeeper extends \Ease\Sand
      * 
      * @return int
      */
-    public static function getCustomerCompany($customer)
-    {
-        return $customer->adresar->getDataValue('kod') ? \AbraFlexi\RO::uncode($customer->adresar->getDataValue('kod'))
-                : null;
+    public static function getCustomerCompany($customer) {
+        return $customer->adresar->getDataValue('kod') ? \AbraFlexi\RO::uncode($customer->adresar->getDataValue('kod')) : null;
     }
+
 }

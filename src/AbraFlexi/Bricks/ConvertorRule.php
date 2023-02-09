@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks - Convertor Class Rule
  *
@@ -13,13 +14,13 @@ namespace AbraFlexi\Bricks;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class ConvertorRule extends \Ease\Sand
-{
+class ConvertorRule extends \Ease\Sand {
+
     /**
      *
      * @var array 
      */
-    public $rules     = [];
+    public $rules = [];
 
     /**
      *
@@ -31,7 +32,7 @@ class ConvertorRule extends \Ease\Sand
      *
      * @var boolean 
      */
-    private $keepId   = null;
+    private $keepId = null;
 
     /**
      *
@@ -55,10 +56,9 @@ class ConvertorRule extends \Ease\Sand
      * @param boolean $handleAccounting set columns "ucetni" like target or ignore it
      */
     public function __construct(Convertor &$convertor = null, $keepId = false,
-                                $addExtId = false, $keepCode = false,
-                                $handleAccounting = true)
-    {
-        $this->keepId   = $keepId;
+            $addExtId = false, $keepCode = false,
+            $handleAccounting = true) {
+        $this->keepId = $keepId;
         $this->addExtId = $addExtId;
         $this->keepCode = $keepCode;
 
@@ -86,18 +86,25 @@ class ConvertorRule extends \Ease\Sand
      * 
      * @param Convertor $convertor
      */
-    public function assignConvertor(Convertor &$convertor)
-    {
+    public function assignConvertor(Convertor &$convertor) {
         $this->convertor = &$convertor;
     }
 
     /**
+     * Get Convertor used
      * 
+     * @return Convertor
      */
-    public function addExtId()
-    {
+    public function getConvertor() {
+        return $this->convertor;
+    }
+
+    /**
+     * Add ExtID by Original ID Into converted
+     */
+    public function addExtId() {
         $this->convertor->getOutput()->setDataValue('id',
-            'ext:src:'.$this->convertor->getInput()->getEvidence().':'.$this->convertor->getInput()->getMyKey());
+                'ext:src:' . $this->convertor->getInput()->getEvidence() . ':' . $this->convertor->getInput()->getMyKey());
     }
 
     /**
@@ -105,8 +112,7 @@ class ConvertorRule extends \Ease\Sand
      * 
      * @return array
      */
-    function getRules()
-    {
+    function getRules() {
         return $this->rules;
     }
 
@@ -117,8 +123,7 @@ class ConvertorRule extends \Ease\Sand
      * 
      * @return string 
      */
-    function getRuleForColumn($columnName)
-    {
+    function getRuleForColumn($columnName) {
         return $this->rules[$columnName];
     }
 
@@ -133,9 +138,8 @@ class ConvertorRule extends \Ease\Sand
      * @throws \Ease\Exception
      */
     public static function convertorClassTemplateGenerator($convertor,
-                                                           $className)
-    {
-        $inputColumns  = $convertor->getInput()->getColumnsInfo();
+            $className) {
+        $inputColumns = $convertor->getInput()->getColumnsInfo();
         $outputColumns = $convertor->getOutput()->getColumnsInfo();
 
         $oposites = self::getOposites($inputColumns, $outputColumns);
@@ -143,22 +147,22 @@ class ConvertorRule extends \Ease\Sand
         $inputRelations = $convertor->getInput()->getRelationsInfo();
         if (!empty($inputRelations)) {
             if (array_key_exists('polozkyDokladu',
-                    \Ease\Functions::reindexArrayBy($inputRelations, 'url'))) {
-                $outSubitemsInfo            = $convertor->getOutput()->getColumnsInfo($convertor->getOutput()->getEvidence().'-polozka');
-                $inSubitemsInfo             = $convertor->getInput()->getColumnsInfo($convertor->getInput()->getEvidence().'-polozka');
+                            \Ease\Functions::reindexArrayBy($inputRelations, 'url'))) {
+                $outSubitemsInfo = $convertor->getOutput()->getColumnsInfo($convertor->getOutput()->getEvidence() . '-polozka');
+                $inSubitemsInfo = $convertor->getInput()->getColumnsInfo($convertor->getInput()->getEvidence() . '-polozka');
                 $oposites['polozkyDokladu'] = self::getOposites($inSubitemsInfo,
-                        $outSubitemsInfo);
+                                $outSubitemsInfo);
             }
         }
 
         $classFile = '<?php
 namespace AbraFlexi\Bricks\ConvertRules;
 /**
- * Description of '.$className.'
+ * Description of ' . $className . '
  *
  * @author EaseAbraFlexiConvertorRule <info@vitexsoftware.cz>
  */
-class '.$className.' extends \AbraFlexi\Bricks\ConvertorRule
+class ' . $className . ' extends \AbraFlexi\Bricks\ConvertorRule
 {
     public $rules = ';
 
@@ -168,17 +172,16 @@ class '.$className.' extends \AbraFlexi\Bricks\ConvertorRule
 
 }
 ';
-        if (file_put_contents($className.'.php', $classFile)) {
+        if (file_put_contents($className . '.php', $classFile)) {
             $convertor->addStatusMessage($classFile, 'success');
         } else {
             throw new \Ease\Exception(sprintf(_('Cannot save ClassFile: %s'),
-                    $className.'.php'));
+                                    $className . '.php'));
         }
-        return $className.'.php';
+        return $className . '.php';
     }
 
-    public static function getOposites($inProps, $outProps)
-    {
+    public static function getOposites($inProps, $outProps) {
         foreach ($outProps as $colName => $colProps) {
             if ($colProps['isWritable'] == 'true') {
                 if (array_key_exists($colName, $inProps)) {
@@ -199,8 +202,8 @@ class '.$className.' extends \AbraFlexi\Bricks\ConvertorRule
      * 
      * @return boolean
      */
-    public function finalizeConversion()
-    {
+    public function finalizeConversion() {
         return true;
     }
+
 }
