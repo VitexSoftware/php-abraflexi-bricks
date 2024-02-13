@@ -10,24 +10,28 @@
 namespace AbraFlexi\ui;
 
 /**
- * Select One Value 
+ * Select One Value
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class RecordSelector extends \Ease\Html\SelectTag {
-
+class RecordSelector extends \Ease\Html\SelectTag
+{
     use \Ease\ui\Selectizer;
 
     /**
      * Selectize.js based input
-     * 
+     *
      * @param string                 $name
      * @param string                 $value
      * @param \AbraFlexi\RO $optionsEngine
      * @param array                  $properties
      */
-    public function __construct($name, $value, $optionsEngine,
-            $properties = array()) {
+    public function __construct(
+        $name,
+        $value,
+        $optionsEngine,
+        $properties = array()
+    ) {
         if (empty($optionsEngine->getColumnInfo('nazev'))) {
             $nameColumn = 'kod';
         } else {
@@ -52,5 +56,4 @@ class RecordSelector extends \Ease\Html\SelectTag {
         $this->selectize(['valueField' => $keyColumn, 'labelField' => $nameColumn,
             'searchField' => ['kod', 'nazev'], 'create' => false]);
     }
-
 }

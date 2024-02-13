@@ -157,7 +157,7 @@ class Banka_to_FakturaVydana extends \AbraFlexi\Bricks\ConvertorRule
         [
 //            'ucetni' => 'ucetni',
 //            'kod' => NULL,
-            'eanKod' => NULL,
+            'eanKod' => null,
             'nazev' => 'nazev',
             'nazevA' => 'nazevA',
             'nazevB' => 'nazevB',
@@ -240,7 +240,7 @@ class Banka_to_FakturaVydana extends \AbraFlexi\Bricks\ConvertorRule
 
     /**
      * Actions performed after converting process
-     * 
+     *
      * @return boolean
      */
     public function sumCelkZakl($inPrice)

@@ -1,10 +1,8 @@
 <?php
 
-
 namespace AbraFlexi\Bricks\ConvertRules;
 
 use AbraFlexi\Bricks\ConvertorRule;
-
 
 /**
  * Description of FakturaVydana_to_PokladniPohyb
@@ -196,5 +194,4 @@ class FakturaVydana_to_PokladniPohyb extends ConvertorRule
 //            'eetTypPlatbyK' => 'eetTypPlatbyK',
 //        ),
     );
-
 }

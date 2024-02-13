@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks
  *
@@ -14,7 +15,6 @@ namespace AbraFlexi\ui;
  */
 class RecordTypeSelect extends \Ease\Html\SelectTag
 {
-
     /**
      * Common AbraFlexi evidence record Type Select
      *
@@ -27,13 +27,15 @@ class RecordTypeSelect extends \Ease\Html\SelectTag
         if (!isset($conditions['order'])) {
             $conditions['order'] = 'nazev';
         }
-        $typesRaw = $engine->getColumnsFromAbraFlexi(['nazev', $valueType],
-            $conditions);
+        $typesRaw = $engine->getColumnsFromAbraFlexi(
+            ['nazev', $valueType],
+            $conditions
+        );
 
         $types = ['' => _('Undefined')];
         if (!empty($typesRaw)) {
             foreach ($typesRaw as $type) {
-                $types[($valueType == 'kod' ? 'code:' : '').$type[$valueType]] = $type['nazev'];
+                $types[($valueType == 'kod' ? 'code:' : '') . $type[$valueType]] = $type['nazev'];
             }
         }
         $default = $engine->getDataValue($valueType);

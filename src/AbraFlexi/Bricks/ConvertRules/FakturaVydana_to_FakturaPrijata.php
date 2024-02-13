@@ -208,5 +208,4 @@ class FakturaVydana_to_FakturaPrijata extends \AbraFlexi\Bricks\ConvertorRule
 //            'sumVedlNaklIntrMen' => 'sumVedlNaklIntrMen',
         ],
     ];
-
 }

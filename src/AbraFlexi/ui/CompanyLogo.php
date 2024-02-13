@@ -13,11 +13,11 @@ namespace AbraFlexi\ui;
  *
  * @author vitex
  */
-class CompanyLogo extends \Ease\Html\ImgTag {
-
+class CompanyLogo extends \Ease\Html\ImgTag
+{
     /**
      * SVG Question Mark
-     * @var string 
+     * @var string
      */
     static $none = '<?xml version="1.0" encoding="UTF-8"?>
 <svg version="1.1" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -44,11 +44,12 @@ class CompanyLogo extends \Ease\Html\ImgTag {
 
     /**
      * Emebed Company logo into page
-     * 
+     *
      * @param array $options       AbraFlexi object parameters
      * @param array $tagProperties Additional tag properties
      */
-    public function __construct($tagProperties = array(), $options = []) {
+    public function __construct($tagProperties = array(), $options = [])
+    {
         $configurator = new \AbraFlexi\Nastaveni(null, $options);
         try {
             $logoInfo = $configurator->getFlexiData('1/logo');
@@ -56,11 +57,13 @@ class CompanyLogo extends \Ease\Html\ImgTag {
             $logoInfo = false;
         }
         if (is_array($logoInfo) && isset($logoInfo[0])) {
-            parent::__construct('data:' . $logoInfo[0]['contentType'] . ';' . $logoInfo[0]['content@encoding'] . ',' . $logoInfo[0]['content'],
-                    $logoInfo[0]['nazSoub'], $tagProperties);
+            parent::__construct(
+                'data:' . $logoInfo[0]['contentType'] . ';' . $logoInfo[0]['content@encoding'] . ',' . $logoInfo[0]['content'],
+                $logoInfo[0]['nazSoub'],
+                $tagProperties
+            );
         } else {
             parent::__construct('data:image/svg+xml;base64,' . base64_encode(self::$none), _('none'), $tagProperties);
         }
     }
-
 }

@@ -34,13 +34,16 @@ class AbraFlexiLogo extends \Ease\Html\ImgTag
 
     /**
      * Inline vector AbraFlexi logo
-     * 
+     *
      * @param string $style         ignored now
      * @param array  $tagProperties img tag properties
      */
     public function __construct($style = 'default', $tagProperties = array())
     {
-        parent::__construct('data:image/svg+xml;base64,'.base64_encode(self::$svg),
-            'AbraFlexi', $tagProperties);
+        parent::__construct(
+            'data:image/svg+xml;base64,' . base64_encode(self::$svg),
+            'AbraFlexi',
+            $tagProperties
+        );
     }
 }

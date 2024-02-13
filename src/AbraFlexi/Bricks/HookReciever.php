@@ -1,10 +1,12 @@
 <?php
+
 /**
  * AbraFlexi - WebHook reciever
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2017 Vitex Software
  */
+
 namespace AbraFlexi\Bricks;
 
 /**
@@ -27,9 +29,9 @@ class HookReciever extends \AbraFlexi\Changes
     /**
      * Prijmac WebHooku
      */
-    public function __construct($id = null,$options = [])
+    public function __construct($id = null, $options = [])
     {
-        parent::__construct($id,$options);
+        parent::__construct($id, $options);
         $this->lastProcessedVersion = $this->getLastProcessedVersion();
     }
 
@@ -43,7 +45,7 @@ class HookReciever extends \AbraFlexi\Changes
         $input     = null;
         $inputJSON = file_get_contents('php://input');
         if (strlen($inputJSON)) {
-            $input     = json_decode($inputJSON, TRUE); //convert JSON into array
+            $input     = json_decode($inputJSON, true); //convert JSON into array
             $lastError = json_last_error();
             if ($lastError) {
                 $this->addStatusMessage(json_last_error_msg(), 'warning');
@@ -69,29 +71,35 @@ class HookReciever extends \AbraFlexi\Changes
                         : [];
 
                 if ($inVersion <= $this->lastProcessedVersion) {
-                    $this->addStatusMessage(sprintf(_('Change version %s already processed'),
-                            $inVersion), 'warning');
+                    $this->addStatusMessage(sprintf(
+                        _('Change version %s already processed'),
+                        $inVersion
+                    ), 'warning');
                     continue;
                 }
                 $handlerClassName = \AbraFlexi\RO::evidenceToClassName($evidence);
-                $handlerClassFile = 'System/whplugins/'.$handlerClassName.'.php';
+                $handlerClassFile = 'System/whplugins/' . $handlerClassName . '.php';
                 if (file_exists($handlerClassFile)) {
                     include_once $handlerClassFile;
                 }
 
-                $handlerClass = '\\SpojeNet\\System\\whplugins\\'.$handlerClassName;
+                $handlerClass = '\\SpojeNet\\System\\whplugins\\' . $handlerClassName;
                 if (class_exists($handlerClass)) {
-                    $saver = new $handlerClass($id,
+                    $saver = new $handlerClass(
+                        $id,
                         ['evidence' => $evidence, 'operation' => $operation, 'external-ids' => $externalIDs,
-                        'changeid' => $inVersion]);
+                        'changeid' => $inVersion]
+                    );
                     $saver->saveHistory();
                     switch ($operation) {
                         case 'update':
                         case 'create':
                         case 'delete':
                             if ($saver->process($operation) && ($this->debug === true)) {
-                                $this->addStatusMessage($changepos.'/'.count($this->changes),
-                                    'success');
+                                $this->addStatusMessage(
+                                    $changepos . '/' . count($this->changes),
+                                    'success'
+                                );
                             }
                             break;
                         default:
@@ -100,8 +108,10 @@ class HookReciever extends \AbraFlexi\Changes
                     }
                 } else {
                     if ($this->debug === true) {
-                        $this->addStatusMessage(sprintf(_('Handler Class %s does not exist'),
-                                addslashes($handlerClass)), 'warning');
+                        $this->addStatusMessage(sprintf(
+                            _('Handler Class %s does not exist'),
+                            addslashes($handlerClass)
+                        ), 'warning');
                     }
                 }
                 $this->saveLastProcessedVersion($inVersion);
@@ -113,7 +123,7 @@ class HookReciever extends \AbraFlexi\Changes
 
     /**
      * Převezme změny
-     * 
+     *
      * @link https://www.abraflexi.eu/api/dokumentace/ref/changes-api/ Changes API
      * @param array $changes pole změn
      * @return int Globální verze poslední změny
@@ -122,14 +132,16 @@ class HookReciever extends \AbraFlexi\Changes
     {
         $result = null;
         if (!is_array($changes)) {
-            \Ease\Shared::logger()->addToLog(_('Empty WebHook request'),
-                'Warning');
+            \Ease\Shared::logger()->addToLog(
+                _('Empty WebHook request'),
+                'Warning'
+            );
         } else {
             if (array_key_exists('winstrom', $changes)) {
                 $this->globalVersion = intval($changes['winstrom']['@globalVersion']);
                 $this->changes       = $changes['winstrom']['changes'];
             }
-            $result = is_numeric($changes['winstrom']['next']) ? $changes['winstrom']['next']-1 : $this->globalVersion;
+            $result = is_numeric($changes['winstrom']['next']) ? $changes['winstrom']['next'] - 1 : $this->globalVersion;
         }
         return $result;
     }
@@ -167,8 +179,10 @@ class HookReciever extends \AbraFlexi\Changes
         if (false) {
             $lastProcessedVersion = 0;
         } else {
-            $this->addStatusMessage(_("Last Processed Change ID Loading Failed"),
-                'warning');
+            $this->addStatusMessage(
+                _("Last Processed Change ID Loading Failed"),
+                'warning'
+            );
         }
         return $lastProcessedVersion;
     }

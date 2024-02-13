@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks
  *
@@ -14,10 +15,9 @@ namespace AbraFlexi\ui;
  */
 class EmbedResponsivePDF extends EmbedResponsive
 {
-
     /**
      * Ebed Document's PDF to Page
-     * 
+     *
      * @link https://www.abraflexi.eu/api/dokumentace/ref/pdf/ PDF Export
      *
      * @param \AbraFlexi\RO $source object with document
@@ -26,19 +26,21 @@ class EmbedResponsivePDF extends EmbedResponsive
      */
     public function __construct($source, $feeder = 'getpdf.php', $report = null)
     {
-        $addParams = ['evidence'=> $source->getEvidence(),'embed'=>'true'];
+        $addParams = ['evidence' => $source->getEvidence(),'embed' => 'true'];
 
-        if(!empty($source->getMyKey())){
+        if (!empty($source->getMyKey())) {
             $addParams['id'] = $source->getMyKey();
         }
-        
-        if(!empty($report)){
+
+        if (!empty($report)) {
             $addParams['report-name'] = urlencode($report);
         }
-        
+
         $url = \Ease\Functions::addUrlParams($feeder, $addParams);
-        
-        parent::__construct('<object data=\''.$url.'\' type=\'application/pdf\' height=\'600\' width=\'100%\'></object>',
-            ['class' => 'embed-responsive', 'style' => 'min-height:100vh;width:100%']);
+
+        parent::__construct(
+            '<object data=\'' . $url . '\' type=\'application/pdf\' height=\'600\' width=\'100%\'></object>',
+            ['class' => 'embed-responsive', 'style' => 'min-height:100vh;width:100%']
+        );
     }
 }

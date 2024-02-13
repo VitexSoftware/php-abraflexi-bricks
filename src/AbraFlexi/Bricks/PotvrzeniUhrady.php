@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks - Payment confirmation
  *
@@ -15,7 +16,6 @@ namespace AbraFlexi\Bricks;
  */
 class PotvrzeniUhrady extends \Ease\HtmlMailer
 {
-
     /**
      * Odešle potvrzení úhrady
      * @param \AbraFlexi\FakturaVydana $invoice
@@ -25,13 +25,18 @@ class PotvrzeniUhrady extends \Ease\HtmlMailer
         $body = new \Ease\Container();
 
         $this->addItem(new \Ease\Html\DivTag(_('Dear customer,')));
-        $this->addItem(new \Ease\Html\DivTag(sprintf(_('we confirm receipt of payment %s %s on %s '),
-                    $invoice->getDataValue('sumCelkem'),
-                    \AbraFlexi\RO::uncode($invoice->getDataValue('mena')),
-                    $invoice->getDataValue('kod'))));
+        $this->addItem(new \Ease\Html\DivTag(sprintf(
+            _('we confirm receipt of payment %s %s on %s '),
+            $invoice->getDataValue('sumCelkem'),
+            \AbraFlexi\RO::uncode($invoice->getDataValue('mena')),
+            $invoice->getDataValue('kod')
+        )));
 
 
-        parent::__construct($to,
-            _('Confirmation of receipt of invoice payment'), $body);
+        parent::__construct(
+            $to,
+            _('Confirmation of receipt of invoice payment'),
+            $body
+        );
     }
 }

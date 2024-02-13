@@ -7,8 +7,8 @@ namespace AbraFlexi\Bricks\ConvertRules;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule {
-
+class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule
+{
     public $rules = array(
 //        'kod' => 'kod',
         'cisDosle' => 'cisDosle',
@@ -174,13 +174,13 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule {
 
     /**
      * zavazek-polozka do not support typPolozky.katalog and "cenik" column
-     * 
+     *
      * @param string $inputValue typPolozky.obecny|typPolozky.ucetni|typPolozky.text|typPolozky.katalog
-     * 
+     *
      * @return string typPolozky.obecny|typPolozky.ucetni|typPolozky.text
      */
-    public function polozkyFakturyTypPolozkyK($inputValue) {
+    public function polozkyFakturyTypPolozkyK($inputValue)
+    {
         return ($inputValue == 'typPolozky.katalog') ? 'typPolozky.obecny' : $inputValue;
     }
-
 }

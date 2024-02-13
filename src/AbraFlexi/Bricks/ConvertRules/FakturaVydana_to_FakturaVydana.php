@@ -237,5 +237,4 @@ class FakturaVydana_to_FakturaVydana extends \AbraFlexi\Bricks\ConvertorRule
 //            'eetTypPlatbyK' => 'eetTypPlatbyK',
         ],
     ];
-
 }

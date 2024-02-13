@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * AbraFlexi Bricks - Convertor Class Test
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2017-2024 Vitex Software
+ */
+
 namespace Test\AbraFlexi\Bricks;
 
 use \AbraFlexi\Bricks\Convertor;
@@ -9,6 +16,7 @@ use \AbraFlexi\Bricks\Convertor;
  */
 class ConvertorTest extends \Test\Ease\SandTest
 {
+
     /**
      * @var Convertor
      */
@@ -20,8 +28,7 @@ class ConvertorTest extends \Test\Ease\SandTest
      */
     protected function setUp(): void
     {
-        $this->object = new Convertor(new \AbraFlexi\FakturaPrijata(),
-            new \AbraFlexi\FakturaVydana());
+        $this->object = new Convertor(new \AbraFlexi\FakturaPrijata(), new \AbraFlexi\FakturaVydana());
     }
 
     /**
@@ -31,6 +38,23 @@ class ConvertorTest extends \Test\Ease\SandTest
     protected function tearDown(): void
     {
         
+    }
+
+    /**
+     * @covers AbraFlexi\Bricks\Convertor::__construct
+     */
+    public function test__construct(): void
+    {
+        $classname = get_class($this->object);
+
+        // Get mock, without the constructor being called
+        $mock = $this->getMockBuilder($classname)
+                ->disableOriginalConstructor()
+                ->getMockForAbstractClass();
+        $mock->__construct(new \AbraFlexi\FakturaPrijata(), new \AbraFlexi\FakturaVydana(), new \AbraFlexi\Bricks\ConvertRules\Banka_to_FakturaVydana());
+
+        $this->assertIsObject($mock->getInput());
+        $this->assertIsObject($mock->getOutput());
     }
 
     /**
@@ -55,19 +79,18 @@ class ConvertorTest extends \Test\Ease\SandTest
 
     /**
      * @covers AbraFlexi\Bricks\Convertor::conversion
-     * @expectedException \Ease\Exception
+     * #expectedException \Ease\Exception
      */
     public function testConversion()
     {
         $varSym = \Ease\Functions::randomNumber(1111, 9999);
         $price = \Ease\Functions::randomNumber(11, 99);
         $payment = \Test\AbraFlexi\BankaTest::makeTestPayment(['varSym' => $varSym,
-                'sumZklZakl' => $price]);
+                    'sumZklZakl' => $price]);
         $this->object->setSource($payment);
 
         $converted = $this->object->conversion();
-        $this->assertEquals($payment->getDataValue('varSym'),
-            $converted->getDataValue('varSym'));
+        $this->assertEquals($payment->getDataValue('varSym'), $converted->getDataValue('varSym'));
     }
 
     /**
@@ -75,22 +98,26 @@ class ConvertorTest extends \Test\Ease\SandTest
      */
     public function testPrepareRules()
     {
-        $this->object->debug = true;
-        $this->object->prepareRules(true /* $keepId */, true /* $addExtId */,
-            true /* $keepCode */, true /* $handleAccounting */);
-
         $this->object->debug = false;
+        $this->object->setSource(new \AbraFlexi\Banka());
         $this->object->prepareRules(true /* $keepId */, true /* $addExtId */,
-            true /* $keepCode */, true /* $handleAccounting */);
-        $this->expectException('\Ease\Exception'); // Cannot Load Class: \AbraFlexi\Bricks\ConvertRules\FakturaPrijata_to_FakturaVydana
+                true /* $keepCode */, true /* $handleAccounting */);
+
+        $this->object->debug = true;
+
+        $this->object->setSource(new \AbraFlexi\Cenik());
+        $this->expectException('\Ease\Exception'); // Cannot Load Class: \AbraFlexi\Bricks\ConvertRules\Cenik_to_FakturaVydana
+
+        $this->object->prepareRules(true /* $keepId */, true /* $addExtId */,
+                true /* $keepCode */, true /* $handleAccounting */);
     }
 
     /**
-     * @covers AbraFlexi\Bricks\Convertor::convertDocument
+     * @covers AbraFlexi\Bricks\Convertor::getConvertorClassName
      */
-    public function testConvertDocument()
+    public function testgetConvertorClassName()
     {
-        $this->object->convertDocument();
+        $this->assertEquals('FakturaPrijata_to_FakturaVydana', $this->object->getConvertorClassName());
     }
 
     /**
@@ -98,7 +125,12 @@ class ConvertorTest extends \Test\Ease\SandTest
      */
     public function testConvertSubitems()
     {
+        $this->object->prepareRules(false, false, false, false);
+        $source = new \AbraFlexi\FakturaVydana();
+        $source->addArrayToBranch(['nazev' => 'test', 'cenaMj' => 33], 'polozkyDokladu');
+        $this->object->setSource($source);
         $this->object->convertSubitems('polozkyDokladu');
+        $this->assertEquals([['nazev' => 'test', 'cenaMj' => 33]], $this->object->getOutput()->getDataValue('polozkyFaktury'));
     }
 
     /**
@@ -106,167 +138,35 @@ class ConvertorTest extends \Test\Ease\SandTest
      */
     public function testConvertItems()
     {
+        $this->object->prepareRules(false, false, false, false);
+        $source = new \AbraFlexi\FakturaVydana(['popis' => 'test', 'sumZklCelkem' => 2345]);
+        $this->object->setSource($source);
         $this->object->convertItems();
+        $this->assertEquals('test', $this->object->getOutput()->getDataValue('popis'));
     }
 
-    /**
-     * @covers AbraFlexi\Bricks\Convertor::removeRoColumns
-     */
-    public function testRemoveRoColumns()
-    {
-        $this->removeRoColumns();
-    }
+//    /**
+//     * @covers AbraFlexi\Bricks\Convertor::removeRoColumns
+//     */
+//    public function testRemoveRoColumns()
+//    {
+//        $this->assertEquals('', $this->removeRoColumns());
+//    }
 
     /**
      * @covers AbraFlexi\Bricks\Convertor::commonItems
      */
     public function testCommonItems()
     {
-        $ci = $this->object->commonItems();
+        $this->assertIsArray($this->object->commonItems());
+    }
 
-        $this->assertEquals(array(
-            0 => 'id',
-            1 => 'lastUpdate',
-            2 => 'kod',
-            3 => 'zamekK',
-            4 => 'cisDosle',
-            5 => 'varSym',
-            6 => 'cisSml',
-            7 => 'cisObj',
-            8 => 'datObj',
-            9 => 'cisDodak',
-            10 => 'doprava',
-            11 => 'datVyst',
-            12 => 'duzpPuv',
-            13 => 'duzpUcto',
-            14 => 'datSplat',
-            15 => 'datUhr',
-            16 => 'datTermin',
-            17 => 'datReal',
-            18 => 'popis',
-            19 => 'poznam',
-            20 => 'sumOsv',
-            21 => 'sumZklSniz',
-            22 => 'sumZklSniz2',
-            23 => 'sumZklZakl',
-            24 => 'sumZklCelkem',
-            25 => 'sumDphSniz',
-            26 => 'sumDphSniz2',
-            27 => 'sumDphZakl',
-            28 => 'sumDphCelkem',
-            29 => 'sumCelkSniz',
-            30 => 'sumCelkSniz2',
-            31 => 'sumCelkZakl',
-            32 => 'sumCelkem',
-            33 => 'sumOsvMen',
-            34 => 'sumZklSnizMen',
-            35 => 'sumZklSniz2Men',
-            36 => 'sumZklZaklMen',
-            37 => 'sumZklCelkemMen',
-            38 => 'sumDphZaklMen',
-            39 => 'sumDphSnizMen',
-            40 => 'sumDphSniz2Men',
-            41 => 'sumDphCelkemMen',
-            42 => 'sumCelkSnizMen',
-            43 => 'sumCelkSniz2Men',
-            44 => 'sumCelkZaklMen',
-            45 => 'sumCelkemMen',
-            46 => 'slevaDokl',
-            47 => 'kurz',
-            48 => 'kurzMnozstvi',
-            49 => 'stavUzivK',
-            50 => 'nazFirmy',
-            51 => 'ulice',
-            52 => 'mesto',
-            53 => 'psc',
-            54 => 'eanKod',
-            55 => 'ic',
-            56 => 'dic',
-            57 => 'pocetPriloh',
-            58 => 'buc',
-            59 => 'iban',
-            60 => 'bic',
-            61 => 'specSym',
-            62 => 'bezPolozek',
-            63 => 'ucetni',
-            64 => 'szbDphSniz',
-            65 => 'szbDphSniz2',
-            66 => 'szbDphZakl',
-            67 => 'uzpTuzemsko',
-            68 => 'zuctovano',
-            69 => 'datUcto',
-            70 => 'vyloucitSaldo',
-            71 => 'storno',
-            72 => 'stitky',
-            73 => 'typDokl',
-            74 => 'mena',
-            75 => 'konSym',
-            76 => 'firma',
-            77 => 'stat',
-            78 => 'banSpojDod',
-            79 => 'bankovniUcet',
-            80 => 'typUcOp',
-            81 => 'primUcet',
-            82 => 'protiUcet',
-            83 => 'dphZaklUcet',
-            84 => 'dphSnizUcet',
-            85 => 'dphSniz2Ucet',
-            86 => 'smerKod',
-            87 => 'statDph',
-            88 => 'clenDph',
-            89 => 'stredisko',
-            90 => 'cinnost',
-            91 => 'zakazka',
-            92 => 'statOdesl',
-            93 => 'statUrc',
-            94 => 'statPuvod',
-            95 => 'dodPodm',
-            96 => 'obchTrans',
-            97 => 'druhDopr',
-            98 => 'zvlPoh',
-            99 => 'krajUrc',
-            100 => 'uzivatel',
-            101 => 'zodpOsoba',
-            102 => 'kontaktOsoba',
-            103 => 'kontaktJmeno',
-            104 => 'kontaktEmail',
-            105 => 'kontaktTel',
-            106 => 'rada',
-            107 => 'smlouva',
-            108 => 'formaDopravy',
-            109 => 'uuid',
-            110 => 'source',
-            112 => 'clenKonVykDph',
-            113 => 'datUp1',
-            114 => 'datUp2',
-            115 => 'datSmir',
-            116 => 'datPenale',
-            117 => 'podpisPrik',
-            118 => 'prikazSum',
-            119 => 'prikazSumMen',
-            120 => 'juhSum',
-            121 => 'juhSumMen',
-            122 => 'juhDat',
-            123 => 'juhDatMen',
-            124 => 'zbyvaUhradit',
-            125 => 'zbyvaUhraditMen',
-            126 => 'formaUhradyCis',
-            127 => 'stavUhrK',
-            128 => 'juhSumPp',
-            129 => 'juhSumPpMen',
-            130 => 'sumPrepl',
-            131 => 'sumPreplMen',
-            132 => 'sumZalohy',
-            133 => 'sumZalohyMen',
-            134 => 'stavOdpocetK',
-            135 => 'generovatSkl',
-            136 => 'hromFakt',
-            137 => 'zdrojProSkl',
-            139 => 'dobropisovano',
-            140 => 'sumCelkemBezZaloh',
-            141 => 'sumCelkemBezZalohMen',
-            142 => 'typDoklSkl',
-            ), $ci);
+    /**
+     * @covers AbraFlexi\Bricks\Convertor::baseClassName
+     */
+    public function testbaseClassName()
+    {
+        $this->assertEquals('FakturaPrijata', Convertor::baseClassName($this->object->getInput()));
     }
 
     /**

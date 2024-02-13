@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks - GDPR Logger support
  *
@@ -7,6 +8,7 @@
  */
 
 namespace AbraFlexi\Bricks;
+
 /**
  * Description of CustomerLog
  *
@@ -16,22 +18,25 @@ class GdprLog extends \Ease\GdprLog
 {
     /**
      * Log AbraFlexi event
-     * 
+     *
      * @param \AbraFlexi\RW $abraflexi
      * @param array $columns
      */
     public function logAbraFlexiEvent($abraflexi, $columns)
     {
         foreach ($columns as $columnName) {
-            $this->logEvent($columnName,
-                empty($abraflexi->lastInsertedID) ? 'update' : 'create', null,
-                $abraflexi->getApiURL().'#'.$columnName);
+            $this->logEvent(
+                $columnName,
+                empty($abraflexi->lastInsertedID) ? 'update' : 'create',
+                null,
+                $abraflexi->getApiURL() . '#' . $columnName
+            );
         }
     }
 
     /**
      * Log Change in AbraFlexi
-     * 
+     *
      * @param \AbraFlexi\RW $abraflexi
      * @param array $originalData
      * @param array $columns
@@ -40,10 +45,13 @@ class GdprLog extends \Ease\GdprLog
     {
         foreach ($columns as $columnName) {
             if ($originalData[$columnName] != $abraflexi->getDataValue($columnName)) {
-                $this->logEvent($columnName, $abraflexi->getLastOperationType(), null,
-                    $abraflexi->getApiURL().'#'.$columnName);
+                $this->logEvent(
+                    $columnName,
+                    $abraflexi->getLastOperationType(),
+                    null,
+                    $abraflexi->getApiURL() . '#' . $columnName
+                );
             }
         }
     }
-
 }

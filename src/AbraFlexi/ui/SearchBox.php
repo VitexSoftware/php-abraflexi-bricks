@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Bricks
  *
@@ -14,20 +15,19 @@ namespace AbraFlexi\ui;
  */
 class SearchBox extends \Ease\Html\InputSearchTag
 {
-
     /**
-     * 
+     *
      * @param any $parent
      */
     public function afterAdd()
     {
-        $this->parent()->addItem(new \Ease\Html\DatalistTag(new \Ease\Html\OptionTag('zatim nic')
-            ,
-            
-            ['id' => 'datalist-'.$this->getTagID()]));
+        $this->parent()->addItem(new \Ease\Html\DatalistTag(
+            new \Ease\Html\OptionTag('zatim nic'),
+            ['id' => 'datalist-' . $this->getTagID()]
+        ));
         $this->addJavaScript('
-var dataList = $(\'#datalist-'.$this->getTagID().'\');
-var input = $(\'#'.$this->getTagID().'\');
+var dataList = $(\'#datalist-' . $this->getTagID() . '\');
+var input = $(\'#' . $this->getTagID() . '\');
 
 input.change(function() {
     $.getJSON( "pricelistsearcher.php?column=nazev&q=" + input.val() , function( data ) {
@@ -49,7 +49,7 @@ input.change(function() {
 
     public function finalize()
     {
-        $this->setTagProperties(['list' => 'datalist-'.$this->getTagID()]);
+        $this->setTagProperties(['list' => 'datalist-' . $this->getTagID()]);
         parent::finalize();
     }
 }

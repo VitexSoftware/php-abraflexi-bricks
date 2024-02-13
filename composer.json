@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "vitexsoftware/ease-core-bricks": "*",
-        "spojenet/flexibee": "*"
+        "spojenet/flexibee": "dev-main"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
@@ -27,15 +27,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\Ease\\": "vendor/vitexsoftware/ease-core/tests/src/Ease",
-            "Test\\AbraFlexi\\": "vendor/spojenet/flexibee/testing/src/AbraFlexi/",
             "Test\\AbraFlexi\\ui\\": "testing/AbraFlexi/ui",
             "Test\\AbraFlexi\\Bricks\\": "testing/AbraFlexi/Bricks",
+            "Test\\Ease\\": ["vendor/vitexsoftware/ease-core/tests/src/Ease/"],
+            "Test\\AbraFlexi\\": ["vendor/spojenet/flexibee/test/src/AbraFlexi/"],
+            "Test\\AbraFlexi\\Matcher\\": "tests/src/AbraFlexi/Matcher/",
             "Test\\": "testing/"
         }
     },
     "require-dev": {
-        "codeception/codeception": "*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "^10.4@dev",
+        "phpunit/php-code-coverage": "^10.1@dev"
     }
 }

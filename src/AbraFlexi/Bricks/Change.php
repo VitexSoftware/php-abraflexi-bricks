@@ -14,8 +14,8 @@ namespace AbraFlexi\Bricks;
  *
  * @author vitex
  */
-class Change {
-
+class Change
+{
     /**
      * Evidence of record
      * @var string
@@ -35,13 +35,13 @@ class Change {
     public $operation = null; //"create",
 
     /**
-     * 
+     *
      * @var \AbraFlexi\DateTime
      */
     public $timestamp = null; // "2019-01-01 00:00:00.0",
 
     /**
-     * 
+     *
      * @var integer
      */
     public $id = null; // "1",
@@ -54,10 +54,11 @@ class Change {
 
     /**
      * One AbraFlexi change
-     * 
+     *
      * @param array $changeData
      */
-    public function __construct($changeData = []) {
+    public function __construct($changeData = [])
+    {
         if ($changeData) {
             $this->setData($changeData);
         }
@@ -65,10 +66,11 @@ class Change {
 
     /**
      * Give your data back
-     * 
+     *
      * @return array
      */
-    public function getData() {
+    public function getData()
+    {
         return [
             "@evidence" => $this->evidence,
             "@in-version" => $this->inVersion,
@@ -83,7 +85,8 @@ class Change {
      * Store data
      * @param array $changeData
      */
-    public function setData($changeData) {
+    public function setData($changeData)
+    {
         $this->evidence = $changeData['@evidence'];
         $this->inVersion = $changeData['@in-version'];
         $this->operation = $changeData['@operation'];
@@ -91,5 +94,4 @@ class Change {
         $this->id = $changeData['id'];
         $this->id = $changeData['external-ids'];
     }
-
 }
