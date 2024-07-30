@@ -14,8 +14,8 @@ namespace AbraFlexi\Bricks;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class Convertor extends \Ease\Sand
-{
+class Convertor extends \Ease\Sand {
+
     /**
      * Source Object
      * @var \AbraFlexi\RO
@@ -29,10 +29,16 @@ class Convertor extends \Ease\Sand
     private $output;
 
     /**
-     *
-     * @var array
+     * Keep the conversion rules
+     * @var \AbraFlexi\Bricks\ConvertorRule
      */
-    private $rules = [];
+    private $ruler;
+
+    /**
+     * 
+     * @var boolean
+     */
+    public $debug = false;
 
     /**
      * Convertor
@@ -42,9 +48,9 @@ class Convertor extends \Ease\Sand
      * @param ConvertorRule $ruler   force convertor rule class
      */
     public function __construct(
-        \AbraFlexi\RO $input = null,
-        \AbraFlexi\RW $output = null,
-        $ruler = null
+            \AbraFlexi\RO $input = null,
+            \AbraFlexi\RW $output = null,
+            $ruler = null
     ) {
         if (!empty($input)) {
             $this->setSource($input);
@@ -53,18 +59,17 @@ class Convertor extends \Ease\Sand
             $this->setDestination($output);
         }
         if (is_object($ruler)) {
-            $this->rules = $ruler;
-            $this->rules->assignConvertor($this);
+            $this->ruler = $ruler;
+            $this->ruler->assignConvertor($this);
         }
     }
 
     /**
-     * Set Source Documnet
+     * Set Source Document
      *
      * @param \AbraFlexi\RO $source
      */
-    public function setSource(\AbraFlexi\RO $source)
-    {
+    public function setSource(\AbraFlexi\RO $source) {
         $this->input = $source;
     }
 
@@ -73,8 +78,7 @@ class Convertor extends \Ease\Sand
      *
      * @param \AbraFlexi\RO $destinantion
      */
-    public function setDestination(\AbraFlexi\RO $destination)
-    {
+    public function setDestination(\AbraFlexi\RO $destination) {
         $this->output = $destination;
     }
 
@@ -89,10 +93,10 @@ class Convertor extends \Ease\Sand
      * @return \AbraFlexi\RW converted object ( unsaved )
      */
     public function conversion(
-        $keepId = false,
-        $addExtId = false,
-        $keepCode = false,
-        $handleAccounting = false
+            $keepId = false,
+            $addExtId = false,
+            $keepCode = false,
+            $handleAccounting = false
     ) {
         $this->prepareRules($keepId, $addExtId, $keepCode, $handleAccounting);
         $this->convertItems();
@@ -100,14 +104,13 @@ class Convertor extends \Ease\Sand
     }
 
     /**
-     * Get Classname without namespace prefix
+     * Get ClassName without NameSpace prefix
      *
      * @param object $object
      *
      * @return string
      */
-    public static function baseClassName($object)
-    {
+    public static function baseClassName($object) {
         return basename(str_replace('\\', '/', get_class($object)));
     }
 
@@ -122,15 +125,15 @@ class Convertor extends \Ease\Sand
      * @throws \Ease\Exception
      */
     public function prepareRules(
-        $keepId,
-        $addExtId,
-        $keepCode,
-        $handleAccounting
+            $keepId,
+            $addExtId,
+            $keepCode,
+            $handleAccounting
     ) {
         $convertorClassname = $this->getConvertorClassName();
         $ruleClass = '\\AbraFlexi\\Bricks\\ConvertRules\\' . $convertorClassname;
         if (class_exists($ruleClass, true)) {
-            $this->rules = new $ruleClass($this, $keepId, $addExtId, $keepCode, $handleAccounting);
+            $this->ruler = new $ruleClass($this, $keepId, $addExtId, $keepCode, $handleAccounting);
             //$this->rules->assignConvertor($this);
         } else {
             if ($this->debug === true) {
@@ -145,8 +148,7 @@ class Convertor extends \Ease\Sand
      *
      * @return string
      */
-    public function getConvertorClassName()
-    {
+    public function getConvertorClassName() {
         return self::baseClassName($this->input) . '_to_' . self::baseClassName($this->output);
     }
 
@@ -155,9 +157,8 @@ class Convertor extends \Ease\Sand
      *
      * @param string  $columnToTake   usually "polozkyDokladu"
      */
-    public function convertSubitems($columnToTake)
-    {
-        $subitemRules = $this->rules->getRuleForColumn($columnToTake);
+    public function convertSubitems($columnToTake) {
+        $subitemRules = $this->ruler->getRuleForColumn($columnToTake);
         if (is_array($this->input->data[$columnToTake]) && \Ease\Functions::isAssoc($this->input->data[$columnToTake])) {
             $sourceData = [$this->input->data[$columnToTake]];
         } else {
@@ -169,13 +170,13 @@ class Convertor extends \Ease\Sand
                 if (array_key_exists($subitemColumn, $subitemRules)) {
                     if (strstr($subitemRules[$subitemColumn], '()')) {
                         $subItemCopyData[$subitemColumn] = call_user_func(
-                            array(
-                            $this->rules, str_replace(
-                                '()',
-                                '',
-                                $subitemRules[$subitemColumn]
-                            )),
-                            $sourceData[$subitemPos][$subitemColumn]
+                                array(
+                                    $this->ruler, str_replace(
+                                            '()',
+                                            '',
+                                            $subitemRules[$subitemColumn]
+                                    )),
+                                $sourceData[$subitemPos][$subitemColumn]
                         );
                     } else {
                         $subItemCopyData[$subitemColumn] = $sourceData[$subitemPos][$subitemRules[$subitemColumn]];
@@ -191,9 +192,8 @@ class Convertor extends \Ease\Sand
      *
      * @return boolean conversion success
      */
-    public function convertItems()
-    {
-        $convertRules = $this->rules->getRules();
+    public function convertItems() {
+        $convertRules = $this->ruler->getRules();
         foreach ($convertRules as $columnToTake => $subitemColumns) {
             if (is_array($subitemColumns)) {
                 if (!empty($this->input->getSubItems())) {
@@ -201,43 +201,42 @@ class Convertor extends \Ease\Sand
                 }
             } else {
                 if (empty($this->output->getDataValue($columnToTake))) {
-                    if (strstr($subitemColumns, '()')) {
+                    if (!empty($subitemColumns) && strstr($subitemColumns, '()')) {
                         $functionResult = call_user_func(
-                            array($this->rules, str_replace(
-                                '()',
-                                '',
-                                $subitemColumns
-                            )),
-                            $this->input->getDataValue($columnToTake)
+                                array($this->ruler, str_replace(
+                                            '()',
+                                            '',
+                                            $subitemColumns
+                                    )),
+                                $this->input->getDataValue($columnToTake)
                         );
                         if (!is_null($functionResult)) {
                             $this->output->setDataValue(
-                                $columnToTake,
-                                $functionResult
+                                    $columnToTake,
+                                    $functionResult
                             );
                         }
                     } else {
                         $this->output->setDataValue(
-                            $columnToTake,
-                            $this->input->getDataValue($subitemColumns)
+                                $columnToTake,
+                                $this->input->getDataValue($subitemColumns)
                         );
                     }
                 }
             }
         }
-        return $this->rules->finalizeConversion();
+        return $this->ruler->finalizeConversion();
     }
 
     /**
-     * Return itemes that same on both sides
+     * Return items that same on both sides
      *
      * @return array
      */
-    public function commonItems()
-    {
+    public function commonItems() {
         return array_intersect(
-            array_keys($this->input->getColumnsInfo()),
-            array_keys($this->output->getColumnsInfo())
+                array_keys($this->input->getColumnsInfo()),
+                array_keys($this->output->getColumnsInfo())
         );
     }
 
@@ -246,8 +245,7 @@ class Convertor extends \Ease\Sand
      *
      * @return \AbraFlexi\RO
      */
-    public function getInput()
-    {
+    public function getInput() {
         return $this->input;
     }
 
@@ -256,8 +254,7 @@ class Convertor extends \Ease\Sand
      *
      * @return \AbraFlexi\RO
      */
-    public function getOutput()
-    {
+    public function getOutput() {
         return $this->output;
     }
 }
