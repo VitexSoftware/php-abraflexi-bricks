@@ -118,7 +118,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -153,7 +153,14 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
+                    <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/AbraFlexi-Bricks-Convertor.html#property_debug">$debug</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/AbraFlexi-Bricks-Convertor.html#property_input">$input</a>
     <span>
                         &nbsp;: <abbr title="\AbraFlexi\RO">RO</abbr>            </span>
@@ -168,11 +175,11 @@
 <dd>Destination Object</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/AbraFlexi-Bricks-Convertor.html#property_rules">$rules</a>
+    <a href="classes/AbraFlexi-Bricks-Convertor.html#property_ruler">$ruler</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: <a href="classes/AbraFlexi-Bricks-ConvertorRule.html"><abbr title="\AbraFlexi\Bricks\ConvertorRule">ConvertorRule</abbr></a>            </span>
 </dt>
-<dd></dd>
+<dd>Keep the conversion rules</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/AbraFlexi-Bricks-Convertor.html#method___construct">__construct()</a>
@@ -186,14 +193,14 @@
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Get Classname without namespace prefix</dd>
+<dd>Get ClassName without NameSpace prefix</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/AbraFlexi-Bricks-Convertor.html#method_commonItems">commonItems()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd>Return itemes that same on both sides</dd>
+<dd>Return items that same on both sides</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/AbraFlexi-Bricks-Convertor.html#method_conversion">conversion()</a>
@@ -201,13 +208,6 @@
                                 &nbsp;: <abbr title="\AbraFlexi\RW">RW</abbr>    </span>
 </dt>
 <dd>Perform Conversion</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/AbraFlexi-Bricks-Convertor.html#method_convertDocument">convertDocument()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd>Convert AbraFlexi document</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/AbraFlexi-Bricks-Convertor.html#method_convertItems">convertItems()</a>
@@ -263,7 +263,7 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd>Set Source Documnet</dd>
+<dd>Set Source Document</dd>
 
         </dl>
 
@@ -281,6 +281,38 @@
         class="
             phpdocumentor-element
             -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_debug">
+        $debug
+        <a href="classes/AbraFlexi-Bricks-Convertor.html#property_debug" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$debug</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
             -private
                                                         "
 >
@@ -293,7 +325,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -326,7 +358,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -350,25 +382,26 @@
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_rules">
-        $rules
-        <a href="classes/AbraFlexi-Bricks-Convertor.html#property_rules" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_ruler">
+        $ruler
+        <a href="classes/AbraFlexi-Bricks-Convertor.html#property_ruler" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Keep the conversion rules</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$rules</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+        <span class="phpdocumentor-signature__type"><a href="classes/AbraFlexi-Bricks-ConvertorRule.html"><abbr title="\AbraFlexi\Bricks\ConvertorRule">ConvertorRule</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$ruler</span>
+    </code>
 
     
     
@@ -395,7 +428,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -458,11 +491,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Get Classname without namespace prefix</p>
+        <p class="phpdocumentor-summary">Get ClassName without NameSpace prefix</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -501,11 +534,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">228</span>
+    <span class="phpdocumentor-element-found-in__line">236</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Return itemes that same on both sides</p>
+        <p class="phpdocumentor-summary">Return items that same on both sides</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -534,7 +567,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
@@ -595,77 +628,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_convertDocument">
-        convertDocument()
-        <a href="classes/AbraFlexi-Bricks-Convertor.html#method_convertDocument" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">156</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Convert AbraFlexi document</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">convertDocument</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keepId</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$addExtId</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keepCode</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$handleAccountig</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$keepId</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>keep item IDs</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$addExtId</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>add ext:originalEvidence:originalId</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$keepCode</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>keep items code</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$handleAccountig</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_convertItems">
         convertItems()
         <a href="classes/AbraFlexi-Bricks-Convertor.html#method_convertItems" class="headerlink"><i class="fas fa-link"></i></a>
@@ -673,7 +635,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">198</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
     </aside>
 
@@ -708,7 +670,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 
     </aside>
 
@@ -753,7 +715,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">143</span>
+    <span class="phpdocumentor-element-found-in__line">151</span>
 
     </aside>
 
@@ -786,7 +748,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">248</span>
 
     </aside>
 
@@ -819,7 +781,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">249</span>
+    <span class="phpdocumentor-element-found-in__line">257</span>
 
     </aside>
 
@@ -852,7 +814,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -938,7 +900,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
@@ -982,11 +944,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/Convertor.php"><a href="files/src-abraflexi-bricks-convertor.html"><abbr title="src/AbraFlexi/Bricks/Convertor.php">Convertor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Set Source Documnet</p>
+        <p class="phpdocumentor-summary">Set Source Document</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>

@@ -119,7 +119,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertRules/FakturaPrijata_to_FakturaVydana.php"><a href="files/src-abraflexi-bricks-convertrules-fakturaprijata-to-fakturavydana.html"><abbr title="src/AbraFlexi/Bricks/ConvertRules/FakturaPrijata_to_FakturaVydana.php">FakturaPrijata_to_FakturaVydana.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">10</span>
 
     </aside>
 
@@ -201,7 +201,7 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
+<dd>Add ExtID by Original ID Into converted</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/AbraFlexi-Bricks-ConvertorRule.html#method_assignConvertor">assignConvertor()</a>
@@ -215,7 +215,7 @@
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Convertor Rule Clas  template Generator</dd>
+<dd>Convertor Rule Class  template Generator</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/AbraFlexi-Bricks-ConvertorRule.html#method_finalizeConversion">finalizeConversion()</a>
@@ -223,6 +223,13 @@
                                 &nbsp;: bool    </span>
 </dt>
 <dd>Actions performed after converting process</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/AbraFlexi-Bricks-ConvertorRule.html#method_getConvertor">getConvertor()</a>
+    <span>
+                                &nbsp;: <a href="classes/AbraFlexi-Bricks-Convertor.html"><abbr title="\AbraFlexi\Bricks\Convertor">Convertor</abbr></a>    </span>
+</dt>
+<dd>Get Convertor used</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/AbraFlexi-Bricks-ConvertorRule.html#method_getOposites">getOposites()</a>
@@ -273,7 +280,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -305,7 +312,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertRules/FakturaPrijata_to_FakturaVydana.php"><a href="files/src-abraflexi-bricks-convertrules-fakturaprijata-to-fakturavydana.html"><abbr title="src/AbraFlexi/Bricks/ConvertRules/FakturaPrijata_to_FakturaVydana.php">FakturaPrijata_to_FakturaVydana.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
@@ -314,7 +321,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$rules</span>
-     = <span class="phpdocumentor-signature__default-value">array(&#039;kod&#039; =&gt; &#039;kod&#039;, &#039;cisDosle&#039; =&gt; &#039;cisDosle&#039;, &#039;varSym&#039; =&gt; &#039;varSym&#039;, &#039;cisSml&#039; =&gt; &#039;cisSml&#039;, &#039;cisObj&#039; =&gt; &#039;cisObj&#039;, &#039;datObj&#039; =&gt; &#039;datObj&#039;, &#039;cisDodak&#039; =&gt; &#039;cisDodak&#039;, &#039;doprava&#039; =&gt; &#039;doprava&#039;, &#039;datVyst&#039; =&gt; &#039;datVyst&#039;, &#039;duzpPuv&#039; =&gt; &#039;duzpPuv&#039;, &#039;duzpUcto&#039; =&gt; &#039;duzpUcto&#039;, &#039;datSplat&#039; =&gt; &#039;datSplat&#039;, &#039;datTermin&#039; =&gt; &#039;datTermin&#039;, &#039;datReal&#039; =&gt; &#039;datReal&#039;, &#039;popis&#039; =&gt; &#039;popis&#039;, &#039;poznam&#039; =&gt; &#039;poznam&#039;, &#039;uvodTxt&#039; =&gt; NULL, &#039;zavTxt&#039; =&gt; NULL, &#039;sumOsv&#039; =&gt; &#039;sumOsv&#039;, &#039;sumZklSniz&#039; =&gt; &#039;sumZklSniz&#039;, &#039;sumZklSniz2&#039; =&gt; &#039;sumZklSniz2&#039;, &#039;sumZklZakl&#039; =&gt; &#039;sumZklZakl&#039;, &#039;sumDphSniz&#039; =&gt; &#039;sumDphSniz&#039;, &#039;sumDphSniz2&#039; =&gt; &#039;sumDphSniz2&#039;, &#039;sumDphZakl&#039; =&gt; &#039;sumDphZakl&#039;, &#039;sumCelkSniz&#039; =&gt; &#039;sumCelkSniz&#039;, &#039;sumCelkSniz2&#039; =&gt; &#039;sumCelkSniz2&#039;, &#039;sumCelkZakl&#039; =&gt; &#039;sumCelkZakl&#039;, &#039;sumCelkem&#039; =&gt; &#039;sumCelkem&#039;, &#039;sumOsvMen&#039; =&gt; &#039;sumOsvMen&#039;, &#039;sumZklSnizMen&#039; =&gt; &#039;sumZklSnizMen&#039;, &#039;sumZklSniz2Men&#039; =&gt; &#039;sumZklSniz2Men&#039;, &#039;sumZklZaklMen&#039; =&gt; &#039;sumZklZaklMen&#039;, &#039;sumDphZaklMen&#039; =&gt; &#039;sumDphZaklMen&#039;, &#039;sumDphSnizMen&#039; =&gt; &#039;sumDphSnizMen&#039;, &#039;sumDphSniz2Men&#039; =&gt; &#039;sumDphSniz2Men&#039;, &#039;sumCelkSnizMen&#039; =&gt; &#039;sumCelkSnizMen&#039;, &#039;sumCelkSniz2Men&#039; =&gt; &#039;sumCelkSniz2Men&#039;, &#039;sumCelkZaklMen&#039; =&gt; &#039;sumCelkZaklMen&#039;, &#039;sumCelkemMen&#039; =&gt; &#039;sumCelkemMen&#039;, &#039;slevaDokl&#039; =&gt; &#039;slevaDokl&#039;, &#039;kurz&#039; =&gt; &#039;kurz&#039;, &#039;kurzMnozstvi&#039; =&gt; &#039;kurzMnozstvi&#039;, &#039;stavUzivK&#039; =&gt; &#039;stavUzivK&#039;, &#039;nazFirmy&#039; =&gt; &#039;nazFirmy&#039;, &#039;ulice&#039; =&gt; &#039;ulice&#039;, &#039;mesto&#039; =&gt; &#039;mesto&#039;, &#039;psc&#039; =&gt; &#039;psc&#039;, &#039;eanKod&#039; =&gt; &#039;eanKod&#039;, &#039;ic&#039; =&gt; &#039;ic&#039;, &#039;dic&#039; =&gt; &#039;dic&#039;, &#039;postovniShodna&#039; =&gt; NULL, &#039;faNazev&#039; =&gt; NULL, &#039;faNazev2&#039; =&gt; NULL, &#039;faUlice&#039; =&gt; NULL, &#039;faMesto&#039; =&gt; NULL, &#039;faPsc&#039; =&gt; NULL, &#039;faEanKod&#039; =&gt; NULL, &#039;buc&#039; =&gt; &#039;buc&#039;, &#039;iban&#039; =&gt; &#039;iban&#039;, &#039;bic&#039; =&gt; &#039;bic&#039;, &#039;specSym&#039; =&gt; &#039;specSym&#039;, &#039;bezPolozek&#039; =&gt; &#039;bezPolozek&#039;, &#039;szbDphSniz&#039; =&gt; &#039;szbDphSniz&#039;, &#039;szbDphSniz2&#039; =&gt; &#039;szbDphSniz2&#039;, &#039;szbDphZakl&#039; =&gt; &#039;szbDphZakl&#039;, &#039;uzpTuzemsko&#039; =&gt; &#039;uzpTuzemsko&#039;, &#039;datUcto&#039; =&gt; &#039;datUcto&#039;, &#039;vyloucitSaldo&#039; =&gt; &#039;vyloucitSaldo&#039;, &#039;zaokrJakSumK&#039; =&gt; NULL, &#039;zaokrNaSumK&#039; =&gt; NULL, &#039;zaokrJakDphK&#039; =&gt; NULL, &#039;zaokrNaDphK&#039; =&gt; NULL, &#039;metodaZaokrDoklK&#039; =&gt; NULL, &#039;vytvaretKorPol&#039; =&gt; NULL, &#039;stitky&#039; =&gt; &#039;stitky&#039;, &#039;typDokl&#039; =&gt; &#039;typDokl&#039;, &#039;mena&#039; =&gt; &#039;mena&#039;, &#039;konSym&#039; =&gt; &#039;konSym&#039;, &#039;firma&#039; =&gt; &#039;firma&#039;, &#039;stat&#039; =&gt; &#039;stat&#039;, &#039;faStat&#039; =&gt; NULL, &#039;mistUrc&#039; =&gt; NULL, &#039;banSpojDod&#039; =&gt; &#039;banSpojDod&#039;, &#039;bankovniUcet&#039; =&gt; &#039;bankovniUcet&#039;, &#039;typUcOp&#039; =&gt; &#039;typUcOp&#039;, &#039;primUcet&#039; =&gt; &#039;primUcet&#039;, &#039;protiUcet&#039; =&gt; &#039;protiUcet&#039;, &#039;dphZaklUcet&#039; =&gt; &#039;dphZaklUcet&#039;, &#039;dphSnizUcet&#039; =&gt; &#039;dphSnizUcet&#039;, &#039;dphSniz2Ucet&#039; =&gt; &#039;dphSniz2Ucet&#039;, &#039;smerKod&#039; =&gt; &#039;smerKod&#039;, &#039;statDph&#039; =&gt; &#039;statDph&#039;, &#039;clenDph&#039; =&gt; &#039;clenDph&#039;, &#039;stredisko&#039; =&gt; &#039;stredisko&#039;, &#039;cinnost&#039; =&gt; &#039;cinnost&#039;, &#039;zakazka&#039; =&gt; &#039;zakazka&#039;, &#039;statOdesl&#039; =&gt; &#039;statOdesl&#039;, &#039;statUrc&#039; =&gt; &#039;statUrc&#039;, &#039;statPuvod&#039; =&gt; &#039;statPuvod&#039;, &#039;dodPodm&#039; =&gt; &#039;dodPodm&#039;, &#039;obchTrans&#039; =&gt; &#039;obchTrans&#039;, &#039;druhDopr&#039; =&gt; &#039;druhDopr&#039;, &#039;zvlPoh&#039; =&gt; &#039;zvlPoh&#039;, &#039;krajUrc&#039; =&gt; &#039;krajUrc&#039;, &#039;zodpOsoba&#039; =&gt; &#039;zodpOsoba&#039;, &#039;kontaktOsoba&#039; =&gt; &#039;kontaktOsoba&#039;, &#039;kontaktJmeno&#039; =&gt; &#039;kontaktJmeno&#039;, &#039;kontaktEmail&#039; =&gt; &#039;kontaktEmail&#039;, &#039;kontaktTel&#039; =&gt; &#039;kontaktTel&#039;, &#039;rada&#039; =&gt; &#039;rada&#039;, &#039;smlouva&#039; =&gt; &#039;smlouva&#039;, &#039;formaDopravy&#039; =&gt; &#039;formaDopravy&#039;, &#039;source&#039; =&gt; &#039;source&#039;, &#039;balikPocet&#039; =&gt; NULL, &#039;balikZacislovan&#039; =&gt; NULL, &#039;balikVytvXml&#039; =&gt; NULL, &#039;clenKonVykDph&#039; =&gt; &#039;clenKonVykDph&#039;, &#039;datUp1&#039; =&gt; &#039;datUp1&#039;, &#039;datUp2&#039; =&gt; &#039;datUp2&#039;, &#039;datSmir&#039; =&gt; &#039;datSmir&#039;, &#039;datPenale&#039; =&gt; &#039;datPenale&#039;, &#039;formaUhradyCis&#039; =&gt; &#039;formaUhradyCis&#039;, &#039;stavUhrK&#039; =&gt; &#039;stavUhrK&#039;, &#039;juhSumPp&#039; =&gt; &#039;juhSumPp&#039;, &#039;juhSumPpMen&#039; =&gt; &#039;juhSumPpMen&#039;, &#039;sumPrepl&#039; =&gt; &#039;sumPrepl&#039;, &#039;sumPreplMen&#039; =&gt; &#039;sumPreplMen&#039;, &#039;hromFakt&#039; =&gt; &#039;hromFakt&#039;, &#039;zdrojProSkl&#039; =&gt; &#039;zdrojProSkl&#039;, &#039;prodejka&#039; =&gt; NULL, &#039;stavMailK&#039; =&gt; NULL, &#039;dobropisovano&#039; =&gt; &#039;dobropisovano&#039;, &#039;sumCelkemBezZaloh&#039; =&gt; &#039;sumCelkemBezZaloh&#039;, &#039;sumCelkemBezZalohMen&#039; =&gt; &#039;sumCelkemBezZalohMen&#039;, &#039;odpocAuto&#039; =&gt; NULL, &#039;eetDicPoverujiciho&#039; =&gt; NULL, &#039;eetFik&#039; =&gt; NULL, &#039;eetPkp&#039; =&gt; NULL, &#039;eetPokladniZarizeni&#039; =&gt; NULL, &#039;eetProvozovna&#039; =&gt; NULL, &#039;eetTypK&#039; =&gt; NULL, &#039;eetDatCasTrzby&#039; =&gt; NULL, &#039;eetTisknoutPkp&#039; =&gt; NULL, &#039;typDoklSkl&#039; =&gt; &#039;typDoklSkl&#039;, &#039;polozkyDokladu&#039; =&gt; array(&#039;ucetni&#039; =&gt; &#039;ucetni&#039;, &#039;kod&#039; =&gt; &#039;kod&#039;, &#039;eanKod&#039; =&gt; &#039;eanKod&#039;, &#039;nazev&#039; =&gt; &#039;nazev&#039;, &#039;nazevA&#039; =&gt; &#039;nazevA&#039;, &#039;nazevB&#039; =&gt; &#039;nazevB&#039;, &#039;nazevC&#039; =&gt; &#039;nazevC&#039;, &#039;cisRad&#039; =&gt; &#039;cisRad&#039;, &#039;typPolozkyK&#039; =&gt; &#039;typPolozkyK&#039;, &#039;baleniId&#039; =&gt; &#039;baleniId&#039;, &#039;mnozBaleni&#039; =&gt; &#039;mnozBaleni&#039;, &#039;mnozMj&#039; =&gt; &#039;mnozMj&#039;, &#039;typCenyDphK&#039; =&gt; &#039;typCenyDphK&#039;, &#039;typSzbDphK&#039; =&gt; &#039;typSzbDphK&#039;, &#039;szbDph&#039; =&gt; &#039;szbDph&#039;, &#039;cenaMj&#039; =&gt; &#039;cenaMj&#039;, &#039;slevaPol&#039; =&gt; &#039;slevaPol&#039;, &#039;uplSlevaDokl&#039; =&gt; &#039;uplSlevaDokl&#039;, &#039;sumZkl&#039; =&gt; &#039;sumZkl&#039;, &#039;sumDph&#039; =&gt; &#039;sumDph&#039;, &#039;sumCelkem&#039; =&gt; &#039;sumCelkem&#039;, &#039;sumZklMen&#039; =&gt; &#039;sumZklMen&#039;, &#039;sumDphMen&#039; =&gt; &#039;sumDphMen&#039;, &#039;sumCelkemMen&#039; =&gt; &#039;sumCelkemMen&#039;, &#039;objem&#039; =&gt; &#039;objem&#039;, &#039;cenJednotka&#039; =&gt; &#039;cenJednotka&#039;, &#039;typVypCenyK&#039; =&gt; &#039;typVypCenyK&#039;, &#039;cenaMjNakup&#039; =&gt; &#039;cenaMjNakup&#039;, &#039;cenaMjProdej&#039; =&gt; &#039;cenaMjProdej&#039;, &#039;cenaMjCenikTuz&#039; =&gt; &#039;cenaMjCenikTuz&#039;, &#039;procZakl&#039; =&gt; &#039;procZakl&#039;, &#039;slevaMnoz&#039; =&gt; &#039;slevaMnoz&#039;, &#039;zaokrJakK&#039; =&gt; &#039;zaokrJakK&#039;, &#039;zaokrNaK&#039; =&gt; &#039;zaokrNaK&#039;, &#039;sarze&#039; =&gt; &#039;sarze&#039;, &#039;expirace&#039; =&gt; &#039;expirace&#039;, &#039;datTrvan&#039; =&gt; &#039;datTrvan&#039;, &#039;datVyroby&#039; =&gt; &#039;datVyroby&#039;, &#039;stavUzivK&#039; =&gt; &#039;stavUzivK&#039;, &#039;poznam&#039; =&gt; &#039;poznam&#039;, &#039;kopZklMdUcet&#039; =&gt; &#039;kopZklMdUcet&#039;, &#039;kopZklDalUcet&#039; =&gt; &#039;kopZklDalUcet&#039;, &#039;kopDphMdUcet&#039; =&gt; &#039;kopDphMdUcet&#039;, &#039;kopDphDalUcet&#039; =&gt; &#039;kopDphDalUcet&#039;, &#039;kopTypUcOp&#039; =&gt; &#039;kopTypUcOp&#039;, &#039;kopZakazku&#039; =&gt; &#039;kopZakazku&#039;, &#039;kopStred&#039; =&gt; &#039;kopStred&#039;, &#039;kopCinnost&#039; =&gt; &#039;kopCinnost&#039;, &#039;kopKlice&#039; =&gt; &#039;kopKlice&#039;, &#039;kopClenDph&#039; =&gt; &#039;kopClenDph&#039;, &#039;kopDatUcto&#039; =&gt; &#039;kopDatUcto&#039;, &#039;datUcto&#039; =&gt; &#039;datUcto&#039;, &#039;sklad&#039; =&gt; &#039;sklad&#039;, &#039;stredisko&#039; =&gt; &#039;stredisko&#039;, &#039;cinnost&#039; =&gt; &#039;cinnost&#039;, &#039;typUcOp&#039; =&gt; &#039;typUcOp&#039;, &#039;zklMdUcet&#039; =&gt; &#039;zklMdUcet&#039;, &#039;zklDalUcet&#039; =&gt; &#039;zklDalUcet&#039;, &#039;dphMdUcet&#039; =&gt; &#039;dphMdUcet&#039;, &#039;dphDalUcet&#039; =&gt; &#039;dphDalUcet&#039;, &#039;zakazka&#039; =&gt; &#039;zakazka&#039;, &#039;dodavatel&#039; =&gt; &#039;dodavatel&#039;, &#039;clenDph&#039; =&gt; &#039;clenDph&#039;, &#039;dphPren&#039; =&gt; &#039;dphPren&#039;, &#039;cenik&#039; =&gt; &#039;cenik&#039;, &#039;cenHlad&#039; =&gt; NULL, &#039;mj&#039; =&gt; &#039;mj&#039;, &#039;mjObjem&#039; =&gt; &#039;mjObjem&#039;, &#039;sazbaDphPuv&#039; =&gt; &#039;sazbaDphPuv&#039;, &#039;stitky&#039; =&gt; &#039;stitky&#039;, &#039;source&#039; =&gt; &#039;source&#039;, &#039;clenKonVykDph&#039; =&gt; &#039;clenKonVykDph&#039;, &#039;kopClenKonVykDph&#039; =&gt; &#039;kopClenKonVykDph&#039;, &#039;ciselnyKodZbozi&#039; =&gt; &#039;ciselnyKodZbozi&#039;, &#039;druhZbozi&#039; =&gt; &#039;druhZbozi&#039;, &#039;poplatekParentPolFak&#039; =&gt; &#039;poplatekParentPolFak&#039;, &#039;zdrojProSkl&#039; =&gt; &#039;zdrojProSkl&#039;, &#039;zaloha&#039; =&gt; &#039;zaloha&#039;, &#039;sumVedlNaklIntrMen&#039; =&gt; &#039;sumVedlNaklIntrMen&#039;, &#039;eetTypPlatbyK&#039; =&gt; NULL))</span></code>
+     = <span class="phpdocumentor-signature__default-value">array(&#039;kod&#039; =&gt; &#039;kod&#039;, &#039;cisDosle&#039; =&gt; &#039;cisDosle&#039;, &#039;varSym&#039; =&gt; &#039;varSym&#039;, &#039;cisSml&#039; =&gt; &#039;cisSml&#039;, &#039;cisObj&#039; =&gt; &#039;cisObj&#039;, &#039;datObj&#039; =&gt; &#039;datObj&#039;, &#039;cisDodak&#039; =&gt; &#039;cisDodak&#039;, &#039;doprava&#039; =&gt; &#039;doprava&#039;, &#039;datVyst&#039; =&gt; &#039;datVyst&#039;, &#039;duzpPuv&#039; =&gt; &#039;duzpPuv&#039;, &#039;duzpUcto&#039; =&gt; &#039;duzpUcto&#039;, &#039;datSplat&#039; =&gt; &#039;datSplat&#039;, &#039;datTermin&#039; =&gt; &#039;datTermin&#039;, &#039;datReal&#039; =&gt; &#039;datReal&#039;, &#039;popis&#039; =&gt; &#039;popis&#039;, &#039;poznam&#039; =&gt; &#039;poznam&#039;, &#039;uvodTxt&#039; =&gt; null, &#039;zavTxt&#039; =&gt; null, &#039;sumOsv&#039; =&gt; &#039;sumOsv&#039;, &#039;sumZklSniz&#039; =&gt; &#039;sumZklSniz&#039;, &#039;sumZklSniz2&#039; =&gt; &#039;sumZklSniz2&#039;, &#039;sumZklZakl&#039; =&gt; &#039;sumZklZakl&#039;, &#039;sumDphSniz&#039; =&gt; &#039;sumDphSniz&#039;, &#039;sumDphSniz2&#039; =&gt; &#039;sumDphSniz2&#039;, &#039;sumDphZakl&#039; =&gt; &#039;sumDphZakl&#039;, &#039;sumCelkSniz&#039; =&gt; &#039;sumCelkSniz&#039;, &#039;sumCelkSniz2&#039; =&gt; &#039;sumCelkSniz2&#039;, &#039;sumCelkZakl&#039; =&gt; &#039;sumCelkZakl&#039;, &#039;sumCelkem&#039; =&gt; &#039;sumCelkem&#039;, &#039;sumOsvMen&#039; =&gt; &#039;sumOsvMen&#039;, &#039;sumZklSnizMen&#039; =&gt; &#039;sumZklSnizMen&#039;, &#039;sumZklSniz2Men&#039; =&gt; &#039;sumZklSniz2Men&#039;, &#039;sumZklZaklMen&#039; =&gt; &#039;sumZklZaklMen&#039;, &#039;sumDphZaklMen&#039; =&gt; &#039;sumDphZaklMen&#039;, &#039;sumDphSnizMen&#039; =&gt; &#039;sumDphSnizMen&#039;, &#039;sumDphSniz2Men&#039; =&gt; &#039;sumDphSniz2Men&#039;, &#039;sumCelkSnizMen&#039; =&gt; &#039;sumCelkSnizMen&#039;, &#039;sumCelkSniz2Men&#039; =&gt; &#039;sumCelkSniz2Men&#039;, &#039;sumCelkZaklMen&#039; =&gt; &#039;sumCelkZaklMen&#039;, &#039;sumCelkemMen&#039; =&gt; &#039;sumCelkemMen&#039;, &#039;slevaDokl&#039; =&gt; &#039;slevaDokl&#039;, &#039;kurz&#039; =&gt; &#039;kurz&#039;, &#039;kurzMnozstvi&#039; =&gt; &#039;kurzMnozstvi&#039;, &#039;stavUzivK&#039; =&gt; &#039;stavUzivK&#039;, &#039;nazFirmy&#039; =&gt; &#039;nazFirmy&#039;, &#039;ulice&#039; =&gt; &#039;ulice&#039;, &#039;mesto&#039; =&gt; &#039;mesto&#039;, &#039;psc&#039; =&gt; &#039;psc&#039;, &#039;eanKod&#039; =&gt; &#039;eanKod&#039;, &#039;ic&#039; =&gt; &#039;ic&#039;, &#039;dic&#039; =&gt; &#039;dic&#039;, &#039;postovniShodna&#039; =&gt; null, &#039;faNazev&#039; =&gt; null, &#039;faNazev2&#039; =&gt; null, &#039;faUlice&#039; =&gt; null, &#039;faMesto&#039; =&gt; null, &#039;faPsc&#039; =&gt; null, &#039;faEanKod&#039; =&gt; null, &#039;buc&#039; =&gt; &#039;buc&#039;, &#039;iban&#039; =&gt; &#039;iban&#039;, &#039;bic&#039; =&gt; &#039;bic&#039;, &#039;specSym&#039; =&gt; &#039;specSym&#039;, &#039;bezPolozek&#039; =&gt; &#039;bezPolozek&#039;, &#039;szbDphSniz&#039; =&gt; &#039;szbDphSniz&#039;, &#039;szbDphSniz2&#039; =&gt; &#039;szbDphSniz2&#039;, &#039;szbDphZakl&#039; =&gt; &#039;szbDphZakl&#039;, &#039;uzpTuzemsko&#039; =&gt; &#039;uzpTuzemsko&#039;, &#039;datUcto&#039; =&gt; &#039;datUcto&#039;, &#039;vyloucitSaldo&#039; =&gt; &#039;vyloucitSaldo&#039;, &#039;zaokrJakSumK&#039; =&gt; null, &#039;zaokrNaSumK&#039; =&gt; null, &#039;zaokrJakDphK&#039; =&gt; null, &#039;zaokrNaDphK&#039; =&gt; null, &#039;metodaZaokrDoklK&#039; =&gt; null, &#039;vytvaretKorPol&#039; =&gt; null, &#039;stitky&#039; =&gt; &#039;stitky&#039;, &#039;typDokl&#039; =&gt; &#039;typDokl&#039;, &#039;mena&#039; =&gt; &#039;mena&#039;, &#039;konSym&#039; =&gt; &#039;konSym&#039;, &#039;firma&#039; =&gt; &#039;firma&#039;, &#039;stat&#039; =&gt; &#039;stat&#039;, &#039;faStat&#039; =&gt; null, &#039;mistUrc&#039; =&gt; null, &#039;banSpojDod&#039; =&gt; &#039;banSpojDod&#039;, &#039;bankovniUcet&#039; =&gt; &#039;bankovniUcet&#039;, &#039;typUcOp&#039; =&gt; &#039;typUcOp&#039;, &#039;primUcet&#039; =&gt; &#039;primUcet&#039;, &#039;protiUcet&#039; =&gt; &#039;protiUcet&#039;, &#039;dphZaklUcet&#039; =&gt; &#039;dphZaklUcet&#039;, &#039;dphSnizUcet&#039; =&gt; &#039;dphSnizUcet&#039;, &#039;dphSniz2Ucet&#039; =&gt; &#039;dphSniz2Ucet&#039;, &#039;smerKod&#039; =&gt; &#039;smerKod&#039;, &#039;statDph&#039; =&gt; &#039;statDph&#039;, &#039;clenDph&#039; =&gt; &#039;clenDph&#039;, &#039;stredisko&#039; =&gt; &#039;stredisko&#039;, &#039;cinnost&#039; =&gt; &#039;cinnost&#039;, &#039;zakazka&#039; =&gt; &#039;zakazka&#039;, &#039;statOdesl&#039; =&gt; &#039;statOdesl&#039;, &#039;statUrc&#039; =&gt; &#039;statUrc&#039;, &#039;statPuvod&#039; =&gt; &#039;statPuvod&#039;, &#039;dodPodm&#039; =&gt; &#039;dodPodm&#039;, &#039;obchTrans&#039; =&gt; &#039;obchTrans&#039;, &#039;druhDopr&#039; =&gt; &#039;druhDopr&#039;, &#039;zvlPoh&#039; =&gt; &#039;zvlPoh&#039;, &#039;krajUrc&#039; =&gt; &#039;krajUrc&#039;, &#039;zodpOsoba&#039; =&gt; &#039;zodpOsoba&#039;, &#039;kontaktOsoba&#039; =&gt; &#039;kontaktOsoba&#039;, &#039;kontaktJmeno&#039; =&gt; &#039;kontaktJmeno&#039;, &#039;kontaktEmail&#039; =&gt; &#039;kontaktEmail&#039;, &#039;kontaktTel&#039; =&gt; &#039;kontaktTel&#039;, &#039;rada&#039; =&gt; &#039;rada&#039;, &#039;smlouva&#039; =&gt; &#039;smlouva&#039;, &#039;formaDopravy&#039; =&gt; &#039;formaDopravy&#039;, &#039;source&#039; =&gt; &#039;source&#039;, &#039;balikPocet&#039; =&gt; null, &#039;balikZacislovan&#039; =&gt; null, &#039;balikVytvXml&#039; =&gt; null, &#039;clenKonVykDph&#039; =&gt; &#039;clenKonVykDph&#039;, &#039;datUp1&#039; =&gt; &#039;datUp1&#039;, &#039;datUp2&#039; =&gt; &#039;datUp2&#039;, &#039;datSmir&#039; =&gt; &#039;datSmir&#039;, &#039;datPenale&#039; =&gt; &#039;datPenale&#039;, &#039;formaUhradyCis&#039; =&gt; &#039;formaUhradyCis&#039;, &#039;stavUhrK&#039; =&gt; &#039;stavUhrK&#039;, &#039;juhSumPp&#039; =&gt; &#039;juhSumPp&#039;, &#039;juhSumPpMen&#039; =&gt; &#039;juhSumPpMen&#039;, &#039;sumPrepl&#039; =&gt; &#039;sumPrepl&#039;, &#039;sumPreplMen&#039; =&gt; &#039;sumPreplMen&#039;, &#039;hromFakt&#039; =&gt; &#039;hromFakt&#039;, &#039;zdrojProSkl&#039; =&gt; &#039;zdrojProSkl&#039;, &#039;prodejka&#039; =&gt; null, &#039;stavMailK&#039; =&gt; null, &#039;dobropisovano&#039; =&gt; &#039;dobropisovano&#039;, &#039;sumCelkemBezZaloh&#039; =&gt; &#039;sumCelkemBezZaloh&#039;, &#039;sumCelkemBezZalohMen&#039; =&gt; &#039;sumCelkemBezZalohMen&#039;, &#039;odpocAuto&#039; =&gt; null, &#039;eetDicPoverujiciho&#039; =&gt; null, &#039;eetFik&#039; =&gt; null, &#039;eetPkp&#039; =&gt; null, &#039;eetPokladniZarizeni&#039; =&gt; null, &#039;eetProvozovna&#039; =&gt; null, &#039;eetTypK&#039; =&gt; null, &#039;eetDatCasTrzby&#039; =&gt; null, &#039;eetTisknoutPkp&#039; =&gt; null, &#039;typDoklSkl&#039; =&gt; &#039;typDoklSkl&#039;, &#039;polozkyDokladu&#039; =&gt; array(&#039;ucetni&#039; =&gt; &#039;ucetni&#039;, &#039;kod&#039; =&gt; &#039;kod&#039;, &#039;eanKod&#039; =&gt; &#039;eanKod&#039;, &#039;nazev&#039; =&gt; &#039;nazev&#039;, &#039;nazevA&#039; =&gt; &#039;nazevA&#039;, &#039;nazevB&#039; =&gt; &#039;nazevB&#039;, &#039;nazevC&#039; =&gt; &#039;nazevC&#039;, &#039;cisRad&#039; =&gt; &#039;cisRad&#039;, &#039;typPolozkyK&#039; =&gt; &#039;typPolozkyK&#039;, &#039;baleniId&#039; =&gt; &#039;baleniId&#039;, &#039;mnozBaleni&#039; =&gt; &#039;mnozBaleni&#039;, &#039;mnozMj&#039; =&gt; &#039;mnozMj&#039;, &#039;typCenyDphK&#039; =&gt; &#039;typCenyDphK&#039;, &#039;typSzbDphK&#039; =&gt; &#039;typSzbDphK&#039;, &#039;szbDph&#039; =&gt; &#039;szbDph&#039;, &#039;cenaMj&#039; =&gt; &#039;cenaMj&#039;, &#039;slevaPol&#039; =&gt; &#039;slevaPol&#039;, &#039;uplSlevaDokl&#039; =&gt; &#039;uplSlevaDokl&#039;, &#039;sumZkl&#039; =&gt; &#039;sumZkl&#039;, &#039;sumDph&#039; =&gt; &#039;sumDph&#039;, &#039;sumCelkem&#039; =&gt; &#039;sumCelkem&#039;, &#039;sumZklMen&#039; =&gt; &#039;sumZklMen&#039;, &#039;sumDphMen&#039; =&gt; &#039;sumDphMen&#039;, &#039;sumCelkemMen&#039; =&gt; &#039;sumCelkemMen&#039;, &#039;objem&#039; =&gt; &#039;objem&#039;, &#039;cenJednotka&#039; =&gt; &#039;cenJednotka&#039;, &#039;typVypCenyK&#039; =&gt; &#039;typVypCenyK&#039;, &#039;cenaMjNakup&#039; =&gt; &#039;cenaMjNakup&#039;, &#039;cenaMjProdej&#039; =&gt; &#039;cenaMjProdej&#039;, &#039;cenaMjCenikTuz&#039; =&gt; &#039;cenaMjCenikTuz&#039;, &#039;procZakl&#039; =&gt; &#039;procZakl&#039;, &#039;slevaMnoz&#039; =&gt; &#039;slevaMnoz&#039;, &#039;zaokrJakK&#039; =&gt; &#039;zaokrJakK&#039;, &#039;zaokrNaK&#039; =&gt; &#039;zaokrNaK&#039;, &#039;sarze&#039; =&gt; &#039;sarze&#039;, &#039;expirace&#039; =&gt; &#039;expirace&#039;, &#039;datTrvan&#039; =&gt; &#039;datTrvan&#039;, &#039;datVyroby&#039; =&gt; &#039;datVyroby&#039;, &#039;stavUzivK&#039; =&gt; &#039;stavUzivK&#039;, &#039;poznam&#039; =&gt; &#039;poznam&#039;, &#039;kopZklMdUcet&#039; =&gt; &#039;kopZklMdUcet&#039;, &#039;kopZklDalUcet&#039; =&gt; &#039;kopZklDalUcet&#039;, &#039;kopDphMdUcet&#039; =&gt; &#039;kopDphMdUcet&#039;, &#039;kopDphDalUcet&#039; =&gt; &#039;kopDphDalUcet&#039;, &#039;kopTypUcOp&#039; =&gt; &#039;kopTypUcOp&#039;, &#039;kopZakazku&#039; =&gt; &#039;kopZakazku&#039;, &#039;kopStred&#039; =&gt; &#039;kopStred&#039;, &#039;kopCinnost&#039; =&gt; &#039;kopCinnost&#039;, &#039;kopKlice&#039; =&gt; &#039;kopKlice&#039;, &#039;kopClenDph&#039; =&gt; &#039;kopClenDph&#039;, &#039;kopDatUcto&#039; =&gt; &#039;kopDatUcto&#039;, &#039;datUcto&#039; =&gt; &#039;datUcto&#039;, &#039;sklad&#039; =&gt; &#039;sklad&#039;, &#039;stredisko&#039; =&gt; &#039;stredisko&#039;, &#039;cinnost&#039; =&gt; &#039;cinnost&#039;, &#039;typUcOp&#039; =&gt; &#039;typUcOp&#039;, &#039;zklMdUcet&#039; =&gt; &#039;zklMdUcet&#039;, &#039;zklDalUcet&#039; =&gt; &#039;zklDalUcet&#039;, &#039;dphMdUcet&#039; =&gt; &#039;dphMdUcet&#039;, &#039;dphDalUcet&#039; =&gt; &#039;dphDalUcet&#039;, &#039;zakazka&#039; =&gt; &#039;zakazka&#039;, &#039;dodavatel&#039; =&gt; &#039;dodavatel&#039;, &#039;clenDph&#039; =&gt; &#039;clenDph&#039;, &#039;dphPren&#039; =&gt; &#039;dphPren&#039;, &#039;cenik&#039; =&gt; &#039;cenik&#039;, &#039;cenHlad&#039; =&gt; null, &#039;mj&#039; =&gt; &#039;mj&#039;, &#039;mjObjem&#039; =&gt; &#039;mjObjem&#039;, &#039;sazbaDphPuv&#039; =&gt; &#039;sazbaDphPuv&#039;, &#039;stitky&#039; =&gt; &#039;stitky&#039;, &#039;source&#039; =&gt; &#039;source&#039;, &#039;clenKonVykDph&#039; =&gt; &#039;clenKonVykDph&#039;, &#039;kopClenKonVykDph&#039; =&gt; &#039;kopClenKonVykDph&#039;, &#039;ciselnyKodZbozi&#039; =&gt; &#039;ciselnyKodZbozi&#039;, &#039;druhZbozi&#039; =&gt; &#039;druhZbozi&#039;, &#039;poplatekParentPolFak&#039; =&gt; &#039;poplatekParentPolFak&#039;, &#039;zdrojProSkl&#039; =&gt; &#039;zdrojProSkl&#039;, &#039;zaloha&#039; =&gt; &#039;zaloha&#039;, &#039;sumVedlNaklIntrMen&#039; =&gt; &#039;sumVedlNaklIntrMen&#039;, &#039;eetTypPlatbyK&#039; =&gt; null))</span></code>
 
     
     
@@ -337,7 +344,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -369,7 +376,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -401,7 +408,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -437,7 +444,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -518,11 +525,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Add ExtID by Original ID Into converted</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                 <span class="phpdocumentor-signature__name">addExtId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -550,7 +558,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -592,11 +600,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">145</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Convertor Rule Clas  template Generator</p>
+        <p class="phpdocumentor-summary">Convertor Rule Class  template Generator</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -658,7 +666,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">218</span>
 
     </aside>
 
@@ -682,6 +690,39 @@
         class="phpdocumentor-element
             -method
             -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getConvertor">
+        getConvertor()
+        <a href="classes/AbraFlexi-Bricks-ConvertorRule.html#method_getConvertor" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">101</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get Convertor used</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getConvertor</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/AbraFlexi-Bricks-Convertor.html"><abbr title="\AbraFlexi\Bricks\Convertor">Convertor</abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/AbraFlexi-Bricks-Convertor.html"><abbr title="\AbraFlexi\Bricks\Convertor">Convertor</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_getOposites">
@@ -691,7 +732,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">180</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -743,7 +784,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -785,7 +826,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/AbraFlexi/Bricks/ConvertorRule.php"><a href="files/src-abraflexi-bricks-convertorrule.html"><abbr title="src/AbraFlexi/Bricks/ConvertorRule.php">ConvertorRule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 

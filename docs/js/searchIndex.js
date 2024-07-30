@@ -63,7 +63,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Changes\u003A\u003AdataDiff\u0028\u0029",
             "name": "dataDiff",
-            "summary": "Show\u0020recursive\u0020difference\u0020between\u0020two\u0020multidimensional\u0020arrays",
+            "summary": "Result\u0020array\u0020contains\u0020different\u0020key\u0020with\u0020new\u007Cold\u0020values",
             "url": "classes/AbraFlexi-Bricks-Changes.html#method_dataDiff"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Changes\u003A\u003A\u0024globalVersion",
@@ -93,7 +93,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AsetSource\u0028\u0029",
             "name": "setSource",
-            "summary": "Set\u0020Source\u0020Documnet",
+            "summary": "Set\u0020Source\u0020Document",
             "url": "classes/AbraFlexi-Bricks-Convertor.html#method_setSource"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AsetDestination\u0028\u0029",
@@ -108,7 +108,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AbaseClassName\u0028\u0029",
             "name": "baseClassName",
-            "summary": "Get\u0020Classname\u0020without\u0020namespace\u0020prefix",
+            "summary": "Get\u0020ClassName\u0020without\u0020NameSpace\u0020prefix",
             "url": "classes/AbraFlexi-Bricks-Convertor.html#method_baseClassName"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AprepareRules\u0028\u0029",
@@ -120,11 +120,6 @@ Search.appendIndex(
             "name": "getConvertorClassName",
             "summary": "Name\u0020for\u0020class\u0020with\u0020rules\u0020for\u0020converting\u0020\u0024this\u002D\u003Einput\u0020to\u0020\u0024this\u002D\u003Eoutput",
             "url": "classes/AbraFlexi-Bricks-Convertor.html#method_getConvertorClassName"
-        },                {
-            "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AconvertDocument\u0028\u0029",
-            "name": "convertDocument",
-            "summary": "Convert\u0020AbraFlexi\u0020document",
-            "url": "classes/AbraFlexi-Bricks-Convertor.html#method_convertDocument"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AconvertSubitems\u0028\u0029",
             "name": "convertSubitems",
@@ -138,7 +133,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AcommonItems\u0028\u0029",
             "name": "commonItems",
-            "summary": "Return\u0020itemes\u0020that\u0020same\u0020on\u0020both\u0020sides",
+            "summary": "Return\u0020items\u0020that\u0020same\u0020on\u0020both\u0020sides",
             "url": "classes/AbraFlexi-Bricks-Convertor.html#method_commonItems"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003AgetInput\u0028\u0029",
@@ -161,10 +156,15 @@ Search.appendIndex(
             "summary": "Destination\u0020Object",
             "url": "classes/AbraFlexi-Bricks-Convertor.html#property_output"
         },                {
-            "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003A\u0024rules",
-            "name": "rules",
+            "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003A\u0024ruler",
+            "name": "ruler",
+            "summary": "Keep\u0020the\u0020conversion\u0020rules",
+            "url": "classes/AbraFlexi-Bricks-Convertor.html#property_ruler"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\Convertor\u003A\u003A\u0024debug",
+            "name": "debug",
             "summary": "",
-            "url": "classes/AbraFlexi-Bricks-Convertor.html#property_rules"
+            "url": "classes/AbraFlexi-Bricks-Convertor.html#property_debug"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ConvertorRule",
             "name": "ConvertorRule",
@@ -180,6 +180,11 @@ Search.appendIndex(
             "name": "assignConvertor",
             "summary": "",
             "url": "classes/AbraFlexi-Bricks-ConvertorRule.html#method_assignConvertor"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\ConvertorRule\u003A\u003AgetConvertor\u0028\u0029",
+            "name": "getConvertor",
+            "summary": "Get\u0020Convertor\u0020used",
+            "url": "classes/AbraFlexi-Bricks-ConvertorRule.html#method_getConvertor"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ConvertorRule\u003A\u003A\u0024addExtId",
             "name": "addExtId",
@@ -198,7 +203,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ConvertorRule\u003A\u003AconvertorClassTemplateGenerator\u0028\u0029",
             "name": "convertorClassTemplateGenerator",
-            "summary": "Convertor\u0020Rule\u0020Clas\u0020\u0020template\u0020Generator",
+            "summary": "Convertor\u0020Rule\u0020Class\u0020\u0020template\u0020Generator",
             "url": "classes/AbraFlexi-Bricks-ConvertorRule.html#method_convertorClassTemplateGenerator"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ConvertorRule\u003A\u003AgetOposites\u0028\u0029",
@@ -270,6 +275,16 @@ Search.appendIndex(
             "name": "rules",
             "summary": "",
             "url": "classes/AbraFlexi-Bricks-ConvertRules-FakturaPrijata-to-Zavazek.html#property_rules"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\ConvertRules\\FakturaPrijataPolozka_to_Cenik",
+            "name": "FakturaPrijataPolozka_to_Cenik",
+            "summary": "Description\u0020of\u0020FakturaPrijataPolozka_to_Cenik",
+            "url": "classes/AbraFlexi-Bricks-ConvertRules-FakturaPrijataPolozka-to-Cenik.html"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\ConvertRules\\FakturaPrijataPolozka_to_Cenik\u003A\u003A\u0024rules",
+            "name": "rules",
+            "summary": "",
+            "url": "classes/AbraFlexi-Bricks-ConvertRules-FakturaPrijataPolozka-to-Cenik.html#property_rules"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ConvertRules\\FakturaVydana_to_FakturaPrijata",
             "name": "FakturaVydana_to_FakturaPrijata",
@@ -536,6 +551,11 @@ Search.appendIndex(
             "summary": "Vrac\u00ED\u0020neuhrazen\u00E9\u0020faktury",
             "url": "classes/AbraFlexi-Bricks-ParovacFaktur.html#method_getInvoicesToProcess"
         },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003AoutInvoiceMatchByBank\u0028\u0029",
+            "name": "outInvoiceMatchByBank",
+            "summary": "Match\u0020Invoice\u0020with\u0020Payment",
+            "url": "classes/AbraFlexi-Bricks-ParovacFaktur.html#method_outInvoiceMatchByBank"
+        },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003AoutInvoicesMatchingByBank\u0028\u0029",
             "name": "outInvoicesMatchingByBank",
             "summary": "P\u00E1rov\u00E1n\u00ED\u0020odchoz\u00EDch\u0020faktur\u0020podle\u0020p\u0159\u00EDchoz\u00EDch\u0020plateb\u0020v\u0020bance",
@@ -671,6 +691,11 @@ Search.appendIndex(
             "summary": "Reindex\u0020array\u0020of\u0020Invoice\u0020Data\u0020by\u0020datVyst\u0020or\u0020another\u0020column\u0020with\u0020date",
             "url": "classes/AbraFlexi-Bricks-ParovacFaktur.html#method_reindexInvoicesByDate"
         },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003AgetDocumentTypes\u0028\u0029",
+            "name": "getDocumentTypes",
+            "summary": "",
+            "url": "classes/AbraFlexi-Bricks-ParovacFaktur.html#method_getDocumentTypes"
+        },                {
             "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003A\u0024invoicer",
             "name": "invoicer",
             "summary": "Invoice\u0020handler\u0020object",
@@ -695,6 +720,16 @@ Search.appendIndex(
             "name": "cfgRequed",
             "summary": "Requied\u0020Config\u0020Keys",
             "url": "classes/AbraFlexi-Bricks-ParovacFaktur.html#property_cfgRequed"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003A\u0024docTypes",
+            "name": "docTypes",
+            "summary": "",
+            "url": "classes/AbraFlexi-Bricks-ParovacFaktur.html#property_docTypes"
+        },                {
+            "fqsen": "\\AbraFlexi\\Bricks\\ParovacFaktur\u003A\u003A\u0024defaultHttpHeaders",
+            "name": "defaultHttpHeaders",
+            "summary": "",
+            "url": "classes/AbraFlexi-Bricks-ParovacFaktur.html#property_defaultHttpHeaders"
         },                {
             "fqsen": "\\AbraFlexi\\Bricks\\PotvrzeniUhrady",
             "name": "PotvrzeniUhrady",
