@@ -3,7 +3,7 @@
   "description": "php-flexibee extending classes and widgets (debianized)",
   "homepage": "https://github.com/VitexSoftware/AbraFlexi-Bricks",
   "license": "GPL-2.0+",
-  "version": "1.2",
+  "version": "1.2.1",
   "type": "library",
   "authors": [
     {
