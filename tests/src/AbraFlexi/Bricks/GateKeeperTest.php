@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\AbraFlexi\Bricks;
 
 /**
@@ -7,10 +20,7 @@ namespace Test\AbraFlexi\Bricks;
  */
 class GateKeeperTest extends \Test\Ease\SandTest
 {
-    /**
-     * @var GateKeeper
-     */
-    protected $object;
+    protected GateKeeper $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -18,7 +28,7 @@ class GateKeeperTest extends \Test\Ease\SandTest
      */
     protected function setUp(): void
     {
-        $this->object = new GateKeeper;
+        $this->object = new GateKeeper();
     }
 
     /**
@@ -27,42 +37,44 @@ class GateKeeperTest extends \Test\Ease\SandTest
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers AbraFlexi\Bricks\GateKeeper::isAccessibleBy
+     * @covers \AbraFlexi\Bricks\GateKeeper::isAccessibleBy
+     *
      * @todo   Implement testIsAccessibleBy().
      */
-    public function testIsAccessibleBy()
+    public function testIsAccessibleBy(): void
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+            'This test has not been implemented yet.',
         );
     }
 
     /**
-     * @covers AbraFlexi\Bricks\GateKeeper::getDocumentCompany
+     * @covers \AbraFlexi\Bricks\GateKeeper::getDocumentCompany
+     *
      * @todo   Implement testGetDocumentCompany().
      */
-    public function testGetDocumentCompany()
+    public function testGetDocumentCompany(): void
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+            'This test has not been implemented yet.',
         );
     }
 
     /**
-     * @covers AbraFlexi\Bricks\GateKeeper::getCustomerCompany
+     * @covers \AbraFlexi\Bricks\GateKeeper::getCustomerCompany
+     *
      * @todo   Implement testGetCustomerCompany().
      */
-    public function testGetCustomerCompany()
+    public function testGetCustomerCompany(): void
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+            'This test has not been implemented yet.',
         );
     }
 }

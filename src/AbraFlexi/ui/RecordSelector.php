@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Common selectize.js based AbraFlexi records chooser
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright (c) 2019, Vitex Software
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\ui;
 
 /**
- * Select One Value
+ * Select One Value.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
@@ -19,18 +25,18 @@ class RecordSelector extends \Ease\Html\SelectTag
     use \Ease\ui\Selectizer;
 
     /**
-     * Selectize.js based input
+     * Selectize.js based input.
      *
-     * @param string                 $name
-     * @param string                 $value
+     * @param string        $name
+     * @param string        $value
      * @param \AbraFlexi\RO $optionsEngine
-     * @param array                  $properties
+     * @param array         $properties
      */
     public function __construct(
         $name,
         $value,
         $optionsEngine,
-        $properties = array()
+        $properties = []
     ) {
         if (empty($optionsEngine->getColumnInfo('nazev'))) {
             $nameColumn = 'kod';

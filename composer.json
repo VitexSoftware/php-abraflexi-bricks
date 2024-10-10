@@ -9,14 +9,10 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "vitexsoftware/ease-core-bricks": "*",
         "spojenet/flexibee": "dev-main"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*",
-        "phpstan/phpstan": "*"
     },
     "autoload": {
         "psr-4": {
@@ -36,7 +32,15 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.4@dev",
-        "phpunit/php-code-coverage": "^10.1@dev"
+        "phpunit/phpunit": "*",
+        "phpstan/phpstan": "*",
+        "friendsofphp/php-cs-fixer": "^3.61",
+        "ergebnis/composer-normalize": "^2.43",
+        "ergebnis/php-cs-fixer-config": "^6.34"
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
     }
 }

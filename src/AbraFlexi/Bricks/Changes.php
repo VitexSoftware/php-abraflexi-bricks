@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Bricks - Changes Class
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2022 Vitex Software
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Bricks;
 
 /**
- * WebHook data Handler class
+ * WebHook data Handler class.
  *
  * @see https://podpora.flexibee.eu/cs/articles/4744362-changes-api
  *
@@ -19,44 +25,44 @@ namespace AbraFlexi\Bricks;
 class Changes
 {
     /**
-     * Reported number of last change
-     * @var int
+     * Reported number of last change.
      */
-    public $globalVersion = null;
+    public int $globalVersion = null;
 
     /**
-     * Stored Changes
+     * Stored Changes.
+     *
      * @var array<Change>
      */
-    public $changes = [];
+    public array $changes = [];
 
     /**
-     * Next chunk ID
-     * @var int
+     * Next chunk ID.
      */
-    public $next = null;
+    public int $next = null;
 
     /**
-     *
      * @param array $changesData
      */
     public function __construct($changesData)
     {
-        if (array_key_exists('changes', $changesData)) {
+        if (\array_key_exists('changes', $changesData)) {
             foreach ($changesData['changes'] as $changeData) {
                 $this->changes[] = new Change($changeData);
             }
         }
-        if (array_key_exists('@globalVersion', $changesData)) {
-            $this->globalVersion = intval($changesData['@globalVersion']);
+
+        if (\array_key_exists('@globalVersion', $changesData)) {
+            $this->globalVersion = (int) $changesData['@globalVersion'];
         }
-        if (array_key_exists('next', $changesData)) {
-            $this->next = intval($changesData['next']);
+
+        if (\array_key_exists('next', $changesData)) {
+            $this->next = (int) $changesData['next'];
         }
     }
 
     /**
-     * Result array contains different key with new|old values
+     * Result array contains different key with new|old values.
      *
      * @param array $data
      * @param array $datb
@@ -65,15 +71,17 @@ class Changes
     {
         $diff = [];
         $columns = array_merge(array_combine(array_keys($data), array_keys($data)), array_combine(array_keys($datb), array_keys($datb)));
+
         foreach ($columns as $column) {
-            if ((array_key_exists($column, $data) && is_array($data[$column])) || (array_key_exists($column, $datb) && is_array($datb[$column]))) {
-                $diff[$column] = self::dataDiff(array_key_exists($column, $data) ? $data[$column] : [], array_key_exists($column, $datb) ? $datb[$column] : []);
+            if ((\array_key_exists($column, $data) && \is_array($data[$column])) || (\array_key_exists($column, $datb) && \is_array($datb[$column]))) {
+                $diff[$column] = self::dataDiff(\array_key_exists($column, $data) ? $data[$column] : [], \array_key_exists($column, $datb) ? $datb[$column] : []);
             } else {
-                if ((array_key_exists($column, $data) && array_key_exists($column, $datb) && (strval($data[$column]) == strval($datb[$column]))) === false) {
-                    $diff[$column] = strval($data[$column]) . '|' . strval($datb[$column]);
+                if ((\array_key_exists($column, $data) && \array_key_exists($column, $datb) && ((string) $data[$column] === (string) $datb[$column])) === false) {
+                    $diff[$column] = (string) $data[$column].'|'.(string) $datb[$column];
                 }
             }
         }
+
         return $diff;
     }
 }

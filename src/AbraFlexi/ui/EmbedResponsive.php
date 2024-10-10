@@ -1,23 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Bricks
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\ui;
 
 /**
- * Description of EmbedResponsive
+ * Description of EmbedResponsive.
  *
  * @author vitex
  */
 class EmbedResponsive extends \Ease\Html\DivTag
 {
-    public function finalize()
+    public function finalize(): void
     {
-        $this->addCSS('
+        $this->addCSS(<<<'EOD'
+
 .embed-responsive {
     position: relative;
     display: block;
@@ -25,7 +33,8 @@ class EmbedResponsive extends \Ease\Html\DivTag
     padding: 0;
     overflow: hidden;
 }
-');
+
+EOD);
         parent::finalize();
     }
 }

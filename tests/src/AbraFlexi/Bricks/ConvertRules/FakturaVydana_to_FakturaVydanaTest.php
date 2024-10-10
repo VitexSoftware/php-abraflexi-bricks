@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\AbraFlexi\Bricks\ConvertRules;
 
 /**
@@ -7,10 +20,7 @@ namespace Test\AbraFlexi\Bricks\ConvertRules;
  */
 class FakturaVydana_to_FakturaVydanaTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var FakturaVydana_to_FakturaVydana
-     */
-    protected $object;
+    protected FakturaVydana_to_FakturaVydana $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -27,6 +37,5 @@ class FakturaVydana_to_FakturaVydanaTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 }

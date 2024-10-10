@@ -1,55 +1,61 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Bricks - GDPR Logger support
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2019 Vitex Software
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Bricks;
 
 /**
- * Description of CustomerLog
+ * Description of CustomerLog.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class GdprLog extends \Ease\GdprLog
 {
     /**
-     * Log AbraFlexi event
+     * Log AbraFlexi event.
      *
      * @param \AbraFlexi\RW $abraflexi
-     * @param array $columns
+     * @param array         $columns
      */
-    public function logAbraFlexiEvent($abraflexi, $columns)
+    public function logAbraFlexiEvent($abraflexi, $columns): void
     {
         foreach ($columns as $columnName) {
             $this->logEvent(
                 $columnName,
                 empty($abraflexi->lastInsertedID) ? 'update' : 'create',
                 null,
-                $abraflexi->getApiURL() . '#' . $columnName
+                $abraflexi->getApiURL().'#'.$columnName,
             );
         }
     }
 
     /**
-     * Log Change in AbraFlexi
+     * Log Change in AbraFlexi.
      *
      * @param \AbraFlexi\RW $abraflexi
-     * @param array $originalData
-     * @param array $columns
+     * @param array         $originalData
+     * @param array         $columns
      */
-    public function logAbraFlexiChange($abraflexi, $originalData, $columns)
+    public function logAbraFlexiChange($abraflexi, $originalData, $columns): void
     {
         foreach ($columns as $columnName) {
-            if ($originalData[$columnName] != $abraflexi->getDataValue($columnName)) {
+            if ($originalData[$columnName] !== $abraflexi->getDataValue($columnName)) {
                 $this->logEvent(
                     $columnName,
                     $abraflexi->getLastOperationType(),
                     null,
-                    $abraflexi->getApiURL() . '#' . $columnName
+                    $abraflexi->getApiURL().'#'.$columnName,
                 );
             }
         }

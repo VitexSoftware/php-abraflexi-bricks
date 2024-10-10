@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\AbraFlexi\Bricks\ConvertRules;
 
 /**
@@ -7,10 +20,7 @@ namespace Test\AbraFlexi\Bricks\ConvertRules;
  */
 class FakturaPrijata_to_ZavazekTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var FakturaPrijata_to_Zavazek
-     */
-    protected $object;
+    protected FakturaPrijata_to_Zavazek $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -27,14 +37,14 @@ class FakturaPrijata_to_ZavazekTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers AbraFlexi\Bricks\ConvertRules\FakturaPrijata_to_Zavazek::polozkyFakturyTypPolozkyK
+     * @covers \AbraFlexi\Bricks\ConvertRules\FakturaPrijata_to_Zavazek::polozkyFakturyTypPolozkyK
+     *
      * @todo   Implement testPolozkyFakturyTypPolozkyK().
      */
-    public function testPolozkyFakturyTypPolozkyK()
+    public function testPolozkyFakturyTypPolozkyK(): void
     {
         $this->assertEquals('', $this->object->PolozkyFakturyTypPolozkyK());
         // Remove the following lines when you implement this test.

@@ -1,59 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Bricks - One Change Class
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2022-2023 Vitex Software
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Bricks;
 
 /**
- * Handle one AbraFlexi change record
+ * Handle one AbraFlexi change record.
  *
  * @author vitex
  */
 class Change
 {
     /**
-     * Evidence of record
-     * @var string
+     * Evidence of record.
      */
-    public $evidence = null; // "faktura-vydana",
+    public string $evidence = null; // "faktura-vydana",
 
     /**
-     * Change IN Version
-     * @var int
+     * Change IN Version.
      */
-    public $inVersion = null; // "3",
+    public int $inVersion = null; // "3",
 
     /**
-     * create, update, delete
-     * @var string
+     * create, update, delete.
      */
-    public $operation = null; //"create",
+    public string $operation = null; // "create",
+    public \AbraFlexi\DateTime $timestamp = null; // "2019-01-01 00:00:00.0",
+    public int $id = null; // "1",
 
     /**
-     *
-     * @var \AbraFlexi\DateTime
+     * Ext-IDs for record.
      */
-    public $timestamp = null; // "2019-01-01 00:00:00.0",
+    public array $extIds = []; // []
 
     /**
-     *
-     * @var integer
-     */
-    public $id = null; // "1",
-
-    /**
-     * Ext-IDs for record
-     * @var array
-     */
-    public $extIds = []; // []
-
-    /**
-     * One AbraFlexi change
+     * One AbraFlexi change.
      *
      * @param array $changeData
      */
@@ -65,27 +57,28 @@ class Change
     }
 
     /**
-     * Give your data back
+     * Give your data back.
      *
      * @return array
      */
     public function getData()
     {
         return [
-            "@evidence" => $this->evidence,
-            "@in-version" => $this->inVersion,
-            "@operation" => $this->operation,
-            "@timestamp" => $this->timestamp,
-            "id" => $this->id,
-            "external-ids" => $this->extIds
+            '@evidence' => $this->evidence,
+            '@in-version' => $this->inVersion,
+            '@operation' => $this->operation,
+            '@timestamp' => $this->timestamp,
+            'id' => $this->id,
+            'external-ids' => $this->extIds,
         ];
     }
 
     /**
-     * Store data
+     * Store data.
+     *
      * @param array $changeData
      */
-    public function setData($changeData)
+    public function setData($changeData): void
     {
         $this->evidence = $changeData['@evidence'];
         $this->inVersion = $changeData['@in-version'];

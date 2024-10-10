@@ -1,33 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi - WebHook reciever
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017 Vitex Software
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Bricks;
 
 /**
- * Obtain & process AbraFlexi webhook call
+ * Obtain & process AbraFlexi webhook call.
  *
  * @author vitex
  */
 class HookReciever extends \AbraFlexi\Changes
 {
-    public $format        = 'json';
-    public $changes       = null;
-    public $globalVersion = null;
+    public $format = 'json';
+    public $changes;
+    public $globalVersion;
 
     /**
-     * Posledni zpracovana verze
-     * @var int
+     * Posledni zpracovana verze.
      */
-    public $lastProcessedVersion = null;
+    public int $lastProcessedVersion = null;
 
     /**
-     * Prijmac WebHooku
+     * Prijmac WebHooku.
+     *
+     * @param null|mixed $id
+     * @param mixed      $options
      */
     public function __construct($id = null, $options = [])
     {
@@ -36,84 +44,97 @@ class HookReciever extends \AbraFlexi\Changes
     }
 
     /**
-     * Poslouchá standartní vstup
+     * Poslouchá standartní vstup.
      *
      * @return string zaslaná data
      */
     public function listen()
     {
-        $input     = null;
+        $input = null;
         $inputJSON = file_get_contents('php://input');
-        if (strlen($inputJSON)) {
-            $input     = json_decode($inputJSON, true); //convert JSON into array
+
+        if (\strlen($inputJSON)) {
+            $input = json_decode($inputJSON, true); // convert JSON into array
             $lastError = json_last_error();
+
             if ($lastError) {
                 $this->addStatusMessage(json_last_error_msg(), 'warning');
             }
         }
+
         return $input;
     }
 
     /**
-     * Zpracuje změny
+     * Zpracuje změny.
      */
-    function processChanges()
+    public function processChanges(): void
     {
         if (!empty($this->changes)) {
             $changepos = 0;
+
             foreach ($this->changes as $change) {
-                $changepos++;
-                $evidence    = $change['@evidence'];
-                $inVersion   = intval($change['@in-version']);
-                $operation   = $change['@operation'];
-                $id          = intval($change['id']);
-                $externalIDs = isset($change['external-ids']) ? $change['external-ids']
-                        : [];
+                ++$changepos;
+                $evidence = $change['@evidence'];
+                $inVersion = (int) $change['@in-version'];
+                $operation = $change['@operation'];
+                $id = (int) $change['id'];
+                $externalIDs = $change['external-ids']
+                        ?? [];
 
                 if ($inVersion <= $this->lastProcessedVersion) {
                     $this->addStatusMessage(sprintf(
                         _('Change version %s already processed'),
-                        $inVersion
+                        $inVersion,
                     ), 'warning');
+
                     continue;
                 }
+
                 $handlerClassName = \AbraFlexi\RO::evidenceToClassName($evidence);
-                $handlerClassFile = 'System/whplugins/' . $handlerClassName . '.php';
+                $handlerClassFile = 'System/whplugins/'.$handlerClassName.'.php';
+
                 if (file_exists($handlerClassFile)) {
                     include_once $handlerClassFile;
                 }
 
-                $handlerClass = '\\SpojeNet\\System\\whplugins\\' . $handlerClassName;
+                $handlerClass = '\\SpojeNet\\System\\whplugins\\'.$handlerClassName;
+
                 if (class_exists($handlerClass)) {
                     $saver = new $handlerClass(
                         $id,
                         ['evidence' => $evidence, 'operation' => $operation, 'external-ids' => $externalIDs,
-                        'changeid' => $inVersion]
+                            'changeid' => $inVersion],
                     );
                     $saver->saveHistory();
+
                     switch ($operation) {
                         case 'update':
                         case 'create':
                         case 'delete':
                             if ($saver->process($operation) && ($this->debug === true)) {
                                 $this->addStatusMessage(
-                                    $changepos . '/' . count($this->changes),
-                                    'success'
+                                    $changepos.'/'.\count($this->changes),
+                                    'success',
                                 );
                             }
+
                             break;
+
                         default:
                             $this->addStatusMessage('Unknown operation', 'warning');
+
                             break;
                     }
                 } else {
                     if ($this->debug === true) {
                         $this->addStatusMessage(sprintf(
                             _('Handler Class %s does not exist'),
-                            addslashes($handlerClass)
+                            addslashes($handlerClass),
                         ), 'warning');
                     }
                 }
+
                 $this->saveLastProcessedVersion($inVersion);
             }
         } else {
@@ -122,68 +143,75 @@ class HookReciever extends \AbraFlexi\Changes
     }
 
     /**
-     * Převezme změny
+     * Převezme změny.
      *
-     * @link https://www.abraflexi.eu/api/dokumentace/ref/changes-api/ Changes API
+     * @see https://www.abraflexi.eu/api/dokumentace/ref/changes-api/ Changes API
+     *
      * @param array $changes pole změn
+     *
      * @return int Globální verze poslední změny
      */
     public function takeChanges($changes)
     {
         $result = null;
-        if (!is_array($changes)) {
+
+        if (!\is_array($changes)) {
             \Ease\Shared::logger()->addToLog(
                 _('Empty WebHook request'),
-                'Warning'
+                'Warning',
             );
         } else {
-            if (array_key_exists('winstrom', $changes)) {
-                $this->globalVersion = intval($changes['winstrom']['@globalVersion']);
-                $this->changes       = $changes['winstrom']['changes'];
+            if (\array_key_exists('winstrom', $changes)) {
+                $this->globalVersion = (int) $changes['winstrom']['@globalVersion'];
+                $this->changes = $changes['winstrom']['changes'];
             }
+
             $result = is_numeric($changes['winstrom']['next']) ? $changes['winstrom']['next'] - 1 : $this->globalVersion;
         }
+
         return $result;
     }
 
     /**
-     * Ulozi posledni zpracovanou verzi
+     * Ulozi posledni zpracovanou verzi.
      *
      * @param int $version
      */
-    public function saveLastProcessedVersion($version)
+    public function saveLastProcessedVersion($version): void
     {
         $this->lastProcessedVersion = $version;
-        $this->myCreateColumn       = null;
-//        $this->deleteFromSQL(['serverurl' => constant('ABRAFLEXI_URL')]);
-//        if (is_null($this->insertToSQL(['serverurl' => constant('ABRAFLEXI_URL'),
-//                    'changeid' => $version]))) {
-//            $this->addStatusMessage(_("Last Processed Change ID Saving Failed"),
-//                'error');
-//        } else {
-//            if ($this->debug === true) {
-//                $this->addStatusMessage(sprintf(_('Last Processed Change ID #%s Saved'),
-//                        $version));
-//            }
-//        }
+        $this->myCreateColumn = null;
+        //        $this->deleteFromSQL(['serverurl' => constant('ABRAFLEXI_URL')]);
+        //        if (is_null($this->insertToSQL(['serverurl' => constant('ABRAFLEXI_URL'),
+        //                    'changeid' => $version]))) {
+        //            $this->addStatusMessage(_("Last Processed Change ID Saving Failed"),
+        //                'error');
+        //        } else {
+        //            if ($this->debug === true) {
+        //                $this->addStatusMessage(sprintf(_('Last Processed Change ID #%s Saved'),
+        //                        $version));
+        //            }
+        //        }
     }
 
     /**
-     * Nacte posledni zpracovanou verzi
+     * Nacte posledni zpracovanou verzi.
      *
      * @return int $version
      */
     public function getLastProcessedVersion()
     {
         $lastProcessedVersion = null;
+
         if (false) {
             $lastProcessedVersion = 0;
         } else {
             $this->addStatusMessage(
-                _("Last Processed Change ID Loading Failed"),
-                'warning'
+                _('Last Processed Change ID Loading Failed'),
+                'warning',
             );
         }
+
         return $lastProcessedVersion;
     }
 }

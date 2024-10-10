@@ -1,23 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Bricks - Payment confirmation
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2018 Vitex Software
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Bricks;
 
 /**
- * Description of PotvrzeniUhrady
+ * Description of PotvrzeniUhrady.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class PotvrzeniUhrady extends \Ease\HtmlMailer
 {
     /**
-     * Odešle potvrzení úhrady
+     * Odešle potvrzení úhrady.
+     *
      * @param \AbraFlexi\FakturaVydana $invoice
      */
     public function __construct($invoice)
@@ -29,14 +36,13 @@ class PotvrzeniUhrady extends \Ease\HtmlMailer
             _('we confirm receipt of payment %s %s on %s '),
             $invoice->getDataValue('sumCelkem'),
             \AbraFlexi\RO::uncode($invoice->getDataValue('mena')),
-            $invoice->getDataValue('kod')
+            $invoice->getDataValue('kod'),
         )));
-
 
         parent::__construct(
             $to,
             _('Confirmation of receipt of invoice payment'),
-            $body
+            $body,
         );
     }
 }

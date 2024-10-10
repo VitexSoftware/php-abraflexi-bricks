@@ -1,8 +1,14 @@
-php-vitexsoftware-abraflexi-bricks (1.2.1) UNRELEASED; urgency=medium
+php-vitexsoftware-abraflexi-bricks (1.3.0) UNRELEASED; urgency=medium
+
+  * v1.3.0 release
+
+ -- vitex <info@vitexsoftware.cz>  Thu, 10 Oct 2024 13:13:18 +0200
+
+php-vitexsoftware-abraflexi-bricks (1.2.1) unstable; urgency=medium
 
   * new rule FakturaPrijataPolozka_to_Cenik
 
- -- vitex <info@vitexsoftware.cz>  Wed, 31 Jul 2024 03:50:04 +0200
+ -- vitex <info@vitexsoftware.cz>  Thu, 10 Oct 2024 13:13:02 +0200
 
 php-vitexsoftware-abraflexi-bricks (1.2) unstable; urgency=medium
 

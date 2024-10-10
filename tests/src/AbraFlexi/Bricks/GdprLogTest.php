@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\AbraFlexi\Bricks;
 
 use AbraFlexi\Bricks\GdprLog;
@@ -9,10 +22,7 @@ use AbraFlexi\Bricks\GdprLog;
  */
 class GdprLogTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var GdprLog
-     */
-    protected $object;
+    protected GdprLog $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class GdprLogTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers AbraFlexi\Bricks\GdprLog::logAbraFlexiEvent
+     * @covers \AbraFlexi\Bricks\GdprLog::logAbraFlexiEvent
+     *
      * @todo   Implement testlogAbraFlexiEvent().
      */
-    public function testlogAbraFlexiEvent()
+    public function testlogAbraFlexiEvent(): void
     {
         $this->assertEquals('', $this->object->logAbraFlexiEvent());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class GdprLogTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers AbraFlexi\Bricks\GdprLog::logAbraFlexiChange
+     * @covers \AbraFlexi\Bricks\GdprLog::logAbraFlexiChange
+     *
      * @todo   Implement testlogAbraFlexiChange().
      */
-    public function testlogAbraFlexiChange()
+    public function testlogAbraFlexiChange(): void
     {
         $this->assertEquals('', $this->object->logAbraFlexiChange());
         // Remove the following lines when you implement this test.

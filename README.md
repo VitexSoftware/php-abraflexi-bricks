@@ -1,5 +1,5 @@
-# php-vitexsoftware-abraflexi-bricks
-![Project Logo](project-logo.png?raw=true "Project Logo")
+# Bricks for AbraFlexi
+![Project Logo](social-preview.svg?raw=true "Project Logo")
 
 [![Build Status](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks.svg?branch=main)](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks)
 [![GitHub stars](https://img.shields.io/github/stars/VitexSoftware/php-abraflexi-bricks.svg)](stargazers)
@@ -7,113 +7,115 @@
 [![GitHub license](https://img.shields.io/github/license/VitexSoftware/php-abraflexi-bricks.svg)](LICENSE?raw=true)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/VitexSoftware/php-abraflexi-bricks.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FVitexSoftware%2Fphp-abraflexi-bricks)
 
-Examples how to use [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) Library for AbraFlexi with EasePHP Framework widgets
+Examples of how to use the [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) Library for AbraFlexi with EasePHP Framework widgets
 
-Příklady použití knihovny [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) pro [AbraFlexi](https://flexibee.eu/)
+Examples of using the [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) library for [AbraFlexi](https://flexibee.eu/)
 
 
-Instalace
-----------
+Installation
+------------
 
     composer require vitexsoftware/abraflexi-bricks
 
 
-How to run ?
-------------
+How to run?
+-----------
 
 1) composer install
 2) cd src
 3) modify config.php to use custom AbraFlexi connection
-4) open the project url in browser
+4) open the project URL in the browser
 
 
-### Co tady máme ?
+### What do we have here?
 
-Zatím několik málo praktických ukázek určený k použití ve vašich aplikacích - odtud název bricks/cihličky
+So far, a few practical examples intended for use in your applications - hence the name bricks/cihličky
 
-# Třídy v php-abraflexi/Bricks/:
+# Classes in php-abraflexi/Bricks/:
 
-| Soubor                                                          | Popis                                 |
-| --------------------------------------------------------------- | --------------------------------------|
-| [Convertor.php](src/php-abraflexi/Bricks/Convertor.php)          | Konvertor dokladů
-| [Customer.php](src/php-abraflexi/Bricks/Customer.php)            | Zákazník
-| [GdprLog.php](src/php-abraflexi/Bricks/GdprLog.php)              | GDPR Logger s podporou pro AbraFlexi
-| [GateKeeper.php](src/php-abraflexi/Bricks/GateKeeper.php)        | Kontroluje zdali je shodná firma uživatele a dokladu
-| [PotvrzeniUhrady.php](src/php-abraflexi/Bricks/HookReciever.php) | Třída potvrzující došlou úhradu
-| [ParovacFaktur.php](src/php-abraflexi/Bricks/ParovacFaktur.php)  | Párovač faktur
+| File                                                           | Description                           |
+| -------------------------------------------------------------- | ------------------------------------- |
+| [Convertor.php](src/php-abraflexi/Bricks/Convertor.php)        | Document converter
+| [Customer.php](src/php-abraflexi/Bricks/Customer.php)          | Customer
+| [GdprLog.php](src/php-abraflexi/Bricks/GdprLog.php)            | GDPR Logger with support for AbraFlexi
+| [GateKeeper.php](src/php-abraflexi/Bricks/GateKeeper.php)      | Checks if the user's company matches the document's company
+| [PotvrzeniUhrady.php](src/php-abraflexi/Bricks/HookReciever.php)| Class confirming received payment
+| [ParovacFaktur.php](src/php-abraflexi/Bricks/ParovacFaktur.php)| Invoice matcher
 
-# Třídy v php-abraflexi/Bricks/ui:
+# Classes in php-abraflexi/Bricks/ui:
 
-| Soubor                                                        | Popis                                 |
-| ------------------------------------------------------------- | --------------------------------------|
-| [CompanyLogo.php](src/php-abraflexi/Bricks/ui/CompanyLogo.php)   | Logo Firmy
-| [DocumentLink.php](src/php-abraflexi/Bricks/ui/DocumentLink.php) | Odkaz na dokument ve webovém rozhraní AbraFlexi
-| [AbraFlexiLogo.php](src/php-abraflexi/Bricks/ui/AbraFlexiLogo.php) | Logo AbraFlexi
-| [EmbedResponsiveHTML.php](src/php-abraflexi/Bricks/ui/EmbedResponsiveHTML.php)| Třída pro zobrazení HTML dokumentu na stránce 
-| [EmbedResponsivePDF.php](src/php-abraflexi/Bricks/ui/EmbedResponsivePDF.php)  | Třída pro zobrazení PDF dokumentu na stránce 
-| [RecordTypeSelect.php](src/php-abraflexi/Bricks/ui/RecordTypeSelect.php)      | Nabídka pro výběr typu dokumnetu 
-| [RecordChooser.php](src/php-abraflexi/Bricks/ui/RecordChooser.php)            | Nabídka pro výběr záznamu zaleožený na [Selectize.js](https://selectize.github.io/selectize.js/)
+| File                                                           | Description                           |
+| -------------------------------------------------------------- | ------------------------------------- |
+| [CompanyLogo.php](src/php-abraflexi/Bricks/ui/CompanyLogo.php) | Company Logo
+| [DocumentLink.php](src/php-abraflexi/Bricks/ui/DocumentLink.php)| Link to the document in the AbraFlexi web interface
+| [AbraFlexiLogo.php](src/php-abraflexi/Bricks/ui/AbraFlexiLogo.php)| AbraFlexi Logo
+| [EmbedResponsiveHTML.php](src/php-abraflexi/Bricks/ui/EmbedResponsiveHTML.php)| Class for displaying HTML document on the page
+| [EmbedResponsivePDF.php](src/php-abraflexi/Bricks/ui/EmbedResponsivePDF.php)  | Class for displaying PDF document on the page
+| [RecordTypeSelect.php](src/php-abraflexi/Bricks/ui/RecordTypeSelect.php)      | Dropdown for selecting document type
+| [RecordChooser.php](src/php-abraflexi/Bricks/ui/RecordChooser.php)            | Dropdown for selecting record based on [Selectize.js](https://selectize.github.io/selectize.js/)
 
 
-Ukázky ve složce [Examples](Examples)
-=====================================
+Examples in the [Examples](Examples) folder
+===========================================
 
-Logo Firmy: [companylogo.php](Examples/companylogo.php)
+Company Logo: [companylogo.php](Examples/companylogo.php)
 
 ![Logo](Examples/companylogo.png?raw=true)
 
-Editor Adresy: [addresseditor.php](Examples/addresseditor.php)
+Address Editor: [addresseditor.php](Examples/addresseditor.php)
 
-![Výpis](Examples/addresseditor.png?raw=true)
+![Output](Examples/addresseditor.png?raw=true)
 
-Výpis faktur do stránky: [invoices.php](Examples/invoices.php)
+Invoice listing on the page: [invoices.php](Examples/invoices.php)
 
-![Výpis](Examples/invoices.png?raw=true)
+![Output](Examples/invoices.png?raw=true)
 
-Vložení PDF do stránky: [embed.php](Examples/embed.php)
+Embedding PDF on the page: [embed.php](Examples/embed.php)
 
-![Vložení](Examples/embed.png?raw=true)
+![Embedding](Examples/embed.png?raw=true)
 
-Převzetí dokladu z AbraFlexi a jeho odeslání do prohlížeče: [getpdf.php](Examples/getpdf.php)
+Retrieving document from AbraFlexi and sending it to the browser: [getpdf.php](Examples/getpdf.php)
 
-Formulář pro zadání přihlašovacích údajů AbraFlexi a zobrazení zdali bylo připojení úspěšné: [statussignin.php](Examples/statussignin.php)
+Form for entering AbraFlexi login details and displaying whether the connection was successful: [statussignin.php](Examples/statussignin.php)
 
-![Test Připojení](Examples/statussignin.png?raw=true)
+![Connection Test](Examples/statussignin.png?raw=true)
 
 
-Instalátor uživatelských tlačítek [buttonInstaller](src/buttonInstaller.php)
+Custom button installer [buttonInstaller](src/buttonInstaller.php)
 
 ![Custom Button Installer](Examples/buttoninstaller.png?raw=true)
 
-+ tyto přesunuté původně z src
++ these moved originally from src
 
-| Soubor                                                        | Popis                                 |
-| ------------------------------------------------------------- | --------------------------------------|
-| [common.php](Examples/common.php)                             | sdílené obecné funkce
-| [ConnectionInfo.php](Examples/ConnectionInfo.php)             | Kontrola připojení k AbraFlexi serveru   
-| [ConvertIncomeToZdd.php](Examples/ConvertIncomeToZdd.php)     | Zkonvertuje příjem v bance na ZDD a vytvoří vazbu
-| [gethtml.php](Examples/gethtml.php)                           | Vrací HTML verzi dokumentu 
-| [LogResults.php](Examples/LogResults.php)                     | Loguje výsledky requestu      
-| [XSLTimporter.php](Examples/XSLTimporter.php)                 | Importuje XML přez XSLT transformaci
-| [config.php](Examples/config.php)                             | Ukázka konfiguračního souboru 
-| [CurrencyExchange.php](Examples/CurrencyExchange.php)         | Funkce pro směnu měny v záznamu 
-| [getpdf.php](Examples/getpdf.php)                             | Vrací PDF verzi dokumentu  
-| [parse-cmdline.php](Examples/parse-cmdline.php)               | Parser parametrů příkazové řádky
-| [RegisterAddress.php](Examples/RegisterAddress.php)           | Ukázka použití registračního formuláře
-| [UpomenNeplatice.php](Examples/UpomenNeplatice.php)           | Rozešle neplatičům upomínky
-| [webhook.php](Examples/webhook.php)                           | Endpoint pro příjem WebHooků
+| File                                                           | Description                           |
+| -------------------------------------------------------------- | ------------------------------------- |
+| [common.php](Examples/common.php)                              | shared general functions
+| [ConnectionInfo.php](Examples/ConnectionInfo.php)              | Connection check to AbraFlexi server
+| [ConvertIncomeToZdd.php](Examples/ConvertIncomeToZdd.php)      | Converts bank income to ZDD and creates a link
+| [gethtml.php](Examples/gethtml.php)                            | Returns HTML version of the document
+| [LogResults.php](Examples/LogResults.php)                      | Logs request results
+| [XSLTimporter.php](Examples/XSLTimporter.php)                  | Imports XML via XSLT transformation
+| [config.php](Examples/config.php)                              | Example configuration file
+| [CurrencyExchange.php](Examples/CurrencyExchange.php)          | Functions for currency exchange in a record
+| [getpdf.php](Examples/getpdf.php)                              | Returns PDF version of the document
+| [parse-cmdline.php](Examples/parse-cmdline.php)                | Command line parameter parser
+| [RegisterAddress.php](Examples/RegisterAddress.php)            | Example of using the registration form
+| [UpomenNeplatice.php](Examples/UpomenNeplatice.php)            | Sends reminders to debtors
+| [webhook.php](Examples/webhook.php)                            | Endpoint for receiving WebHooks
 
 
 
 Debian/Ubuntu
 -------------
 
-Pro Linux jsou k dispozici .deb balíčky. Prosím použijte repo:
+For Linux, .deb packages are available. Please use the repo:
 
 
 ```shell
-    echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
-    sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
-    sudo apt update
-    sudo apt install php-vitexsoftware-abraflexi-bricks
+sudo apt install lsb-release wget apt-transport-https bzip2
+
+wget -qO- https://repo.vitexsoftware.com/keyring.gpg | sudo tee /etc/apt/trusted.gpg.d/vitexsoftware.gpg
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/vitexsoftware.gpg]  https://repo.vitexsoftware.com  $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+sudo apt update
+sudo apt install php-vitexsoftware-abraflexi-bricks
 ```

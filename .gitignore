@@ -22,3 +22,4 @@ debian/php-abraflexi-bricks.debhelper.log
 /debian/php-vitexsoftware-abraflexi-bricks.substvars
 /.env
 /Cenik_to_FakturaVydana.php
+/.build/

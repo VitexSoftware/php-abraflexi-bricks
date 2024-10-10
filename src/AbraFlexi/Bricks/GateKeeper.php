@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi - WebHook reciever
+ * This file is part of the BricksForAbraFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017 Vitex Software
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Bricks;
 
 /**
- * Description of GateKeeper
+ * Description of GateKeeper.
  *
  * @version 0.1
  *
@@ -21,30 +27,35 @@ class GateKeeper extends \Ease\Sand
     /**
      * Is document accessible by user ?
      *
-     * @param \AbraFlexi\RO $document AbraFlexi documnet
-     * @param Customer|User|\Ease\Anonym $user Current User
+     * @param \AbraFlexi\RO              $document AbraFlexi documnet
+     * @param Customer|\Ease\Anonym|User $user     Current User
      *
-     * @return boolean
+     * @return bool
      */
     public static function isAccessibleBy($document, $user)
     {
         $result = null;
+
         switch (Convertor::baseClassName($user)) {
-            case 'User': //Admin
+            case 'User': // Admin
                 $result = true;
+
                 break;
-            case 'Customer': //Customer
-                $result = (self::getDocumentCompany($document) == self::getCustomerCompany($user));
+            case 'Customer': // Customer
+                $result = (self::getDocumentCompany($document) === self::getCustomerCompany($user));
+
                 break;
-            case 'Anonym': //Anonymous
+            case 'Anonym': // Anonymous
                 $result = false;
+
                 break;
         }
+
         return $result;
     }
 
     /**
-     * Get Company code for document
+     * Get Company code for document.
      *
      * @param \AbraFlexi\RO $document
      *
@@ -53,12 +64,12 @@ class GateKeeper extends \Ease\Sand
     public static function getDocumentCompany($document)
     {
         return $document->getDataValue('firma') ? \AbraFlexi\RO::uncode(
-            $document->getDataValue('firma')
+            $document->getDataValue('firma'),
         ) : null;
     }
 
     /**
-     * Obtain customer company code
+     * Obtain customer company code.
      *
      * @param Customer $customer
      *

@@ -1,15 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace AbraFlexi\ui;
 
 /**
- * AbraFlexi Bricks - AbraFlexi svg logo
+ * AbraFlexi Bricks - AbraFlexi svg logo.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class AbraFlexiLogo extends \Ease\Html\ImgTag
 {
-    static $svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    public static $svg = <<<'EOD'
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="48" width="48" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 12.7 12.7">
  <metadata>
@@ -30,20 +44,21 @@ class AbraFlexiLogo extends \Ease\Html\ImgTag
   </g>
  </g>
 </svg>
-';
+
+EOD;
 
     /**
-     * Inline vector AbraFlexi logo
+     * Inline vector AbraFlexi logo.
      *
      * @param string $style         ignored now
      * @param array  $tagProperties img tag properties
      */
-    public function __construct($style = 'default', $tagProperties = array())
+    public function __construct($style = 'default', $tagProperties = [])
     {
         parent::__construct(
-            'data:image/svg+xml;base64,' . base64_encode(self::$svg),
+            'data:image/svg+xml;base64,'.base64_encode(self::$svg),
             'AbraFlexi',
-            $tagProperties
+            $tagProperties,
         );
     }
 }

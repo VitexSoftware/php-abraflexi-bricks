@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\AbraFlexi\ui;
 
 use AbraFlexi\ui\CompanyLogo;
@@ -9,10 +22,7 @@ use AbraFlexi\ui\CompanyLogo;
  */
 class CompanyLogoTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var CompanyLogo
-     */
-    protected $object;
+    protected CompanyLogo $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,6 +39,5 @@ class CompanyLogoTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 }

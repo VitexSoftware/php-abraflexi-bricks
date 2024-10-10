@@ -1,12 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace AbraFlexi\Bricks;
 
 use AbraFlexi\Banka;
 use AbraFlexi\FakturaVydana;
 
 /**
- * Invoice matching class
+ * Invoice matching class.
  *
  * @copyright (c) 2018-2023, Vítězslav Dvořák
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
@@ -14,96 +27,90 @@ use AbraFlexi\FakturaVydana;
 class ParovacFaktur extends \Ease\Sand
 {
     /**
-     * Invoice handler object
-     * @var  FakturaVydana|\AbraFlexi\FakturaPrijata
+     * account statements handler object.
      */
-    private $invoicer;
-
-    /**
-     * account statements handler object
-     * @var \AbraFlexi\Banka
-     */
-    public $banker;
+    public \AbraFlexi\Banka $banker;
 
     /**
      * @var Od kdy začít dohledávat doklady
      */
-    public $daysBack = 1;
+    public Od $daysBack = 1;
 
     /**
-     * Configuration options
-     * @var array
+     * Requied Config Keys.
      */
-    private $config = ['limit' => 0];
+    public array $cfgRequed = ['LABEL_OVERPAY', 'LABEL_INVOICE_MISSING', 'LABEL_UNIDENTIFIED'];
+    public array $defaultHttpHeaders;
 
     /**
-     * Requied Config Keys
-     * @var array
-     */
-    public $cfgRequed = ["LABEL_OVERPAY", "LABEL_INVOICE_MISSING", "LABEL_UNIDENTIFIED"];
-
-    /**
+     * Invoice handler object.
      *
-     * @var type
+     * @var \AbraFlexi\FakturaPrijata|FakturaVydana
      */
-    private $docTypes;
+    private $invoicer;
 
     /**
+     * Configuration options.
+     */
+    private array $config = ['limit' => 0];
+    private type $docTypes;
+
+    /**
+     * Invoice matcher.
      *
-     * @var array
-     */
-    public $defaultHttpHeaders;
-
-    /**
-     * Invoice matcher
+     * @param mixed $configuration
      */
     public function __construct($configuration = [])
     {
         $this->config = array_merge($this->config, $configuration);
+
         foreach ($this->cfgRequed as $key) {
-            if ((array_key_exists($key, $this->config) === false) || empty($this->config[$key])) {
+            if ((\array_key_exists($key, $this->config) === false) || empty($this->config[$key])) {
                 throw new \Ease\Exception(sprintf(
                     _('Configuration key %s is not set'),
-                    $key
+                    $key,
                 ));
             }
         }
+
         $this->banker = new \AbraFlexi\Banka(null, $this->config);
     }
 
     /**
-     * Start set date
+     * Start set date.
      *
      * @param int $daysBack
      */
-    public function setStartDay($daysBack)
+    public function setStartDay($daysBack): void
     {
-        if (!is_null($daysBack)) {
-            $this->addStatusMessage('Start Date ' . date(
+        if (null !== $daysBack) {
+            $this->addStatusMessage('Start Date '.date(
                 'Y-m-d',
-                mktime(0, 0, 0, date("m"), date("d") - $daysBack, date("Y"))
+                mktime(0, 0, 0, date('m'), date('d') - $daysBack, date('Y')),
             ));
         }
+
         $this->daysBack = $daysBack;
     }
 
     /**
-     * Prepare invoice helper
+     * Prepare invoice helper.
      *
-     * @return  FakturaVydana
+     * @return FakturaVydana
      */
     public function getInvoicer()
     {
-        if (!is_object($this->invoicer)) {
+        if (!\is_object($this->invoicer)) {
             $this->invoicer = new FakturaVydana(null, $this->config);
         }
+
         return $this->invoicer;
     }
 
     /**
-     * Get unmatched payments within given days and direction
+     * Get unmatched payments within given days and direction.
      *
-     * @param int    $daysBack Maximum age of payment
+     * @param int    $daysBack  Maximum age of payment
      * @param string $direction Incoming or outcoming payents in|out
      *
      * @return array
@@ -114,43 +121,42 @@ class ParovacFaktur extends \Ease\Sand
         $this->banker->defaultUrlParams['order'] = 'datVyst@A';
         $payments = $this->banker->getColumnsFromAbraFlexi(
             [
-            'id',
-            'kod',
-            'varSym',
-            'specSym',
-            'sumCelkem',
-            'buc',
-            'smerKod',
-            'mena',
-            'datVyst'],
-            ["sparovano eq false AND typPohybuK eq '" . (($direction == 'out') ? 'typPohybu.vydej' : 'typPohybu.prijem' ) . "' AND storno eq false " .
-                    (is_null($daysBack) ? '' :
-                    "AND datVyst eq '" . \AbraFlexi\RW::timestampToFlexiDate(mktime(
-                        0,
-                        0,
-                        0,
-                        date("m"),
-                        date("d") - $daysBack,
-                        date("Y")
-                    )) . "' ")
+                'id',
+                'kod',
+                'varSym',
+                'specSym',
+                'sumCelkem',
+                'buc',
+                'smerKod',
+                'mena',
+                'datVyst'],
+            ["sparovano eq false AND typPohybuK eq '".(($direction === 'out') ? 'typPohybu.vydej' : 'typPohybu.prijem')."' AND storno eq false ".
+                        (null === $daysBack ? '' :
+                        "AND datVyst eq '".\AbraFlexi\RW::timestampToFlexiDate(mktime(
+                            0,
+                            0,
+                            0,
+                            date('m'),
+                            date('d') - $daysBack,
+                            date('Y'),
+                        ))."' "),
             ],
-            'id'
+            'id',
         );
 
-        if ($this->banker->lastResponseCode == 200) {
+        if ($this->banker->lastResponseCode === 200) {
             if (empty($payments)) {
                 $result = [];
             } else {
                 $result = $payments;
             }
         }
+
         return $result;
     }
 
     /**
-     *
-     * @param \DatePeriod $period
-     * @param string  $direction
+     * @param string $direction
      *
      * @return array
      */
@@ -163,7 +169,7 @@ class ParovacFaktur extends \Ease\Sand
 
         $conds['storno'] = false;
         $conds['sparovano'] = false;
-        $conds['typPohybuK'] = ($direction == 'out') ? 'typPohybu.vydej' : 'typPohybu.prijem';
+        $conds['typPohybuK'] = ($direction === 'out') ? 'typPohybu.vydej' : 'typPohybu.prijem';
 
         $conds['datVyst'] = $period;
 
@@ -178,18 +184,19 @@ class ParovacFaktur extends \Ease\Sand
             'mena',
             'datVyst'], $conds, 'id');
 
-        if ($this->banker->lastResponseCode == 200) {
+        if ($this->banker->lastResponseCode === 200) {
             if (empty($payments)) {
                 $result = [];
             } else {
                 $result = $payments;
             }
         }
+
         return $result;
     }
 
     /**
-     * Vrací neuhrazené faktury
+     * Vrací neuhrazené faktury.
      *
      * @return array
      */
@@ -197,13 +204,15 @@ class ParovacFaktur extends \Ease\Sand
     {
         $this->getInvoicer();
         $this->invoicer->defaultUrlParams['includes'] = '/faktura-vydana/typDokl';
+
         return $this->searchInvoices(["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false"]);
     }
 
     /**
-     * Match Invoice with Payment
+     * Match Invoice with Payment.
      *
-     * @param type $payment
+     * @param mixed $invoiceData
+     * @param type  $payment
      *
      * @return type
      */
@@ -227,53 +236,60 @@ class ParovacFaktur extends \Ease\Sand
          *    Pohyb měna / Zůstatek měna (typBanUctu.mena)
          */
         $matched = false;
+
         switch ($docType) {
             case 'typDokladu.zalohFaktura':
             case 'typDokladu.faktura':
                 $matched = $this->settleInvoice($invoice, $payment);
+
                 break;
             case 'typDokladu.proforma':
                 $matched = $this->settleProforma($invoice, $payment);
+
                 break;
             case 'typDokladu.dobropis':
                 $matched = $this->settleCreditNote($invoice, $payment);
+
                 break;
 
             default:
                 $this->addStatusMessage(
                     sprintf(
                         _('Unsupported document type: %s %s'),
-                        $docTypeShowAs . ' (' . $docType . '): ' . $invoiceData['typDokl'],
-                        $invoice->getApiURL()
+                        $docTypeShowAs.' ('.$docType.'): '.$invoiceData['typDokl'],
+                        $invoice->getApiURL(),
                     ),
-                    'warning'
+                    'warning',
                 );
+
                 break;
         }
 
         if (
             $matched && $this->savePayerAccount(
                 $invoice->getDataValue('firma'),
-                $payment
+                $payment,
             )
         ) {
             $this->addStatusMessage(sprintf(
                 _('new Bank account %s assigned to Address %s'),
-                $payment->getDataValue('buc') . '/' . \AbraFlexi\RO::uncode($payment->getDataValue('smerKod')),
-                $invoice->getDataValue('firma')->showAs
+                $payment->getDataValue('buc').'/'.\AbraFlexi\RO::uncode($payment->getDataValue('smerKod')),
+                $invoice->getDataValue('firma')->showAs,
             ));
         }
 
         $this->banker->loadFromAbraFlexi($payment);
+
         return $this->banker->getDataValue('sparovano');
     }
 
     /**
-     * Párování odchozích faktur podle příchozích plateb v bance
+     * Párování odchozích faktur podle příchozích plateb v bance.
      */
-    public function outInvoicesMatchingByBank()
+    public function outInvoicesMatchingByBank(): void
     {
         $this->getInvoicer();
+
         foreach ($this->getPaymentsToProcess($this->daysBack, 'in') as $paymentData) {
             $this->addStatusMessage(
                 sprintf(
@@ -283,20 +299,20 @@ class ParovacFaktur extends \Ease\Sand
                     \AbraFlexi\RO::uncode($paymentData['mena']),
                     $paymentData['varSym'],
                     $paymentData['specSym'],
-                    $this->banker->url . '/c/' . $this->banker->company . '/' . $this->banker->getEvidence() . '/' . $paymentData['id']
+                    $this->banker->url.'/c/'.$this->banker->company.'/'.$this->banker->getEvidence().'/'.$paymentData['id'],
                 ),
-                'info'
+                'info',
             );
 
             $invoices = $this->findInvoices($paymentData);
-//  kdyz se vrati jedna faktura:
-//     kdyz  je prijata castka mensi nebo rovno tak zlikviduji celou
-//     kdyz sedi castka, nebo castecne
-//  kdyz se vrati vic faktur  tak kdyz sedi castka uhrazuje se ta nejstarsi
-//  jinak se uhrazuje castecne
+            //  kdyz se vrati jedna faktura:
+            //     kdyz  je prijata castka mensi nebo rovno tak zlikviduji celou
+            //     kdyz sedi castka, nebo castecne
+            //  kdyz se vrati vic faktur  tak kdyz sedi castka uhrazuje se ta nejstarsi
+            //  jinak se uhrazuje castecne
 
-            if (count($invoices) && count(current($invoices))) {
-                $prijatoCelkem = floatval($paymentData['sumCelkem']);
+            if (\count($invoices) && \count(current($invoices))) {
+                $prijatoCelkem = (float) $paymentData['sumCelkem'];
                 $payment = new \AbraFlexi\Banka($paymentData, $this->config);
 
                 foreach ($invoices as $invoiceID => $invoiceData) {
@@ -308,40 +324,39 @@ class ParovacFaktur extends \Ease\Sand
                         $vInvoices = $this->searchInvoices(['varSym' => $paymentData['varSym']]);
                     }
                 }
+
                 if (!empty($paymentData['specSym'])) {
                     if (!empty($paymentData['specSym'])) {
                         $sInvoices = $this->searchInvoices(['specSym' => $paymentData['specSym']]);
                     }
                 }
 
-//                if ($vInvoices || $sInvoices) {
-////                    $zdd = $this->paymentToZDD($payment);
-////                    if ($zdd) {
-////                        $this->addStatusMessage(sprinf(_('advance tax document created'),
-////                                \AbraFlexi\RO::uncode($zdd)));
-////                    }
-//
-//                    $this->addStatusMessage(_('Invoice found: - overdue?'),
-//                        'warning');
-//                }
+                //                if ($vInvoices || $sInvoices) {
+                // //                    $zdd = $this->paymentToZDD($payment);
+                // //                    if ($zdd) {
+                // //                        $this->addStatusMessage(sprinf(_('advance tax document created'),
+                // //                                \AbraFlexi\RO::uncode($zdd)));
+                // //                    }
+                //
+                //                    $this->addStatusMessage(_('Invoice found: - overdue?'),
+                //                        'warning');
+                //                }
             }
         }
     }
 
-    public function paymentToZDD($invoiceData)
+    public function paymentToZDD($invoiceData): void
     {
         $return = $this->invoiceCopy($invoiceData, 'ZDD');
     }
 
     /**
-     * Párování prichozich faktur podle odchozich plateb v bance
-     *
-     * @param  $name Description
-     *
+     * Párování prichozich faktur podle odchozich plateb v bance.
      */
-    public function inInvoicesMatchingByBank(\DatePeriod $range = null)
+    public function inInvoicesMatchingByBank(?\DatePeriod $range = null): void
     {
         $this->invoicer = new \AbraFlexi\FakturaPrijata(null, $this->config);
+
         foreach ($this->getPaymentsWithinPeriod($range, 'out') as $outPaymentId => $outPaymentData) {
             $this->banker->setData($outPaymentData, true);
             $this->banker->setMyKey($outPaymentId);
@@ -352,21 +367,20 @@ class ParovacFaktur extends \Ease\Sand
                 \AbraFlexi\RO::uncode($outPaymentData['mena']),
                 $outPaymentData['varSym'],
                 $outPaymentData['specSym'],
-                $this->banker->getApiURL()
+                $this->banker->getApiURL(),
             ), 'info');
 
             $inInvoicesToMatch = $this->findInvoices($outPaymentData);
-//  kdyz se vrati jedna faktura:
-//     kdyz  je prijata castka mensi nebo rovno tak zlikviduji celou
-//     kdyz sedi castka, nebo castecne
-//  kdyz se vrati vic faktur  tak kdyz sedi castka uhrazuje se ta nejstarsi
-//  jinak se uhrazuje castecne
+            //  kdyz se vrati jedna faktura:
+            //     kdyz  je prijata castka mensi nebo rovno tak zlikviduji celou
+            //     kdyz sedi castka, nebo castecne
+            //  kdyz se vrati vic faktur  tak kdyz sedi castka uhrazuje se ta nejstarsi
+            //  jinak se uhrazuje castecne
 
-
-
-            switch (count($inInvoicesToMatch)) {
+            switch (\count($inInvoicesToMatch)) {
                 case 0:
                     $this->addStatusMessage(_('No incoming invoice found for outcoming payment'));
+
                     break;
                 case 1:
                     $invoiceData = current($inInvoicesToMatch);
@@ -375,13 +389,16 @@ class ParovacFaktur extends \Ease\Sand
                         $invoiceData,
                         array_merge(
                             $this->config,
-                            ['evidence' => 'faktura-prijata']
-                        )
+                            ['evidence' => 'faktura-prijata'],
+                        ),
                     );
+
                     if ($this->settleInvoice($inInvoice, $this->banker)) {
-                        //Post match action here
+                        // Post match action here
                     }
+
                     break;
+
                 default:
                     if (self::isSameCompany($inInvoicesToMatch)) {
                         foreach ($inInvoicesToMatch as $invoiceID => $invoiceData) {
@@ -389,37 +406,39 @@ class ParovacFaktur extends \Ease\Sand
                                 $invoiceData,
                                 array_merge(
                                     $this->config,
-                                    ['evidence' => 'faktura-prijata']
-                                )
+                                    ['evidence' => 'faktura-prijata'],
+                                ),
                             );
+
                             if ($this->settleInvoice($inInvoice, $this->banker)) {
                             }
                         }
                     } else {
                         $this->addStatusMessage(_('Match by bank here'));
+
                         foreach ($inInvoicesToMatch as $invoiceID => $invoiceData) {
                             $inInvoice = new FakturaVydana(
                                 $invoiceData,
                                 array_merge(
                                     $this->config,
-                                    ['evidence' => 'faktura-prijata']
-                                )
+                                    ['evidence' => 'faktura-prijata'],
+                                ),
                             );
                         }
                     }
+
                     break;
             }
 
-
-            if (count($inInvoicesToMatch) && count(current($inInvoicesToMatch))) {
-                $uhrazenoCelkem = floatval($outPaymentData['sumCelkem']);
+            if (\count($inInvoicesToMatch) && \count(current($inInvoicesToMatch))) {
+                $uhrazenoCelkem = (float) $outPaymentData['sumCelkem'];
                 $payment = new \AbraFlexi\Banka($outPaymentData, $this->config);
             }
         }
     }
 
     /**
-     * Obtain AbraFlexi company code for given bank account number
+     * Obtain AbraFlexi company code for given bank account number.
      *
      * @param string $account
      * @param string $bankCode
@@ -431,43 +450,45 @@ class ParovacFaktur extends \Ease\Sand
         $bucer = new \AbraFlexi\RW(null, ['evidence' => 'adresar-bankovni-ucet']);
         $companyRaw = $bucer->getColumnsFromAbraFlexi(
             ['firma'],
-            empty($bankCode) ? ['buc' => $account] : ['buc' => $account, 'smerKod' => $bankCode]
+            empty($bankCode) ? ['buc' => $account] : ['buc' => $account, 'smerKod' => $bankCode],
         );
-        return array_key_exists(0, $companyRaw) ? $companyRaw[0]['firma'] : null;
+
+        return \array_key_exists(0, $companyRaw) ? $companyRaw[0]['firma'] : null;
     }
 
     /**
-     * Check for common company
+     * Check for common company.
      *
      * @param array $documents invoices or payments data
      *
-     * @return boolean All records have same company
+     * @return bool All records have same company
      */
     public static function isSameCompany($documents)
     {
-        return count(\Ease\Functions::reindexArrayBy($documents, 'firma')) == 1;
+        return \count(\Ease\Functions::reindexArrayBy($documents, 'firma')) === 1;
     }
 
     /**
-     * Check for common bank account
+     * Check for common bank account.
      *
      * @param array $documents invoices or payments data
      *
-     * @return boolean All records have same bank account
+     * @return bool All records have same bank account
      */
     public static function isSameAccount($documents)
     {
-        return count(\Ease\Functions::reindexArrayBy($documents, 'buc')) == 1;
+        return \count(\Ease\Functions::reindexArrayBy($documents, 'buc')) === 1;
     }
 
     /**
-     * Párování faktur dle nezaplacenych faktur
+     * Párování faktur dle nezaplacenych faktur.
      */
-    public function invoicesMatchingByInvoices()
+    public function invoicesMatchingByInvoices(): void
     {
         foreach ($this->getInvoicesToProcess() as $invoiceData) {
             $payments = $this->findPayments($invoiceData);
-            if (!empty($payments) && count(current($payments))) {
+
+            if (!empty($payments) && \count(current($payments))) {
                 $typDokl = $invoiceData['typDokl'][0];
                 $docType = $typDokl['typDoklK'];
                 $invoiceData['typDokl'] = \AbraFlexi\RO::code($typDokl['kod']);
@@ -486,27 +507,33 @@ class ParovacFaktur extends \Ease\Sand
 
                 foreach ($payments as $paymentData) {
                     $payment = new \AbraFlexi\Banka($paymentData, $this->config);
+
                     switch ($docType) {
                         case 'typDokladu.zalohFaktura':
                         case 'typDokladu.faktura':
                             if ($this->settleInvoice($invoice, $payment)) {
                             }
+
                             break;
                         case 'typDokladu.proforma':
                             $this->settleProforma($invoice, $payments);
+
                             break;
                         case 'typDokladu.dobropis':
                             $this->settleCreditNote($invoice, $payments);
+
                             break;
+
                         default:
                             $this->addStatusMessage(
                                 sprintf(
                                     _('Unsupported document type: %s %s'),
-                                    $typDokl['typDoklK@showAs'] . ' (' . $docType . '): ' . $invoiceData['typDokl'],
-                                    $invoice->getApiURL()
+                                    $typDokl['typDoklK@showAs'].' ('.$docType.'): '.$invoiceData['typDokl'],
+                                    $invoice->getApiURL(),
                                 ),
-                                'warning'
+                                'warning',
                             );
+
                             break;
                     }
                 }
@@ -515,10 +542,7 @@ class ParovacFaktur extends \Ease\Sand
     }
 
     /**
-     * Provede "Zaplacení" vydaného dobropisu
-     *
-     * @param  FakturaVydana $invoice
-     * @param \AbraFlexi\Banka $payment
+     * Provede "Zaplacení" vydaného dobropisu.
      *
      * @return int vysledek 0 = chyba, 1 = sparovano
      */
@@ -527,24 +551,25 @@ class ParovacFaktur extends \Ease\Sand
         $success = 0;
         $prijataCastka = (float) $payment->getDataValue('sumCelkem');
 
-        if ($prijataCastka < $invoice->getDataValue('zbyvaUhradit')) { //Castecna uhrada
+        if ($prijataCastka < $invoice->getDataValue('zbyvaUhradit')) { // Castecna uhrada
             $this->addStatusMessage(
                 sprintf(
                     _('Castecna uhrada - DOBROPIS: prijato: %s ma byt zaplaceno %s'),
                     $prijataCastka,
-                    $invoice->getDataValue('zbyvaUhradit')
+                    $invoice->getDataValue('zbyvaUhradit'),
                 ),
-                'warning'
+                'warning',
             );
         }
-        if ($prijataCastka > $invoice->getDataValue('zbyvaUhradit')) { //Castecna uhrada
+
+        if ($prijataCastka > $invoice->getDataValue('zbyvaUhradit')) { // Castecna uhrada
             $this->addStatusMessage(
                 sprintf(
                     _('Přeplatek - DOBROPIS: prijato: %s ma byt zaplaceno %s'),
                     $prijataCastka,
-                    $invoice->getDataValue('zbyvaUhradit')
+                    $invoice->getDataValue('zbyvaUhradit'),
                 ),
-                'warning'
+                'warning',
             );
 
             $this->banker->dataReset();
@@ -553,28 +578,27 @@ class ParovacFaktur extends \Ease\Sand
             $this->banker->insertToAbraFlexi();
         }
 
-        if ($invoice->sparujPlatbu($payment, 'castecnaUhrada')) { //Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
+        if ($invoice->sparujPlatbu($payment, 'castecnaUhrada')) { // Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
             $success = 1;
             $invoice->addStatusMessage(
                 sprintf(
                     _('Platba %s  %s byla sparovana s dobropisem %s'),
                     (string) $payment,
                     $prijataCastka,
-                    (string) $invoice
+                    (string) $invoice,
                 ),
-                'success'
+                'success',
             );
-            //PDF Danoveho dokladu priloz k nemu samemu
-            //PDF Danoveho dokladu odesli mailem zakaznikovi y ABRAFLEXI( nasledne pouzit tabulku Mail/Gandalf)
+            // PDF Danoveho dokladu priloz k nemu samemu
+            // PDF Danoveho dokladu odesli mailem zakaznikovi y ABRAFLEXI( nasledne pouzit tabulku Mail/Gandalf)
         }
 
         return $success;
     }
 
     /**
-     * Provede "Zaplacení" vydané zalohove faktury
+     * Provede "Zaplacení" vydané zalohove faktury.
      *
-     * @param FakturaVydana $zaloha
      * @param array $payment
      *
      * @return int vysledek 0 = chyba, 1 = sparovano, 2 sparovano a vytvorena faktura, -1 sparovnano ale chyba vytvoreni faktury
@@ -588,7 +612,7 @@ class ParovacFaktur extends \Ease\Sand
 
         $platba = new \AbraFlexi\Banka(
             \AbraFlexi\RO::code($payment['kod']),
-            $this->config
+            $this->config,
         );
 
         if ($zaloha->sparujPlatbu($platba, 'castecnaUhrada')) {
@@ -599,133 +623,135 @@ class ParovacFaktur extends \Ease\Sand
                     \AbraFlexi\RO::uncode($platba),
                     $prijataCastka,
                     \AbraFlexi\RO::uncode($payment['mena']),
-                    (string) $zaloha
+                    (string) $zaloha,
                 ),
-                'success'
+                'success',
             );
 
             if ($zaloha->getDataValue('zbyvaUhradit') > $prijataCastka) { // Castecna Uhrada
-//                //Castecna uhrada
-//                //Vytvorit ZDD ve vysi payment
-//                $zdd = new  FakturaVydana(['firma' => $zaloha->getDataValue('firma'),
-//                    'zavTxt' => $zaloha->getDataValue('zavTxt').' DOPLNIT!!! ',
-//                    'varSym' => $zaloha->getDataValue('varSym'),
-//                    'popis' => 'Částečná úhrada '.$zaloha->getDataValue('kod')
-//                ]);
-//
-//                $zdd->setDataValue('typDokl', 'code:ZDD');
-////                $zdd->setDataValue('zbyvaUhradit', 0); //Mozna nemusime resit -vymazat
-////                $zdd->setDataValue('sumCelkem', $prijataCastka);
-//                $zdd->setDataValue('szbDphZakl',
-//                    $zaloha->getDataValue('szbDphZakl'));
-//                $zdd->setDataValue('bezPolozek', true);
-////                $zdd->setDataValue('stavUhrK', '');
-//                $zdd->unsetDataValue('polozkyFaktury');
-//
-//                // ---------- Tady se resi sazby - nahrdit objektem pro praci s castkami --------------//
-//                // DPH21
-//                if ((float) $zaloha->getDataValue('sumCelkZakl')) {
-//                    $sumZklZakl = $prijataCastka / ( 1 + (float) $zaloha->getDataValue('szbDphZakl')
-//                        / 100 );
-//
-////                    $zdd->setDataValue('sumZklZakl', round($sumZklZakl, 2));
-////                    $zdd->setDataValue('sumDphZakl',
-////                        round($prijataCastka - $sumZklZakl, 2));
-//                    $zdd->setDataValue('sumCelkZakl', round($prijataCastka, 2));
-//                    // DPH00
-//                } else {
-//                    if ((float) $zaloha->getDataValue('sumOsv')) {
-////                        $zdd->setDataValue('sumOsv', round($prijataCastka),
-////                            2);
-//                    }
-//                }
-//                $result = $zdd->insertToAbraFlexi();
-//
-//                $zdd->loadFromAbraFlexi();
-//                $zaloha->debug = true;
-//                $zdd->debug    = true;
-//
-//
-//                $targt      = $platba->apiURL.'/vytvor-zdd.json';
-//                $zauctovani = '01-02';
-//                $value      = $zaloha->getDataValue('kod').'^^^'.$zauctovani;
-//                $sender     = new \AbraFlexi\RW();
-//                $sender->setPostFields(['zalohaACleneni' => $value]);
-//                $result     = $sender->performRequest($targt, 'POST', 'json');
-//
-//                $result = $zdd->odpocetZDD($zaloha,
-//                    ['castkaMen' => $prijataCastka]);
-//                if (isset($result['success']) && ($result['success'] == 'true')) {
-//                    $success = 2;
-//                    $zaloha->addStatusMessage(sprintf(_('Faktura #%s byla sparovana se ZDD'),
-//                            $kod), 'success');
-//                } else {
-//                    $success = -1;
-//                    $zaloha->addStatusMessage(sprintf(_('Faktura #%s nebyla sparovana se ZDD'),
-//                            $kod), 'error');
-//                }
+                //                //Castecna uhrada
+                //                //Vytvorit ZDD ve vysi payment
+                //                $zdd = new  FakturaVydana(['firma' => $zaloha->getDataValue('firma'),
+                //                    'zavTxt' => $zaloha->getDataValue('zavTxt').' DOPLNIT!!! ',
+                //                    'varSym' => $zaloha->getDataValue('varSym'),
+                //                    'popis' => 'Částečná úhrada '.$zaloha->getDataValue('kod')
+                //                ]);
+                //
+                //                $zdd->setDataValue('typDokl', 'code:ZDD');
+                // //                $zdd->setDataValue('zbyvaUhradit', 0); //Mozna nemusime resit -vymazat
+                // //                $zdd->setDataValue('sumCelkem', $prijataCastka);
+                //                $zdd->setDataValue('szbDphZakl',
+                //                    $zaloha->getDataValue('szbDphZakl'));
+                //                $zdd->setDataValue('bezPolozek', true);
+                // //                $zdd->setDataValue('stavUhrK', '');
+                //                $zdd->unsetDataValue('polozkyFaktury');
+                //
+                //                // ---------- Tady se resi sazby - nahrdit objektem pro praci s castkami --------------//
+                //                // DPH21
+                //                if ((float) $zaloha->getDataValue('sumCelkZakl')) {
+                //                    $sumZklZakl = $prijataCastka / ( 1 + (float) $zaloha->getDataValue('szbDphZakl')
+                //                        / 100 );
+                //
+                // //                    $zdd->setDataValue('sumZklZakl', round($sumZklZakl, 2));
+                // //                    $zdd->setDataValue('sumDphZakl',
+                // //                        round($prijataCastka - $sumZklZakl, 2));
+                //                    $zdd->setDataValue('sumCelkZakl', round($prijataCastka, 2));
+                //                    // DPH00
+                //                } else {
+                //                    if ((float) $zaloha->getDataValue('sumOsv')) {
+                // //                        $zdd->setDataValue('sumOsv', round($prijataCastka),
+                // //                            2);
+                //                    }
+                //                }
+                //                $result = $zdd->insertToAbraFlexi();
+                //
+                //                $zdd->loadFromAbraFlexi();
+                //                $zaloha->debug = true;
+                //                $zdd->debug    = true;
+                //
+                //
+                //                $targt      = $platba->apiURL.'/vytvor-zdd.json';
+                //                $zauctovani = '01-02';
+                //                $value      = $zaloha->getDataValue('kod').'^^^'.$zauctovani;
+                //                $sender     = new \AbraFlexi\RW();
+                //                $sender->setPostFields(['zalohaACleneni' => $value]);
+                //                $result     = $sender->performRequest($targt, 'POST', 'json');
+                //
+                //                $result = $zdd->odpocetZDD($zaloha,
+                //                    ['castkaMen' => $prijataCastka]);
+                //                if (isset($result['success']) && ($result['success'] == 'true')) {
+                //                    $success = 2;
+                //                    $zaloha->addStatusMessage(sprintf(_('Faktura #%s byla sparovana se ZDD'),
+                //                            $kod), 'success');
+                //                } else {
+                //                    $success = -1;
+                //                    $zaloha->addStatusMessage(sprintf(_('Faktura #%s nebyla sparovana se ZDD'),
+                //                            $kod), 'error');
+                //                }
                 $zaloha->addStatusMessage(sprintf(
                     _('Částečná úhrada %s'),
-                    self::apiUrlToLink($zaloha->apiURL)
+                    self::apiUrlToLink($zaloha->apiURL),
                 ), 'warning');
 
                 $zaloha->addStatusMessage(
                     sprintf(
                         _('Vytvoř ZDD: %s'),
-                        self::apiUrlToLink($platba->apiURL . '/vytvor-zdd')
+                        self::apiUrlToLink($platba->apiURL.'/vytvor-zdd'),
                     ),
-                    'debug'
+                    'debug',
                 );
             } else {
                 if ($prijataCastka > $zaloha->getDataValue('zbyvaUhradit')) { // Preplatek
                     $zaloha->addStatusMessage(sprintf(
                         _('Přeplatek %s'),
-                        self::apiUrlToLink($platba->apiURL)
+                        self::apiUrlToLink($platba->apiURL),
                     ), 'warning');
                 }
 
-                //Plna uhrada
-                //$toCopy['sumCelkem'] = $payment->getDataValue('sumCelkem');
-                //Dopsat pro vsechny mozne sazby dane - vytvorit objekt
+                // Plna uhrada
+                // $toCopy['sumCelkem'] = $payment->getDataValue('sumCelkem');
+                // Dopsat pro vsechny mozne sazby dane - vytvorit objekt
 
                 $faktura2 = $this->invoiceCopy(
                     $zaloha,
-                    ['duzpUcto' => $platba->getDataValue('datVyst'), 'datVyst' => $platba->getDataValue('datVyst')]
+                    ['duzpUcto' => $platba->getDataValue('datVyst'), 'datVyst' => $platba->getDataValue('datVyst')],
                 );
                 $id = (int) $faktura2->getLastInsertedId();
                 $faktura2->loadFromAbraFlexi($id);
                 $kod = $faktura2->getDataValue('kod');
                 $faktura2->dataReset();
-                $faktura2->setDataValue('id', 'code:' . $kod);
+                $faktura2->setDataValue('id', 'code:'.$kod);
                 $faktura2->setDataValue('typDokl', 'code:FAKTURA');
 
                 $result = $faktura2->odpocetZalohy($zaloha);
-                if (isset($result['success']) && ($result['success'] == 'true')) {
+
+                if (isset($result['success']) && ($result['success'] === 'true')) {
                     $success = 2;
                     $zaloha->addStatusMessage(sprintf(
                         _('Faktura #%s byla sparovana'),
-                        $kod
+                        $kod,
                     ), 'success');
                 } else {
                     $success = -1;
                     $zaloha->addStatusMessage(sprintf(
                         _('Faktura #%s nebyla sparovana'),
-                        $kod
+                        $kod,
                     ), 'error');
                 }
             }
 
-            //PDF Danoveho dokladu priloz k nemu samemu
-            //PDF Danoveho dokladu odesli mailem zakaznikovi y ABRAFLEXI( nasledne pouzit tabulku Mail/Gandalf)
+            // PDF Danoveho dokladu priloz k nemu samemu
+            // PDF Danoveho dokladu odesli mailem zakaznikovi y ABRAFLEXI( nasledne pouzit tabulku Mail/Gandalf)
         }
+
         return $success;
     }
 
     /**
-     * Provede "Zaplacení" vydané faktury
+     * Provede "Zaplacení" vydané faktury.
      *
-     * @param  FakturaVydana $invoice Invoice to settle
-     * @param \AbraFlexi\Banka         $payment Payment to settle by
+     * @param FakturaVydana    $invoice Invoice to settle
+     * @param \AbraFlexi\Banka $payment Payment to settle by
      *
      * @return int vysledek 0 = chyba, 1 = sparovano
      */
@@ -736,37 +762,38 @@ class ParovacFaktur extends \Ease\Sand
         $prijataCastka = (float) $payment->getDataValue('sumCelkem');
         $zbyvaUhradit = $invoice->getDataValue('zbyvaUhradit');
 
-        if ($prijataCastka < $zbyvaUhradit) { //Castecna uhrada
+        if ($prijataCastka < $zbyvaUhradit) { // Castecna uhrada
             $this->addStatusMessage(
                 sprintf(
                     _('Castecna uhrada - FAKTURA: prijato: %s %s ma byt zaplaceno %s %s'),
                     $prijataCastka,
                     \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
                     $zbyvaUhradit,
-                    \AbraFlexi\RO::uncode($invoice->getDataValue('mena'))
+                    \AbraFlexi\RO::uncode($invoice->getDataValue('mena')),
                 ),
-                'warning'
+                'warning',
             );
             $zbytek = 'castecnaUhrada';
         }
-        if ($prijataCastka > $zbyvaUhradit) { //Castecna uhrada
+
+        if ($prijataCastka > $zbyvaUhradit) { // Castecna uhrada
             $this->addStatusMessage(
                 sprintf(
                     _('Overpay - INVOICE: recieved: %s %s excepted %s %s'),
                     $prijataCastka,
                     \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
                     $zbyvaUhradit,
-                    \AbraFlexi\RO::uncode($invoice->getDataValue('mena'))
+                    \AbraFlexi\RO::uncode($invoice->getDataValue('mena')),
                 ),
-                'warning'
+                'warning',
             );
 
-            //$this->banker->insertToAbraFlexi(['id'=>$payment->getDataValue('id'), 'stitky'=>$this->config['LABEL_CASTECNAUHRADA']]);
+            // $this->banker->insertToAbraFlexi(['id'=>$payment->getDataValue('id'), 'stitky'=>$this->config['LABEL_CASTECNAUHRADA']]);
             $zbytek = 'ignorovat';
         }
 
         try {
-            if ($invoice->sparujPlatbu($payment, $zbytek)) { //Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
+            if ($invoice->sparujPlatbu($payment, $zbytek)) { // Jak se ma AbraFlexi zachovat pri preplatku/nedoplatku
                 $success = 1;
                 $invoice->insertToAbraFlexi(['id' => $invoice->getRecordIdent(),
                     'stavMailK' => 'stavMail.odeslat']);
@@ -776,83 +803,86 @@ class ParovacFaktur extends \Ease\Sand
                         \AbraFlexi\RO::uncode($payment->getRecordIdent()),
                         $prijataCastka,
                         \AbraFlexi\RO::uncode($payment->getDataValue('mena')),
-                        \AbraFlexi\RO::uncode($invoice->getRecordIdent())
+                        \AbraFlexi\RO::uncode($invoice->getRecordIdent()),
                     ),
-                    'success'
+                    'success',
                 );
             }
         } catch (\AbraFlexi\Exception $exc) {
             $success = 0;
         }
+
         return $success;
     }
 
     /**
-     * Provizorní zkopírování faktury
+     * Provizorní zkopírování faktury.
      *
-     * @link https://www.abraflexi.eu/podpora/Tickets/Ticket/View/28848 Chyba při Provádění akcí přes REST API JSON
-     * @param  FakturaVydana $invoice
-     * @param array                     $extraValues Extra hodnoty pro kopii faktury
+     * @see https://www.abraflexi.eu/podpora/Tickets/Ticket/View/28848 Chyba při Provádění akcí přes REST API JSON
      *
-     * @return  FakturaVydana
+     * @param FakturaVydana $invoice
+     * @param array         $extraValues Extra hodnoty pro kopii faktury
+     *
+     * @return FakturaVydana
      */
-    function invoiceCopy($invoice, $extraValues = [])
+    public function invoiceCopy($invoice, $extraValues = [])
     {
-
         if (isset($extraValues['datVyst'])) {
             $today = $extraValues['datVyst'];
         } else {
             $today = date('Y-m-d');
         }
+
         $copyer = new Convertor(
             $invoice,
             new FakturaVydana(array_merge(
                 $extraValues,
                 ['typDokl' => 'code:FAKTURA',
-                                    'duzpPuv' => $today,
-                                    'duzpUcto' => $today,
-                                    'datUcto' => $today,
-                                    'stitky' => 'SYSTEM',
-                                    'stavMailK' => 'stavMail.neodesilat'
-                    ]
-            ))
+                    'duzpPuv' => $today,
+                    'duzpUcto' => $today,
+                    'datUcto' => $today,
+                    'stitky' => 'SYSTEM',
+                    'stavMailK' => 'stavMail.neodesilat',
+                ],
+            )),
         );
 
         $invoice2 = $copyer->conversion();
 
-////        $invoice2->debug = true;
+        // //        $invoice2->debug = true;
 
-        if (!array_key_exists('datSplat', $extraValues)) {
+        if (!\array_key_exists('datSplat', $extraValues)) {
             $invoice2->unsetDataValue('datSplat');
         }
-        if ($invoice2->getDataValue('stavUhrK') != 'stavUhr.uhrazenoRucne') {
+
+        if ($invoice2->getDataValue('stavUhrK') !== 'stavUhr.uhrazenoRucne') {
             $invoice2->unsetDataValue('stavUhrK');
         }
 
         $polozky = $invoice2->getDataValue('polozkyDokladu');
         $invoice2->unsetDataValue('polozkyDokladu');
-        if (count($polozky)) {
+
+        if (\count($polozky)) {
             foreach ($polozky as $pid => $polozka) {
-                unset($polozka['id']);
-                unset($polozka['datUcto']);
-                unset($polozka['doklFak']);
-                unset($polozka['ucetni']);
-                unset($polozka['doklFak@showAs']);
-                unset($polozka['doklFak@ref']);
-                if (array_key_exists('stitky', $polozka)) {
+                unset($polozka['id'], $polozka['datUcto'], $polozka['doklFak'], $polozka['ucetni'], $polozka['doklFak@showAs'], $polozka['doklFak@ref']);
+
+                if (\array_key_exists('stitky', $polozka)) {
                     $labelsFiltered = [];
-                    $labels = is_array($polozka['stitky']) ? $polozka['stitky'] : \AbraFlexi\Stitek::listToArray($polozka['stitky']);
+                    $labels = \is_array($polozka['stitky']) ? $polozka['stitky'] : \AbraFlexi\Stitek::listToArray($polozka['stitky']);
+
                     foreach ($labels as $label) {
                         if (!preg_match('/^API/', $label)) {
                             $labelsFiltered[] = $label;
                         }
                     }
-                    if (count($labelsFiltered)) {
+
+                    if (\count($labelsFiltered)) {
                         $polozka['stitky'] = $labelsFiltered;
                     } else {
                         unset($polozka['stitky']);
                     }
                 }
+
                 $invoice2->addArrayToBranch($polozka);
             }
         }
@@ -863,35 +893,33 @@ class ParovacFaktur extends \Ease\Sand
                 \AbraFlexi\RO::uncode($invoice2->getRecordCode()),
                 $invoice2->getApiURL(),
                 \AbraFlexi\RO::uncode($invoice->getRecordCode()),
-                $invoice->getApiURL()
+                $invoice->getApiURL(),
             ), 'success');
         }
+
         return $invoice2;
     }
 
     /**
-     *
-     *
      * @param FakturaVydana $invoice ZDD
      * @param Banka         $payment Income
      *
      * @return type
      */
-    function hotfixDeductionOfAdvances($invoice, $payment)
+    public function hotfixDeductionOfAdvances($invoice, $payment)
     {
         return $this->vytvorVazbuZDD($payment->getData(), $invoice);
     }
 
     /**
-     *
      * @param array $vInvoices new invoices
-     * @param array $invoices current invoices
+     * @param array $invoices  current invoices
      */
-    public static function unifyInvoices($vInvoices, &$invoices)
+    public static function unifyInvoices($vInvoices, &$invoices): void
     {
-        if (!empty($vInvoices) && count($vInvoices)) {
+        if (!empty($vInvoices) && \count($vInvoices)) {
             foreach ($vInvoices as $invoiceID => $invoice) {
-                if (!array_key_exists($invoiceID, $invoices)) {
+                if (!\array_key_exists($invoiceID, $invoices)) {
                     $invoices[$invoiceID] = $invoice;
                 }
             }
@@ -899,7 +927,7 @@ class ParovacFaktur extends \Ease\Sand
     }
 
     /**
-     * Najde vydané faktury
+     * Najde vydané faktury.
      *
      * @param array $paymentData
      *
@@ -922,8 +950,8 @@ class ParovacFaktur extends \Ease\Sand
                 // Faktury vydane "firma":"code:02100",
                 // Adresar: ext:lms.cstmr:2365
                 $uInvoices = $this->findInvoice(['firma' => sprintf(
-                    "code:%05s",
-                    $paymentData['specSym']
+                    'code:%05s',
+                    $paymentData['specSym'],
                 )]);
             }
 
@@ -948,23 +976,23 @@ class ParovacFaktur extends \Ease\Sand
             $this->banker->setDataValue('id', $paymentData['id']);
             $this->banker->setDataValue(
                 'stitky',
-                $this->config['LABEL_UNIDENTIFIED']
+                $this->config['LABEL_UNIDENTIFIED'],
             );
             $this->addStatusMessage(
-                _('Unidentified payment') . ': ' . $this->banker->getApiURL(),
-                'warning'
+                _('Unidentified payment').': '.$this->banker->getApiURL(),
+                'warning',
             );
             $this->banker->insertToAbraFlexi();
-        } elseif (count($invoices) == 0) {
+        } elseif (\count($invoices) === 0) {
             $this->banker->dataReset();
             $this->banker->setDataValue('id', $paymentData['id']);
             $this->banker->setDataValue(
                 'stitky',
-                $this->config['LABEL_INVOICE_MISSING']
+                $this->config['LABEL_INVOICE_MISSING'],
             );
             $this->addStatusMessage(
-                _('Payment without invoice') . ': ' . $this->banker->getApiURL(),
-                'warning'
+                _('Payment without invoice').': '.$this->banker->getApiURL(),
+                'warning',
             );
             $this->banker->insertToAbraFlexi();
         }
@@ -975,28 +1003,31 @@ class ParovacFaktur extends \Ease\Sand
     /**
      * Reorder invoices by Age.
      *
-     * @param array $invoices
-     *
      * @return array Older First sorted invoices
      */
     public static function reorderInvoicesByAge(array $invoices)
     {
         $invoicesByAge = [];
         $invoicesByAgeRaw = [];
+
         foreach ($invoices as $invoiceData) {
             $invoicesByAgeRaw[$invoiceData['datVyst']->getTimestamp()] = $invoiceData;
         }
+
         ksort($invoicesByAgeRaw);
+
         foreach ($invoicesByAgeRaw as $invoiceData) {
             $invoicesByAge[$invoiceData['kod']] = $invoiceData;
         }
+
         return $invoicesByAge;
     }
 
     /**
-     * Najde příchozí platby
+     * Najde příchozí platby.
      *
      * @param array $invoiceData
+     *
      * @return array
      */
     public function findPayments($invoiceData)
@@ -1005,25 +1036,28 @@ class ParovacFaktur extends \Ease\Sand
         $sPays = [];
         $bPays = [];
 
-        if (array_key_exists('varSym', $invoiceData) && !empty($invoiceData['varSym'])) {
+        if (\array_key_exists('varSym', $invoiceData) && !empty($invoiceData['varSym'])) {
             $sPays = $this->findPayment(['varSym' => $invoiceData['varSym']]);
-            if (is_array($sPays)) {
+
+            if (\is_array($sPays)) {
                 $pays = $sPays;
             }
         }
 
-        if (array_key_exists('specSym', $invoiceData) && !empty($invoiceData['specSym'])) {
+        if (\array_key_exists('specSym', $invoiceData) && !empty($invoiceData['specSym'])) {
             $sPays = $this->findPayment(['specSym' => $invoiceData['specSym']]);
-            if (is_array($bPays)) {
+
+            if (\is_array($bPays)) {
                 $pays = $bPays;
             }
         }
 
-        if (array_key_exists('buc', $invoiceData) && !empty($invoiceData['buc'])) {
+        if (\array_key_exists('buc', $invoiceData) && !empty($invoiceData['buc'])) {
             $bPays = $this->findPayment(['buc' => $invoiceData['buc']]);
+
             if ($bPays) {
                 foreach ($bPays as $payID => $payment) {
-                    if (!array_key_exists($payID, $pays)) {
+                    if (!\array_key_exists($payID, $pays)) {
                         $pays[$payID] = $payment;
                     }
                 }
@@ -1034,7 +1068,7 @@ class ParovacFaktur extends \Ease\Sand
     }
 
     /**
-     * Vrací neuhrazene faktury odpovídající zadaným parametrům
+     * Vrací neuhrazene faktury odpovídající zadaným parametrům.
      *
      * @param array $what
      *
@@ -1042,11 +1076,11 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function findInvoice($what)
     {
-        return $this->searchInvoices(["(" . \AbraFlexi\RO::flexiUrl($what, 'or') . ") AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false"]);
+        return $this->searchInvoices(['('.\AbraFlexi\RO::flexiUrl($what, 'or').") AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false"]);
     }
 
     /**
-     * Vrací neuhrazene faktury odpovídající zadaným parametrům
+     * Vrací neuhrazene faktury odpovídající zadaným parametrům.
      *
      * @param array $what
      *
@@ -1072,20 +1106,23 @@ class ParovacFaktur extends \Ease\Sand
             'duzpPuv',
             'stitky',
             'typDokl',
-            'datVyst'
-                ], $what, 'id');
+            'datVyst',
+        ], $what, 'id');
 
-        if ($this->invoicer->lastResponseCode == 200) {
+        if ($this->invoicer->lastResponseCode === 200) {
             $result = $invoices;
         }
+
         unset($this->invoicer->defaultUrlParams['includes']);
+
         return $result;
     }
 
     /**
-     * Vrací nesparovane platby odpovídající zadaným parametrům
+     * Vrací nesparovane platby odpovídající zadaným parametrům.
      *
      * @param array $what
+     *
      * @return array
      */
     public function findPayment($what)
@@ -1094,18 +1131,19 @@ class ParovacFaktur extends \Ease\Sand
         $this->banker->defaultUrlParams['order'] = 'datVyst@A';
         $payments = $this->banker->getColumnsFromAbraFlexi(
             [
+                'id',
+                'varSym',
+                'specSym',
+                'buc',
+                'sumCelkem',
+                'mena',
+                'stitky',
+                'datVyst'],
+            ['('.\AbraFlexi\RO::flexiUrl($what, 'or').") AND sparovano eq 'false'"],
             'id',
-            'varSym',
-            'specSym',
-            'buc',
-            'sumCelkem',
-            'mena',
-            'stitky',
-            'datVyst'],
-            ["(" . \AbraFlexi\RO::flexiUrl($what, 'or') . ") AND sparovano eq 'false'"],
-            'id'
         );
-        if ($this->banker->lastResponseCode == 200) {
+
+        if ($this->banker->lastResponseCode === 200) {
             $result = $payments;
         }
 
@@ -1113,9 +1151,9 @@ class ParovacFaktur extends \Ease\Sand
     }
 
     /**
-     * Najde nejlepší platbu pro danou fakturu
+     * Najde nejlepší platbu pro danou fakturu.
      *
-     * @param array $payments pole příchozích plateb
+     * @param array         $payments pole příchozích plateb
      * @param FakturaVydana $invoice  faktura ke spárování
      *
      * @return \AbraFlexi\Banka Bankovní pohyb
@@ -1123,11 +1161,12 @@ class ParovacFaktur extends \Ease\Sand
     public function findBestPayment($payments, $invoice)
     {
         $value = $invoice->getDataValue('sumCelkem');
+
         foreach ($payments as $paymentID => $payment) {
-            if ($payment['sumCelkem'] == $value) {
+            if ($payment['sumCelkem'] === $value) {
                 return new \AbraFlexi\Banka(
                     \AbraFlexi\RO::code($payments[$paymentID]['kod']),
-                    $this->config
+                    $this->config,
                 );
             }
         }
@@ -1136,14 +1175,14 @@ class ParovacFaktur extends \Ease\Sand
 
         $this->addStatusMessage(sprintf(
             _('Platba pro fakturu %s nebyla dohledána'),
-            self::apiUrlToLink($invoice->apiURL)
+            self::apiUrlToLink($invoice->apiURL),
         ), 'warning');
 
         return null;
     }
 
     /**
-     * Change url to html link
+     * Change url to html link.
      *
      * @param string $apiURL
      *
@@ -1155,15 +1194,15 @@ class ParovacFaktur extends \Ease\Sand
             '.json?limit=0',
             '',
             preg_replace(
-                "#(^|[\n ])([\w]+?://[\w\#$%&~/.\-;:=,?@\[\]+]*)#is",
-                "\\1<a href=\"\\2\" target=\"_blank\" rel=\"nofollow\">\\2</a>",
-                $apiURL
-            )
+                "#(^|[\n ])([\\w]+?://[\\w\\#$%&~/.\\-;:=,?@\\[\\]+]*)#is",
+                '\\1<a href="\\2" target="_blank" rel="nofollow">\\2</a>',
+                $apiURL,
+            ),
         );
     }
 
     /**
-     * Return Document original type
+     * Return Document original type.
      *
      * @param string $typDokl
      *
@@ -1177,39 +1216,42 @@ class ParovacFaktur extends \Ease\Sand
         if (empty($this->docTypes)) {
             $this->docTypes = $this->getDocumentTypes();
         }
+
         $documentType = \AbraFlexi\RO::uncode($typDokl);
-        return array_key_exists($documentType, $this->docTypes) ? $this->docTypes[$documentType] : 'typDokladu.neznamy';
+
+        return \array_key_exists($documentType, $this->docTypes) ? $this->docTypes[$documentType] : 'typDokladu.neznamy';
     }
 
     /**
-     * Assign Bank Account to Address
+     * Assign Bank Account to Address.
      *
-     * @param \AbraFlexi\Adresar|string $payer    Object or code: identier
-     * @param \AbraFlexi\Banka          $payment  Payment object
+     * @param \AbraFlexi\Adresar|string $payer   Object or code: identier
+     * @param \AbraFlexi\Banka          $payment Payment object
      *
-     * @return boolean account was assigned to Address
+     * @return bool account was assigned to Address
      */
     public function savePayerAccount($payer, $payment)
     {
         $result = null;
         $buc = $payment->getDataValue('buc');
+
         if (
             !empty($buc) && !empty($payer) && self::isKnownBankAccountForAddress(
                 $payer,
-                $buc
+                $buc,
             )
         ) {
             $result = $this->assignBankAccountToAddress($payer, $payment);
         }
+
         return $result;
     }
 
     /**
-     *
      * @param \AbraFlexi\Adresar $address
-     * @param string $buc
+     * @param string             $buc
      *
-     * @return boolean
+     * @return bool
      */
     public static function isKnownBankAccountForAddress($address, $buc)
     {
@@ -1218,62 +1260,66 @@ class ParovacFaktur extends \Ease\Sand
         $bucer = new \AbraFlexi\RW(null, ['evidence' => 'adresar-bankovni-ucet']);
         $accountsRaw = $bucer->getColumnsFromAbraFlexi(
             ['buc', 'smerKod'],
-            ['firma' => $address]
+            ['firma' => $address],
         );
+
         if (!empty($accountsRaw)) {
             $accounts = \Ease\Functions::reindexArrayBy($accountsRaw, 'buc');
         }
-        return !array_key_exists($buc, $accounts);
+
+        return !\array_key_exists($buc, $accounts);
     }
 
     /**
-     * Assign Bank Account to Address
+     * Assign Bank Account to Address.
      *
      * @param \AbraFlexi\Adresar|string $address Object or code: identier
-     * @param \AbraFlexi\Banka                   $payment
+     * @param \AbraFlexi\Banka          $payment
      *
-     * @return boolean added ?
+     * @return bool added ?
      */
     public static function assignBankAccountToAddress($address, $payment)
     {
         $bucer = new \AbraFlexi\RW(null, ['evidence' => 'adresar-bankovni-ucet']);
         $bucer->insertToAbraFlexi(['firma' => $address, 'buc' => $payment->getDataValue('buc'),
             'smerKod' => $payment->getDataValue('smerKod'), 'poznam' => _('Added by script')]);
-        return $bucer->lastResponseCode == 201;
+
+        return $bucer->lastResponseCode === 201;
     }
 
     /**
-     *
      * @param array $paymentData
      * @param int   $invoiceId
      */
-    public function vytvorVazbuZDD($paymentData, $invoiceId)
+    public function vytvorVazbuZDD($paymentData, $invoiceId): void
     {
-        $modul = 'banka'; //pokladna
+        $modul = 'banka'; // pokladna
 
         $this->banker->setData($paymentData);
         $this->banker->ignore404(true);
 
-        if ($this->banker->lastResponseCode == 200) {
+        if ($this->banker->lastResponseCode === 200) {
             $headersBackup = $this->defaultHttpHeaders;
             $bankID = $this->banker->getDataValue('id');
 
             $this->defaultHttpHeaders['Accept'] = 'text/html';
             $this->setPostFields(http_build_query(['modul' => $modul, 'submit' => 'OK']));
             $this->performRequest(
-                $invoiceId . '/vytvor-vazbu-zdd/' . $bankID,
+                $invoiceId.'/vytvor-vazbu-zdd/'.$bankID,
                 'GET',
-                'json'
+                'json',
             );
 
             $responseArr = explode("\n", $this->lastCurlResponse);
             $result = true;
             $message = '';
+
             foreach ($responseArr as $lineNo => $responseLine) {
                 if (strstr($responseLine, '<ul class = "abraflexi-errors">')) {
                     $message = trim($responseArr[$lineNo + 1]);
                     $result = false;
                 }
+
                 if (strstr($responseLine, '<div class = "alert alert-success">')) {
                     $message = strip_tags(html_entity_decode(trim($responseArr[$lineNo + 1])));
                     $result = true;
@@ -1281,11 +1327,11 @@ class ParovacFaktur extends \Ease\Sand
             }
 
             if ($result === true) {
-                $this->addStatusMessage(empty($message) ? $this->getDataValue('kod') . '/vytvor-vazbu-zdd/' . $documentID : $message, 'success');
+                $this->addStatusMessage(empty($message) ? $this->getDataValue('kod').'/vytvor-vazbu-zdd/'.$documentID : $message, 'success');
             } else {
                 $this->addStatusMessage(
-                    $this->getDataValue('kod') . '/vytvor-vazbu-zdd/' . $documentID,
-                    'warning'
+                    $this->getDataValue('kod').'/vytvor-vazbu-zdd/'.$documentID,
+                    'warning',
                 );
             }
 
@@ -1294,9 +1340,10 @@ class ParovacFaktur extends \Ease\Sand
     }
 
     /**
-     * Reindex array of Invoice Data by datVyst or another column with date
+     * Reindex array of Invoice Data by datVyst or another column with date.
      *
      * @param array $invoices
+     * @param mixed $sortBy
      *
      * @return array
      */
@@ -1305,7 +1352,7 @@ class ParovacFaktur extends \Ease\Sand
         return $invoicesByDate;
     }
 
-    public function getDocumentTypes()
+    public function getDocumentTypes(): void
     {
     }
 }

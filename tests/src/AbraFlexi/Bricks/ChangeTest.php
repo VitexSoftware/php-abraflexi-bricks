@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the BricksForAbraFlexi package
+ *
+ * https://github.com/VitexSoftware/php-abraflexi-bricks
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\AbraFlexi\Bricks;
 
 use AbraFlexi\Bricks\Change;
@@ -9,10 +22,7 @@ use AbraFlexi\Bricks\Change;
  */
 class ChangeTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Change
-     */
-    protected $object;
+    protected Change $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ChangeTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers AbraFlexi\Bricks\Change::getData
+     * @covers \AbraFlexi\Bricks\Change::getData
+     *
      * @todo   Implement testgetData().
      */
-    public function testgetData()
+    public function testgetData(): void
     {
         $this->assertEquals('', $this->object->getData());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ChangeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers AbraFlexi\Bricks\Change::setData
+     * @covers \AbraFlexi\Bricks\Change::setData
+     *
      * @todo   Implement testsetData().
      */
-    public function testsetData()
+    public function testsetData(): void
     {
         $this->assertEquals('', $this->object->setData());
         // Remove the following lines when you implement this test.
