@@ -24,12 +24,8 @@ class DocumentLink extends \Ease\Html\ATag
 {
     /**
      * A Href to document in AbraFlexi web interface.
-     *
-     * @param string        $idCode
-     * @param \AbraFlexi\RO $engine
-     * @param string        $format
      */
-    public function __construct($idCode, $engine, $format = null)
+    public function __construct(string $idCode, \AbraFlexi\Document $engine, string $format = '')
     {
         $engine->setMyKey($idCode);
         parent::__construct($engine->getApiUrl($format), \AbraFlexi\RO::uncode($engine->getRecordIdent()));
