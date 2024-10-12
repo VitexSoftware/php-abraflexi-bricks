@@ -51,7 +51,7 @@ class CompanyLogo extends \Ease\Html\ImgTag
 EOD;
 
     /**
-     * Emebed Company logo into page.
+     * Embed Company logo into page.
      *
      * @param array $tagProperties Additional tag properties
      * @param array $options       AbraFlexi object parameters

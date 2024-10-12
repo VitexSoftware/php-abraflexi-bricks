@@ -63,7 +63,7 @@ class GateKeeper extends \Ease\Sand
      */
     public static function getDocumentCompany($document)
     {
-        return $document->getDataValue('firma') ? \AbraFlexi\RO::uncode(
+        return $document->getDataValue('firma') ? \AbraFlexi\Functions::uncode((string)
             $document->getDataValue('firma'),
         ) : null;
     }
@@ -77,6 +77,6 @@ class GateKeeper extends \Ease\Sand
      */
     public static function getCustomerCompany($customer)
     {
-        return $customer->adresar->getDataValue('kod') ? \AbraFlexi\RO::uncode($customer->adresar->getDataValue('kod')) : null;
+        return $customer->adresar->getDataValue('kod') ? \AbraFlexi\Functions::uncode((string)$customer->adresar->getDataValue('kod')) : null;
     }
 }

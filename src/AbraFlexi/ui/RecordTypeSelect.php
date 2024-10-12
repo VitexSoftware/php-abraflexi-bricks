@@ -50,6 +50,6 @@ class RecordTypeSelect extends \Ease\Html\SelectTag
 
         $default = $engine->getDataValue($valueType);
 
-        parent::__construct($engine->getEvidence(), $types, $valueType === 'kod' && !empty($default) ? \AbraFlexi\RO::code($default) : $default);
+        parent::__construct($engine->getEvidence(), $types, $valueType === 'kod' && !empty($default) ? \AbraFlexi\Functions::code((string)$default) : $default);
     }
 }

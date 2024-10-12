@@ -35,7 +35,7 @@ class PotvrzeniUhrady extends \Ease\HtmlMailer
         $this->addItem(new \Ease\Html\DivTag(sprintf(
             _('we confirm receipt of payment %s %s on %s '),
             $invoice->getDataValue('sumCelkem'),
-            \AbraFlexi\RO::uncode($invoice->getDataValue('mena')),
+            \AbraFlexi\Functions::uncode((string)$invoice->getDataValue('mena')),
             $invoice->getDataValue('kod'),
         )));
 

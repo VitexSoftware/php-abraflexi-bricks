@@ -30,13 +30,13 @@ $zdd = $copyer->conversion();
 $zdd->defaultUrlParams['relations'] = 'vazby';
 
 if ($zdd->sync()) {
-    $zdd->addStatusMessage(sprintf(_('New advance tax document was created: %s '), \AbraFlexi\RO::uncode($zdd)), 'success');
+    $zdd->addStatusMessage(sprintf(_('New advance tax document was created: %s '), \AbraFlexi\Functions::uncode((string)$zdd)), 'success');
 
     if ($zdd->getDataValue('sumCelkem') == $payment->getDataValue('sumCelkem')) {
 
         if ($zdd->vytvorVazbuZDD($payment)) {
             $zdd->addStatusMessage(sprintf(_('ZDD %s bond to payment %s '),
-                    \AbraFlexi\RO::uncode($zdd), \AbraFlexi\RO::uncode($payment)), 'success');
+                    \AbraFlexi\Functions::uncode((string)$zdd), \AbraFlexi\Functions::uncode((string)$payment)), 'success');
 
             $zdd->sync(['id' => $zdd, 'stavMailK' => 'stavMail.odeslat']);
 
@@ -48,9 +48,9 @@ if ($zdd->sync()) {
         }
     } else {
         $zdd->addStatusMessage(sprintf(_('ZDD %s value %d does not match payment %s value %s'),
-                \AbraFlexi\RO::uncode($zdd), $zdd->getDataValue('sumCelkem'), $payment,
+                \AbraFlexi\Functions::uncode((string)$zdd), $zdd->getDataValue('sumCelkem'), $payment,
                 $payment->getDataValue('sumCelkem')), 'error');
     }
 } else {
-    $zdd->addStatusMessage(sprintf(_('Error creating ZZD for %s'), \AbraFlexi\RO::uncode($payment)), 'error');
+    $zdd->addStatusMessage(sprintf(_('Error creating ZZD for %s'), \AbraFlexi\Functions::uncode((string)$payment)), 'error');
 }

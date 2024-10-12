@@ -28,6 +28,6 @@ class DocumentLink extends \Ease\Html\ATag
     public function __construct(string $idCode, \AbraFlexi\Document $engine, string $format = '')
     {
         $engine->setMyKey($idCode);
-        parent::__construct($engine->getApiUrl($format), \AbraFlexi\RO::uncode($engine->getRecordIdent()));
+        parent::__construct($engine->getApiUrl($format), \AbraFlexi\Functions::uncode((string)$engine->getRecordIdent()));
     }
 }
