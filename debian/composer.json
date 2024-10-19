@@ -13,7 +13,7 @@
   ],
   "require": {
     "deb/abraflexi": "*",
-    "deb/ease-bricks": "*"
+    "deb/ease-html": "*"
   },
   "autoload": {
     "psr-4": {
@@ -31,10 +31,6 @@
     {
       "type": "path",
       "url": "/usr/share/php/EaseHtml"
-    },
-    {
-      "type": "path",
-      "url": "/usr/share/php/EaseBricks"
     },
     {
       "type": "path",

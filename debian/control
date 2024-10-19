@@ -7,7 +7,7 @@ Priority: optional
 Homepage: https://github.com/VitexSoftware/php-abraflexi-bricks
 
 Package: php-vitexsoftware-abraflexi-bricks
-Depends: ${misc:Depends}, php-spojenet-abraflexi,php-vitexsoftware-ease-bricks, php-vitexsoftware-ease-html
+Depends: ${misc:Depends}, php-spojenet-abraflexi, php-vitexsoftware-ease-html
 Replaces: php-abraflexi-bricks
 Suggests: php-spojenet-abraflexi-doc,php-abraflexi-bricks-doc
 Architecture: all
