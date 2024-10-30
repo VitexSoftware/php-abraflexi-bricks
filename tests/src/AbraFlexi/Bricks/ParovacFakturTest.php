@@ -118,11 +118,11 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testInInvoicesMatchingByBank(): void
     {
-        $faktura = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'FAKTURA'),
+        $faktura = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'FAKTURA'),
             'popis' => 'InvoicesMatchingByBank AbraFlexi-Bricks Test']);
-        $zaloha = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'ZÁLOHA'),
+        $zaloha = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'ZÁLOHA'),
             'popis' => 'InvoicesMatchingByBank AbraFlexi-Bricks Test']);
-        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'DOBROPIS'),
+        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'DOBROPIS'),
             'popis' => 'InvoicesMatchingByBank AbraFlexi-Bricks Test']);
         $this->object->setStartDay(-1);
         $this->object->outInvoicesMatchingByBank();
@@ -135,7 +135,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
         $this->object->outInvoicesMatchingByBank();
 
         foreach ($paymentsToCheck as $paymentID => $paymentData) {
-            $paymentChecker->loadFromAbraFlexi(\AbraFlexi\Functions::code((string)$paymentData['kod']));
+            $paymentChecker->loadFromAbraFlexi(\AbraFlexi\Functions::code((string) $paymentData['kod']));
             $this->assertEquals(
                 'true',
                 $paymentChecker->getDataValue('sparovano'),
@@ -149,11 +149,11 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testInvoicesMatchingByInvoices(): void
     {
-        $faktura = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'FAKTURA'),
+        $faktura = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'FAKTURA'),
             'popis' => 'InvoicesMatchingByInvoices AbraFlexi-Bricks Test']);
-        $zaloha = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'ZÁLOHA'),
+        $zaloha = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'ZÁLOHA'),
             'popis' => 'InvoicesMatchingByInvoices AbraFlexi-Bricks Test']);
-        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'DOBROPIS'),
+        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'DOBROPIS'),
             'popis' => 'InvoicesMatchingByInvoices AbraFlexi-Bricks Test']);
 
         $invoiceChecker = new \AbraFlexi\FakturaVydana(
@@ -183,7 +183,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testSettleCreditNote(): void
     {
-        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'ODD'),
+        $dobropis = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'ODD'),
             'popis' => 'Test SettleCreditNote AbraFlexi-Bricks']);
         $payment = $this->makePayment();
         $this->assertEquals(
@@ -197,7 +197,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testSettleProforma(): void
     {
-        $zaloha = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'ZÁLOHA'),
+        $zaloha = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'ZÁLOHA'),
             'popis' => 'Test SettleProforma AbraFlexi-Bricks']);
         $payment = $this->makePayment();
         $this->object->settleProforma($zaloha, $payment->getData());
@@ -208,7 +208,7 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function testSettleInvoice(): void
     {
-        $invoice = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string)'FAKTURA'),
+        $invoice = $this->makeInvoice(['typDokl' => \AbraFlexi\Functions::code((string) 'FAKTURA'),
             'popis' => 'Test SettleInvoice AbraFlexi-Bricks PHPUnit']);
         $payment = $this->makePayment();
         $this->assertEquals(1, $this->object->settleInvoice($invoice, $payment));

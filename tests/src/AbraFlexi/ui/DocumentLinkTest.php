@@ -30,7 +30,7 @@ class DocumentLinkTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new DocumentLink(new \AbraFlexi\Adresar('code:TEST',['ignore404'=>true]));
+        $this->object = new DocumentLink(new \AbraFlexi\Adresar('code:TEST', ['ignore404' => true]));
     }
 
     /**

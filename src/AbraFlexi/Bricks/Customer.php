@@ -123,7 +123,7 @@ class Customer extends \Ease\User
         return $result;
     }
 
-    public function insertToAbraFlexi($data = []): array|bool
+    public function insertToAbraFlexi($data = []): bool
     {
         if ($data) {
             $data = $this->getData();
@@ -153,8 +153,6 @@ class Customer extends \Ease\User
      * Returns unpaid invoices of the customer.
      *
      * @param mixed $customer Customer Identifier or Object
-     *
-     * @return array
      */
     public function getCustomerDebts($customer = null): array
     {
@@ -400,7 +398,7 @@ class Customer extends \Ease\User
      * Encrypts the password.
      *
      * @param string $plainTextPassword plainext password
-     * 
+     *
      * @todo Enable Encrypted passwords for AbraFlexi
      *
      * @return string Encrypted password
