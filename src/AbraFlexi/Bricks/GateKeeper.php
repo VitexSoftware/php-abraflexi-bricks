@@ -42,7 +42,7 @@ class GateKeeper extends \Ease\Sand
 
                 break;
             case 'Customer': // Customer
-                $result = (self::getDocumentCompany($document) === self::getCustomerCompany($user));
+                $result = (self::getDocumentCompany($document)->getRecordCode() === self::getCustomerCompany($user)->getRecordCode());
 
                 break;
             case 'Anonym': // Anonymous

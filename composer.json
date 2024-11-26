@@ -9,10 +9,10 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "vitexsoftware/ease-core-bricks": "*",
-        "spojenet/flexibee": "dev-main"
+        "spojenet/flexibee": "^3.3"
     },
     "autoload": {
         "psr-4": {

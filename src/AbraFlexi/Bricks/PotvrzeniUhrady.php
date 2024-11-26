@@ -27,7 +27,7 @@ class PotvrzeniUhrady extends \Ease\HtmlMailer
      *
      * @param \AbraFlexi\FakturaVydana $invoice
      */
-    public function __construct($invoice)
+    public function __construct(\AbraFlexi\Document $invoice)
     {
         $body = new \Ease\Container();
 
@@ -40,7 +40,7 @@ class PotvrzeniUhrady extends \Ease\HtmlMailer
         )));
 
         parent::__construct(
-            $to,
+            $invoice->getEmail(),
             _('Confirmation of receipt of invoice payment'),
             $body,
         );

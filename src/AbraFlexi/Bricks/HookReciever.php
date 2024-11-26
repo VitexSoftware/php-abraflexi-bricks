@@ -22,14 +22,14 @@ namespace AbraFlexi\Bricks;
  */
 class HookReciever extends \AbraFlexi\Changes
 {
-    public $format = 'json';
+    public string $format = 'json';
     public $changes;
     public $globalVersion;
 
     /**
      * Posledni zpracovana verze.
      */
-    public int $lastProcessedVersion = null;
+    public int $lastProcessedVersion = 0;
 
     /**
      * Prijmac WebHooku.

@@ -244,7 +244,7 @@ class Convertor extends \Ease\Sand
     /**
      * Return items that same on both sides.
      *
-     * @return array
+     * @return array<mixed>
      */
     public function commonItems()
     {

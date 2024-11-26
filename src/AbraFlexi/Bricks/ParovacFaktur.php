@@ -32,14 +32,19 @@ class ParovacFaktur extends \Ease\Sand
     public \AbraFlexi\Banka $banker;
 
     /**
-     * @var Od kdy začít dohledávat doklady
+     * @var int Od kdy začít dohledávat doklady
      */
-    public Od $daysBack = 1;
+    public int $daysBack = 1;
 
     /**
      * Requied Config Keys.
+     * @var array<string>
      */
     public array $cfgRequed = ['LABEL_OVERPAY', 'LABEL_INVOICE_MISSING', 'LABEL_UNIDENTIFIED'];
+    /**
+     * Default HTTP Headers.
+     * @var array<string,string>
+     */
     public array $defaultHttpHeaders;
 
     /**

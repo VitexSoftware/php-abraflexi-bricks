@@ -25,12 +25,12 @@ class Change
     /**
      * Evidence of record.
      */
-    public string $evidence = null; // "faktura-vydana",
+    public ?string $evidence = null; // "faktura-vydana",
 
     /**
      * Change IN Version.
      */
-    public int $inVersion = null; // "3",
+    public ?int $inVersion = null; // "3",
 
     /**
      * create, update, delete.
@@ -41,15 +41,16 @@ class Change
 
     /**
      * Ext-IDs for record.
+     * @var array<string>
      */
     public array $extIds = []; // []
 
     /**
      * One AbraFlexi change.
      *
-     * @param array $changeData
+     * @param array<string,string> $changeData
      */
-    public function __construct($changeData = [])
+    public function __construct(array $changeData = [])
     {
         if ($changeData) {
             $this->setData($changeData);
@@ -59,9 +60,9 @@ class Change
     /**
      * Give your data back.
      *
-     * @return array
+     * @return array<string, \AbraFlexi\DateTime|array<string>|int|string|null>
      */
-    public function getData()
+    public function getData(): array
     {
         return [
             '@evidence' => $this->evidence,
@@ -76,7 +77,7 @@ class Change
     /**
      * Store data.
      *
-     * @param array $changeData
+     * @param array<string, string,int|AbraFlexi\DateTime|array<string>|string|null> $changeData
      */
     public function setData($changeData): void
     {
