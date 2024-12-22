@@ -329,7 +329,7 @@ class Customer extends \Ease\User
      */
     public function getUserName(): string
     {
-        return $this->kontakt->getDataValue($this->loginColumn);
+        return (string) $this->kontakt->getDataValue($this->loginColumn);
     }
 
     /**

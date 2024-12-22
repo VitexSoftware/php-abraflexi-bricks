@@ -22,7 +22,12 @@ namespace AbraFlexi\Bricks\ConvertRules;
  */
 class Banka_to_FakturaVydana extends \AbraFlexi\Bricks\ConvertorRule
 {
-    public $rules = [
+    /**
+     * Source object type.
+     *
+     * @var array<string, array<string, string>|string>
+     */
+    public array $rules = [
         'kod' => 'kod',
         //        'cisDosle' => 'cisDosle',
         'varSym' => 'varSym',

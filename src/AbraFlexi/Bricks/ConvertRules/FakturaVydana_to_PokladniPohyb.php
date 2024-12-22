@@ -24,7 +24,12 @@ use AbraFlexi\Bricks\ConvertorRule;
  */
 class FakturaVydana_to_PokladniPohyb extends ConvertorRule
 {
-    public $rules = [
+    /**
+     * Source object type.
+     *
+     * @var array<string, array<string, string>|string>
+     */
+    public array $rules = [
         //        'kod' => 'kod',
         //        'typPohybuK' => NULL,
         //        'cisDosle' => 'cisDosle',

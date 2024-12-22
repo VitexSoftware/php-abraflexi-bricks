@@ -38,12 +38,15 @@ class ParovacFaktur extends \Ease\Sand
 
     /**
      * Requied Config Keys.
+     *
      * @var array<string>
      */
     public array $cfgRequed = ['LABEL_OVERPAY', 'LABEL_INVOICE_MISSING', 'LABEL_UNIDENTIFIED'];
+
     /**
      * Default HTTP Headers.
-     * @var array<string,string>
+     *
+     * @var array<string, string>
      */
     public array $defaultHttpHeaders;
 

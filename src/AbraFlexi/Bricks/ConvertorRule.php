@@ -21,10 +21,10 @@ namespace AbraFlexi\Bricks;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class ConvertorRule extends \Ease\Sand
-
 {
     /**
-     * Summary of rules
+     * Summary of rules.
+     *
      * @var array<string, array<string, string>|string>
      */
     public array $rules = [];

@@ -22,7 +22,12 @@ namespace AbraFlexi\Bricks\ConvertRules;
  */
 class FakturaPrijataPolozka_to_Cenik extends \AbraFlexi\Bricks\ConvertorRule
 {
-    public $rules = [
+    /**
+     * Source object type.
+     *
+     * @var array<string, array<string, string>|string>
+     */
+    public array $rules = [
         'kod' => 'kod',
         'nazev' => 'nazev',
         'nazevA' => 'nazevA',

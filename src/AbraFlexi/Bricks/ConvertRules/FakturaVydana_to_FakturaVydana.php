@@ -23,10 +23,11 @@ namespace AbraFlexi\Bricks\ConvertRules;
 class FakturaVydana_to_FakturaVydana extends \AbraFlexi\Bricks\ConvertorRule
 {
     /**
-     * Convert rules
+     * Convert rules.
+     *
      * @var array<string, array<string, string>|string>
      */
-    public $rules = [
+    public array $rules = [
         'kod' => 'kod',
         //        'cisDosle' => 'cisDosle',
         'varSym' => 'varSym',

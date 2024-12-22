@@ -41,6 +41,7 @@ class Change
 
     /**
      * Ext-IDs for record.
+     *
      * @var array<string>
      */
     public array $extIds = []; // []
@@ -48,7 +49,7 @@ class Change
     /**
      * One AbraFlexi change.
      *
-     * @param array<string,string> $changeData
+     * @param array<string, string> $changeData
      */
     public function __construct(array $changeData = [])
     {
@@ -60,7 +61,7 @@ class Change
     /**
      * Give your data back.
      *
-     * @return array<string, \AbraFlexi\DateTime|array<string>|int|string|null>
+     * @return array<string, null|\AbraFlexi\DateTime|array<string>|int|string>
      */
     public function getData(): array
     {
@@ -77,7 +78,7 @@ class Change
     /**
      * Store data.
      *
-     * @param array<string, string,int|AbraFlexi\DateTime|array<string>|string|null> $changeData
+     * @param array<string, string, null|AbraFlexi\DateTime|array<string>|int|string> $changeData
      */
     public function setData($changeData): void
     {
