@@ -178,7 +178,7 @@ class Customer extends \Ease\User
                 break;
         }
 
-        if (!\is_object($this->invoicer)) {
+        if (isset($this->invoicer) === false) {
             $this->invoicer = new \AbraFlexi\FakturaVydana();
         }
 
