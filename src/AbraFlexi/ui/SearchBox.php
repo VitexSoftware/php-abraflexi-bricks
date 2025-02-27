@@ -18,6 +18,8 @@ namespace AbraFlexi\ui;
 /**
  * Description of SearchBox.
  *
+ * @deprecated this class is deprecated and will be removed in a future release
+ *
  * @author vitex
  */
 class SearchBox extends \Ease\Html\InputSearchTag
