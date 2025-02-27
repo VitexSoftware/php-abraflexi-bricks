@@ -54,41 +54,39 @@ class Customer extends \Ease\User
      */
     public function __construct(array $userInfo = [])
     {
-        $this->adresar = new \AbraFlexi\Adresar();
-        $this->kontakt = new \AbraFlexi\Kontakt();
         parent::__construct();
 
         if (isset($userInfo['username'])) {
-            $contactInfo = $this->kontakt->getColumnsFromAbraFlexi(
+            $contactInfo = $this->getKontakt()->getColumnsFromAbraFlexi(
                 '*',
                 ['username' => $userInfo['username']],
             );
 
             if ($contactInfo) {
-                $this->kontakt->takeData($contactInfo);
+                $this->getKontakt()->takeData($contactInfo);
                 $this->takeData($contactInfo);
                 $this->origin = 'kontakt';
             }
         }
 
         if (isset($userInfo['email'])) {
-            $contactInfo = $this->kontakt->getColumnsFromAbraFlexi(
+            $contactInfo = $this->getKontakt()->getColumnsFromAbraFlexi(
                 '*',
                 ['email' => $userInfo['email']],
             );
 
             if (!empty($contactInfo)) {
-                $this->kontakt->takeData($contactInfo[0]);
+                $this->getKontakt()->takeData($contactInfo[0]);
                 $this->takeData($contactInfo[0]);
                 $this->origin = 'kontakt';
             } else {
-                $contactInfo = $this->adresar->getColumnsFromAbraFlexi(
+                $contactInfo = $this->getAdresar()->getColumnsFromAbraFlexi(
                     '*',
                     ['email' => $userInfo['email']],
                 );
 
                 if (!empty($contactInfo)) {
-                    $this->adresar->takeData($contactInfo);
+                    $this->getAdresar()->takeData($contactInfo);
                     $this->takeData($contactInfo);
                     $this->origin = 'adresar';
                 }
@@ -98,6 +96,8 @@ class Customer extends \Ease\User
 
     /**
      * Return Customers.
+     *
+     * @param array<array, array> $conditions
      */
     public function getCustomerList(array $conditions = []): array
     {
@@ -112,13 +112,11 @@ class Customer extends \Ease\User
      * Load Customer from AbraFlexi.
      *
      * @param id $id AbraFlexi address record ID
-     *
-     * @return int
      */
-    public function loadFromAbraFlexi($id = null)
+    public function loadFromAbraFlexi($id = null): int
     {
-        $result = $this->adresar->loadFromAbraFlexi($id);
-        $this->takeData($this->adresar->getData());
+        $result = $this->getAdresar()->loadFromAbraFlexi($id);
+        $this->takeData($this->getAdresar()->getData());
 
         return $result;
     }
@@ -131,17 +129,17 @@ class Customer extends \Ease\User
 
         switch ($this->origin) {
             case 'adresar':
-                $result = $this->adresar->insertToAbraFlexi($data);
+                $result = $this->getAdresar()->insertToAbraFlexi($data);
 
                 break;
             case 'kontakt':
-                $result = $this->kontakt->insertToAbraFlexi($data);
+                $result = $this->getKontakt()->insertToAbraFlexi($data);
 
                 break;
 
             default:
-                $result = $this->kontakt->insertToAbraFlexi($data);
-                $result = $this->adresar->insertToAbraFlexi($data);
+                $result = $this->getKontakt()->insertToAbraFlexi($data);
+                $result = $this->getAdresar()->insertToAbraFlexi($data);
 
                 break;
         }
@@ -158,15 +156,15 @@ class Customer extends \Ease\User
     {
         switch (\gettype($customer)) {
             case 'object':
-                if (\get_class($customer) === 'Customer') {
-                    $firma = $customer->adresa;
+                if (\Ease\Functions::baseClassName($customer) === 'Customer') {
+                    $firma = $customer->getAdresar();
                 } else {
                     $firma = $customer;
                 }
 
                 break;
             case 'NULL':
-                $firma = $this->adresar;
+                $firma = $this->getAdresar();
 
                 break;
 
@@ -179,12 +177,12 @@ class Customer extends \Ease\User
         }
 
         if (isset($this->invoicer) === false) {
-            $this->invoicer = new \AbraFlexi\FakturaVydana();
+            $this->getInvoicer() = new \AbraFlexi\FakturaVydana();
         }
 
         $result = [];
-        $this->invoicer->defaultUrlParams['order'] = 'datVyst@A';
-        $invoices = $this->invoicer->getColumnsFromAbraFlexi(
+        $this->getInvoicer()->defaultUrlParams['order'] = 'datVyst@A';
+        $invoices = $this->getInvoicer()->getColumnsFromAbraFlexi(
             [
                 'id',
                 'kod',
@@ -205,11 +203,38 @@ class Customer extends \Ease\User
             'kod',
         );
 
-        if ($this->invoicer->lastResponseCode === 200) {
+        if ($this->getInvoicer()->lastResponseCode === 200) {
             $result = $invoices;
         }
 
         return $result;
+    }
+
+    public function getInvoicer(): \AbraFlexi\FakturaVydana
+    {
+        if (isset($this->invoicer) === false) {
+            $this->invoicer = new \AbraFlexi\FakturaVydana();
+        }
+
+        return $this->invoicer;
+    }
+
+    public function getAdresar(): \AbraFlexi\Adresar
+    {
+        if (isset($this->adresar) === false) {
+            $this->adresar = new \AbraFlexi\Adresar();
+        }
+
+        return $this->adresar;
+    }
+
+    public function getKontakt(): \AbraFlexi\Kontakt
+    {
+        if (isset($this->kontakt) === false) {
+            $this->kontakt = new \AbraFlexi\Kontakt();
+        }
+
+        return $this->kontakt;
     }
 
     /**
@@ -313,7 +338,7 @@ class Customer extends \Ease\User
      */
     public function loginSuccess()
     {
-        $this->userID = (int) $this->kontakt->getMyKey();
+        $this->userID = (int) $this->getKontakt()->getMyKey();
         $this->setUserLogin($this->kontakt->getDataValue($this->loginColumn));
         $this->logged = true;
         $this->addStatusMessage(
@@ -329,7 +354,7 @@ class Customer extends \Ease\User
      */
     public function getUserName(): string
     {
-        return (string) $this->kontakt->getDataValue($this->loginColumn);
+        return (string) $this->getKontakt()->getDataValue($this->loginColumn);
     }
 
     /**
@@ -345,7 +370,7 @@ class Customer extends \Ease\User
      */
     public function getUserEmail(): string
     {
-        return \strlen($this->kontakt->getDataValue($this->mailColumn)) ? $this->kontakt->getDataValue($this->mailColumn) : $this->adresar->getDataValue($this->mailColumn);
+        return \strlen($this->getKontakt()->getDataValue($this->mailColumn)) ? $this->kontakt->getDataValue($this->mailColumn) : $this->adresar->getDataValue($this->mailColumn);
     }
 
     /**
