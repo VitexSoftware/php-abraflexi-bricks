@@ -21,7 +21,7 @@ use AbraFlexi\FakturaVydana;
 /**
  * Invoice matching class.
  *
- * @copyright (c) 2018-2023, Vítězslav Dvořák
+ * @copyright (c) 2018-2025, Vítězslav Dvořák
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class ParovacFaktur extends \Ease\Sand
@@ -849,7 +849,6 @@ class ParovacFaktur extends \Ease\Sand
                     'duzpPuv' => $today,
                     'duzpUcto' => $today,
                     'datUcto' => $today,
-                    'stitky' => 'SYSTEM',
                     'stavMailK' => 'stavMail.neodesilat',
                 ],
             )),

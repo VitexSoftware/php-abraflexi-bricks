@@ -42,7 +42,7 @@ class PotvrzeniUhrady extends \Ease\HtmlMailer
         parent::__construct(
             $invoice->getEmail(),
             _('Confirmation of receipt of invoice payment'),
-            $body,
+            (string) $body,
         );
     }
 }

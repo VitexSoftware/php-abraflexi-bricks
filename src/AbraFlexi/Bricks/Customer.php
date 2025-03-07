@@ -51,6 +51,8 @@ class Customer extends \Ease\User
 
     /**
      * Customer.
+     *
+     * @param array<string, string> $userInfo
      */
     public function __construct(array $userInfo = [])
     {
@@ -98,6 +100,10 @@ class Customer extends \Ease\User
 
     /**
      * Return Customers.
+     *
+     * @param array<string, string> $conditions
+     *
+     * @return array<string, string>
      */
     public function getCustomerList(array $conditions = []): array
     {
@@ -123,6 +129,13 @@ class Customer extends \Ease\User
         return $result;
     }
 
+    /**
+     * Load Customer from AbraFlexi.
+     *
+     * @param array<string, string> $data to insert to AbraFlexi
+     *
+     * @return int
+     */
     public function insertToAbraFlexi($data = []): bool
     {
         if ($data) {
@@ -153,13 +166,15 @@ class Customer extends \Ease\User
      * Returns unpaid invoices of the customer.
      *
      * @param mixed $customer Customer Identifier or Object
+     *
+     * @return array<string, string>
      */
-    public function getCustomerDebts($customer = null): array
+    public function getCustomerDebts($customer): array
     {
         switch (\gettype($customer)) {
             case 'object':
-                if (\get_class($customer) === 'Customer') {
-                    $firma = $customer->adresa;
+                if (\Ease\Functions::baseClassName($customer) === 'Customer') {
+                    $firma = $customer->adresar;
                 } else {
                     $firma = $customer;
                 }
@@ -263,7 +278,7 @@ class Customer extends \Ease\User
     /**
      * Try to Sign in.
      *
-     * @param array $formData form data e.g. $_REQUEST
+     * @param array<string, string> $formData form data e.g. $_REQUEST
      *
      * @return null|bool
      */
@@ -420,6 +435,24 @@ class Customer extends \Ease\User
         }
 
         return (int) $this->kontakt->getMyKey();
+    }
+
+    public function getAdresar(): \AbraFlexi\Adresar
+    {
+        if ((isset($this->adresar) === false) || empty($this->adresar)) {
+            $this->adresar = new \AbraFlexi\Adresar();
+        }
+
+        return $this->adresar;
+    }
+
+    public function getKontakt(): \AbraFlexi\Kontakt
+    {
+        if ((isset($this->kontakt) === false) || empty($this->kontakt)) {
+            $this->kontakt = new \AbraFlexi\Kontakt(['firma' => $this->getAdresar()]);
+        }
+
+        return $this->kontakt;
     }
 
     /**
