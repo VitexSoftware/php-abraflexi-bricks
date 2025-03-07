@@ -18,6 +18,8 @@ namespace AbraFlexi\ui;
 /**
  * Description of GroupChooser.
  *
+ * @deprecated this class is deprecated and will be removed in a future release
+ *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class RecordChooser extends \Ease\Html\InputTextTag

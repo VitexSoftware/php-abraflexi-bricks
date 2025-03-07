@@ -18,6 +18,8 @@ namespace AbraFlexi\ui;
 /**
  * AbraFlexi Bricks - AbraFlexi svg logo.
  *
+ * @deprecated this class is deprecated and will be removed in a future release
+ *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class AbraFlexiLogo extends \Ease\Html\ImgTag

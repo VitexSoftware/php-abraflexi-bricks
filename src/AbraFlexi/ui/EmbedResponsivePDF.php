@@ -18,6 +18,8 @@ namespace AbraFlexi\ui;
 /**
  * Description of EmbedResponsive.
  *
+ * @deprecated this class is deprecated and will be removed in a future release
+ *
  * @author vitex
  */
 class EmbedResponsivePDF extends EmbedResponsive

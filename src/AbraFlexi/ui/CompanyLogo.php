@@ -18,6 +18,8 @@ namespace AbraFlexi\ui;
 /**
  * Description of CompanyLogo.
  *
+ * @deprecated this class is deprecated and will be removed in a future release
+ *
  * @author vitex
  */
 class CompanyLogo extends \Ease\Html\ImgTag

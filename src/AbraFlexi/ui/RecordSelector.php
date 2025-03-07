@@ -18,6 +18,8 @@ namespace AbraFlexi\ui;
 /**
  * Select One Value.
  *
+ * @deprecated this class is deprecated and will be removed in a future release
+ *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class RecordSelector extends \Ease\Html\SelectTag

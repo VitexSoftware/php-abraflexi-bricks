@@ -16,11 +16,11 @@ Priority: optional
 Description: PHP Based AbraFlexi RestAPI/Json library AddOns
  Additional classes and code snipplets for spojenet/abraflexi library
 
-Package: php-vitexsoftware-abraflexi-bricks-doc
-Depends: ${misc:Depends}
-Suggests: www-browser
-Architecture: all
-Section: doc
-Priority: optional
-Description: PHP Based AbraFlexi RestAPI/Json library Addons documentation
- PHPDocumentor html documentation for AbraFlexi Bricks php library
+#Package: php-vitexsoftware-abraflexi-bricks-doc
+#Depends: ${misc:Depends}
+#Suggests: www-browser
+#Architecture: all
+#Section: doc
+#Priority: optional
+#Description: PHP Based AbraFlexi RestAPI/Json library Addons documentation
+# PHPDocumentor html documentation for AbraFlexi Bricks php library

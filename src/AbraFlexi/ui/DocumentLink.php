@@ -18,6 +18,8 @@ namespace AbraFlexi\ui;
 /**
  * Description of DocumentLink.
  *
+ * @deprecated this class is deprecated and will be removed in a future release
+ *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class DocumentLink extends \Ease\Html\ATag
