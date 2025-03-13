@@ -116,8 +116,6 @@ class Customer extends \Ease\User
      * Load Customer from AbraFlexi.
      *
      * @param id $id AbraFlexi address record ID
-     *
-     * @return int
      */
     public function loadFromAbraFlexi($id = null): int
     {
