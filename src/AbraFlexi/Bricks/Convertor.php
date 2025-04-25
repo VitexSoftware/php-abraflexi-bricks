@@ -49,7 +49,7 @@ class Convertor extends \Ease\Sand
     public function __construct(
         ?\AbraFlexi\RO $input = null,
         ?\AbraFlexi\RW $output = null,
-        $ruler = null
+        $ruler = null,
     ) {
         if (!empty($input)) {
             $this->setSource($input);
@@ -95,7 +95,7 @@ class Convertor extends \Ease\Sand
         $keepId = false,
         $addExtId = false,
         $keepCode = false,
-        $handleAccounting = false
+        $handleAccounting = false,
     ) {
         $this->prepareRules($keepId, $addExtId, $keepCode, $handleAccounting);
         $this->convertItems();
@@ -112,7 +112,7 @@ class Convertor extends \Ease\Sand
      */
     public static function baseClassName($object)
     {
-        return basename(str_replace('\\', '/', \get_class($object)));
+        return basename(str_replace('\\', '/', $object::class));
     }
 
     /**
@@ -129,7 +129,7 @@ class Convertor extends \Ease\Sand
         $keepId,
         $addExtId,
         $keepCode,
-        $handleAccounting
+        $handleAccounting,
     ): void {
         $convertorClassname = $this->getConvertorClassName();
         $ruleClass = '\\AbraFlexi\\Bricks\\ConvertRules\\'.$convertorClassname;

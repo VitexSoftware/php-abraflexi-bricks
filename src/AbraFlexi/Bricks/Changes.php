@@ -27,7 +27,7 @@ class Changes
     /**
      * Reported number of last change.
      */
-    public int $globalVersion = null;
+    public ?int $globalVersion = null;
 
     /**
      * Stored Changes.
@@ -39,12 +39,12 @@ class Changes
     /**
      * Next chunk ID.
      */
-    public int $next = null;
+    public ?int $next = null;
 
     /**
-     * @param array $changesData
+     * @param array<int,mixed> $changesData
      */
-    public function __construct($changesData)
+    public function __construct(array $changesData)
     {
         if (\array_key_exists('changes', $changesData)) {
             foreach ($changesData['changes'] as $changeData) {

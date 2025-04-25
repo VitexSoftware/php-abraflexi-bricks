@@ -38,7 +38,7 @@ class RecordSelector extends \Ease\Html\SelectTag
         $name,
         $value,
         $optionsEngine,
-        $properties = []
+        $properties = [],
     ) {
         if (empty($optionsEngine->getColumnInfo('nazev'))) {
             $nameColumn = 'kod';

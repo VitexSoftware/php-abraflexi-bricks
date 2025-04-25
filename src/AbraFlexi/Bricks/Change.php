@@ -35,9 +35,9 @@ class Change
     /**
      * create, update, delete.
      */
-    public string $operation = null; // "create",
-    public \AbraFlexi\DateTime $timestamp = null; // "2019-01-01 00:00:00.0",
-    public int $id = null; // "1",
+    public ?string $operation = null; // "create",
+    public ?\AbraFlexi\DateTime $timestamp = null; // "2019-01-01 00:00:00.0",
+    public ?int $id = null; // "1",
 
     /**
      * Ext-IDs for record.

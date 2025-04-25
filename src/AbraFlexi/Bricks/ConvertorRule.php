@@ -47,7 +47,7 @@ class ConvertorRule extends \Ease\Sand
         $keepId = false,
         $addExtId = false,
         $keepCode = false,
-        $handleAccounting = true
+        $handleAccounting = true,
     ) {
         $this->keepId = $keepId;
         $this->addExtId = $addExtId;
@@ -133,7 +133,7 @@ class ConvertorRule extends \Ease\Sand
      */
     public static function convertorClassTemplateGenerator(
         $convertor,
-        $className
+        $className,
     ) {
         $inputColumns = $convertor->getInput()->getColumnsInfo();
         $outputColumns = $convertor->getOutput()->getColumnsInfo();

@@ -52,10 +52,8 @@ class ParovacFaktur extends \Ease\Sand
 
     /**
      * Invoice handler object.
-     *
-     * @var \AbraFlexi\FakturaPrijata|FakturaVydana
      */
-    private $invoicer;
+    private \AbraFlexi\FakturaPrijata|FakturaVydana $invoicer;
 
     /**
      * Configuration options.
@@ -170,7 +168,7 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function getPaymentsWithinPeriod(
         \DatePeriod $period,
-        $direction = 'in'
+        $direction = 'in',
     ) {
         $result = [];
         $this->banker->defaultUrlParams['order'] = 'datVyst@A';
@@ -613,7 +611,7 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function settleProforma(
         \AbraFlexi\FakturaVydana $zaloha,
-        \AbraFlexi\Banka $payment
+        \AbraFlexi\Banka $payment,
     ) {
         $success = 0;
         $prijataCastka = (float) $payment['sumCelkem'];

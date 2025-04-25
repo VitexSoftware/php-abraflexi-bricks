@@ -26,9 +26,9 @@ class GdprLog extends \Ease\GdprLog
      * Log AbraFlexi event.
      *
      * @param \AbraFlexi\RW $abraflexi
-     * @param array         $columns
+     * @param array<string> $columns
      */
-    public function logAbraFlexiEvent($abraflexi, $columns): void
+    public function logAbraFlexiEvent(\AbraFlexi\RW $abraflexi, $columns): void
     {
         foreach ($columns as $columnName) {
             $this->logEvent(
@@ -43,9 +43,9 @@ class GdprLog extends \Ease\GdprLog
     /**
      * Log Change in AbraFlexi.
      *
-     * @param \AbraFlexi\RW $abraflexi
-     * @param array         $originalData
-     * @param array         $columns
+     * @param \AbraFlexi\RW         $abraflexi
+     * @param array<string, string> $originalData
+     * @param array<string>         $columns
      */
     public function logAbraFlexiChange($abraflexi, $originalData, $columns): void
     {

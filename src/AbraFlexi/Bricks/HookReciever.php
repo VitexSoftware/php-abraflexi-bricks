@@ -23,8 +23,8 @@ namespace AbraFlexi\Bricks;
 class HookReciever extends \AbraFlexi\Changes
 {
     public string $format = 'json';
-    public $changes;
-    public $globalVersion;
+    public array $changes;
+    public ?int $globalVersion = null;
 
     /**
      * Posledni zpracovana verze.
@@ -151,7 +151,7 @@ class HookReciever extends \AbraFlexi\Changes
      *
      * @return int Globální verze poslední změny
      */
-    public function takeChanges($changes)
+    public function takeChanges(array $changes)
     {
         $result = null;
 
