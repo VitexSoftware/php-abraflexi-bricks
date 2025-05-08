@@ -25,7 +25,6 @@ class GdprLog extends \Ease\GdprLog
     /**
      * Log AbraFlexi event.
      *
-     * @param \AbraFlexi\RW $abraflexi
      * @param array<string> $columns
      */
     public function logAbraFlexiEvent(\AbraFlexi\RW $abraflexi, $columns): void

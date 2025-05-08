@@ -78,7 +78,7 @@ class Change
     /**
      * Store data.
      *
-     * @param array<string, string, null|AbraFlexi\DateTime|array<string>|int|string> $changeData
+     * @param array<string, string, null|\AbraFlexi\DateTime|array<string>|int|string> $changeData
      */
     public function setData($changeData): void
     {

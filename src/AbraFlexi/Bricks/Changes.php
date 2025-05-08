@@ -42,7 +42,7 @@ class Changes
     public ?int $next = null;
 
     /**
-     * @param array<int,mixed> $changesData
+     * @param array<int, mixed> $changesData
      */
     public function __construct(array $changesData)
     {

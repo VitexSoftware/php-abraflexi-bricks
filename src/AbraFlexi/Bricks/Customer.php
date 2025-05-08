@@ -161,33 +161,11 @@ class Customer extends \Ease\User
     /**
      * Returns unpaid invoices of the customer.
      *
-     * @param mixed $customer Customer Identifier or Object
-     *
      * @return array<string, string>
      */
-    public function getCustomerDebts($customer): array
+    public function getCustomerDebts(): array
     {
-        switch (\gettype($customer)) {
-            case 'object':
-                if (\Ease\Functions::baseClassName($customer) === 'Customer') {
-                    $firma = $customer->adresar;
-                } else {
-                    $firma = $customer;
-                }
-
-                break;
-            case 'NULL':
-                $firma = $this->getAdresar();
-
-                break;
-
-            default:
-            case 'string':
-            case 'int':
-                $firma = $customer;
-
-                break;
-        }
+        $firma = $this->getAdresar();
 
         if (isset($this->invoicer) === false) {
             $this->invoicer = new \AbraFlexi\FakturaVydana();

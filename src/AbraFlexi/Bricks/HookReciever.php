@@ -23,6 +23,11 @@ namespace AbraFlexi\Bricks;
 class HookReciever extends \AbraFlexi\Changes
 {
     public string $format = 'json';
+    /**
+     * Changes Array.
+     *
+     * @var array<string, mixed>
+     */
     public array $changes;
     public ?int $globalVersion = null;
 
@@ -91,7 +96,7 @@ class HookReciever extends \AbraFlexi\Changes
                     continue;
                 }
 
-                $handlerClassName = \AbraFlexi\RO::evidenceToClassName($evidence);
+                $handlerClassName = \AbraFlexi\Functions::evidenceToClassName($evidence);
                 $handlerClassFile = 'System/whplugins/'.$handlerClassName.'.php';
 
                 if (file_exists($handlerClassFile)) {
