@@ -107,7 +107,7 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function getInvoicer()
     {
-        if (\isset($this->invoicer) || !\is_object($this->invoicer)) {
+        if (!isset($this->invoicer) || !\is_object($this->invoicer)) {
             $this->invoicer = new FakturaVydana(null, $this->config);
         }
 
