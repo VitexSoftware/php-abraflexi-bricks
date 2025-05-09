@@ -173,6 +173,7 @@ class Customer extends \Ease\User
 
         $result = [];
         $this->getInvoicer()->defaultUrlParams['order'] = 'datVyst@A';
+        $this->getInvoicer()->defaultUrlParams['limit'] = 0;
         $invoices = $this->getInvoicer()->getColumnsFromAbraFlexi(
             [
                 'id',

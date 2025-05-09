@@ -64,8 +64,8 @@ class Changes
     /**
      * Result array contains different key with new|old values.
      *
-     * @param array $data
-     * @param array $datb
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $datb
      */
     public static function dataDiff($data, $datb)
     {

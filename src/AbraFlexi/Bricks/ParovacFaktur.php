@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace AbraFlexi\Bricks;
 
 use AbraFlexi\Banka;
+use AbraFlexi\FakturaPrijata;
 use AbraFlexi\FakturaVydana;
 
 /**
@@ -29,12 +30,12 @@ class ParovacFaktur extends \Ease\Sand
     /**
      * account statements handler object.
      */
-    public \AbraFlexi\Banka $banker;
+    public Banka $banker;
 
     /**
-     * @var int Od kdy začít dohledávat doklady
+     * @var int Days back to search for payments
      */
-    public int $daysBack = 1;
+    public int $daysBack = 1; // Yesterday is default
 
     /**
      * Requied Config Keys.
@@ -53,13 +54,13 @@ class ParovacFaktur extends \Ease\Sand
     /**
      * Invoice handler object.
      */
-    private \AbraFlexi\FakturaPrijata|FakturaVydana $invoicer;
+    private FakturaPrijata|FakturaVydana $invoicer;
 
     /**
      * Configuration options.
      */
     private array $config = ['limit' => 0];
-    private type $docTypes;
+    private array $docTypes;
 
     /**
      * Invoice matcher.
@@ -106,7 +107,7 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function getInvoicer()
     {
-        if (!\is_object($this->invoicer)) {
+        if (\isset($this->invoicer) || !\is_object($this->invoicer)) {
             $this->invoicer = new FakturaVydana(null, $this->config);
         }
 
@@ -125,6 +126,7 @@ class ParovacFaktur extends \Ease\Sand
     {
         $result = [];
         $this->banker->defaultUrlParams['order'] = 'datVyst@A';
+        $this->banker->defaultUrlParams['limit'] = 0;
         $payments = $this->banker->getColumnsFromAbraFlexi(
             [
                 'id',
@@ -138,7 +140,7 @@ class ParovacFaktur extends \Ease\Sand
                 'datVyst'],
             ["sparovano eq false AND typPohybuK eq '".(($direction === 'out') ? 'typPohybu.vydej' : 'typPohybu.prijem')."' AND storno eq false ".
                         (null === $daysBack ? '' :
-                        "AND datVyst eq '".\AbraFlexi\RW::timestampToFlexiDate(mktime(
+                        "AND datVyst eq '".\AbraFlexi\Date::timestampToFlexiDate(mktime(
                             0,
                             0,
                             0,
@@ -1124,16 +1126,17 @@ class ParovacFaktur extends \Ease\Sand
     }
 
     /**
-     * Vrací nesparovane platby odpovídající zadaným parametrům.
+     * Returns payments from AbraFlexi by given filters.
      *
-     * @param array $what
+     * @param array<string, string> $what filters
      *
-     * @return array
+     * @return array<int, array<string, mixed>> payments
      */
-    public function findPayment($what)
+    public function findPayment(array $what = []): ?array
     {
         $result = null;
         $this->banker->defaultUrlParams['order'] = 'datVyst@A';
+        $this->banker->defaultUrlParams['limit'] = 0;
         $payments = $this->banker->getColumnsFromAbraFlexi(
             [
                 'id',
@@ -1144,7 +1147,7 @@ class ParovacFaktur extends \Ease\Sand
                 'mena',
                 'stitky',
                 'datVyst'],
-            ['('.\AbraFlexi\RO::flexiUrl($what, 'or').") AND sparovano eq 'false'"],
+            ['('.\AbraFlexi\Functions::flexiUrl($what, 'or').") AND sparovano eq 'false'"],
             'id',
         );
 
@@ -1158,18 +1161,18 @@ class ParovacFaktur extends \Ease\Sand
     /**
      * Najde nejlepší platbu pro danou fakturu.
      *
-     * @param array         $payments pole příchozích plateb
-     * @param FakturaVydana $invoice  faktura ke spárování
+     * @param array<int, array<string, mixed>> $payments pole příchozích plateb
+     * @param FakturaVydana                    $invoice  faktura ke spárování
      *
      * @return \AbraFlexi\Banka Bankovní pohyb
      */
-    public function findBestPayment($payments, $invoice)
+    public function findBestPayment(array $payments, $invoice): ?Banka
     {
         $value = $invoice->getDataValue('sumCelkem');
 
         foreach ($payments as $paymentID => $payment) {
             if ($payment['sumCelkem'] === $value) {
-                return new \AbraFlexi\Banka(
+                return new Banka(
                     \AbraFlexi\Functions::code((string) $payments[$paymentID]['kod']),
                     $this->config,
                 );
@@ -1189,11 +1192,9 @@ class ParovacFaktur extends \Ease\Sand
     /**
      * Change url to html link.
      *
-     * @param string $apiURL
-     *
      * @return string
      */
-    public static function apiUrlToLink($apiURL)
+    public static function apiUrlToLink(string $apiURL)
     {
         return str_replace(
             '.json?limit=0',
@@ -1218,7 +1219,7 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function getOriginDocumentType($typDokl)
     {
-        if (empty($this->docTypes)) {
+        if (empty($this->docTypes) === true) {
             $this->docTypes = $this->getDocumentTypes();
         }
 
@@ -1292,11 +1293,7 @@ class ParovacFaktur extends \Ease\Sand
         return $bucer->lastResponseCode === 201;
     }
 
-    /**
-     * @param array $paymentData
-     * @param int   $invoiceId
-     */
-    public function vytvorVazbuZDD($paymentData, $invoiceId): void
+    public function vytvorVazbuZDD(array $paymentData, int $invoiceId): void
     {
         $modul = 'banka'; // pokladna
 

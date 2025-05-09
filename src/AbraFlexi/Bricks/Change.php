@@ -80,7 +80,7 @@ class Change
      *
      * @param array<string, string, null|\AbraFlexi\DateTime|array<string>|int|string> $changeData
      */
-    public function setData($changeData): void
+    public function setData(array $changeData): self
     {
         $this->evidence = $changeData['@evidence'];
         $this->inVersion = $changeData['@in-version'];
@@ -88,5 +88,7 @@ class Change
         $this->timestamp = $changeData['@timestamp'];
         $this->id = $changeData['id'];
         $this->id = $changeData['external-ids'];
+
+        return $this;
     }
 }

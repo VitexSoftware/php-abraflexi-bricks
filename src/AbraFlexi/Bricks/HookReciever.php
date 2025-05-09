@@ -23,6 +23,7 @@ namespace AbraFlexi\Bricks;
 class HookReciever extends \AbraFlexi\Changes
 {
     public string $format = 'json';
+
     /**
      * Changes Array.
      *

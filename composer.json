@@ -11,8 +11,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "vitexsoftware/ease-core-bricks": "*",
-        "spojenet/flexibee": "^3.3"
+        "vitexsoftware/ease-core-bricks": "^1.2",
+        "spojenet/flexibee": "^3.5"
     },
     "autoload": {
         "psr-4": {
@@ -34,9 +34,9 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "^3.61",
-        "ergebnis/composer-normalize": "^2.43",
-        "ergebnis/php-cs-fixer-config": "^6.34"
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "ergebnis/composer-normalize": "^2.47",
+        "ergebnis/php-cs-fixer-config": "^6.46"
     },
     "config": {
         "allow-plugins": {
