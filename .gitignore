@@ -23,3 +23,4 @@ debian/php-abraflexi-bricks.debhelper.log
 /.env
 /Cenik_to_FakturaVydana.php
 /.build/
+debian/files

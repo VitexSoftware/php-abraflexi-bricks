@@ -17,7 +17,7 @@
     "autoload": {
         "psr-4": {
             "AbraFlexi\\Bricks\\": "src/AbraFlexi/Bricks",
-            "AbraFlexi\\Bricks\\ConvertRules\\": "src/AbraFlexi/Bricks/ConvertRules",
+            "AbraFlexi\\Bricks\\ConvertRules\\": "src/AbraFlexi/Bricks/ConvertRules"
         }
     },
     "autoload-dev": {
