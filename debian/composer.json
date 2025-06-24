@@ -1,0 +1,33 @@
+{
+  "name": "deb/abraflexi-bricks",
+  "description": "php-flexibee extending classes and widgets (debianized)",
+  "homepage": "https://github.com/VitexSoftware/php-abraflexi-bricks",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Vítězslav Dvořák",
+      "email": "vitex@arachne.cz"
+    }
+  ],
+  "require": {
+    "deb/abraflexi": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AbraFlexi\\Bricks\\": "./Bricks",
+      "AbraFlexi\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules"
+    }
+  },
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseCore"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/AbraFlexi"
+    }
+  ]
+}
