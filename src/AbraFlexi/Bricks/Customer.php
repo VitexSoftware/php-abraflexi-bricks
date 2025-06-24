@@ -167,10 +167,6 @@ class Customer extends \Ease\User
     {
         $firma = $this->getAdresar();
 
-        if (isset($this->invoicer) === false) {
-            $this->invoicer = new \AbraFlexi\FakturaVydana();
-        }
-
         $result = [];
         $this->getInvoicer()->defaultUrlParams['order'] = 'datVyst@A';
         $this->getInvoicer()->defaultUrlParams['limit'] = 0;

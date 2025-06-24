@@ -12,14 +12,12 @@
     }
   ],
   "require": {
-    "deb/abraflexi": "*",
-    "deb/ease-html": "*"
+    "deb/abraflexi": "*"
   },
   "autoload": {
     "psr-4": {
       "AbraFlexi\\Bricks\\": "./Bricks",
       "AbraFlexi\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules",
-      "AbraFlexi\\ui\\": "./ui"
     }
   },
   "minimum-stability": "dev",

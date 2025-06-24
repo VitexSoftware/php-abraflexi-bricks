@@ -18,12 +18,10 @@
         "psr-4": {
             "AbraFlexi\\Bricks\\": "src/AbraFlexi/Bricks",
             "AbraFlexi\\Bricks\\ConvertRules\\": "src/AbraFlexi/Bricks/ConvertRules",
-            "AbraFlexi\\ui\\": "src/AbraFlexi/ui"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\AbraFlexi\\ui\\": "testing/AbraFlexi/ui",
             "Test\\AbraFlexi\\Bricks\\": "testing/AbraFlexi/Bricks",
             "Test\\Ease\\": ["vendor/vitexsoftware/ease-core/tests/src/Ease/"],
             "Test\\AbraFlexi\\": ["vendor/spojenet/flexibee/test/src/AbraFlexi/"],
