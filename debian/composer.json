@@ -19,7 +19,6 @@
       "AbraFlexi\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules"
     }
   },
-  "minimum-stability": "dev",
   "repositories": [
     {
       "type": "path",
