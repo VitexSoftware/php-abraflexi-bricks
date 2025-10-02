@@ -30,7 +30,7 @@ class ChangesTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new Changes();
+        $this->object = new Changes([]);
     }
 
     /**

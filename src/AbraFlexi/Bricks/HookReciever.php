@@ -29,7 +29,7 @@ class HookReciever extends \AbraFlexi\Changes
      *
      * @var array<string, mixed>
      */
-    public array $changes;
+    public array $changes = [];
     public ?int $globalVersion = null;
 
     /**

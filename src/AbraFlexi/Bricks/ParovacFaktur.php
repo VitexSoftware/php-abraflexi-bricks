@@ -93,7 +93,7 @@ class ParovacFaktur extends \Ease\Sand
         if (null !== $daysBack) {
             $this->addStatusMessage('Start Date '.date(
                 'Y-m-d',
-                mktime(0, 0, 0, date('m'), date('d') - $daysBack, date('Y')),
+                mktime(0, 0, 0, (int)date('m'), (int)date('d') - $daysBack, (int)date('Y')),
             ));
         }
 
@@ -144,9 +144,9 @@ class ParovacFaktur extends \Ease\Sand
                             0,
                             0,
                             0,
-                            date('m'),
-                            date('d') - $daysBack,
-                            date('Y'),
+                            (int)date('m'),
+                            (int)date('d') + $daysBack,
+                            (int)date('Y'),
                         ))."' "),
             ],
             'id',

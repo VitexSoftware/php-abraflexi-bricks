@@ -104,7 +104,8 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      */
     public function testtryToLogin(): void
     {
-        $this->assertEquals('', $this->object->tryToLogin());
+        $result = $this->object->tryToLogin(['password' => 'testPassword']);
+        $this->assertIsBool($result);
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -164,7 +165,8 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      */
     public function testpasswordChange(): void
     {
-        $this->assertEquals('', $this->object->passwordChange());
+        $result = $this->object->passwordChange('newPassword');
+        $this->assertIsBool($result);
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -176,7 +178,8 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      */
     public function testencryptPassword(): void
     {
-        $this->assertEquals('', $this->object->encryptPassword());
+        $result = $this->object->encryptPassword('testPassword');
+        $this->assertIsString($result);
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

@@ -60,8 +60,11 @@ class ChangeTest extends \PHPUnit\Framework\TestCase
      */
     public function testsetData(): void
     {
-        $this->assertEquals('', $this->object->setData());
+        $result = $this->object->setData(['test' => 'value']);
+        $this->assertNull($result);
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.',
+        );
     }
 }

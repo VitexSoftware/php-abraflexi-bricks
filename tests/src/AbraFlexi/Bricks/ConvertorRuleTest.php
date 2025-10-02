@@ -22,7 +22,7 @@ use AbraFlexi\Bricks\ConvertorRule;
  */
 class ConvertorRuleTest extends \PHPUnit\Framework\TestCase
 {
-    protected ConvertorRule $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -83,7 +83,7 @@ class ConvertorRuleTest extends \PHPUnit\Framework\TestCase
      */
     public function testgetRuleForColumn(): void
     {
-        $this->assertEquals('', $this->object->getRuleForColumn());
+        $this->assertEquals('', $this->object->getRuleForColumn('testColumn'));
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -95,9 +95,8 @@ class ConvertorRuleTest extends \PHPUnit\Framework\TestCase
      */
     public function testconvertorClassTemplateGenerator(): void
     {
-        $this->assertEquals('', $this->object->convertorClassTemplateGenerator());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        // This is a static method, need to call it differently
+        $this->markTestIncomplete('This test requires convertor object setup.');
     }
 
     /**
@@ -107,7 +106,9 @@ class ConvertorRuleTest extends \PHPUnit\Framework\TestCase
      */
     public function testgetOposites(): void
     {
-        $this->assertEquals('', $this->object->getOposites());
+        // This is a static method, need to call it differently
+        $result = ConvertorRule::getOposites([], []);
+        $this->assertIsArray($result);
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

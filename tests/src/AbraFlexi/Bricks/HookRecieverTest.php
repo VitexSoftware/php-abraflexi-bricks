@@ -102,7 +102,7 @@ class HookRecieverTest extends \PHPUnit\Framework\TestCase
      */
     public function testSaveLastProcessedVersion(): void
     {
-        $this->object->saveLastProcessedVersion('X');
+        $this->object->saveLastProcessedVersion(1);
         $fchid = self::getFakeChangeId();
         $this->object->saveLastProcessedVersion($fchid);
         $this->assertEquals($fchid, $this->object->getLastProcessedVersion());
