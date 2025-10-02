@@ -22,8 +22,6 @@ use AbraFlexi\Bricks\ParovacFaktur;
  */
 class ParovacFakturTest extends \Test\Ease\SandTest
 {
-    protected ParovacFaktur $object;
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -31,7 +29,8 @@ class ParovacFakturTest extends \Test\Ease\SandTest
     protected function setUp(): void
     {
         $this->object = new ParovacFaktur(['LABEL_PREPLATEK' => 'PREPLATEK', 'LABEL_CHYBIFAKTURA' => 'CHYBIFAKTURA',
-            'LABEL_NEIDENTIFIKOVANO' => 'NEIDENTIFIKOVANO']);
+            'LABEL_NEIDENTIFIKOVANO' => 'NEIDENTIFIKOVANO', 'LABEL_OVERPAY' => 'OVERPAY', 
+            'LABEL_INVOICE_MISSING' => 'INVOICE_MISSING', 'LABEL_UNIDENTIFIED' => 'UNIDENTIFIED']);
     }
 
     /**
@@ -51,11 +50,8 @@ class ParovacFakturTest extends \Test\Ease\SandTest
      */
     public function makeInvoice($initialData = [])
     {
-        return \Test\AbraFlexi\FakturaVydanaTest::makeTestInvoice(
-            $initialData,
-            1,
-            'vydana',
-        );
+        $invoice = new \AbraFlexi\FakturaVydana($initialData, ['evidence' => 'vydana']);
+        return $invoice;
     }
 
     /**

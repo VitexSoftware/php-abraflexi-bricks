@@ -22,8 +22,6 @@ use AbraFlexi\Bricks\Convertor;
  */
 class ConvertorTest extends \Test\Ease\SandTest
 {
-    protected Convertor $object;
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -46,16 +44,10 @@ class ConvertorTest extends \Test\Ease\SandTest
      */
     public function testConstruct(): void
     {
-        $classname = \get_class($this->object);
+        $convertor = new Convertor(new \AbraFlexi\FakturaPrijata(), new \AbraFlexi\FakturaVydana(), new \AbraFlexi\Bricks\ConvertRules\Banka_to_FakturaVydana());
 
-        // Get mock, without the constructor being called
-        $mock = $this->getMockBuilder($classname)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
-        $mock->__construct(new \AbraFlexi\FakturaPrijata(), new \AbraFlexi\FakturaVydana(), new \AbraFlexi\Bricks\ConvertRules\Banka_to_FakturaVydana());
-
-        $this->assertIsObject($mock->getInput());
-        $this->assertIsObject($mock->getOutput());
+        $this->assertIsObject($convertor->getInput());
+        $this->assertIsObject($convertor->getOutput());
     }
 
     /**
@@ -86,7 +78,7 @@ class ConvertorTest extends \Test\Ease\SandTest
     {
         $varSym = \Ease\Functions::randomNumber(1111, 9999);
         $price = \Ease\Functions::randomNumber(11, 99);
-        $payment = \Test\AbraFlexi\BankaTest::makeTestPayment(['varSym' => $varSym,
+        $payment = new \AbraFlexi\Banka(['varSym' => $varSym,
             'sumZklZakl' => $price]);
         $this->object->setSource($payment);
 

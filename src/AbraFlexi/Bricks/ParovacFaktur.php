@@ -1083,7 +1083,7 @@ class ParovacFaktur extends \Ease\Sand
      */
     public function findInvoice($what)
     {
-        return $this->searchInvoices(['('.\AbraFlexi\RO::flexiUrl($what, 'or').") AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false"]);
+        return $this->searchInvoices(['('.\AbraFlexi\Functions::flexiUrl($what, 'or').") AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false"]);
     }
 
     /**

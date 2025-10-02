@@ -207,7 +207,7 @@ class HookReciever extends \AbraFlexi\Changes
      */
     public function getLastProcessedVersion()
     {
-        $lastProcessedVersion = null;
+        $lastProcessedVersion = 0;
 
         if (false) {
             $lastProcessedVersion = 0;
