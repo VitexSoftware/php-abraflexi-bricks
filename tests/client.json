@@ -1,0 +1,9 @@
+{
+    "ABRAFLEXI_URL": "https://demo.flexibee.eu:5434",
+    "ABRAFLEXI_LOGIN": "winstrom",
+    "ABRAFLEXI_PASSWORD": "winstrom",
+    "ABRAFLEXI_COMPANY": "demo_de",
+    "LABEL_OVERPAY": "PREPLATEK",
+    "LABEL_INVOICE_MISSING": "CHYBI_FAKTURA",
+    "LABEL_UNIDENTIFIED": "NEIDENTIFIKOVANO"
+}

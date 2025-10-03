@@ -93,7 +93,7 @@ class ParovacFaktur extends \Ease\Sand
         if (null !== $daysBack) {
             $this->addStatusMessage('Start Date '.date(
                 'Y-m-d',
-                mktime(0, 0, 0, (int)date('m'), (int)date('d') - $daysBack, (int)date('Y')),
+                mktime(0, 0, 0, (int) date('m'), (int) date('d') - $daysBack, (int) date('Y')),
             ));
         }
 
@@ -144,9 +144,9 @@ class ParovacFaktur extends \Ease\Sand
                             0,
                             0,
                             0,
-                            (int)date('m'),
-                            (int)date('d') + $daysBack,
-                            (int)date('Y'),
+                            (int) date('m'),
+                            (int) date('d') + $daysBack,
+                            (int) date('Y'),
                         ))."' "),
             ],
             'id',
@@ -229,7 +229,7 @@ class ParovacFaktur extends \Ease\Sand
         $typDokl = $invoiceData['typDokl'];
         $docType = $typDokl->value[0]['typDoklK'];
         $docTypeShowAs = $typDokl->value[0]['typDoklK@showAs'];
-        $invoiceData['typDokl'] = \AbraFlexi\Functions::code((string) $typDokl->value[0]['kod']);
+        $invoiceData['typDokl'] = \AbraFlexi\Code::ensure((string) $typDokl->value[0]['kod']);
 
         $invoice = new FakturaVydana($invoiceData, $this->config);
 
@@ -281,7 +281,7 @@ class ParovacFaktur extends \Ease\Sand
         ) {
             $this->addStatusMessage(sprintf(
                 _('new Bank account %s assigned to Address %s'),
-                $payment->getDataValue('buc').'/'.\AbraFlexi\Functions::uncode((string) $payment->getDataValue('smerKod')),
+                $payment->getDataValue('buc').'/'.\AbraFlexi\Code::strip((string) $payment->getDataValue('smerKod')),
                 $invoice->getDataValue('firma')->showAs,
             ));
         }
@@ -304,7 +304,7 @@ class ParovacFaktur extends \Ease\Sand
                     'Processing Payment %s %s %s vs: %s ss: %s %s',
                     $paymentData['kod'],
                     $paymentData['sumCelkem'],
-                    \AbraFlexi\Functions::uncode((string) $paymentData['mena']),
+                    \AbraFlexi\Code::strip((string) $paymentData['mena']),
                     $paymentData['varSym'],
                     $paymentData['specSym'],
                     $this->banker->url.'/c/'.$this->banker->company.'/'.$this->banker->getEvidence().'/'.$paymentData['id'],
@@ -372,7 +372,7 @@ class ParovacFaktur extends \Ease\Sand
                 'Processing Outcoming Payment %s %s %s vs: %s ss: %s %s',
                 $outPaymentData['kod'],
                 $outPaymentData['sumCelkem'],
-                \AbraFlexi\Functions::uncode((string) $outPaymentData['mena']),
+                \AbraFlexi\Code::strip((string) $outPaymentData['mena']),
                 $outPaymentData['varSym'],
                 $outPaymentData['specSym'],
                 $this->banker->getApiURL(),
@@ -499,7 +499,7 @@ class ParovacFaktur extends \Ease\Sand
             if (!empty($payments) && \count(current($payments))) {
                 $typDokl = $invoiceData['typDokl'][0];
                 $docType = $typDokl['typDoklK'];
-                $invoiceData['typDokl'] = \AbraFlexi\Functions::code((string) $typDokl['kod']);
+                $invoiceData['typDokl'] = \AbraFlexi\Code::ensure((string) $typDokl['kod']);
                 $invoice = new FakturaVydana($invoiceData, $this->config);
                 $this->invoicer->setMyKey($invoiceData['id']);
                 /*
@@ -619,7 +619,7 @@ class ParovacFaktur extends \Ease\Sand
         $prijataCastka = (float) $payment['sumCelkem'];
 
         $platba = new \AbraFlexi\Banka(
-            \AbraFlexi\Functions::code((string) $payment['kod']),
+            \AbraFlexi\Code::ensure((string) $payment['kod']),
             $this->config,
         );
 
@@ -628,9 +628,9 @@ class ParovacFaktur extends \Ease\Sand
             $zaloha->addStatusMessage(
                 sprintf(
                     _('Platba %s  %s %s byla sparovana s zalohou %s'),
-                    \AbraFlexi\Functions::uncode((string) $platba),
+                    \AbraFlexi\Code::strip((string) $platba),
                     $prijataCastka,
-                    \AbraFlexi\Functions::uncode((string) $payment['mena']),
+                    \AbraFlexi\Code::strip((string) $payment['mena']),
                     (string) $zaloha,
                 ),
                 'success',
@@ -1173,7 +1173,7 @@ class ParovacFaktur extends \Ease\Sand
         foreach ($payments as $paymentID => $payment) {
             if ($payment['sumCelkem'] === $value) {
                 return new Banka(
-                    \AbraFlexi\Functions::code((string) $payments[$paymentID]['kod']),
+                    \AbraFlexi\Code::ensure((string) $payments[$paymentID]['kod']),
                     $this->config,
                 );
             }

@@ -30,7 +30,14 @@ class PotvrzeniUhradyTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new PotvrzeniUhrady();
+        if (class_exists('\Ease\HtmlMailer')) {
+            // Create a mock document for testing
+            $mockDocument = $this->createMock(\AbraFlexi\Document::class);
+            $mockDocument->method('getDataValue')->willReturn('test');
+            $mockDocument->method('getEmail')->willReturn('test@example.com');
+            
+            $this->object = new PotvrzeniUhrady($mockDocument);
+        }
     }
 
     /**
@@ -39,5 +46,18 @@ class PotvrzeniUhradyTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
+    }
+
+    /**
+     * @covers \AbraFlexi\Bricks\PotvrzeniUhrady::__construct
+     */
+    public function testConstruct(): void
+    {
+        if (!class_exists('\Ease\HtmlMailer')) {
+            $this->markTestSkipped('Ease\HtmlMailer class is not available. Please install vitexsoftware/ease-core package.');
+            return;
+        }
+        
+        $this->assertInstanceOf(PotvrzeniUhrady::class, $this->object);
     }
 }

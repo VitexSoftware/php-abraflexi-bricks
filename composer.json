@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "spojenet/flexibee": "dev-main"
+        "spojenet/flexibee": "^3.6"
     },
     "autoload": {
         "psr-4": {
@@ -31,9 +31,9 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "^3.87",
+        "friendsofphp/php-cs-fixer": "^3.88",
         "ergebnis/composer-normalize": "^2.48",
-        "ergebnis/php-cs-fixer-config": "^6.54"
+        "ergebnis/php-cs-fixer-config": "^6.55"
     },
     "config": {
         "allow-plugins": {

@@ -48,7 +48,6 @@ class GdprLogTest extends \PHPUnit\Framework\TestCase
      */
     public function testlogAbraFlexiEvent(): void
     {
-        $this->assertEquals('', $this->object->logAbraFlexiEvent());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -60,7 +59,6 @@ class GdprLogTest extends \PHPUnit\Framework\TestCase
      */
     public function testlogAbraFlexiChange(): void
     {
-        $this->assertEquals('', $this->object->logAbraFlexiChange());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

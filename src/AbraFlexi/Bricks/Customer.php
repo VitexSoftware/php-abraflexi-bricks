@@ -22,22 +22,22 @@ namespace AbraFlexi\Bricks;
  */
 class Customer extends \Ease\User
 {
-    public \AbraFlexi\Adresar $adresar;
+    public ?\AbraFlexi\Adresar $adresar = null;
 
     /**
      * Contact.
      */
-    public \AbraFlexi\Kontakt $kontakt;
+    public ?\AbraFlexi\Kontakt $kontakt = null;
 
     /**
      * Invoice Issued.
      */
-    public \AbraFlexi\FakturaVydana $invoicer;
+    public ?\AbraFlexi\FakturaVydana $invoicer = null;
 
     /**
      * Loaded Data origin.
      */
-    public string $origin;
+    public ?string $origin = null;
 
     /**
      * User login name.
@@ -105,7 +105,7 @@ class Customer extends \Ease\User
      */
     public function getCustomerList(array $conditions = []): array
     {
-        return $this->adresar->getColumnsFromAbraFlexi(
+        return $this->getAdresar()->getColumnsFromAbraFlexi(
             ['id', 'nazev'],
             $conditions,
             'nazev',
@@ -187,7 +187,7 @@ class Customer extends \Ease\User
                 'mena',
                 'zamekK',
                 'datVyst'],
-            ["datSplat lte '".\AbraFlexi\Functions::dateToFlexiDate(new \DateTime())."' AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false AND firma=".(is_numeric($firma) ? $firma : "'".$firma."'")],
+            ["datSplat lte '".(new \DateTime())->format('Y-m-d')."' AND (stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr') AND storno eq false AND firma=".(is_numeric($firma) ? $firma : "'".$firma."'")],
             'kod',
         );
 
@@ -210,12 +210,12 @@ class Customer extends \Ease\User
     public function getCustomerScore($addressID = null, $label1 = 'UPOMINKA1', $label2 = 'UPOMINKA2')
     {
         $score = 0;
-        $debts = $this->getCustomerDebts($addressID ?: $this->adresar);
-        $stitkyRaw = $this->adresar->getColumnsFromAbraFlexi(
+        $debts = $this->getCustomerDebts();
+        $stitkyRaw = $this->getAdresar()->getColumnsFromAbraFlexi(
             ['stitky'],
-            ['id' => $addressID ? $addressID : $this->adresar->getRecordID()],
+            ['id' => $addressID ? $addressID : $this->getAdresar()->getRecordID()],
         );
-        $stitky = $stitkyRaw[0]['stitky'];
+        $stitky = (!empty($stitkyRaw) && isset($stitkyRaw[0]['stitky'])) ? $stitkyRaw[0]['stitky'] : '';
 
         if (!empty($debts)) {
             foreach ($debts as $did => $debt) {
@@ -235,11 +235,11 @@ class Customer extends \Ease\User
             }
         }
 
-        if ($score === 3 && !strstr($stitky, $label2)) {
+        if ($score === 3 && !strstr((string) $stitky, $label2)) {
             $score = 2;
         }
 
-        if (!strstr($stitky, $label1) && !empty($debts)) {
+        if (!strstr((string) $stitky, $label1) && !empty($debts)) {
             $score = 1;
         }
 
@@ -300,10 +300,15 @@ class Customer extends \Ease\User
     public function loginSuccess()
     {
         $this->userID = (int) $this->getKontakt()->getMyKey();
-        $this->setUserLogin($this->kontakt->getDataValue($this->loginColumn));
+        $loginValue = $this->getKontakt()->getDataValue($this->loginColumn);
+
+        if ($loginValue !== null) {
+            $this->setUserLogin((string) $loginValue);
+        }
+
         $this->logged = true;
         $this->addStatusMessage(
-            sprintf(_('Sign in %s all ok'), $this->userLogin),
+            sprintf(_('Sign in %s all ok'), $this->userLogin ?? $this->getUserLogin()),
             'success',
         );
 
@@ -331,7 +336,10 @@ class Customer extends \Ease\User
      */
     public function getUserEmail(): string
     {
-        return \strlen($this->getKontakt()->getDataValue($this->mailColumn)) ? $this->kontakt->getDataValue($this->mailColumn) : $this->adresar->getDataValue($this->mailColumn);
+        $kontaktEmail = $this->getKontakt()->getDataValue($this->mailColumn);
+        $adresarEmail = $this->getAdresar()->getDataValue($this->mailColumn);
+
+        return (!empty($kontaktEmail)) ? (string) $kontaktEmail : (string) $adresarEmail;
     }
 
     /**
@@ -402,12 +410,12 @@ class Customer extends \Ease\User
             return (int) $this->userID;
         }
 
-        return (int) $this->kontakt->getMyKey();
+        return (int) $this->getKontakt()->getMyKey();
     }
 
     public function getAdresar(): \AbraFlexi\Adresar
     {
-        if ((isset($this->adresar) === false) || empty($this->adresar)) {
+        if ($this->adresar === null || empty($this->adresar)) {
             $this->adresar = new \AbraFlexi\Adresar();
         }
 
@@ -416,7 +424,7 @@ class Customer extends \Ease\User
 
     public function getKontakt(): \AbraFlexi\Kontakt
     {
-        if ((isset($this->kontakt) === false) || empty($this->kontakt)) {
+        if ($this->kontakt === null || empty($this->kontakt)) {
             $this->kontakt = new \AbraFlexi\Kontakt(['firma' => $this->getAdresar()]);
         }
 
@@ -425,7 +433,7 @@ class Customer extends \Ease\User
 
     public function getInvoicer(): \AbraFlexi\FakturaVydana
     {
-        if (isset($this->invoicer) === false) {
+        if ($this->invoicer === null) {
             $this->invoicer = new \AbraFlexi\FakturaVydana(['firma' => $this->getAdresar()]);
         }
 

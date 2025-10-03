@@ -30,7 +30,8 @@ class Banka_to_FakturaVydanaTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new Banka_to_FakturaVydana();
+        $convertor = new \AbraFlexi\Bricks\Convertor(new \AbraFlexi\Banka(), new \AbraFlexi\FakturaVydana());
+        $this->object = new Banka_to_FakturaVydana($convertor);
     }
 
     /**
@@ -48,7 +49,6 @@ class Banka_to_FakturaVydanaTest extends \PHPUnit\Framework\TestCase
      */
     public function testSumCelkZakl(): void
     {
-        $this->assertEquals('', $this->object->SumCelkZakl(100));
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

@@ -59,7 +59,9 @@ class ConvertorRuleTest extends \PHPUnit\Framework\TestCase
      */
     public function testaddExtId(): void
     {
-        $this->assertEquals('', $this->object->addExtId());
+        $testConvertor = new \AbraFlexi\Bricks\Convertor(new \AbraFlexi\FakturaPrijata(), new \AbraFlexi\FakturaVydana());
+        $this->object->assignConvertor($testConvertor);
+        $this->object->addExtId();
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
@@ -71,7 +73,7 @@ class ConvertorRuleTest extends \PHPUnit\Framework\TestCase
      */
     public function testgetRules(): void
     {
-        $this->assertEquals('', $this->object->getRules());
+        $this->assertEquals([], $this->object->getRules());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

@@ -40,4 +40,12 @@ class FakturaPrijata_to_FakturaVydanaTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
     }
+
+    /**
+     * @covers \AbraFlexi\Bricks\ConvertRules\FakturaPrijata_to_FakturaVydana::__construct
+     */
+    public function testConstruct(): void
+    {
+        $this->assertInstanceOf(FakturaPrijata_to_FakturaVydana::class, $this->object);
+    }
 }

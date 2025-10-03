@@ -81,12 +81,18 @@ class HookReciever extends \AbraFlexi\Changes
 
             foreach ($this->changes as $change) {
                 ++$changepos;
-                $evidence = $change['@evidence'];
-                $inVersion = (int) $change['@in-version'];
-                $operation = $change['@operation'];
-                $id = (int) $change['id'];
+                $evidence = $change['@evidence'] ?? null;
+                $inVersion = (int) ($change['@in-version'] ?? 0);
+                $operation = $change['@operation'] ?? '';
+                $id = (int) ($change['id'] ?? 0);
                 $externalIDs = $change['external-ids']
                         ?? [];
+
+                if (empty($evidence)) {
+                    $this->addStatusMessage('Empty evidence in change', 'warning');
+
+                    continue;
+                }
 
                 if ($inVersion <= $this->lastProcessedVersion) {
                     $this->addStatusMessage(sprintf(
@@ -169,7 +175,7 @@ class HookReciever extends \AbraFlexi\Changes
         } else {
             if (\array_key_exists('winstrom', $changes)) {
                 $this->globalVersion = (int) $changes['winstrom']['@globalVersion'];
-                $this->changes = $changes['winstrom']['changes'];
+                $this->changes = $changes['winstrom']['changes'] ?? [];
             }
 
             $result = is_numeric($changes['winstrom']['next']) ? $changes['winstrom']['next'] - 1 : $this->globalVersion;

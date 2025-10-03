@@ -20,8 +20,19 @@ namespace AbraFlexi\Bricks;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class GdprLog extends \Ease\GdprLog
+class GdprLog extends \Ease\Sand
 {
+    /**
+     * Log GDPR event.
+     *
+     * @param mixed $oldValue
+     */
+    public function logEvent(string $columnName, string $operation, $oldValue, string $url): void
+    {
+        // Basic GDPR logging implementation - could be enhanced
+        $this->addStatusMessage("GDPR Log: {$operation} on {$columnName} at {$url}", 'debug');
+    }
+
     /**
      * Log AbraFlexi event.
      *
