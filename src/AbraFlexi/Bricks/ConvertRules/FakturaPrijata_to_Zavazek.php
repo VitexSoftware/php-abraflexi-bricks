@@ -116,7 +116,7 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule
         //        'zakazPlatba' => 'zakazPlatba',
         //        'sumCelkemBezZaloh' => 'sumCelkemBezZaloh',
         //        'sumCelkemBezZalohMen' => 'sumCelkemBezZalohMen',
-        'polozkyFaktury' => [
+        'polozkyDokladu' => [
             //            'ucetni' => 'ucetni',
             //            'eanKod' => 'eanKod',
             'nazev' => 'nazev',
@@ -191,14 +191,16 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule
     ];
 
     /**
-     * zavazek-polozka do not support typPolozky.katalog and "cenik" column.
+     * zavazek-polozka can be only typPolozky.ucetni.
      *
      * @param string $inputValue typPolozky.obecny|typPolozky.ucetni|typPolozky.text|typPolozky.katalog
+     *
+     * @see https://demo.flexibee.eu:5434/c/demo/zavazek-polozka/properties
      *
      * @return string typPolozky.obecny|typPolozky.ucetni|typPolozky.text
      */
     public function polozkyFakturyTypPolozkyK($inputValue)
     {
-        return ($inputValue === 'typPolozky.katalog') ? 'typPolozky.obecny' : $inputValue;
+        return 'typPolozky.ucetni';
     }
 }

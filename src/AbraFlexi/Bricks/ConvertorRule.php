@@ -213,10 +213,8 @@ EOD;
 
     /**
      * Actions performed after converting process.
-     *
-     * @return bool
      */
-    public function finalizeConversion()
+    public function finalizeConversion(): bool
     {
         return true;
     }

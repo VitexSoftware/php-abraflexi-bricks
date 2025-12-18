@@ -150,7 +150,7 @@ class Convertor extends \Ease\Sand
     {
         $subitemRules = $this->ruler->getRuleForColumn($columnToTake);
 
-        if (\is_array($this->input->data[$columnToTake]) && \Ease\Functions::isAssoc($this->input->data[$columnToTake])) {
+        if (\array_key_exists($columnToTake, $this->input->data) && $this->input->data[$columnToTake] && \Ease\Functions::isAssoc($this->input->data[$columnToTake])) {
             $sourceData = [$this->input->data[$columnToTake]];
         } else {
             $sourceData = $this->input->getDataValue($columnToTake);
