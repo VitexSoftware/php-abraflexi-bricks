@@ -267,8 +267,8 @@ class ParovacFakturTest extends \Test\Ease\SandTest
     {
         $found1 = $this->object->findInvoice(['varSym' => 123]);
         $found2 = $this->object->findInvoice(['specSym' => 456]);
-        $this->assertTrue(is_array($found1) || $found1 === null);
-        $this->assertTrue(is_array($found2) || $found2 === null);
+        $this->assertTrue(\is_array($found1) || $found1 === null);
+        $this->assertTrue(\is_array($found2) || $found2 === null);
     }
 
     /**
@@ -278,8 +278,8 @@ class ParovacFakturTest extends \Test\Ease\SandTest
     {
         $result1 = $this->object->findPayment(['varSym' => 123]);
         $result2 = $this->object->findPayment(['specSym' => 456]);
-        $this->assertTrue(is_array($result1) || $result1 === null);
-        $this->assertTrue(is_array($result2) || $result2 === null);
+        $this->assertTrue(\is_array($result1) || $result1 === null);
+        $this->assertTrue(\is_array($result2) || $result2 === null);
     }
 
     /**

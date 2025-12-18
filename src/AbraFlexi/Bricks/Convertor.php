@@ -84,35 +84,20 @@ class Convertor extends \Ease\Sand
     /**
      * Perform Conversion.
      *
-     * @param bool $keepId
-     * @param bool $addExtId
-     * @param bool $keepCode
      * @param bool $handleAccounting set columns "ucetni" like target or ignore it
      *
      * @return \AbraFlexi\RW converted object ( unsaved )
      */
     public function conversion(
-        $keepId = false,
-        $addExtId = false,
-        $keepCode = false,
-        $handleAccounting = false,
+        bool $keepId = false,
+        bool $addExtId = false,
+        bool $keepCode = false,
+        bool $handleAccounting = false,
     ) {
         $this->prepareRules($keepId, $addExtId, $keepCode, $handleAccounting);
         $this->convertItems();
 
         return $this->getOutput();
-    }
-
-    /**
-     * Get ClassName without NameSpace prefix.
-     *
-     * @param object $object
-     *
-     * @return string
-     */
-    public static function baseClassName($object)
-    {
-        return basename(str_replace('\\', '/', $object::class));
     }
 
     /**
@@ -126,10 +111,10 @@ class Convertor extends \Ease\Sand
      * @throws \Ease\Exception
      */
     public function prepareRules(
-        $keepId,
-        $addExtId,
-        $keepCode,
-        $handleAccounting,
+        bool $keepId,
+        bool $addExtId,
+        bool $keepCode,
+        bool $handleAccounting,
     ): void {
         $convertorClassname = $this->getConvertorClassName();
         $ruleClass = '\\AbraFlexi\\Bricks\\ConvertRules\\'.$convertorClassname;
@@ -153,7 +138,7 @@ class Convertor extends \Ease\Sand
      */
     public function getConvertorClassName()
     {
-        return self::baseClassName($this->input).'_to_'.self::baseClassName($this->output);
+        return \Ease\Functions::baseClassName($this->input).'_to_'.\Ease\Functions::baseClassName($this->output);
     }
 
     /**
@@ -161,7 +146,7 @@ class Convertor extends \Ease\Sand
      *
      * @param string $columnToTake usually "polozkyDokladu"
      */
-    public function convertSubitems($columnToTake): void
+    public function convertSubitems(string $columnToTake): void
     {
         $subitemRules = $this->ruler->getRuleForColumn($columnToTake);
 
