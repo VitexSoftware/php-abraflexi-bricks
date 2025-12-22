@@ -203,4 +203,21 @@ class FakturaPrijata_to_Zavazek extends \AbraFlexi\Bricks\ConvertorRule
     {
         return 'typPolozky.ucetni';
     }
+
+    /**
+     * Get the output relation path for subitems.
+     * For Zavazek evidence, polozkyDokladu must be converted to polozkyFaktury.
+     *
+     * @param string $inputRelationPath Input relation path
+     *
+     * @return string Output relation path
+     */
+    public function getOutputRelationPath($inputRelationPath)
+    {
+        if ($inputRelationPath === 'polozkyDokladu') {
+            return 'polozkyFaktury';
+        }
+
+        return $inputRelationPath;
+    }
 }

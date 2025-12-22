@@ -157,6 +157,9 @@ class Convertor extends \Ease\Sand
         }
 
         $subItemCopyData = [];
+        
+        // Determine the correct relation path for the output evidence
+        $relationPath = $this->ruler->getOutputRelationPath($columnToTake);
 
         foreach ($sourceData as $subitemPos => $subItemData) {
             foreach (array_keys($subItemData) as $subitemColumn) {
@@ -177,7 +180,7 @@ class Convertor extends \Ease\Sand
                 }
             }
 
-            $this->output->addArrayToBranch($subItemCopyData);
+            $this->output->addArrayToBranch($subItemCopyData, $relationPath);
         }
     }
 
