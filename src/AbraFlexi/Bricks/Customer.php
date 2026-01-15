@@ -49,6 +49,8 @@ class Customer extends \Ease\User
      */
     public ?string $loginColumn = 'username';
 
+    public ?string $mailColumn = 'mail';
+
     /**
      * Customer.
      *
@@ -416,7 +418,7 @@ class Customer extends \Ease\User
     public function getAdresar(): \AbraFlexi\Adresar
     {
         if ($this->adresar === null || empty($this->adresar)) {
-            $this->adresar = new \AbraFlexi\Adresar();
+            $this->adresar = new \AbraFlexi\Adresar($this->firma);
         }
 
         return $this->adresar;
