@@ -123,9 +123,9 @@ class ConvertorRule extends \Ease\Sand
 
     /**
      * Get the output relation path for subitems.
-     * 
+     *
      * @param string $inputRelationPath Input relation path (e.g. "polozkyDokladu")
-     * 
+     *
      * @return string Output relation path
      */
     public function getOutputRelationPath($inputRelationPath)

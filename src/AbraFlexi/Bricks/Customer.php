@@ -48,7 +48,6 @@ class Customer extends \Ease\User
      * Column with login.
      */
     public ?string $loginColumn = 'username';
-
     public ?string $mailColumn = 'mail';
 
     /**

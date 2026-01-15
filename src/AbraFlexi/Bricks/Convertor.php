@@ -157,7 +157,7 @@ class Convertor extends \Ease\Sand
         }
 
         $subItemCopyData = [];
-        
+
         // Determine the correct relation path for the output evidence
         $relationPath = $this->ruler->getOutputRelationPath($columnToTake);
 
