@@ -12,6 +12,13 @@ Examples of how to use the [php-abraflexi](https://github.com/Spoje-NET/php-abra
 
 Examples of using the [php-abraflexi](https://github.com/Spoje-NET/php-abraflexi) library for [AbraFlexi](https://flexibee.eu/)
 
+## What's New in 1.5.0
+
+- **Critical Fix**: Resolved fatal error in `Customer::getUserEmail()` for PHP 8+ compatibility
+- Improved type safety and null handling throughout Customer class
+- Better encapsulation with private properties and accessor methods
+- See [CHANGELOG.md](CHANGELOG.md) for full details
+
 Installation
 ------------
 
