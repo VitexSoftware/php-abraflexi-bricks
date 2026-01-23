@@ -25,6 +25,15 @@ namespace AbraFlexi\Bricks;
  */
 class Customer extends \Ease\User
 {
+    /**
+     * Column with login (must be public per parent class requirement).
+     */
+    public ?string $loginColumn = 'username';
+
+    /**
+     * Column with email (must be public per parent class requirement).
+     */
+    public ?string $mailColumn = 'mail';
     private ?\AbraFlexi\Adresar $adresar = null;
 
     /**
@@ -46,16 +55,6 @@ class Customer extends \Ease\User
      * AbraFlexi firma (company) identifier.
      */
     private mixed $firma = null;
-
-    /**
-     * Column with login (must be public per parent class requirement).
-     */
-    public ?string $loginColumn = 'username';
-    
-    /**
-     * Column with email (must be public per parent class requirement).
-     */
-    public ?string $mailColumn = 'mail';
 
     /**
      * Customer constructor.
@@ -358,7 +357,7 @@ class Customer extends \Ease\User
      * Change the user's password in AbraFlexi.
      *
      * @param mixed $newPassword New password
-     * @param mixed $userID User ID (uses current user if not provided)
+     * @param mixed $userID      User ID (uses current user if not provided)
      *
      * @return bool True if password was changed successfully
      */
@@ -415,7 +414,9 @@ class Customer extends \Ease\User
      * support encrypted passwords via API. This is a known limitation.
      *
      * @param mixed $plainTextPassword Plaintext password
+     *
      * @return mixed Password (currently plaintext)
+     *
      * @todo Implement proper password hashing when AbraFlexi API supports it
      */
     public static function encryptPassword($plainTextPassword)
@@ -440,11 +441,18 @@ class Customer extends \Ease\User
 
     /**
      * Get or initialize Adresar (address book) entity.
+     * Automatically loads data from AbraFlexi if firma is set but data isn't loaded yet.
      */
     public function getAdresar(): \AbraFlexi\Adresar
     {
         if ($this->adresar === null) {
             $this->adresar = new \AbraFlexi\Adresar($this->firma);
+        }
+
+        // If adresar doesn't have data loaded yet and we have a firma, load it
+        // This ensures external IDs and other data are available
+        if (empty($this->adresar->getMyKey()) && !empty($this->firma)) {
+            $this->adresar->loadFromAbraFlexi($this->firma);
         }
 
         return $this->adresar;
