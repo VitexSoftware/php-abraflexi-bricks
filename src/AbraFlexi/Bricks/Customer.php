@@ -48,20 +48,20 @@ class Customer extends \Ease\User
     private mixed $firma = null;
 
     /**
-     * Column with login.
+     * Column with login (must be public per parent class requirement).
      */
-    private string $loginColumn = 'username';
+    public ?string $loginColumn = 'username';
     
     /**
-     * Column with email.
+     * Column with email (must be public per parent class requirement).
      */
-    private string $mailColumn = 'mail';
+    public ?string $mailColumn = 'mail';
 
     /**
      * Customer constructor.
      *
      * @param array<string, string> $userInfo User identification data (username or email)
-     * @param mixed $firma AbraFlexi firma identifier (optional)
+     * @param mixed                 $firma    AbraFlexi firma identifier (optional)
      */
     public function __construct(array $userInfo = [], mixed $firma = null)
     {
@@ -73,70 +73,6 @@ class Customer extends \Ease\User
         } elseif (isset($userInfo['email']) && !empty($userInfo['email'])) {
             $this->loadByEmail($userInfo['email']);
         }
-    }
-
-    /**
-     * Load customer by username from Kontakt.
-     *
-     * @param string $username
-     * @return bool True if customer found
-     */
-    private function loadByUsername(string $username): bool
-    {
-        $contactInfo = $this->getKontakt()->getColumnsFromAbraFlexi(
-            '*',
-            ['username' => $username],
-        );
-
-        if (!empty($contactInfo)) {
-            // Handle array of results - take first match
-            $data = is_array($contactInfo) && isset($contactInfo[0]) ? $contactInfo[0] : $contactInfo;
-            $this->getKontakt()->takeData($data);
-            $this->takeData($data);
-            $this->origin = 'kontakt';
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Load customer by email from Kontakt or Adresar.
-     *
-     * @param string $email
-     * @return bool True if customer found
-     */
-    private function loadByEmail(string $email): bool
-    {
-        // Try Kontakt first
-        $contactInfo = $this->getKontakt()->getColumnsFromAbraFlexi(
-            '*',
-            ['email' => $email],
-        );
-
-        if (!empty($contactInfo)) {
-            $data = is_array($contactInfo) && isset($contactInfo[0]) ? $contactInfo[0] : $contactInfo;
-            $this->getKontakt()->takeData($data);
-            $this->takeData($data);
-            $this->origin = 'kontakt';
-            return true;
-        }
-
-        // Fallback to Adresar
-        $addressInfo = $this->getAdresar()->getColumnsFromAbraFlexi(
-            '*',
-            ['email' => $email],
-        );
-
-        if (!empty($addressInfo)) {
-            $data = is_array($addressInfo) && isset($addressInfo[0]) ? $addressInfo[0] : $addressInfo;
-            $this->getAdresar()->takeData($data);
-            $this->takeData($data);
-            $this->origin = 'adresar';
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -159,17 +95,18 @@ class Customer extends \Ease\User
      * Load Customer from AbraFlexi by address ID.
      *
      * @param mixed $id AbraFlexi address record ID
+     *
      * @return mixed Result from AbraFlexi load operation
      */
     public function loadFromAbraFlexi($id = null): mixed
     {
         $result = $this->getAdresar()->loadFromAbraFlexi($id);
         $adresarData = $this->getAdresar()->getData();
-        
+
         if ($adresarData !== null) {
             $this->takeData($adresarData);
         }
-        
+
         $this->origin = 'adresar';
 
         return $result;
@@ -179,6 +116,7 @@ class Customer extends \Ease\User
      * Insert customer data to AbraFlexi.
      *
      * @param array<string, mixed> $data Data to insert (empty array uses internal data)
+     *
      * @return mixed Insert result from AbraFlexi
      */
     public function insertToAbraFlexi(array $data = []): mixed
@@ -193,13 +131,13 @@ class Customer extends \Ease\User
         switch ($this->origin) {
             case 'adresar':
                 return $this->getAdresar()->insertToAbraFlexi($data);
-
             case 'kontakt':
                 return $this->getKontakt()->insertToAbraFlexi($data);
 
             default:
                 // No origin set - this shouldn't happen in normal flow
                 $this->addStatusMessage('No origin set for customer data insertion', 'warning');
+
                 return false;
         }
     }
@@ -212,22 +150,23 @@ class Customer extends \Ease\User
     public function getCustomerDebts(): array
     {
         $firmaId = $this->getAdresar()->getMyKey();
-        
+
         if (empty($firmaId)) {
             $this->addStatusMessage('Cannot load debts: no firma ID available', 'warning');
+
             return [];
         }
 
         $invoicer = $this->getInvoicer();
         $invoicer->defaultUrlParams['order'] = 'datVyst@A';
         $invoicer->defaultUrlParams['limit'] = 0;
-        
+
         // Build proper query with firma identifier
         $firmaFilter = is_numeric($firmaId) ? "firma={$firmaId}" : "firma='{$firmaId}'";
-        $dateFilter = "datSplat lte '" . (new \DateTime())->format('Y-m-d') . "'";
+        $dateFilter = "datSplat lte '".(new \DateTime())->format('Y-m-d')."'";
         $statusFilter = "(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')";
         $conditions = "{$dateFilter} AND {$statusFilter} AND storno eq false AND {$firmaFilter}";
-        
+
         $invoices = $invoicer->getColumnsFromAbraFlexi(
             [
                 'id',
@@ -244,13 +183,13 @@ class Customer extends \Ease\User
                 'zbyvaUhradit',
                 'mena',
                 'zamekK',
-                'datVyst'
+                'datVyst',
             ],
             [$conditions],
             'kod',
         );
 
-        if ($invoicer->lastResponseCode === 200 && is_array($invoices)) {
+        if ($invoicer->lastResponseCode === 200 && \is_array($invoices)) {
             return $invoices;
         }
 
@@ -382,6 +321,7 @@ class Customer extends \Ease\User
     public function getUserName(): string
     {
         $value = $this->getKontakt()->getDataValue($this->loginColumn);
+
         return $value !== null ? (string) $value : '';
     }
 
@@ -404,23 +344,25 @@ class Customer extends \Ease\User
     public function getUserEmail(): string
     {
         $kontaktEmail = $this->getKontakt()->getDataValue($this->mailColumn);
-        
+
         if ($kontaktEmail !== null && $kontaktEmail !== '') {
             return (string) $kontaktEmail;
         }
 
         $adresarEmail = $this->getAdresar()->getDataValue($this->mailColumn);
+
         return $adresarEmail !== null ? (string) $adresarEmail : '';
     }
 
     /**
      * Change the user's password in AbraFlexi.
      *
-     * @param string $newPassword New password
-     * @param int|null $userID User ID (uses current user if not provided)
+     * @param mixed $newPassword New password
+     * @param mixed $userID User ID (uses current user if not provided)
+     *
      * @return bool True if password was changed successfully
      */
-    public function passwordChange(string $newPassword, ?int $userID = null): bool
+    public function passwordChange($newPassword, $userID = null): bool
     {
         if (empty($userID)) {
             $userID = $this->getUserID();
@@ -428,6 +370,7 @@ class Customer extends \Ease\User
 
         if (empty($userID)) {
             $this->addStatusMessage('Cannot change password: no user ID', 'error');
+
             return false;
         }
 
@@ -446,21 +389,22 @@ class Customer extends \Ease\User
         if ($kontakt->lastResponseCode === 201) {
             $kontakt->addStatusMessage(_('Password set'), 'success');
             $kontakt->loadFromAbraFlexi();
-            
+
             $loginValue = $this->getDataValue($this->loginColumn);
             $this->addStatusMessage(
-                'PasswordChange: ' . ($loginValue ?? 'unknown') . '@' . $userID,
-                'debug'
+                'PasswordChange: '.($loginValue ?? 'unknown').'@'.$userID,
+                'debug',
             );
 
             if ($userID === $this->getUserID()) {
                 $this->setDataValue($this->passwordColumn, $hash);
             }
-            
+
             return true;
         }
 
         $kontakt->addStatusMessage(_('Password set failed'), 'warning');
+
         return false;
     }
 
@@ -470,11 +414,11 @@ class Customer extends \Ease\User
      * WARNING: Currently returns plaintext password as AbraFlexi does not
      * support encrypted passwords via API. This is a known limitation.
      *
-     * @param string $plainTextPassword Plaintext password
-     * @return string Password (currently plaintext)
+     * @param mixed $plainTextPassword Plaintext password
+     * @return mixed Password (currently plaintext)
      * @todo Implement proper password hashing when AbraFlexi API supports it
      */
-    public static function encryptPassword(string $plainTextPassword): string
+    public static function encryptPassword($plainTextPassword)
     {
         // AbraFlexi currently does not support encrypted passwords via API
         return $plainTextPassword;
@@ -496,8 +440,6 @@ class Customer extends \Ease\User
 
     /**
      * Get or initialize Adresar (address book) entity.
-     *
-     * @return \AbraFlexi\Adresar
      */
     public function getAdresar(): \AbraFlexi\Adresar
     {
@@ -510,8 +452,6 @@ class Customer extends \Ease\User
 
     /**
      * Get or initialize Kontakt (contact) entity.
-     *
-     * @return \AbraFlexi\Kontakt
      */
     public function getKontakt(): \AbraFlexi\Kontakt
     {
@@ -524,8 +464,6 @@ class Customer extends \Ease\User
 
     /**
      * Get or initialize FakturaVydana (invoice) entity.
-     *
-     * @return \AbraFlexi\FakturaVydana
      */
     public function getInvoicer(): \AbraFlexi\FakturaVydana
     {
@@ -544,7 +482,7 @@ class Customer extends \Ease\User
     public function setFirma(mixed $firma): void
     {
         $this->firma = $firma;
-        
+
         // Reset entities so they reinitialize with new firma
         $this->adresar = null;
         $this->kontakt = null;
@@ -553,12 +491,75 @@ class Customer extends \Ease\User
 
     /**
      * Get the current firma identifier.
-     *
-     * @return mixed
      */
     public function getFirma(): mixed
     {
         return $this->firma;
+    }
+
+    /**
+     * Load customer by username from Kontakt.
+     *
+     * @return bool True if customer found
+     */
+    private function loadByUsername(string $username): bool
+    {
+        $contactInfo = $this->getKontakt()->getColumnsFromAbraFlexi(
+            '*',
+            ['username' => $username],
+        );
+
+        if (!empty($contactInfo)) {
+            // Handle array of results - take first match
+            $data = \is_array($contactInfo) && isset($contactInfo[0]) ? $contactInfo[0] : $contactInfo;
+            $this->getKontakt()->takeData($data);
+            $this->takeData($data);
+            $this->origin = 'kontakt';
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Load customer by email from Kontakt or Adresar.
+     *
+     * @return bool True if customer found
+     */
+    private function loadByEmail(string $email): bool
+    {
+        // Try Kontakt first
+        $contactInfo = $this->getKontakt()->getColumnsFromAbraFlexi(
+            '*',
+            ['email' => $email],
+        );
+
+        if (!empty($contactInfo)) {
+            $data = \is_array($contactInfo) && isset($contactInfo[0]) ? $contactInfo[0] : $contactInfo;
+            $this->getKontakt()->takeData($data);
+            $this->takeData($data);
+            $this->origin = 'kontakt';
+
+            return true;
+        }
+
+        // Fallback to Adresar
+        $addressInfo = $this->getAdresar()->getColumnsFromAbraFlexi(
+            '*',
+            ['email' => $email],
+        );
+
+        if (!empty($addressInfo)) {
+            $data = \is_array($addressInfo) && isset($addressInfo[0]) ? $addressInfo[0] : $addressInfo;
+            $this->getAdresar()->takeData($data);
+            $this->takeData($data);
+            $this->origin = 'adresar';
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
