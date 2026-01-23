@@ -24,3 +24,4 @@ debian/php-abraflexi-bricks.debhelper.log
 /Cenik_to_FakturaVydana.php
 /.build/
 debian/files
+/coverage/
