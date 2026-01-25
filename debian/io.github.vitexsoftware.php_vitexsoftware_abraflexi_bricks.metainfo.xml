@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.vitexsoftware.php_vitexsoftware_abraflexi_bricks</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>php-vitexsoftware-abraflexi-bricks</name>
+  <summary>PHP Based AbraFlexi RestAPI/Json library AddOns</summary>
+  <description>
+    <p>
+      Additional classes and code snipplets for spojenet/abraflexi library
+    </p>
+  </description>
+  <categories>
+    <category>Utility</category>
+  </categories>
+  <url type="homepage">https://github.com/VitexSoftware/php-abraflexi-bricks</url>
+  <url type="bugtracker">https://github.com/VitexSoftware/php-abraflexi-bricks/issues</url>
+  <developer id="cz.vitexsoftware">
+    <name>VitexSoftware</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+</component>
