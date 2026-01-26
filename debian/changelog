@@ -1,3 +1,9 @@
+php-vitexsoftware-abraflexi-bricks (1.5.1) UNRELEASED; urgency=medium
+
+  * customer address loading fix
+
+ -- vitex <info@vitexsoftware.cz>  Fri, 23 Jan 2026 22:32:23 +0100
+
 php-vitexsoftware-abraflexi-bricks (1.5.0) unstable; urgency=medium
 
   * Customer class refactored for PHP 8+ compatibility
@@ -9,7 +15,7 @@ php-vitexsoftware-abraflexi-bricks (1.5.0) unstable; urgency=medium
   * Added firma parameter to constructor
   * Improved error handling throughout the class
 
- -- vitex <info@vitexsoftware.cz>  Fri, 23 Jan 2026 18:55:17 +0100
+ -- vitex <info@vitexsoftware.cz>  Fri, 23 Jan 2026 22:32:01 +0100
 
 php-vitexsoftware-abraflexi-bricks (1.4.1) UNRELEASED; urgency=medium
 
