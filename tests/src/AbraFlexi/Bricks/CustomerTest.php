@@ -253,8 +253,8 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers \AbraFlexi\Bricks\Customer::setFirma
      * @covers \AbraFlexi\Bricks\Customer::getFirma
+     * @covers \AbraFlexi\Bricks\Customer::setFirma
      */
     public function testSetAndGetFirma(): void
     {
@@ -269,10 +269,10 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     {
         $this->object->setFirma(123);
         $this->assertEquals(123, $this->object->getFirma());
-        
+
         $this->object->setFirma('code:TEST');
         $this->assertEquals('code:TEST', $this->object->getFirma());
-        
+
         $this->object->setFirma(null);
         $this->assertNull($this->object->getFirma());
     }
