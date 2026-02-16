@@ -86,7 +86,7 @@ class Customer extends \Ease\User
         return $this->getAdresar()->getColumnsFromAbraFlexi(
             ['id', 'nazev', 'stitky', 'kod'],
             $conditions,
-            'nazev',
+            'kod',
         );
     }
 
