@@ -84,7 +84,7 @@ class Customer extends \Ease\User
     public function getCustomerList(array $conditions = []): array
     {
         return $this->getAdresar()->getColumnsFromAbraFlexi(
-            ['id', 'nazev'],
+            ['id', 'nazev', 'stitky', 'kod'],
             $conditions,
             'nazev',
         );
