@@ -84,12 +84,23 @@ class Customer extends \Ease\User
     public function getCustomerList(array $conditions = []): array
     {
         return $this->getAdresar()->getColumnsFromAbraFlexi(
-            ['id', 'nazev'],
+            ['id', 'nazev', 'stitky', 'kod'],
             $conditions,
-            'nazev',
+            'kod',
         );
     }
 
+    public function getCustomers(array $conditions = []) {
+        $conditions['relations'] = 'kontakty';
+        $customers = new \Ease\Collection(self::class);
+        
+        
+        foreach ($this->getCustomerList($conditions) as $customer){
+            $customers->addArray($customer);
+        }
+        return $customers;
+    }
+    
     /**
      * Load Customer from AbraFlexi by address ID.
      *
