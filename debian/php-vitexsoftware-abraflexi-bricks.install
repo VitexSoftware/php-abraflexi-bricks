@@ -1,4 +1,3 @@
 src/AbraFlexi/Bricks/ConvertRules/*.php /usr/share/php/AbraFlexiBricks/Bricks/ConvertRules
 src/AbraFlexi/Bricks/*.php              /usr/share/php/AbraFlexiBricks/Bricks
-debian/composer.json                    /usr/share/php/AbraFlexiBricks
 

@@ -1,5 +1,5 @@
 Source: php-vitexsoftware-abraflexi-bricks
-Build-Depends: debhelper (>= 7.0.50~), composer, phpdocumentor 
+Build-Depends: debhelper-compat (= 13), pkg-php-tools, phpdocumentor
 Standards-Version: 4.3.0
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>

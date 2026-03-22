@@ -13,6 +13,17 @@ override_dh_auto_test:
 #	mv .phpdoc/build/* docs
 #	dh_prep
 
+
 override_dh_install:
 	dh_install
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/composer.json |sponge debian/php-vitexsoftware-abraflexi-bricks/usr/share/php/AbraFlexiBricks/composer.json
+	# Generate Debian-style autoloader with phpab and register it for pkg-php-tools
+	phpab --output debian/php-vitexsoftware-abraflexi-bricks/usr/share/php/AbraFlexiBricks/autoload.php \
+		--basedir debian/php-vitexsoftware-abraflexi-bricks/usr/share/php/AbraFlexiBricks \
+		--tolerant \
+		debian/php-vitexsoftware-abraflexi-bricks/usr/share/php/AbraFlexiBricks
+	# Ensure dependency autoloaders are required at top of generated autoload.php
+	echo "require_once '/usr/share/php/Ease/autoload.php';" >> debian/php-vitexsoftware-abraflexi-bricks/usr/share/php/AbraFlexiBricks/autoload.php
+	echo "require_once '/usr/share/php/AbraFlexi/autoload.php';" >> debian/php-vitexsoftware-abraflexi-bricks/usr/share/php/AbraFlexiBricks/autoload.php
+	install -m0755 -d debian/php-vitexsoftware-abraflexi-bricks/usr/share/pkg-php-tools/autoloaders
+	# Register autoloader: format matches example packages
+	echo 'deb abraflexi-bricks AbraFlexiBricks/autoload.php' > debian/php-vitexsoftware-abraflexi-bricks/usr/share/pkg-php-tools/autoloaders/php-vitexsoftware-abraflexi-bricks
