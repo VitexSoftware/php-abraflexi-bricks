@@ -1,6 +1,8 @@
 # Bricks for AbraFlexi
 
 ![Project Logo](social-preview.svg?raw=true "Project Logo")
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Packaging: deb](https://img.shields.io/badge/packaging-.deb-red?logo=debian&logoColor=white)
 
 [![Build Status](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks.svg?branch=main)](https://travis-ci.org/VitexSoftware/php-abraflexi-bricks)
 [![GitHub stars](https://img.shields.io/github/stars/VitexSoftware/php-abraflexi-bricks.svg)](stargazers)
