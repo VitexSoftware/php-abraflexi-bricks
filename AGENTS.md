@@ -1,4 +1,4 @@
-# WARP.md - Working AI Reference for php-vitexsoftware-abraflexi-bricks
+# AGENTS.md - Working AI Reference for php-vitexsoftware-abraflexi-bricks
 
 ## Project Overview
 
